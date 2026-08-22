@@ -36,7 +36,7 @@ function Hero() {
       <div className="absolute inset-0 bg-[#050505]/65" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/30 to-[#050505]" aria-hidden="true" />
 
-      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-5xl px-6 pt-36 pb-28 text-center md:px-10">
+      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
             OrynticLabs — Full-Spectrum Technology Company
@@ -53,7 +53,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-          className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
+          className="mx-auto mt-8 max-w-3xl text-base md:text-lg leading-relaxed text-white/65"
         >
           We design, build, and deliver secure, scalable technology across the complete software
           lifecycle — combining strong architecture, data engineering, and AI capability to move
