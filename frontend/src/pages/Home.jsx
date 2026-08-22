@@ -14,6 +14,7 @@ import { Reveal, KineticLine, Overline, SectionHead, ArrowLink, EASE } from "@/c
 import Ribbon from "@/components/site/Ribbon";
 import ClientMarquee from "@/components/site/ClientMarquee";
 import AutomobileSection from "@/components/site/AutomobileSection";
+import EngagementModels from "@/components/site/EngagementModels";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ICONS = { Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge };
@@ -579,6 +580,7 @@ export default function Home() {
       <AutomobileSection />
       <WhyBand />
       <FaqSection />
+      <EngagementModels />
       <CtaBand />
     </main>
   );
