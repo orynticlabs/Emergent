@@ -39,6 +39,7 @@ const DROPDOWNS = {
 const PLAIN_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/portfolio", label: "Portfolio" },
   { to: "/stack", label: "Stack" },
 ];
 
@@ -220,7 +221,7 @@ export default function Navbar() {
           </div>
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-            {PLAIN_LINKS.slice(0, 2).map((link) => (
+            {PLAIN_LINKS.slice(0, 3).map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}

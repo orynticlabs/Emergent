@@ -12,6 +12,7 @@ import Products from "@/pages/Products";
 import Industries from "@/pages/Industries";
 import TechStack from "@/pages/TechStack";
 import Contact from "@/pages/Contact";
+import Portfolio from "@/pages/Portfolio";
 import Sitemap from "@/pages/Sitemap";
 import Legal from "@/pages/Legal";
 import AdminLogin from "@/pages/admin/AdminLogin";
@@ -58,6 +59,7 @@ const Shell = () => {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/industries" element={<Industries />} />
         <Route path="/stack" element={<TechStack />} />
         <Route path="/contact" element={<Contact />} />

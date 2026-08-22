@@ -15,6 +15,7 @@ export const IMAGES = {
 export const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/portfolio", label: "Portfolio" },
   { to: "/services", label: "Services" },
   { to: "/products", label: "Products" },
   { to: "/industries", label: "Industries" },
