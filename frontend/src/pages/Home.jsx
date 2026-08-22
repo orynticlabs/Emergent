@@ -13,6 +13,7 @@ import {
 import { Reveal, KineticLine, Overline, SectionHead, ArrowLink, EASE } from "@/components/site/Reveal";
 import Ribbon from "@/components/site/Ribbon";
 import ClientMarquee from "@/components/site/ClientMarquee";
+import AutomobileSection from "@/components/site/AutomobileSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ICONS = { Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge };
@@ -575,6 +576,7 @@ export default function Home() {
       <StatsShowcase />
       <OryAISection />
       <IndustriesTabs />
+      <AutomobileSection />
       <WhyBand />
       <FaqSection />
       <CtaBand />
