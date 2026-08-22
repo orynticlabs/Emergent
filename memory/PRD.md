@@ -24,6 +24,7 @@ Build the official OrynticLabs website with a modern, premium, futuristic visual
 ## Implemented (2026-08-22)
 - Multi-page site with 7 routes, kinetic masked hero reveal, parallax, lenis smooth scroll
 - v2 redesign (appinventiv.com-inspired): mega-menu header with hover dropdowns (Services 8, Products 3, Industries 11) + mobile accordion menu; video background hero (Pexels abstract) with kinetic headline + stats strip; homepage sections: tech ribbon marquee, "Beyond Development" 4 service-group cards, tabbed Products showcase ("Innovation, Engineered by OrynticLabs"), image-backed stats cards, OryAI ecosystem section, interactive Industries tabs with image panel, Why OrynticLabs, FAQ accordion (5 FAQs), CTA band
+- Announcement bar at very top: rotating NEW/OFFER/INSIGHT messages with vertical up-down animation, tag chips, progress dots, pause-on-hover, dismiss button; collapses on scroll (content in Navbar.jsx ANNOUNCEMENTS)
 - About / Services / Products / Industries / Stack / Contact pages (v1 layouts retained)
 - Newsletter: POST /api/newsletter/subscribe — stores subscriber in MongoDB + sends branded welcome email via managed Resend (verified, email_id returned)
 - Contact form: frontend-only demo with success toast (MOCKED — not stored or emailed)

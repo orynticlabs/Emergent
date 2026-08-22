@@ -38,6 +38,95 @@ const PLAIN_LINKS = [
   { to: "/stack", label: "Stack" },
 ];
 
+const ANNOUNCEMENTS = [
+  { tag: "NEW", tagCls: "bg-brand-orange", text: "OryAI agent orchestration 2.0 is now live in production", link: "/products", cta: "Explore" },
+  { tag: "OFFER", tagCls: "bg-brand-blue", text: "Free AI-readiness audit for engagements started this quarter", link: "/contact", cta: "Claim Audit" },
+  { tag: "INSIGHT", tagCls: "bg-white/15", text: "Why RAG beats fine-tuning for most enterprise knowledge systems", link: "/stack", cta: "Read" },
+  { tag: "NEW", tagCls: "bg-brand-orange", text: "PerformX HRMS — direct salary disbursement now available", link: "/products", cta: "See PerformX" },
+];
+
+function AnnouncementBar({ scrolled }) {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    if (paused || dismissed) return;
+    const timer = setInterval(() => setIndex((i) => (i + 1) % ANNOUNCEMENTS.length), 4500);
+    return () => clearInterval(timer);
+  }, [paused, dismissed]);
+
+  if (dismissed) return null;
+  const item = ANNOUNCEMENTS[index];
+
+  return (
+    <div
+      data-testid="announcement-bar"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className={`relative overflow-hidden transition-all duration-500 ${
+        scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
+      } border-b border-white/10 bg-gradient-to-r from-brand-blue/20 via-[#080808] to-brand-orange/20`}
+    >
+      <div className="mx-auto flex h-10 max-w-7xl items-center justify-center px-6 md:px-10">
+        <span className="relative mr-3 hidden h-1.5 w-1.5 sm:block" aria-hidden="true">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-orange opacity-75" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-orange" />
+        </span>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{ duration: 0.45, ease: EASE }}
+            data-testid="announcement-item"
+            className="flex min-w-0 items-center gap-3"
+          >
+            <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-[0.2em] text-white ${item.tagCls}`}>
+              {item.tag}
+            </span>
+            <span className="max-w-[46vw] truncate text-xs text-white/75 md:max-w-none">{item.text}</span>
+            <Link
+              to={item.link}
+              data-testid="announcement-cta"
+              className="group hidden shrink-0 items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-brand-orange sm:inline-flex"
+            >
+              {item.cta}
+              <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="absolute right-4 flex items-center gap-2 md:right-10">
+          <div className="hidden items-center gap-1.5 md:flex" data-testid="announcement-dots">
+            {ANNOUNCEMENTS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                data-testid={`announcement-dot-${i}`}
+                aria-label={`Announcement ${i + 1}`}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  i === index ? "w-4 bg-brand-orange" : "w-1 bg-white/25 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={() => setDismissed(true)}
+            data-testid="announcement-close"
+            aria-label="Dismiss announcements"
+            className="ml-1 text-white/40 transition-colors duration-300 hover:text-white"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MegaPanel({ config, menuKey }) {
   return (
     <motion.div
@@ -110,6 +199,7 @@ export default function Navbar() {
           scrolled || activeMenu ? "border-b border-white/10 bg-brand-ink/80 backdrop-blur-xl" : "bg-transparent"
         }`}
       >
+        <AnnouncementBar scrolled={scrolled} />
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 md:py-5">
           <Link to="/" data-testid="nav-logo" className="font-display text-xl font-extrabold tracking-tight text-white">
             ORYNTIC<span className="text-brand-orange">LABS</span>
