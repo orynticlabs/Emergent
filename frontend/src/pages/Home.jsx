@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   ArrowUpRight, ArrowRight, Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge, Check,
+  Package, Zap, Target,
 } from "lucide-react";
 import {
   IMAGES, SERVICES, PRODUCTS, INDUSTRIES, WHY_US, PROCESS,
@@ -137,7 +138,7 @@ function ProductsShowcase() {
           description="Systems we built for ourselves and now ship to clients — running in production every day."
         />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-12">
+        <div className="mt-16 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
               {PRODUCTS.map((p, i) => (
@@ -145,20 +146,29 @@ function ProductsShowcase() {
                   key={p.id}
                   onClick={() => setActive(i)}
                   data-testid={`product-tab-${p.id}`}
-                  className={`flex min-w-[220px] items-center justify-between rounded-2xl border px-6 py-5 text-left transition-all duration-300 lg:min-w-0 ${
+                  className={`group relative flex min-w-[250px] items-center gap-5 rounded-2xl border p-5 text-left transition-all duration-300 lg:min-w-0 ${
                     active === i
-                      ? "border-brand-orange bg-brand-ink text-white shadow-xl shadow-black/15"
-                      : "border-black/10 bg-white text-brand-coal hover:border-brand-orange/50"
+                      ? "border-brand-orange/70 bg-white shadow-[0_24px_50px_-24px_rgba(255,85,0,0.4)] lg:translate-x-2"
+                      : "border-black/10 bg-white/60 hover:border-brand-orange/40 hover:bg-white"
                   }`}
                 >
-                  <span>
-                    <span className="block font-display text-lg font-bold tracking-tight">{p.name}</span>
-                    <span className={`mt-0.5 block text-xs ${active === i ? "text-white/50" : "text-black/45"}`}>{p.tagline}</span>
+                  {active === i && (
+                    <span className="absolute inset-y-4 left-0 w-1 rounded-full bg-brand-orange" aria-hidden="true" />
+                  )}
+                  <span className={`font-display text-sm font-black tracking-widest transition-colors duration-300 ${active === i ? "text-brand-orange" : "text-black/25"}`}>
+                    0{i + 1}
                   </span>
-                  <ArrowRight className={`h-4 w-4 shrink-0 transition-colors duration-300 ${active === i ? "text-brand-orange" : "text-black/25"}`} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg font-bold tracking-tight">{p.name}</span>
+                    <span className="mt-0.5 block truncate text-xs text-black/45">{p.tagline}</span>
+                  </span>
+                  <ArrowRight className={`h-4 w-4 shrink-0 transition-all duration-300 ${active === i ? "translate-x-0.5 text-brand-orange" : "text-black/20 group-hover:text-black/40"}`} />
                 </button>
               ))}
             </div>
+            <p className="mt-6 hidden max-w-xs text-xs leading-relaxed text-black/40 lg:block">
+              Every product ships as part of client engagements — and select products are available standalone.
+            </p>
           </div>
 
           <div className="lg:col-span-8">
@@ -170,28 +180,53 @@ function ProductsShowcase() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.45, ease: EASE }}
                 data-testid="product-showcase-panel"
-                className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl shadow-black/5"
+                className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_40px_90px_-40px_rgba(0,0,0,0.3)]"
               >
-                <div className="relative h-64 overflow-hidden md:h-72">
+                <div className="relative h-64 overflow-hidden md:h-80">
                   <img src={product.image} alt={`${product.name} visual`} className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <div className="absolute bottom-6 left-8">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
+                  <div className="absolute left-8 top-6 flex flex-wrap gap-2.5">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                      <Package className="h-3.5 w-3.5 text-brand-orange" /> {product.model}
+                    </span>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                      <Zap className="h-3.5 w-3.5 text-brand-blue" /> In Production
+                    </span>
+                  </div>
+                  <div className="absolute bottom-6 left-8 right-8">
                     <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/60">OrynticLabs Product Suite</p>
                     <p className="mt-1 font-display text-3xl font-black tracking-tight text-white md:text-4xl">{product.name}</p>
                   </div>
                 </div>
+
                 <div className="p-8 md:p-10">
-                  <p className="leading-relaxed text-black/60">{product.description}</p>
-                  <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                    {product.features.slice(0, 4).map((f) => (
+                  <p className="text-base leading-relaxed text-black/60">{product.description}</p>
+
+                  <div className="mt-6 flex items-start gap-3 rounded-2xl border border-brand-blue/20 bg-brand-blue/5 p-5">
+                    <Target className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" strokeWidth={2} />
+                    <p className="text-sm leading-relaxed text-black/65">
+                      <span className="font-bold text-brand-blue">Ideal for:</span> {product.ideal}
+                    </p>
+                  </div>
+
+                  <p className="mt-9 text-xs font-bold uppercase tracking-[0.25em] text-black/40">What's inside</p>
+                  <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                    {product.features.slice(0, 6).map((f) => (
                       <div key={f} className="flex items-start gap-3">
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" strokeWidth={2.5} />
                         <p className="text-sm text-black/70">{f}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-9">
+                  {product.features.length > 6 && (
+                    <p className="mt-3 text-xs font-medium text-black/40">
+                      + {product.features.length - 6} more capabilities
+                    </p>
+                  )}
+
+                  <div className="mt-9 flex flex-wrap gap-4">
                     <ArrowLink to="/products">View Product</ArrowLink>
+                    <ArrowLink to="/contact" variant="ghost" className="border-black/20 text-brand-coal hover:bg-black/5">Discuss Fit</ArrowLink>
                   </div>
                 </div>
               </motion.div>
