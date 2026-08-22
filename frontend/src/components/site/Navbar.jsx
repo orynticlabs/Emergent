@@ -48,15 +48,13 @@ const ANNOUNCEMENTS = [
 function AnnouncementBar({ scrolled }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (paused || dismissed) return;
+    if (paused) return;
     const timer = setInterval(() => setIndex((i) => (i + 1) % ANNOUNCEMENTS.length), 4500);
     return () => clearInterval(timer);
-  }, [paused, dismissed]);
+  }, [paused]);
 
-  if (dismissed) return null;
   const item = ANNOUNCEMENTS[index];
 
   return (
@@ -66,7 +64,7 @@ function AnnouncementBar({ scrolled }) {
       onMouseLeave={() => setPaused(false)}
       className={`relative overflow-hidden transition-all duration-500 ${
         scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
-      } border-b border-white/10 bg-gradient-to-r from-brand-blue/20 via-[#080808] to-brand-orange/20`}
+      } border-b border-white/10 bg-[#0B0B0E]`}
     >
       <div className="mx-auto flex h-10 max-w-7xl items-center justify-center px-6 md:px-10">
         <span className="relative mr-3 hidden h-1.5 w-1.5 sm:block" aria-hidden="true">
@@ -91,7 +89,7 @@ function AnnouncementBar({ scrolled }) {
             <Link
               to={item.link}
               data-testid="announcement-cta"
-              className="group hidden shrink-0 items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-brand-orange sm:inline-flex"
+              className="group hidden shrink-0 items-center gap-1 text-[11px] font-bold uppercase italic tracking-widest text-brand-orange underline decoration-brand-orange/60 underline-offset-4 transition-colors duration-300 hover:decoration-brand-orange sm:inline-flex"
             >
               {item.cta}
               <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -113,14 +111,6 @@ function AnnouncementBar({ scrolled }) {
               />
             ))}
           </div>
-          <button
-            onClick={() => setDismissed(true)}
-            data-testid="announcement-close"
-            aria-label="Dismiss announcements"
-            className="ml-1 text-white/40 transition-colors duration-300 hover:text-white"
-          >
-            <X className="h-3.5 w-3.5" />
-          </button>
         </div>
       </div>
     </div>
