@@ -12,6 +12,10 @@ import Products from "@/pages/Products";
 import Industries from "@/pages/Industries";
 import TechStack from "@/pages/TechStack";
 import Contact from "@/pages/Contact";
+import Sitemap from "@/pages/Sitemap";
+import Legal from "@/pages/Legal";
+import AdminLogin from "@/pages/admin/AdminLogin";
+import AdminFooter from "@/pages/admin/AdminFooter";
 
 const SmoothScroll = ({ children }) => {
   const { pathname } = useLocation();
@@ -43,23 +47,39 @@ const SmoothScroll = ({ children }) => {
   return children;
 };
 
+const Shell = () => {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith("/admin");
+  return (
+    <>
+      {!isAdmin && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/industries" element={<Industries />} />
+        <Route path="/stack" element={<TechStack />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/sitemap" element={<Sitemap />} />
+        <Route path="/privacy-policy" element={<Legal kind="privacy-policy" />} />
+        <Route path="/terms-conditions" element={<Legal kind="terms-conditions" />} />
+        <Route path="/terms-of-service" element={<Legal kind="terms-of-service" />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminFooter />} />
+      </Routes>
+      {!isAdmin && <Footer />}
+    </>
+  );
+};
+
 function App() {
   return (
     <div className="App" data-testid="app-root">
       <div className="noise-overlay" aria-hidden="true" />
       <BrowserRouter>
         <SmoothScroll>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/stack" element={<TechStack />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <Footer />
+          <Shell />
           <Toaster position="bottom-right" theme="dark" richColors />
         </SmoothScroll>
       </BrowserRouter>

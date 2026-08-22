@@ -1,5 +1,8 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from dotenv import load_dotenv
+
+load_dotenv()
+
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
@@ -8,14 +11,15 @@ import ipaddress
 import logging
 from pathlib import Path
 from pydantic import BaseModel, EmailStr
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from html import escape
 from html.parser import HTMLParser
 from urllib.parse import urlparse
 import httpx
+import bcrypt
+import jwt
 
 ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
 
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
@@ -32,6 +36,10 @@ EMAIL_KEY = os.environ["EMERGENT_EMAIL_KEY"]
 EMAIL_FROM_NAME = os.environ["EMAIL_FROM_NAME"]
 EMAIL_REPLY_TO = os.environ.get("EMAIL_REPLY_TO")
 SITE_URL = os.environ.get("SITE_URL", "")
+JWT_SECRET = os.environ["JWT_SECRET"]
+JWT_ALGORITHM = "HS256"
+ADMIN_EMAIL = os.environ["ADMIN_EMAIL"]
+ADMIN_PASSWORD = os.environ["ADMIN_PASSWORD"]
 
 _SHORTENERS = ("bit.ly", "tinyurl.com", "t.co", "is.gd", "cutt.ly", "goo.gl", "rebrand.ly")
 _CRED_ASK = ("reply with your password", "reply with the code", "send your password", "cvv",
@@ -149,6 +157,157 @@ def _newsletter_html() -> str:
     )
 
 
+# ---------- Footer settings ----------
+
+DEFAULT_FOOTER = {
+    "company": {
+        "email": "hello@orynticlabs.com",
+        "phone": "+91 79017 17617",
+        "address1": "Registered Office — India (update via admin)",
+        "address2": "Corporate Office — India (update via admin)",
+        "cin": "Available on request",
+        "gst": "Available on request",
+    },
+    "newsletter": {
+        "title": "Stay in the Loop",
+        "text": "Get OrynticLabs updates, technology insights, product announcements, and company news — delivered occasionally. No noise, no spam.",
+    },
+    "socials": {"linkedin": "", "instagram": "", "facebook": "", "x": "", "youtube": ""},
+    "columns": [
+        {"title": "Company", "links": [
+            {"label": "About OrynticLabs", "url": "/about"},
+            {"label": "Our Story", "url": "/about"},
+            {"label": "Careers", "url": "/contact"},
+            {"label": "Contact", "url": "/contact"},
+            {"label": "Partnerships", "url": "/contact"},
+        ]},
+        {"title": "Services", "links": [
+            {"label": "Web Development", "url": "/services"},
+            {"label": "Software Development", "url": "/services"},
+            {"label": "Mobile Development", "url": "/services"},
+            {"label": "AI & Machine Learning", "url": "/services"},
+            {"label": "UI/UX Design", "url": "/services"},
+            {"label": "E-commerce Development", "url": "/services"},
+            {"label": "Cloud & DevOps", "url": "/services"},
+            {"label": "Technology Consulting", "url": "/services"},
+        ]},
+        {"title": "Expertise", "links": [
+            {"label": "SaaS & PaaS", "url": "/about"},
+            {"label": "Product Engineering", "url": "/services"},
+            {"label": "AI & Automation", "url": "/services"},
+            {"label": "Data & Analytics", "url": "/services"},
+            {"label": "Enterprise Solutions", "url": "/industries"},
+            {"label": "Digital Transformation", "url": "/services"},
+        ]},
+        {"title": "Technologies", "links": [
+            {"label": "React / Next.js", "url": "/stack"},
+            {"label": "Node.js", "url": "/stack"},
+            {"label": "Python", "url": "/stack"},
+            {"label": "Java / Go", "url": "/stack"},
+            {"label": "Shopify", "url": "/stack"},
+            {"label": "WordPress", "url": "/stack"},
+            {"label": "Payload CMS", "url": "/stack"},
+            {"label": "OryCMS", "url": "/products"},
+            {"label": "Cloud & DevOps", "url": "/stack"},
+        ]},
+    ],
+    "badges": ["Incorporated in India", "Companies Act, 2013"],
+    "legal_links": [
+        {"label": "Sitemap", "url": "/sitemap"},
+        {"label": "Privacy Policy", "url": "/privacy-policy"},
+        {"label": "Terms & Conditions", "url": "/terms-conditions"},
+        {"label": "Terms of Service", "url": "/terms-of-service"},
+    ],
+    "copyright": "© 2026 OrynticLabs Private Limited. All rights reserved.",
+}
+
+FOOTER_REQUIRED_KEYS = {"company", "newsletter", "socials", "columns", "badges", "legal_links", "copyright"}
+
+
+# ---------- Admin auth ----------
+
+def hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+
+
+def verify_password(plain: str, hashed: str) -> bool:
+    return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
+
+
+def create_admin_token(email: str) -> str:
+    payload = {"sub": email, "type": "admin", "exp": datetime.now(timezone.utc) + timedelta(hours=12)}
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+
+async def get_current_admin(request: Request) -> dict:
+    auth_header = request.headers.get("Authorization", "")
+    token = auth_header[7:] if auth_header.startswith("Bearer ") else None
+    if not token:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        if payload.get("type") != "admin":
+            raise HTTPException(status_code=401, detail="Invalid token type")
+        admin = await db.admins.find_one({"email": payload["sub"]}, {"_id": 0, "password_hash": 0})
+        if not admin:
+            raise HTTPException(status_code=401, detail="Admin not found")
+        return admin
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+
+class AdminLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+@api_router.post("/admin/login")
+async def admin_login(input: AdminLogin, request: Request):
+    email = input.email.lower().strip()
+    ip = request.client.host if request.client else "unknown"
+    identifier = f"{ip}:{email}"
+    attempts = await db.login_attempts.find_one({"identifier": identifier})
+    if attempts and attempts.get("count", 0) >= 5:
+        last = attempts.get("last_attempt")
+        if last and datetime.now(timezone.utc) - datetime.fromisoformat(last) < timedelta(minutes=15):
+            raise HTTPException(status_code=429, detail="Too many failed attempts. Try again in 15 minutes.")
+
+    admin = await db.admins.find_one({"email": email})
+    if not admin or not verify_password(input.password, admin["password_hash"]):
+        await db.login_attempts.update_one(
+            {"identifier": identifier},
+            {"$inc": {"count": 1}, "$set": {"last_attempt": datetime.now(timezone.utc).isoformat()}},
+            upsert=True,
+        )
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    await db.login_attempts.delete_one({"identifier": identifier})
+    return {"token": create_admin_token(email), "email": email}
+
+
+@api_router.get("/admin/footer")
+async def get_footer_admin(request: Request):
+    await get_current_admin(request)
+    doc = await db.footer_settings.find_one({"key": "main"}, {"_id": 0, "key": 0})
+    return doc or DEFAULT_FOOTER
+
+
+@api_router.put("/admin/footer")
+async def update_footer(request: Request):
+    await get_current_admin(request)
+    body = await request.json()
+    if not isinstance(body, dict) or not FOOTER_REQUIRED_KEYS.issubset(body.keys()):
+        raise HTTPException(status_code=400, detail="Invalid footer settings payload")
+    body["updated_at"] = datetime.now(timezone.utc).isoformat()
+    await db.footer_settings.update_one({"key": "main"}, {"$set": body}, upsert=True)
+    body.pop("updated_at", None)
+    return {"status": "success", "footer": body}
+
+
+# ---------- Public routes ----------
+
 class NewsletterSubscribe(BaseModel):
     email: EmailStr
 
@@ -156,6 +315,12 @@ class NewsletterSubscribe(BaseModel):
 @api_router.get("/")
 async def root():
     return {"message": "OrynticLabs API"}
+
+
+@api_router.get("/footer")
+async def get_footer():
+    doc = await db.footer_settings.find_one({"key": "main"}, {"_id": 0, "key": 0})
+    return doc or DEFAULT_FOOTER
 
 
 @api_router.post("/newsletter/subscribe")
@@ -169,6 +334,27 @@ async def newsletter_subscribe(input: NewsletterSubscribe):
     subject = f"Welcome to {EMAIL_FROM_NAME}"
     email_id = await send_email(to=email, subject=subject, html=_newsletter_html())
     return {"status": "success", "message": "Subscribed", "email_id": email_id}
+
+
+@app.on_event("startup")
+async def startup():
+    await db.admins.create_index("email", unique=True)
+    await db.login_attempts.create_index("identifier")
+    existing = await db.admins.find_one({"email": ADMIN_EMAIL})
+    if existing is None:
+        await db.admins.insert_one({
+            "email": ADMIN_EMAIL,
+            "password_hash": hash_password(ADMIN_PASSWORD),
+            "role": "admin",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        })
+        logger.info(f"Admin seeded: {ADMIN_EMAIL}")
+    elif not verify_password(ADMIN_PASSWORD, existing["password_hash"]):
+        await db.admins.update_one({"email": ADMIN_EMAIL}, {"$set": {"password_hash": hash_password(ADMIN_PASSWORD)}})
+    footer = await db.footer_settings.find_one({"key": "main"})
+    if footer is None:
+        await db.footer_settings.insert_one({"key": "main", **DEFAULT_FOOTER})
+        logger.info("Footer settings seeded")
 
 
 app.include_router(api_router)

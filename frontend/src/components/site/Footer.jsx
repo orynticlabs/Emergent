@@ -1,118 +1,253 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import { ArrowRight, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
-import { NAV_LINKS, SERVICES, CONTACT } from "@/data/content";
-import { Reveal, Overline } from "@/components/site/Reveal";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight, Loader2, CheckCircle2, Mail, Phone, MapPin, Building2,
+  FileText, Receipt, ShieldCheck, Linkedin, Instagram, Facebook, Twitter, Youtube,
+} from "lucide-react";
+import { Reveal } from "@/components/site/Reveal";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+const FALLBACK = {
+  company: {
+    email: "hello@orynticlabs.com",
+    phone: "+91 79017 17617",
+    address1: "Registered Office — India",
+    address2: "Corporate Office — India",
+    cin: "Available on request",
+    gst: "Available on request",
+  },
+  newsletter: {
+    title: "Stay in the Loop",
+    text: "Get OrynticLabs updates, technology insights, product announcements, and company news — delivered occasionally. No noise, no spam.",
+  },
+  socials: {},
+  columns: [],
+  badges: ["Incorporated in India", "Companies Act, 2013"],
+  legal_links: [],
+  copyright: "© 2026 OrynticLabs Private Limited. All rights reserved.",
+};
+
+const SOCIAL_ICONS = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook, x: Twitter, youtube: Youtube };
+
+const FooterLink = ({ to, children }) => (
+  <Link
+    to={to}
+    data-testid={`footer-nav-${String(children).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+    className="group relative inline-flex items-center py-1 text-sm text-white/50 transition-colors duration-300 hover:text-white"
+  >
+    <span className="mr-0 h-px w-0 bg-brand-orange transition-all duration-300 group-hover:mr-2 group-hover:w-3" aria-hidden="true" />
+    {children}
+  </Link>
+);
+
+const InfoItem = ({ icon: Icon, label, value, href, testId }) => (
+  <div className="flex items-start gap-4" data-testid={testId}>
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition-colors duration-300 group-hover:border-brand-orange/40">
+      <Icon className="h-4 w-4 text-brand-orange" strokeWidth={1.75} />
+    </span>
+    <div className="min-w-0">
+      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/35">{label}</p>
+      {href ? (
+        <a href={href} className="mt-1 block truncate text-sm font-medium text-white/80 transition-colors duration-300 hover:text-brand-orange">
+          {value}
+        </a>
+      ) : (
+        <p className="mt-1 text-sm font-medium leading-snug text-white/80">{value}</p>
+      )}
+    </div>
+  </div>
+);
+
 export default function Footer() {
+  const [settings, setSettings] = useState(FALLBACK);
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("idle");
+
+  useEffect(() => {
+    axios.get(`${API}/footer`).then((r) => setSettings(r.data)).catch(() => {});
+  }, []);
 
   const subscribe = async (e) => {
     e.preventDefault();
-    if (!email) return;
-    setLoading(true);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState("error");
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setState("loading");
     try {
       await axios.post(`${API}/newsletter/subscribe`, { email });
+      setState("success");
       toast.success("You're on the list. Check your inbox for a welcome email.");
       setEmail("");
-    } catch (err) {
+      setTimeout(() => setState("idle"), 4000);
+    } catch {
+      setState("error");
       toast.error("Subscription failed. Please try again.");
-    } finally {
-      setLoading(false);
+      setTimeout(() => setState("idle"), 3000);
     }
   };
 
-  return (
-    <footer data-testid="site-footer" className="relative overflow-hidden border-t border-white/10 bg-brand-ink text-white">
-      <div className="absolute -bottom-40 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full bg-brand-blue/10 blur-[140px]" aria-hidden="true" />
+  const { company, newsletter, socials = {}, columns = [], badges = [], legal_links = [], copyright } = settings;
+  const socialsSet = Object.entries(socials).filter(([, url]) => url);
 
-      <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <div className="grid gap-16 lg:grid-cols-2">
-          <div>
+  return (
+    <footer data-testid="site-footer" className="relative overflow-hidden bg-brand-ink text-white">
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-orange/60 to-transparent" aria-hidden="true" />
+      <div className="absolute -top-40 left-1/4 h-80 w-80 rounded-full bg-brand-blue/10 blur-[140px]" aria-hidden="true" />
+      <div className="absolute -bottom-40 right-1/4 h-80 w-80 rounded-full bg-brand-orange/10 blur-[140px]" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-20 md:px-10 md:pt-24">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
             <Reveal>
-              <Overline>Stay in the loop</Overline>
+              <Link to="/" className="font-display text-2xl font-extrabold tracking-tight" data-testid="footer-logo">
+                ORYNTIC<span className="text-brand-orange">LABS</span>
+                <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-brand-blue align-super" />
+              </Link>
             </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="mt-4 font-display text-4xl md:text-6xl font-black tracking-tighter leading-[0.95]">
-                LET'S BUILD<br />THE <span className="text-brand-orange">FUTURE.</span>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="mt-6 max-w-md text-white/60">
-                Occasional, sharp thinking on AI systems, product engineering, and the platforms we are building. No noise.
+            <Reveal delay={0.08}>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/50">
+                A full-spectrum technology company engineering intelligent software —
+                web, mobile, AI, data, cloud, and design.
               </p>
             </Reveal>
-            <Reveal delay={0.3}>
-              <form onSubmit={subscribe} data-testid="newsletter-form" className="mt-8 flex max-w-md gap-3">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  data-testid="newsletter-email-input"
-                  className="w-full rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm text-white placeholder:text-white/40 outline-none backdrop-blur-sm transition-colors duration-300 focus:border-brand-orange"
-                />
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  type="submit"
-                  disabled={loading}
-                  data-testid="newsletter-submit-button"
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#e04a00] disabled:opacity-60"
-                >
-                  {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
-                  Subscribe
-                </motion.button>
-              </form>
+
+            <Reveal delay={0.15}>
+              <div className="mt-10" data-testid="newsletter-block">
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-orange">{newsletter?.title || "Stay in the Loop"}</p>
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/50">{newsletter?.text}</p>
+                <form onSubmit={subscribe} data-testid="newsletter-form" className="mt-6 flex max-w-md gap-3" noValidate>
+                  <motion.div
+                    animate={state === "error" ? { x: [0, -6, 6, -4, 4, 0] } : { x: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full"
+                  >
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@company.com"
+                      data-testid="newsletter-email-input"
+                      className={`w-full rounded-full border bg-white/5 px-6 py-3.5 text-sm text-white placeholder:text-white/35 outline-none backdrop-blur-sm transition-colors duration-300 ${
+                        state === "error" ? "border-red-500/70" : state === "success" ? "border-emerald-500/70" : "border-white/15 focus:border-brand-orange"
+                      }`}
+                    />
+                  </motion.div>
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    type="submit"
+                    disabled={state === "loading"}
+                    data-testid="newsletter-submit-button"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#e04a00] disabled:opacity-60"
+                  >
+                    <AnimatePresence mode="wait">
+                      {state === "loading" ? (
+                        <motion.span key="l" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        </motion.span>
+                      ) : state === "success" ? (
+                        <motion.span key="s" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ opacity: 0 }}>
+                          <CheckCircle2 className="h-4 w-4" />
+                        </motion.span>
+                      ) : (
+                        <motion.span key="a" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                          <ArrowRight className="h-4 w-4" />
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                    {state === "success" ? "Subscribed" : "Subscribe"}
+                  </motion.button>
+                </form>
+              </div>
             </Reveal>
+
+            {socialsSet.length > 0 && (
+              <Reveal delay={0.2}>
+                <div className="mt-10 flex items-center gap-3" data-testid="social-links">
+                  {socialsSet.map(([key, url]) => {
+                    const Icon = SOCIAL_ICONS[key];
+                    if (!Icon) return null;
+                    return (
+                      <motion.a
+                        key={key}
+                        whileHover={{ y: -3 }}
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={key}
+                        data-testid={`social-${key}`}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-brand-orange hover:text-brand-orange hover:shadow-[0_0_24px_-6px_rgba(255,85,0,0.5)]"
+                      >
+                        <Icon className="h-4 w-4" strokeWidth={1.75} />
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </Reveal>
+            )}
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3">
-            <div>
-              <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Sitemap</p>
-              <ul className="mt-5 space-y-3">
-                {NAV_LINKS.map((l) => (
-                  <li key={l.to}>
-                    <Link to={l.to} data-testid={`footer-link-${l.label.toLowerCase()}`} className="text-sm text-white/70 transition-colors duration-300 hover:text-brand-orange">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Expertise</p>
-              <ul className="mt-5 space-y-3">
-                {SERVICES.slice(0, 6).map((s) => (
-                  <li key={s.id}>
-                    <Link to="/services" className="text-sm text-white/70 transition-colors duration-300 hover:text-brand-orange">
-                      {s.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Contact</p>
-              <ul className="mt-5 space-y-3 text-sm text-white/70">
-                <li><a href={`mailto:${CONTACT.sales}`} data-testid="footer-email-sales" className="transition-colors duration-300 hover:text-brand-orange">{CONTACT.sales}</a></li>
-                <li><a href={`mailto:${CONTACT.general}`} data-testid="footer-email-general" className="transition-colors duration-300 hover:text-brand-orange">{CONTACT.general}</a></li>
-                <li><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} data-testid="footer-phone" className="transition-colors duration-300 hover:text-brand-orange">{CONTACT.phone}</a></li>
-                <li className="text-white/40">Incorporated in India</li>
-              </ul>
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
+              {columns.map((col) => (
+                <Reveal key={col.title} delay={0.05}>
+                  <div data-testid={`footer-column-${col.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                    <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/40">{col.title}</p>
+                    <ul className="mt-5 space-y-2.5">
+                      {(col.links || []).map((link) => (
+                        <li key={link.label}>
+                          <FooterLink to={link.url}>{link.label}</FooterLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
-          <p data-testid="footer-copyright">© 2026 OrynticLabs Private Limited. All rights reserved.</p>
-          <p>Engineering intelligent software — SaaS · PaaS · Custom</p>
+        <Reveal delay={0.1}>
+          <div
+            data-testid="company-info"
+            className="mt-16 grid gap-8 rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm sm:grid-cols-2 md:p-10 lg:grid-cols-3"
+          >
+            <InfoItem icon={Mail} label="Official Email" value={company?.email} href={`mailto:${company?.email}`} testId="info-email" />
+            <InfoItem icon={Phone} label="Contact Number" value={company?.phone} href={`tel:${(company?.phone || "").replace(/\s/g, "")}`} testId="info-phone" />
+            <InfoItem icon={MapPin} label="Office Address 1" value={company?.address1} testId="info-address-1" />
+            <InfoItem icon={Building2} label="Office Address 2" value={company?.address2} testId="info-address-2" />
+            <InfoItem icon={FileText} label="CIN" value={company?.cin} testId="info-cin" />
+            <InfoItem icon={Receipt} label="GST" value={company?.gst} testId="info-gst" />
+          </div>
+        </Reveal>
+
+        <div className="mt-14 border-t border-white/10 pt-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <nav className="flex flex-wrap items-center gap-x-7 gap-y-3" aria-label="Legal" data-testid="footer-legal-links">
+              {legal_links.map((link) => (
+                <FooterLink key={link.label} to={link.url}>{link.label}</FooterLink>
+              ))}
+            </nav>
+            {badges.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2.5" data-testid="footer-badges">
+                {badges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[11px] font-semibold tracking-wide text-white/60 transition-colors duration-300 hover:border-brand-blue/50 hover:text-white"
+                  >
+                    <ShieldCheck className="h-3.5 w-3.5 text-brand-blue" strokeWidth={2} />
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+          <p className="mt-8 text-xs text-white/35" data-testid="footer-copyright">{copyright}</p>
         </div>
       </div>
     </footer>
