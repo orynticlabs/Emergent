@@ -211,7 +211,12 @@ DEFAULT_FOOTER = {
             {"label": "Cloud & DevOps", "url": "/stack"},
         ]},
     ],
-    "badges": ["Incorporated in India", "Companies Act, 2013"],
+    "badges": ["Incorporated in India", "Companies Act, 2013", "Startup India Recognized", "ISO 27001 Certified", "DMCA Protected"],
+    "certificates": [
+        {"label": "Startup India Recognized", "image": "/assets/startup-india.png"},
+        {"label": "ISO 27001 Certified", "image": "/assets/iso-27001.png"},
+        {"label": "DMCA Protected", "image": "/assets/dmca.png"},
+    ],
     "legal_links": [
         {"label": "Sitemap", "url": "/sitemap"},
         {"label": "Privacy Policy", "url": "/privacy-policy"},
@@ -221,7 +226,7 @@ DEFAULT_FOOTER = {
     "copyright": "© 2026 OrynticLabs Private Limited. All rights reserved.",
 }
 
-FOOTER_REQUIRED_KEYS = {"company", "newsletter", "socials", "columns", "badges", "legal_links", "copyright"}
+FOOTER_REQUIRED_KEYS = {"company", "newsletter", "socials", "columns", "badges", "certificates", "legal_links", "copyright"}
 
 
 # ---------- Admin auth ----------
@@ -355,6 +360,15 @@ async def startup():
     if footer is None:
         await db.footer_settings.insert_one({"key": "main", **DEFAULT_FOOTER})
         logger.info("Footer settings seeded")
+    else:
+        patch = {}
+        if "certificates" not in footer:
+            patch["certificates"] = DEFAULT_FOOTER["certificates"]
+        if "Startup India Recognized" not in footer.get("badges", []):
+            patch["badges"] = DEFAULT_FOOTER["badges"]
+        if patch:
+            await db.footer_settings.update_one({"key": "main"}, {"$set": patch})
+            logger.info(f"Footer settings patched: {list(patch.keys())}")
 
 
 app.include_router(api_router)

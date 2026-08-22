@@ -26,7 +26,12 @@ const FALLBACK = {
   },
   socials: {},
   columns: [],
-  badges: ["Incorporated in India", "Companies Act, 2013"],
+  certificates: [
+    { label: "Startup India Recognized", image: "/assets/startup-india.png" },
+    { label: "ISO 27001 Certified", image: "/assets/iso-27001.png" },
+    { label: "DMCA Protected", image: "/assets/dmca.png" },
+  ],
+  badges: ["Incorporated in India", "Companies Act, 2013", "Startup India Recognized", "ISO 27001 Certified", "DMCA Protected"],
   legal_links: [],
   copyright: "© 2026 OrynticLabs Private Limited. All rights reserved.",
 };
@@ -45,8 +50,8 @@ const FooterLink = ({ to, children }) => (
 );
 
 const InfoItem = ({ icon: Icon, label, value, href, testId }) => (
-  <div className="flex items-start gap-4" data-testid={testId}>
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition-colors duration-300 group-hover:border-brand-orange/40">
+  <div className="flex items-start gap-4 border-b border-white/[0.06] pb-6" data-testid={testId}>
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
       <Icon className="h-4 w-4 text-brand-orange" strokeWidth={1.75} />
     </span>
     <div className="min-w-0">
@@ -92,7 +97,7 @@ export default function Footer() {
     }
   };
 
-  const { company, newsletter, socials = {}, columns = [], badges = [], legal_links = [], copyright } = settings;
+  const { company, newsletter, socials = {}, columns = [], certificates = [], badges = [], legal_links = [], copyright } = settings;
   const socialsSet = Object.entries(socials).filter(([, url]) => url);
 
   return (
@@ -102,7 +107,7 @@ export default function Footer() {
       <div className="absolute -bottom-40 right-1/4 h-80 w-80 rounded-full bg-brand-orange/10 blur-[140px]" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-20 md:px-10 md:pt-24">
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>
               <Link to="/" className="font-display text-2xl font-extrabold tracking-tight" data-testid="footer-logo">
@@ -166,8 +171,29 @@ export default function Footer() {
               </div>
             </Reveal>
 
-            {socialsSet.length > 0 && (
+            {certificates.length > 0 && (
               <Reveal delay={0.2}>
+                <div className="mt-10" data-testid="footer-certificates">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">Certified & Recognized</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-4">
+                    {certificates.map((cert) => (
+                      <motion.div
+                        key={cert.label}
+                        whileHover={{ y: -4 }}
+                        title={cert.label}
+                        data-testid={`certificate-${cert.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                        className="rounded-xl bg-white p-2.5 shadow-lg shadow-black/30 transition-shadow duration-300 hover:shadow-[0_0_28px_-6px_rgba(0,102,255,0.5)]"
+                      >
+                        <img src={cert.image} alt={cert.label} className="h-14 w-auto object-contain" />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            )}
+
+            {socialsSet.length > 0 && (
+              <Reveal delay={0.25}>
                 <div className="mt-10 flex items-center gap-3" data-testid="social-links">
                   {socialsSet.map(([key, url]) => {
                     const Icon = SOCIAL_ICONS[key];
@@ -193,38 +219,38 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-              {columns.map((col) => (
-                <Reveal key={col.title} delay={0.05}>
-                  <div data-testid={`footer-column-${col.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
-                    <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/40">{col.title}</p>
-                    <ul className="mt-5 space-y-2.5">
-                      {(col.links || []).map((link) => (
-                        <li key={link.label}>
-                          <FooterLink to={link.url}>{link.label}</FooterLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Reveal>
-              ))}
+            <Reveal>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-blue">Company Information</p>
+            </Reveal>
+            <div className="mt-8 grid gap-x-12 gap-y-7 sm:grid-cols-2" data-testid="company-info">
+              <Reveal delay={0.05}><InfoItem icon={Mail} label="Official Email" value={company?.email} href={`mailto:${company?.email}`} testId="info-email" /></Reveal>
+              <Reveal delay={0.1}><InfoItem icon={Phone} label="Contact Number" value={company?.phone} href={`tel:${(company?.phone || "").replace(/\s/g, "")}`} testId="info-phone" /></Reveal>
+              <Reveal delay={0.15}><InfoItem icon={MapPin} label="Office Address 1" value={company?.address1} testId="info-address-1" /></Reveal>
+              <Reveal delay={0.2}><InfoItem icon={Building2} label="Office Address 2" value={company?.address2} testId="info-address-2" /></Reveal>
+              <Reveal delay={0.25}><InfoItem icon={FileText} label="CIN" value={company?.cin} testId="info-cin" /></Reveal>
+              <Reveal delay={0.3}><InfoItem icon={Receipt} label="GST" value={company?.gst} testId="info-gst" /></Reveal>
             </div>
           </div>
         </div>
 
-        <Reveal delay={0.1}>
-          <div
-            data-testid="company-info"
-            className="mt-16 grid gap-8 rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm sm:grid-cols-2 md:p-10 lg:grid-cols-3"
-          >
-            <InfoItem icon={Mail} label="Official Email" value={company?.email} href={`mailto:${company?.email}`} testId="info-email" />
-            <InfoItem icon={Phone} label="Contact Number" value={company?.phone} href={`tel:${(company?.phone || "").replace(/\s/g, "")}`} testId="info-phone" />
-            <InfoItem icon={MapPin} label="Office Address 1" value={company?.address1} testId="info-address-1" />
-            <InfoItem icon={Building2} label="Office Address 2" value={company?.address2} testId="info-address-2" />
-            <InfoItem icon={FileText} label="CIN" value={company?.cin} testId="info-cin" />
-            <InfoItem icon={Receipt} label="GST" value={company?.gst} testId="info-gst" />
+        <div className="mt-16 border-t border-white/10 pt-14">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
+            {columns.map((col, i) => (
+              <Reveal key={col.title} delay={0.05 * i}>
+                <div data-testid={`footer-column-${col.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/40">{col.title}</p>
+                  <ul className="mt-5 space-y-2.5">
+                    {(col.links || []).map((link) => (
+                      <li key={link.label}>
+                        <FooterLink to={link.url}>{link.label}</FooterLink>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+        </div>
 
         <div className="mt-14 border-t border-white/10 pt-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">

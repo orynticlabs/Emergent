@@ -170,12 +170,23 @@ export default function AdminFooter() {
           ))}
         </Section>
 
-        <Section title="Legal & Compliance">
-          <Field label="Legal Links (Label|URL per line)">
-            <textarea value={linksToText(settings.legal_links)} onChange={(e) => set("legal_links", textToLinks(e.target.value))} data-testid="admin-input-legal-links" className={areaCls} />
+        <Section title="Certificates & Badges">
+          <Field label="Certificates (Label|Image path per line, e.g. ISO 27001 Certified|/assets/iso-27001.png)">
+            <textarea
+              value={linksToText((settings.certificates || []).map((c) => ({ label: c.label, url: c.image })))}
+              onChange={(e) => set("certificates", textToLinks(e.target.value).map((l) => ({ label: l.label, image: l.url })))}
+              data-testid="admin-input-certificates"
+              className={areaCls}
+            />
           </Field>
           <Field label="Badges / Certifications (one per line)">
             <textarea value={listToText(settings.badges)} onChange={(e) => set("badges", textToList(e.target.value))} data-testid="admin-input-badges" className={areaCls} />
+          </Field>
+        </Section>
+
+        <Section title="Legal & Copyright">
+          <Field label="Legal Links (Label|URL per line)">
+            <textarea value={linksToText(settings.legal_links)} onChange={(e) => set("legal_links", textToLinks(e.target.value))} data-testid="admin-input-legal-links" className={areaCls} />
           </Field>
           <Field label="Copyright Text">
             <input value={settings.copyright} onChange={(e) => set("copyright", e.target.value)} data-testid="admin-input-copyright" className={inputCls} />
