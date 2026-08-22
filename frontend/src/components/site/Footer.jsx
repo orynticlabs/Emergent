@@ -4,8 +4,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, Loader2, CheckCircle2, Mail, Phone, MapPin, Building2,
-  FileText, Receipt, Linkedin, Instagram, Facebook, Twitter, Youtube,
+  ArrowRight, Loader2, CheckCircle2, Linkedin, Instagram, Facebook, Twitter, Youtube,
 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 
@@ -14,10 +13,12 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const FALLBACK = {
   company: {
     email: "hello@orynticlabs.com",
+    sales_email: "sales@orynticlabs.com",
+    support_email: "support@orynticlabs.com",
     phone: "+91 79017 17617",
-    address1: "Registered Office — India",
-    address2: "Corporate Office — India",
-    cin: "Available on request",
+    address1: "Ward 14, Main Stand, Mangawan, Rewa, Madhya Pradesh 486111, India",
+    address2: "OrynticLabs Private Limited, 6th Venture X, Landmark, Sector 67, Gurugram, Haryana 122101, India",
+    cin: "U62011MP2026PTC085165",
     gst: "Available on request",
   },
   newsletter: {
@@ -31,7 +32,6 @@ const FALLBACK = {
     { label: "ISO 27001 Certified", image: "/assets/iso-27001.png" },
     { label: "DMCA Protected", image: "/assets/dmca.png" },
   ],
-  badges: ["Incorporated in India", "Companies Act, 2013", "Startup India Recognized", "ISO 27001 Certified", "DMCA Protected"],
   legal_links: [],
   copyright: "© 2026 OrynticLabs Private Limited. All rights reserved.",
 };
@@ -49,21 +49,16 @@ const FooterLink = ({ to, children }) => (
   </Link>
 );
 
-const InfoItem = ({ icon: Icon, label, value, href, testId }) => (
-  <div className="flex items-start gap-4 border-b border-white/[0.06] pb-6" data-testid={testId}>
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
-      <Icon className="h-4 w-4 text-brand-orange" strokeWidth={1.75} />
-    </span>
-    <div className="min-w-0">
-      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/35">{label}</p>
-      {href ? (
-        <a href={href} className="mt-1 block truncate text-sm font-medium text-white/80 transition-colors duration-300 hover:text-brand-orange">
-          {value}
-        </a>
-      ) : (
-        <p className="mt-1 text-sm font-medium leading-snug text-white/80">{value}</p>
-      )}
-    </div>
+const InfoItem = ({ label, value, href, testId }) => (
+  <div className="border-b border-white/[0.07] pb-5" data-testid={testId}>
+    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-brand-orange/80">{label}</p>
+    {href ? (
+      <a href={href} className="mt-2 block text-sm font-medium leading-relaxed text-white/85 transition-colors duration-300 hover:text-brand-orange">
+        {value}
+      </a>
+    ) : (
+      <p className="mt-2 text-sm font-medium leading-relaxed text-white/85">{value}</p>
+    )}
   </div>
 );
 
@@ -179,12 +174,12 @@ export default function Footer() {
                     whileHover={{ y: -4 }}
                     title={certificates[0].label}
                     data-testid={`certificate-${certificates[0].label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                    className="inline-block"
+                    className="max-w-md"
                   >
                     <img
                       src={certificates[0].image}
                       alt={certificates[0].label}
-                      className="h-28 w-auto rounded-lg object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-[filter] duration-300 hover:drop-shadow-[0_0_28px_rgba(0,102,255,0.35)]"
+                      className="h-auto w-full rounded-lg object-contain drop-shadow-[0_10px_28px_rgba(0,0,0,0.5)] transition-[filter] duration-300 hover:drop-shadow-[0_0_32px_rgba(0,102,255,0.35)]"
                     />
                   </motion.div>
                 </div>
@@ -222,12 +217,12 @@ export default function Footer() {
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-blue">Company Information</p>
             </Reveal>
             <div className="mt-8 grid gap-x-12 gap-y-7 sm:grid-cols-2" data-testid="company-info">
-              <Reveal delay={0.05}><InfoItem icon={Mail} label="Official Email" value={company?.email} href={`mailto:${company?.email}`} testId="info-email" /></Reveal>
-              <Reveal delay={0.1}><InfoItem icon={Phone} label="Contact Number" value={company?.phone} href={`tel:${(company?.phone || "").replace(/\s/g, "")}`} testId="info-phone" /></Reveal>
-              <Reveal delay={0.15}><InfoItem icon={MapPin} label="Office Address 1" value={company?.address1} testId="info-address-1" /></Reveal>
-              <Reveal delay={0.2}><InfoItem icon={Building2} label="Office Address 2" value={company?.address2} testId="info-address-2" /></Reveal>
-              <Reveal delay={0.25}><InfoItem icon={FileText} label="CIN" value={company?.cin} testId="info-cin" /></Reveal>
-              <Reveal delay={0.3}><InfoItem icon={Receipt} label="GST" value={company?.gst} testId="info-gst" /></Reveal>
+              <Reveal delay={0.05}><InfoItem label="Sales Email" value={company?.sales_email} href={`mailto:${company?.sales_email}`} testId="info-sales-email" /></Reveal>
+              <Reveal delay={0.1}><InfoItem label="Support Email" value={company?.support_email} href={`mailto:${company?.support_email}`} testId="info-support-email" /></Reveal>
+              <Reveal delay={0.15}><InfoItem label="Contact Number" value={company?.phone} href={`tel:${(company?.phone || "").replace(/\s/g, "")}`} testId="info-phone" /></Reveal>
+              <Reveal delay={0.2}><InfoItem label="CIN" value={company?.cin} testId="info-cin" /></Reveal>
+              <Reveal delay={0.25}><InfoItem label="Head Office" value={company?.address1} testId="info-address-1" /></Reveal>
+              <Reveal delay={0.3}><InfoItem label="Corporate Office" value={company?.address2} testId="info-address-2" /></Reveal>
             </div>
           </div>
         </div>

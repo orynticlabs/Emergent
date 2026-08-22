@@ -162,10 +162,12 @@ def _newsletter_html() -> str:
 DEFAULT_FOOTER = {
     "company": {
         "email": "hello@orynticlabs.com",
+        "sales_email": "sales@orynticlabs.com",
+        "support_email": "support@orynticlabs.com",
         "phone": "+91 79017 17617",
-        "address1": "Registered Office — India (update via admin)",
-        "address2": "Corporate Office — India (update via admin)",
-        "cin": "Available on request",
+        "address1": "Ward 14, Main Stand, Mangawan, Rewa, Madhya Pradesh 486111, India",
+        "address2": "OrynticLabs Private Limited, 6th Venture X, Landmark, Sector 67, Gurugram, Haryana 122101, India",
+        "cin": "U62011MP2026PTC085165",
         "gst": "Available on request",
     },
     "newsletter": {
@@ -366,6 +368,8 @@ async def startup():
             patch["certificates"] = DEFAULT_FOOTER["certificates"]
         if "Startup India Recognized" not in footer.get("badges", []):
             patch["badges"] = DEFAULT_FOOTER["badges"]
+        if "sales_email" not in footer.get("company", {}):
+            patch["company"] = DEFAULT_FOOTER["company"]
         if patch:
             await db.footer_settings.update_one({"key": "main"}, {"$set": patch})
             logger.info(f"Footer settings patched: {list(patch.keys())}")

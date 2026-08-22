@@ -124,10 +124,12 @@ export default function AdminFooter() {
       <div className="mx-auto mt-10 max-w-5xl space-y-8 px-6">
         <Section title="Company Information">
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Official Email"><input value={settings.company.email} onChange={(e) => set("company.email", e.target.value)} data-testid="admin-input-email" className={inputCls} /></Field>
+            <Field label="Sales Email"><input value={settings.company.sales_email || ""} onChange={(e) => set("company.sales_email", e.target.value)} data-testid="admin-input-sales-email" className={inputCls} /></Field>
+            <Field label="Support Email"><input value={settings.company.support_email || ""} onChange={(e) => set("company.support_email", e.target.value)} data-testid="admin-input-support-email" className={inputCls} /></Field>
+            <Field label="General Email"><input value={settings.company.email} onChange={(e) => set("company.email", e.target.value)} data-testid="admin-input-email" className={inputCls} /></Field>
             <Field label="Contact Number"><input value={settings.company.phone} onChange={(e) => set("company.phone", e.target.value)} data-testid="admin-input-phone" className={inputCls} /></Field>
-            <Field label="Office Address 1"><input value={settings.company.address1} onChange={(e) => set("company.address1", e.target.value)} data-testid="admin-input-address1" className={inputCls} /></Field>
-            <Field label="Office Address 2"><input value={settings.company.address2} onChange={(e) => set("company.address2", e.target.value)} data-testid="admin-input-address2" className={inputCls} /></Field>
+            <Field label="Head Office Address"><input value={settings.company.address1} onChange={(e) => set("company.address1", e.target.value)} data-testid="admin-input-address1" className={inputCls} /></Field>
+            <Field label="Corporate Office Address"><input value={settings.company.address2} onChange={(e) => set("company.address2", e.target.value)} data-testid="admin-input-address2" className={inputCls} /></Field>
             <Field label="CIN Number"><input value={settings.company.cin} onChange={(e) => set("company.cin", e.target.value)} data-testid="admin-input-cin" className={inputCls} /></Field>
             <Field label="GST Number"><input value={settings.company.gst} onChange={(e) => set("company.gst", e.target.value)} data-testid="admin-input-gst" className={inputCls} /></Field>
           </div>
