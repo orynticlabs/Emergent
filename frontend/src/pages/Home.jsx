@@ -6,20 +6,14 @@ import {
 } from "lucide-react";
 import {
   IMAGES, SERVICES, PRODUCTS, INDUSTRIES, WHY_US, PROCESS,
-  HERO_VIDEO, TECH_RIBBON, SERVICE_GROUPS, HOME_STATS, ORYAI_ECOSYSTEM, FAQS, INDUSTRY_IMAGES,
+  HERO_VIDEO, SERVICE_GROUPS, HOME_STATS, ORYAI_ECOSYSTEM, FAQS, INDUSTRY_IMAGES,
 } from "@/data/content";
 import { Reveal, KineticLine, Overline, SectionHead, ArrowLink, EASE } from "@/components/site/Reveal";
 import Ribbon from "@/components/site/Ribbon";
+import ClientMarquee from "@/components/site/ClientMarquee";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ICONS = { Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge };
-const STATS = [
-  { value: "08", label: "Service practices" },
-  { value: "03", label: "Proprietary products" },
-  { value: "11", label: "Industries served" },
-  { value: "100%", label: "Founder-led delivery" },
-];
-
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -27,7 +21,7 @@ function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
-    <section ref={ref} data-testid="home-hero" className="relative flex min-h-screen items-center overflow-hidden bg-brand-ink text-white">
+    <section ref={ref} data-testid="home-hero" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-ink text-white">
       <video
         autoPlay
         muted
@@ -39,17 +33,19 @@ function Hero() {
       >
         <source src={HERO_VIDEO} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/55 to-[#050505]" aria-hidden="true" />
-      <div className="absolute inset-0 bg-grid-dark opacity-40" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#050505]/65" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/30 to-[#050505]" aria-hidden="true" />
 
-      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-24 md:px-10">
+      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-5xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <Overline>OrynticLabs — Full-Spectrum Technology Company</Overline>
+          <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
+            OrynticLabs — Full-Spectrum Technology Company
+          </p>
         </motion.div>
 
-        <h1 className="mt-8 max-w-5xl font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.02]">
+        <h1 className="mt-10 font-display text-5xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.08]">
           <KineticLine delay={0.15}>Engineering the Next Generation of</KineticLine>
-          <KineticLine delay={0.27}><span className="text-brand-orange">Intelligent Systems</span></KineticLine>
+          <KineticLine delay={0.27}><span className="font-semibold text-brand-orange">Intelligent Systems</span></KineticLine>
           <KineticLine delay={0.39}>with AI<span className="text-brand-blue">.</span></KineticLine>
         </h1>
 
@@ -57,7 +53,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-          className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
+          className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
         >
           We design, build, and deliver secure, scalable technology across the complete software
           lifecycle — combining strong architecture, data engineering, and AI capability to move
@@ -68,25 +64,10 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
-          className="mt-10 flex flex-wrap gap-4"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <ArrowLink to="/contact">Consult Our Strategy Team</ArrowLink>
-          <ArrowLink to="/services" variant="ghost" className="border-white/30 text-white">Explore Services</ArrowLink>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.95 }}
-          className="mt-20 grid grid-cols-2 gap-8 border-t border-white/15 pt-8 sm:grid-cols-4"
-          data-testid="hero-stats"
-        >
-          {STATS.map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white">{s.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-widest text-white/45">{s.label}</p>
-            </div>
-          ))}
+          <ArrowLink to="/services" variant="ghost" className="border-white/30 text-white backdrop-blur-md">Explore Services</ArrowLink>
         </motion.div>
       </motion.div>
 
@@ -495,7 +476,7 @@ export default function Home() {
   return (
     <main data-testid="home-page">
       <Hero />
-      <Ribbon items={TECH_RIBBON} dark />
+      <ClientMarquee />
       <ServicesShowcase />
       <ProductsShowcase />
       <StatsShowcase />
