@@ -15,6 +15,7 @@ import Ribbon from "@/components/site/Ribbon";
 import ClientMarquee from "@/components/site/ClientMarquee";
 import AutomobileSection from "@/components/site/AutomobileSection";
 import EngagementModels from "@/components/site/EngagementModels";
+import UIShowcase from "@/components/site/UIShowcase";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ICONS = { Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge };
@@ -574,6 +575,7 @@ export default function Home() {
       <ClientMarquee />
       <ServicesShowcase />
       <ProductsShowcase />
+      <UIShowcase />
       <StatsShowcase />
       <OryAISection />
       <IndustriesTabs />
