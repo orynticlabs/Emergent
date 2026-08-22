@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   ArrowUpRight, ArrowRight, Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge, Check,
-  Package, Zap, Target,
+  Package, Zap, Target, Loader2, ChevronDown,
 } from "lucide-react";
+import { toast } from "sonner";
 import {
   IMAGES, SERVICES, PRODUCTS, INDUSTRIES, WHY_US, PROCESS,
   HERO_VIDEO, SERVICE_GROUPS, HOME_STATS, ORYAI_ECOSYSTEM, FAQS, INDUSTRY_IMAGES,
@@ -480,27 +481,84 @@ function FaqSection() {
 }
 
 function CtaBand() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", timeline: "", project: "" });
+  const [sending, setSending] = useState(false);
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+  const submit = (e) => {
+    e.preventDefault();
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setForm({ name: "", phone: "", email: "", timeline: "", project: "" });
+      toast.success("Request received. Our strategy team will reach out within 24 hours.");
+    }, 900);
+  };
+
+  const lineInput =
+    "w-full border-b border-white/20 bg-transparent py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors duration-300 focus:border-brand-orange";
+
   return (
-    <section data-testid="home-cta" className="relative overflow-hidden border-t border-white/10 bg-brand-ink py-24 text-white md:py-32">
-      <div className="absolute left-1/2 top-0 h-72 w-[50rem] -translate-x-1/2 rounded-full bg-brand-blue/15 blur-[140px]" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
-        <Reveal>
-          <h2 className="max-w-4xl font-display text-4xl md:text-6xl font-black tracking-tighter leading-[1.02]">
-            Ready to Build Your Next<br />
-            <span className="text-brand-orange">Intelligent Product?</span>
-          </h2>
-        </Reveal>
+    <section data-testid="home-cta" className="bg-mesh-brand relative overflow-hidden border-t border-white/10 py-24 text-white md:py-32">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 md:px-10 lg:grid-cols-2">
+        <div
+          className="absolute left-1/2 top-1/2 hidden h-56 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-brand-blue via-white/40 to-brand-orange lg:block"
+          aria-hidden="true"
+        />
+
+        <div>
+          <Reveal>
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight leading-[1.12]">
+              Partner with tech catalysts who transform ideas into <span className="text-brand-orange">impact.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-5 text-base text-white/55 md:text-lg">Book your consultation with us.</p>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-12 font-display text-6xl md:text-7xl font-black tracking-tight">
+              Let's Talk<span className="text-brand-orange">!</span>
+            </p>
+          </Reveal>
+        </div>
+
         <Reveal delay={0.15}>
-          <p className="mt-6 max-w-xl leading-relaxed text-white/55">
-            Share a few details about your idea, and our team will come back with technical
-            insight, a clear scope, and next steps — not a sales deck.
-          </p>
-        </Reveal>
-        <Reveal delay={0.25}>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <ArrowLink to="/contact">Start a Project</ArrowLink>
-            <ArrowLink to="/stack" variant="ghost" className="border-white/25 text-white">See Our Stack</ArrowLink>
-          </div>
+          <form
+            onSubmit={submit}
+            data-testid="cta-form"
+            className="rounded-3xl border border-brand-blue/40 bg-gradient-to-br from-brand-blue/[0.14] via-white/[0.03] to-transparent p-8 backdrop-blur-xl glow-blue md:p-10"
+          >
+            <h3 className="font-display text-2xl font-bold tracking-tight">Speak With Our Experts</h3>
+            <div className="mt-8 space-y-6">
+              <input required placeholder="Full Name" value={form.name} onChange={set("name")} data-testid="cta-input-name" className={lineInput} />
+              <div className="relative">
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-white/20 pr-3 text-sm font-medium text-white/60">+91</span>
+                <input type="tel" placeholder="Mobile Number" value={form.phone} onChange={set("phone")} data-testid="cta-input-phone" className={`${lineInput} pl-14`} />
+              </div>
+              <input required type="email" placeholder="Business Email" value={form.email} onChange={set("email")} data-testid="cta-input-email" className={lineInput} />
+              <div className="relative">
+                <select required value={form.timeline} onChange={set("timeline")} data-testid="cta-input-timeline" className={`${lineInput} appearance-none pr-8 ${form.timeline ? "" : "text-white/40"}`}>
+                  <option value="" disabled className="bg-brand-ink text-white">When do you want to launch a solution?</option>
+                  <option value="Immediately" className="bg-brand-ink text-white">Immediately</option>
+                  <option value="2-3 months" className="bg-brand-ink text-white">2–3 months</option>
+                  <option value="4-6 months" className="bg-brand-ink text-white">4–6 months</option>
+                  <option value="After 6 months" className="bg-brand-ink text-white">After 6 months</option>
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50" />
+              </div>
+              <textarea rows={3} placeholder="About Project" value={form.project} onChange={set("project")} data-testid="cta-input-project" className={`${lineInput} resize-none`} />
+            </div>
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              type="submit"
+              disabled={sending}
+              data-testid="cta-submit-button"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-brand-orange px-12 py-3.5 text-sm font-bold text-white transition-colors duration-300 hover:bg-[#e04a00] disabled:opacity-60"
+            >
+              {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+              {sending ? "Submitting..." : "Submit"}
+            </motion.button>
+          </form>
         </Reveal>
       </div>
     </section>
