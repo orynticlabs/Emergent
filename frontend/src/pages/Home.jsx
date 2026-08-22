@@ -139,7 +139,7 @@ function ProductsShowcase() {
         />
 
         <div className="mt-16 grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="min-w-0 lg:col-span-4">
             <div className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
               {PRODUCTS.map((p, i) => (
                 <button
@@ -171,7 +171,7 @@ function ProductsShowcase() {
             </p>
           </div>
 
-          <div className="lg:col-span-8">
+          <div className="min-w-0 lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={product.id}
