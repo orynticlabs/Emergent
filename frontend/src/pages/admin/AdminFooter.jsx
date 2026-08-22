@@ -171,7 +171,7 @@ export default function AdminFooter() {
         </Section>
 
         <Section title="Certificates & Badges">
-          <Field label="Certificates (Label|Image path per line, e.g. ISO 27001 Certified|/assets/iso-27001.png)">
+          <Field label="Certificates (Label|Image path per line — first one shows large under the newsletter, the rest appear in the bottom bar)">
             <textarea
               value={linksToText((settings.certificates || []).map((c) => ({ label: c.label, url: c.image })))}
               onChange={(e) => set("certificates", textToLinks(e.target.value).map((l) => ({ label: l.label, image: l.url })))}

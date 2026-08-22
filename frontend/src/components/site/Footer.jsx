@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, Loader2, CheckCircle2, Mail, Phone, MapPin, Building2,
-  FileText, Receipt, ShieldCheck, Linkedin, Instagram, Facebook, Twitter, Youtube,
+  FileText, Receipt, Linkedin, Instagram, Facebook, Twitter, Youtube,
 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 
@@ -97,8 +97,9 @@ export default function Footer() {
     }
   };
 
-  const { company, newsletter, socials = {}, columns = [], certificates = [], badges = [], legal_links = [], copyright } = settings;
+  const { company, newsletter, socials = {}, columns = [], certificates = [], legal_links = [], copyright } = settings;
   const socialsSet = Object.entries(socials).filter(([, url]) => url);
+  const bottomBadges = certificates.slice(1);
 
   return (
     <footer data-testid="site-footer" className="relative overflow-hidden bg-brand-ink text-white">
@@ -174,20 +175,18 @@ export default function Footer() {
             {certificates.length > 0 && (
               <Reveal delay={0.2}>
                 <div className="mt-10" data-testid="footer-certificates">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">Certified & Recognized</p>
-                  <div className="mt-4 flex flex-wrap items-center gap-4">
-                    {certificates.map((cert) => (
-                      <motion.div
-                        key={cert.label}
-                        whileHover={{ y: -4 }}
-                        title={cert.label}
-                        data-testid={`certificate-${cert.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                        className="rounded-xl bg-white p-2.5 shadow-lg shadow-black/30 transition-shadow duration-300 hover:shadow-[0_0_28px_-6px_rgba(0,102,255,0.5)]"
-                      >
-                        <img src={cert.image} alt={cert.label} className="h-14 w-auto object-contain" />
-                      </motion.div>
-                    ))}
-                  </div>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    title={certificates[0].label}
+                    data-testid={`certificate-${certificates[0].label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                    className="inline-block"
+                  >
+                    <img
+                      src={certificates[0].image}
+                      alt={certificates[0].label}
+                      className="h-28 w-auto rounded-lg object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-[filter] duration-300 hover:drop-shadow-[0_0_28px_rgba(0,102,255,0.35)]"
+                    />
+                  </motion.div>
                 </div>
               </Reveal>
             )}
@@ -259,16 +258,18 @@ export default function Footer() {
                 <FooterLink key={link.label} to={link.url}>{link.label}</FooterLink>
               ))}
             </nav>
-            {badges.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2.5" data-testid="footer-badges">
-                {badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[11px] font-semibold tracking-wide text-white/60 transition-colors duration-300 hover:border-brand-blue/50 hover:text-white"
-                  >
-                    <ShieldCheck className="h-3.5 w-3.5 text-brand-blue" strokeWidth={2} />
-                    {badge}
-                  </span>
+            {bottomBadges.length > 0 && (
+              <div className="flex flex-wrap items-center gap-6" data-testid="footer-badges">
+                {bottomBadges.map((badge) => (
+                  <motion.img
+                    key={badge.label}
+                    whileHover={{ y: -3 }}
+                    src={badge.image}
+                    alt={badge.label}
+                    title={badge.label}
+                    data-testid={`footer-badge-${badge.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                    className="h-10 w-auto object-contain opacity-80 transition-opacity duration-300 hover:opacity-100"
+                  />
                 ))}
               </div>
             )}
