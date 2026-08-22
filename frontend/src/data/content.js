@@ -169,3 +169,87 @@ export const CONTACT = {
   phone: "+91 79017 17617",
   website: "www.orynticlabs.com",
 };
+
+export const HERO_VIDEO = "https://videos.pexels.com/video-files/3141210/3141210-uhd_2560_1440_25fps.mp4";
+
+export const TECH_RIBBON = [
+  "AWS", "Google Cloud", "Azure", "Kubernetes", "TensorFlow", "PyTorch", "LangChain",
+  "OpenAI", "Anthropic", "Next.js", "React", "PostgreSQL", "Kafka", "Terraform", "Shopify",
+];
+
+export const SERVICE_GROUPS = [
+  {
+    icon: "Compass",
+    title: "Strategic Technology Consulting",
+    text: "From architecture audits to technology roadmaps, we help leaders align engineering decisions with business outcomes.",
+    link: "View Consulting Services",
+  },
+  {
+    icon: "Layers",
+    title: "Product Development & Engineering",
+    text: "Full-lifecycle engineering — from MVPs that validate quickly to enterprise platforms built to scale and last.",
+    link: "View Engineering Services",
+  },
+  {
+    icon: "BrainCircuit",
+    title: "AI, Data & Analytics Solutions",
+    text: "Custom AI agents, ML systems, and data platforms that automate operations and turn raw data into decisions.",
+    link: "View AI Services",
+  },
+  {
+    icon: "Cloud",
+    title: "Cloud & Infrastructure Operations",
+    text: "Secure, observable, automated cloud environments on AWS, GCP, and Azure — engineered to never fail at the worst moment.",
+    link: "View Cloud Services",
+  },
+];
+
+export const HOME_STATS = [
+  { value: "08", label: "Service Practices", caption: "covering the complete software lifecycle under one roof", image: "datacenter" },
+  { value: "03", label: "Proprietary Products", caption: "OryAI, OryCMS, and PerformX — running in production daily", image: "dashboard" },
+  { value: "11", label: "Industries Served", caption: "with deep domain exposure from fintech to agriculture", image: "architecture" },
+  { value: "100%", label: "Founder-Led Delivery", caption: "the people on your kickoff call build your product", image: "hero" },
+];
+
+export const ORYAI_ECOSYSTEM = [
+  {
+    icon: "Bot",
+    title: "AI Agents & GenAI Integration",
+    points: ["Custom agent builder & orchestration", "LLM layer — OpenAI, Anthropic, open-source", "Workflow automation builder"],
+  },
+  {
+    icon: "Database",
+    title: "RAG & Knowledge Systems",
+    points: ["Multi-vector-database retrieval", "Domain knowledge grounded answers", "Multi-language — Hindi & English"],
+  },
+  {
+    icon: "Gauge",
+    title: "Evaluation & Monitoring",
+    points: ["Production evaluation dashboard", "Conversation memory & sessions", "Reliability beyond the prototype"],
+  },
+];
+
+export const FAQS = [
+  {
+    q: "What services does OrynticLabs offer?",
+    a: "Eight practices across the complete software lifecycle — web development, product development, custom software, mobile apps, AI & machine learning, data & analytics, cloud infrastructure, and UI/UX design — plus staff augmentation and technology consulting for teams that need talent or advisory support.",
+  },
+  {
+    q: "What engagement models do you support?",
+    a: "Three delivery models: SaaS (subscribe to platforms we build and run), PaaS (build on our proprietary platforms like OryAI and OryCMS), and custom project-based engagements scoped around your exact requirements. You work with us in whatever way fits your business best.",
+  },
+  {
+    q: "Is your AI capability real or just API wrappers?",
+    a: "Real. We build custom AI and ML systems — predictive models, neural networks, intelligent agents, RAG architectures, and production-grade ML infrastructure trained on your data and integrated into your workflows. And we are honest when a simpler approach will do the job better.",
+  },
+  {
+    q: "How does a typical engagement work?",
+    a: "We understand before recommending, document the scope before building, work in two-week sprints with a working demo every Friday, communicate honestly when something is not working, and measure success by outcomes — not just shipped code.",
+  },
+  {
+    q: "Which industries do you serve?",
+    a: "Eleven and counting: fintech, healthcare & biotech, EdTech, supply chain & logistics, manufacturing, agriculture, retail & e-commerce, energy & utilities, real estate, automobile, and hospitality & food service. In each, we understand the domain deeply before proposing a solution.",
+  },
+];
+
+export const INDUSTRY_IMAGES = ["architecture", "datacenter", "ai", "dashboard", "hero", "about", "culture"];

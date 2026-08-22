@@ -22,9 +22,9 @@ Build the official OrynticLabs website with a modern, premium, futuristic visual
 - Potential client exploring OryAI/OryCMS/PerformX products
 
 ## Implemented (2026-08-22)
-- Multi-page site with 7 routes, kinetic masked hero reveal, parallax hero image, floating glow orbs
-- Numbered manifesto chapters (How We Work), editorial marquees, services bento grid, products teaser, Why band
-- About (story, delivery models, metrics, culture, why-us), Services (8 cards + process timeline + staffing/consulting), Products (OryAI/OryCMS/PerformX alternating themes), Industries (11 domains), Tech Stack (13 groups), Contact (form + direct lines)
+- Multi-page site with 7 routes, kinetic masked hero reveal, parallax, lenis smooth scroll
+- v2 redesign (appinventiv.com-inspired): mega-menu header with hover dropdowns (Services 8, Products 3, Industries 11) + mobile accordion menu; video background hero (Pexels abstract) with kinetic headline + stats strip; homepage sections: tech ribbon marquee, "Beyond Development" 4 service-group cards, tabbed Products showcase ("Innovation, Engineered by OrynticLabs"), image-backed stats cards, OryAI ecosystem section, interactive Industries tabs with image panel, Why OrynticLabs, FAQ accordion (5 FAQs), CTA band
+- About / Services / Products / Industries / Stack / Contact pages (v1 layouts retained)
 - Newsletter: POST /api/newsletter/subscribe — stores subscriber in MongoDB + sends branded welcome email via managed Resend (verified, email_id returned)
 - Contact form: frontend-only demo with success toast (MOCKED — not stored or emailed)
 - data-testid coverage on interactive elements

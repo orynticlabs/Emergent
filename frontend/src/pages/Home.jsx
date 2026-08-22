@@ -1,11 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { IMAGES, SERVICES, PRODUCTS, WHY_US, MARQUEE_ITEMS, PROCESS } from "@/data/content";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import {
+  ArrowUpRight, ArrowRight, Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge, Check,
+} from "lucide-react";
+import {
+  IMAGES, SERVICES, PRODUCTS, INDUSTRIES, WHY_US, PROCESS,
+  HERO_VIDEO, TECH_RIBBON, SERVICE_GROUPS, HOME_STATS, ORYAI_ECOSYSTEM, FAQS, INDUSTRY_IMAGES,
+} from "@/data/content";
 import { Reveal, KineticLine, Overline, SectionHead, ArrowLink, EASE } from "@/components/site/Reveal";
 import Ribbon from "@/components/site/Ribbon";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
+const ICONS = { Compass, Layers, BrainCircuit, Cloud, Bot, Database, Gauge };
 const STATS = [
   { value: "08", label: "Service practices" },
   { value: "03", label: "Proprietary products" },
@@ -13,107 +20,81 @@ const STATS = [
   { value: "100%", label: "Founder-led delivery" },
 ];
 
-const BENTO_SPANS = [
-  "md:col-span-4", "md:col-span-2", "md:col-span-2", "md:col-span-4",
-  "md:col-span-3", "md:col-span-3", "md:col-span-2", "md:col-span-4",
-];
-
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
-    <section ref={ref} data-testid="home-hero" className="relative flex min-h-screen items-center overflow-hidden bg-brand-ink bg-grid-dark text-white">
-      <motion.div
-        aria-hidden="true"
-        className="absolute -top-24 -left-24 h-[28rem] w-[28rem] rounded-full bg-brand-blue/25 blur-[130px]"
-        animate={{ y: [0, 40, 0], x: [0, 20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-brand-orange/20 blur-[130px]"
-        animate={{ y: [0, -40, 0], x: [0, -20, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
+    <section ref={ref} data-testid="home-hero" className="relative flex min-h-screen items-center overflow-hidden bg-brand-ink text-white">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        data-testid="hero-video"
+        className="absolute inset-0 h-full w-full object-cover"
+        poster={IMAGES.hero}
+      >
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/55 to-[#050505]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid-dark opacity-40" aria-hidden="true" />
 
-      <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-20 md:px-10">
-        <div className="grid items-center gap-16 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-              <Overline>OrynticLabs — Full-Spectrum Technology Studio</Overline>
-            </motion.div>
+      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-24 md:px-10">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+          <Overline>OrynticLabs — Full-Spectrum Technology Company</Overline>
+        </motion.div>
 
-            <h1 className="mt-8 font-display text-5xl sm:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.95]">
-              <KineticLine delay={0.15}>ENGINEERING</KineticLine>
-              <KineticLine delay={0.27}><span className="text-brand-orange">INTELLIGENT</span></KineticLine>
-              <KineticLine delay={0.39}>SOFTWARE<span className="text-brand-blue">.</span></KineticLine>
-            </h1>
+        <h1 className="mt-8 max-w-5xl font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.02]">
+          <KineticLine delay={0.15}>Engineering the Next Generation of</KineticLine>
+          <KineticLine delay={0.27}><span className="text-brand-orange">Intelligent Systems</span></KineticLine>
+          <KineticLine delay={0.39}>with AI<span className="text-brand-blue">.</span></KineticLine>
+        </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-              className="mt-8 max-w-xl text-base md:text-lg leading-relaxed text-white/60"
-            >
-              We design, build, and deliver custom technology across the complete software
-              lifecycle — from early-stage product thinking to enterprise-scale deployment.
-              Technology that solves real problems, moves fast, and lasts long.
-            </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
+        >
+          We design, build, and deliver secure, scalable technology across the complete software
+          lifecycle — combining strong architecture, data engineering, and AI capability to move
+          organizations from strategy to reliable systems in production.
+        </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
-              className="mt-10 flex flex-wrap gap-4"
-            >
-              <ArrowLink to="/contact">Start a Project</ArrowLink>
-              <ArrowLink to="/services" variant="ghost" className="text-white">Explore Services</ArrowLink>
-            </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
+          className="mt-10 flex flex-wrap gap-4"
+        >
+          <ArrowLink to="/contact">Consult Our Strategy Team</ArrowLink>
+          <ArrowLink to="/services" variant="ghost" className="border-white/30 text-white">Explore Services</ArrowLink>
+        </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.95 }}
-              className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-8 sm:grid-cols-4"
-              data-testid="hero-stats"
-            >
-              {STATS.map((s) => (
-                <div key={s.label}>
-                  <p className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white">{s.value}</p>
-                  <p className="mt-1 text-xs uppercase tracking-widest text-white/40">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          <div className="hidden lg:col-span-5 lg:block">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
-              style={{ y: imgY }}
-              className="relative"
-            >
-              <div className="overflow-hidden rounded-3xl border border-white/10 glow-blue">
-                <img src={IMAGES.hero} alt="Futuristic abstract light architecture" className="h-[34rem] w-full object-cover" />
-              </div>
-              <div className="absolute -bottom-6 -left-6 rounded-2xl border border-white/10 bg-brand-ink/80 px-6 py-4 backdrop-blur-xl">
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Delivery models</p>
-                <p className="mt-1 font-display text-lg font-bold">SaaS · PaaS · Custom</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.95 }}
+          className="mt-20 grid grid-cols-2 gap-8 border-t border-white/15 pt-8 sm:grid-cols-4"
+          data-testid="hero-stats"
+        >
+          {STATS.map((s) => (
+            <div key={s.label}>
+              <p className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white">{s.value}</p>
+              <p className="mt-1 text-xs uppercase tracking-widest text-white/45">{s.label}</p>
+            </div>
+          ))}
+        </motion.div>
       </motion.div>
 
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2" aria-hidden="true">
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="h-10 w-6 rounded-full border border-white/30 p-1.5"
+          className="h-10 w-6 rounded-full border border-white/40 p-1.5"
         >
           <div className="h-2 w-full rounded-full bg-brand-orange" />
         </motion.div>
@@ -122,121 +103,284 @@ function Hero() {
   );
 }
 
-function Manifesto() {
-  return (
-    <section data-testid="manifesto-section">
-      {PROCESS.slice(0, 4).map((step, i) => {
-        const dark = i % 2 === 1;
-        return (
-          <div key={step.n} className={dark ? "bg-brand-ink text-white" : "bg-brand-paper text-brand-coal"}>
-            <div className="mx-auto grid max-w-7xl gap-8 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32">
-              <div className="md:col-span-4">
-                <Reveal>
-                  <span className={`font-display text-7xl md:text-9xl font-black tracking-tighter ${dark ? "text-outline-light" : "text-outline-dark"}`}>
-                    {step.n}
-                  </span>
-                </Reveal>
-              </div>
-              <div className="md:col-span-8 md:pt-6">
-                <Reveal delay={0.1}>
-                  <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight">{step.title}</h3>
-                </Reveal>
-                <Reveal delay={0.2}>
-                  <p className={`mt-6 max-w-2xl text-base md:text-lg leading-relaxed ${dark ? "text-white/60" : "text-black/60"}`}>
-                    {step.text}
-                  </p>
-                </Reveal>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </section>
-  );
-}
-
-function ServicesBento() {
+function ServicesShowcase() {
   return (
     <section data-testid="home-services" className="bg-brand-ink py-24 text-white md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <SectionHead
-            overline="What we do"
-            title="Full-stack capability, one accountable team."
-            description="Eight practices covering the complete software lifecycle — no coordination gaps between agencies that have never spoken to each other."
-          />
-          <Reveal delay={0.2}>
-            <Link to="/services" data-testid="services-view-all" className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-orange">
-              All services <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid gap-5 md:grid-cols-6">
-          {SERVICES.map((s, i) => {
-            const Icon = s.icon;
+        <SectionHead
+          overline="What we do"
+          title={<>Beyond Development.<br />We Engineer <span className="text-brand-orange">Transformation.</span></>}
+        />
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {SERVICE_GROUPS.map((g, i) => {
+            const Icon = ICONS[g.icon];
             return (
-              <Reveal key={s.id} delay={0.06 * i} className={BENTO_SPANS[i]}>
-                <Link
-                  to="/services"
-                  data-testid={`service-card-${s.id}`}
-                  className="group flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/60 hover:bg-white/[0.05]"
+              <Reveal key={g.title} delay={0.08 * i}>
+                <div
+                  data-testid={`service-group-${g.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                  className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/60 hover:bg-white/[0.05]"
                 >
-                  <div>
-                    <Icon className="h-8 w-8 text-brand-blue transition-colors duration-300 group-hover:text-brand-orange" strokeWidth={1.5} />
-                    <h3 className="mt-6 font-display text-xl md:text-2xl font-bold tracking-tight">{s.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/50">{s.blurb}</p>
-                  </div>
-                  <div className="mt-8 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/40 transition-colors duration-300 group-hover:text-brand-orange">
-                    Explore <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
-                </Link>
+                  <Icon className="h-10 w-10 text-brand-blue transition-colors duration-300 group-hover:text-brand-orange" strokeWidth={1.5} />
+                  <h3 className="mt-7 font-display text-xl font-bold leading-snug tracking-tight">{g.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-white/50">{g.text}</p>
+                  <Link to="/services" className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange">
+                    {g.link}
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </div>
               </Reveal>
             );
           })}
         </div>
+        <Reveal delay={0.2}>
+          <div className="mt-12">
+            <ArrowLink to="/services" variant="ghost" className="border-white/25 text-white">View All 8 Service Practices</ArrowLink>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function ProductsTeaser() {
+function ProductsShowcase() {
+  const [active, setActive] = useState(0);
+  const product = PRODUCTS[active];
+
   return (
     <section data-testid="home-products" className="bg-brand-paper py-24 text-brand-coal md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHead
           dark={false}
           overline="Internal products"
-          title="Systems we built for ourselves — and now ship."
-          description="OryAI, OryCMS, and PerformX are not theoretical. They run our own operations every day."
+          title={<>Innovation, Engineered by <span className="text-brand-blue">OrynticLabs</span></>}
+          description="Systems we built for ourselves and now ship to clients — running in production every day."
         />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {PRODUCTS.map((p, i) => (
-            <Reveal key={p.id} delay={0.1 * i} className={i === 1 ? "md:translate-y-10" : i === 2 ? "md:translate-y-20" : ""}>
-              <Link
-                to="/products"
-                data-testid={`product-teaser-${p.id}`}
-                className="group block overflow-hidden rounded-3xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10"
-              >
-                <div className="relative h-52 overflow-hidden">
-                  <img src={p.image} alt={p.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <span className="absolute left-6 top-6 rounded-full bg-brand-ink/70 px-4 py-1.5 text-xs font-bold tracking-widest text-white backdrop-blur-md">
-                    0{i + 1}
+        <div className="mt-14 grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
+              {PRODUCTS.map((p, i) => (
+                <button
+                  key={p.id}
+                  onClick={() => setActive(i)}
+                  data-testid={`product-tab-${p.id}`}
+                  className={`flex min-w-[220px] items-center justify-between rounded-2xl border px-6 py-5 text-left transition-all duration-300 lg:min-w-0 ${
+                    active === i
+                      ? "border-brand-orange bg-brand-ink text-white shadow-xl shadow-black/15"
+                      : "border-black/10 bg-white text-brand-coal hover:border-brand-orange/50"
+                  }`}
+                >
+                  <span>
+                    <span className="block font-display text-lg font-bold tracking-tight">{p.name}</span>
+                    <span className={`mt-0.5 block text-xs ${active === i ? "text-white/50" : "text-black/45"}`}>{p.tagline}</span>
                   </span>
-                </div>
-                <div className="p-8">
-                  <h3 className="font-display text-2xl font-bold tracking-tight">{p.name}</h3>
-                  <p className="mt-1 text-sm font-medium text-brand-blue">{p.tagline}</p>
-                  <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-black/55">{p.description}</p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange">
-                    View product <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowRight className={`h-4 w-4 shrink-0 transition-colors duration-300 ${active === i ? "text-brand-orange" : "text-black/25"}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.45, ease: EASE }}
+                data-testid="product-showcase-panel"
+                className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl shadow-black/5"
+              >
+                <div className="relative h-64 overflow-hidden md:h-72">
+                  <img src={product.image} alt={`${product.name} visual`} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div className="absolute bottom-6 left-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/60">OrynticLabs Product Suite</p>
+                    <p className="mt-1 font-display text-3xl font-black tracking-tight text-white md:text-4xl">{product.name}</p>
                   </div>
                 </div>
-              </Link>
+                <div className="p-8 md:p-10">
+                  <p className="leading-relaxed text-black/60">{product.description}</p>
+                  <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                    {product.features.slice(0, 4).map((f) => (
+                      <div key={f} className="flex items-start gap-3">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" strokeWidth={2.5} />
+                        <p className="text-sm text-black/70">{f}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-9">
+                    <ArrowLink to="/products">View Product</ArrowLink>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatsShowcase() {
+  return (
+    <section data-testid="home-stats-section" className="bg-brand-ink py-24 text-white md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <SectionHead
+          overline="The studio in numbers"
+          title={<>Capability you can <span className="text-brand-orange">measure.</span></>}
+        />
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {HOME_STATS.map((s, i) => (
+            <Reveal key={s.label} delay={0.08 * i}>
+              <div
+                data-testid={`stat-card-${i}`}
+                className="group relative h-80 overflow-hidden rounded-3xl border border-white/10"
+              >
+                <img
+                  src={IMAGES[s.image]}
+                  alt={s.label}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/55 to-[#050505]/20" />
+                <div className="absolute inset-x-0 bottom-0 p-7">
+                  <p className="font-display text-5xl font-black tracking-tighter text-brand-orange">{s.value}</p>
+                  <p className="mt-2 font-display text-lg font-bold tracking-tight">{s.label}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-white/55">{s.caption}</p>
+                </div>
+              </div>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OryAISection() {
+  return (
+    <section data-testid="home-oryai" className="relative overflow-hidden bg-brand-ink py-24 text-white md:py-32">
+      <div className="absolute -left-40 top-1/4 h-[26rem] w-[26rem] rounded-full bg-brand-blue/15 blur-[140px]" aria-hidden="true" />
+      <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-brand-orange/10 blur-[130px]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Reveal>
+              <Overline>OryAI — Our AI Core</Overline>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mt-4 font-display text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
+                Building an AI Ecosystem That Aligns With <span className="text-brand-blue">Your Organization</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="mt-6 leading-relaxed text-white/60">
+                OryAI is our proprietary AI intelligence platform — the infrastructure layer underneath
+                every AI feature we build. From custom agents to RAG pipelines, we move your business
+                beyond the hype into practical, production-grade AI.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <ArrowLink to="/contact">Book Your AI Advisory Session</ArrowLink>
+                <ArrowLink to="/products" variant="blue">Discover OryAI</ArrowLink>
+              </div>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-7">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {ORYAI_ECOSYSTEM.map((card, i) => {
+                const Icon = ICONS[card.icon];
+                return (
+                  <Reveal key={card.title} delay={0.08 * i} className={i === 2 ? "sm:col-span-2" : ""}>
+                    <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50">
+                      <Icon className="h-9 w-9 text-brand-orange" strokeWidth={1.5} />
+                      <h3 className="mt-6 font-display text-xl font-bold tracking-tight">{card.title}</h3>
+                      <ul className={`mt-5 space-y-2.5 ${i === 2 ? "sm:grid sm:grid-cols-3 sm:gap-4 sm:space-y-0" : ""}`}>
+                        {card.points.map((pt) => (
+                          <li key={pt} className="flex items-start gap-2.5 text-sm text-white/55">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
+                            {pt}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IndustriesTabs() {
+  const [active, setActive] = useState(0);
+  const industry = INDUSTRIES[active];
+
+  return (
+    <section data-testid="home-industries" className="bg-brand-paper py-24 text-brand-coal md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <SectionHead
+          dark={false}
+          overline="Industries"
+          title={<>Deep domain expertise, <span className="text-brand-orange">real delivery.</span></>}
+          description="We understand the domain deeply before proposing a solution — then build something that fits how your industry actually works."
+        />
+
+        <div className="mt-14 grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="flex flex-wrap gap-2.5">
+              {INDUSTRIES.map((ind, i) => (
+                <button
+                  key={ind.name}
+                  onClick={() => setActive(i)}
+                  data-testid={`industry-tab-${i}`}
+                  className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
+                    active === i
+                      ? "border-brand-orange bg-brand-orange text-white shadow-lg shadow-brand-orange/25"
+                      : "border-black/15 bg-white text-black/65 hover:border-brand-orange/60 hover:text-brand-orange"
+                  }`}
+                >
+                  {ind.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={industry.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4, ease: EASE }}
+                data-testid="industry-panel"
+                className="grid overflow-hidden rounded-3xl border border-black/10 bg-white shadow-xl shadow-black/5 md:grid-cols-2"
+              >
+                <div className="relative h-60 md:h-auto">
+                  <img
+                    src={IMAGES[INDUSTRY_IMAGES[active % INDUSTRY_IMAGES.length]]}
+                    alt={industry.name}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+                </div>
+                <div className="p-8 md:p-10">
+                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-blue">Industry {String(active + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 font-display text-3xl font-black tracking-tight">{industry.name}</h3>
+                  <p className="mt-4 leading-relaxed text-black/60">{industry.build}</p>
+                  <Link to="/industries" data-testid="industry-know-more" className="group mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange">
+                    Know More
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
@@ -279,16 +423,87 @@ function WhyBand() {
   );
 }
 
+function FaqSection() {
+  return (
+    <section data-testid="home-faq" className="bg-brand-paper py-24 text-brand-coal md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHead
+              dark={false}
+              overline="FAQ"
+              title={<>Frequently Asked <span className="text-brand-blue">Questions</span></>}
+              description="Didn't find what you were looking for? Reach out — a real engineer reads every message."
+            />
+            <Reveal delay={0.3}>
+              <div className="mt-10">
+                <ArrowLink to="/contact" variant="blue">Ask your question</ArrowLink>
+              </div>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-7">
+            <Reveal delay={0.1}>
+              <Accordion type="single" collapsible data-testid="faq-accordion" className="w-full">
+                {FAQS.map((faq, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-black/10" data-testid={`faq-item-${i}`}>
+                    <AccordionTrigger className="text-left font-display text-lg font-bold tracking-tight hover:text-brand-orange hover:no-underline">
+                      {faq.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="leading-relaxed text-black/60">
+                      {faq.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CtaBand() {
+  return (
+    <section data-testid="home-cta" className="relative overflow-hidden border-t border-white/10 bg-brand-ink py-24 text-white md:py-32">
+      <div className="absolute left-1/2 top-0 h-72 w-[50rem] -translate-x-1/2 rounded-full bg-brand-blue/15 blur-[140px]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+        <Reveal>
+          <h2 className="max-w-4xl font-display text-4xl md:text-6xl font-black tracking-tighter leading-[1.02]">
+            Ready to Build Your Next<br />
+            <span className="text-brand-orange">Intelligent Product?</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <p className="mt-6 max-w-xl leading-relaxed text-white/55">
+            Share a few details about your idea, and our team will come back with technical
+            insight, a clear scope, and next steps — not a sales deck.
+          </p>
+        </Reveal>
+        <Reveal delay={0.25}>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <ArrowLink to="/contact">Start a Project</ArrowLink>
+            <ArrowLink to="/stack" variant="ghost" className="border-white/25 text-white">See Our Stack</ArrowLink>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main data-testid="home-page">
       <Hero />
-      <Ribbon items={MARQUEE_ITEMS} dark />
-      <Manifesto />
-      <ServicesBento />
-      <Ribbon items={["OryAI", "OryCMS", "PerformX", "Staff Augmentation", "Technology Consulting"]} dark={false} />
-      <ProductsTeaser />
+      <Ribbon items={TECH_RIBBON} dark />
+      <ServicesShowcase />
+      <ProductsShowcase />
+      <StatsShowcase />
+      <OryAISection />
+      <IndustriesTabs />
       <WhyBand />
+      <FaqSection />
+      <CtaBand />
     </main>
   );
 }
