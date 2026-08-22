@@ -87,8 +87,8 @@ function Hero() {
 
 function ServicesShowcase() {
   return (
-    <section data-testid="home-services" className="bg-brand-ink py-24 text-white md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
+    <section data-testid="home-services" className="bg-mesh-brand relative overflow-hidden py-24 text-white md:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <SectionHead
           overline="What we do"
           title={<>Beyond Development.<br />We Engineer <span className="text-brand-orange">Transformation.</span></>}
@@ -100,11 +100,11 @@ function ServicesShowcase() {
               <Reveal key={g.title} delay={0.08 * i}>
                 <div
                   data-testid={`service-group-${g.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/60 hover:bg-white/[0.05]"
+                  className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/60 hover:bg-white/[0.07] hover:shadow-[0_24px_60px_-24px_rgba(0,102,255,0.45)]"
                 >
                   <Icon className="h-10 w-10 text-brand-blue transition-colors duration-300 group-hover:text-brand-orange" strokeWidth={1.5} />
                   <h3 className="mt-7 font-display text-xl font-bold leading-snug tracking-tight">{g.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-white/50">{g.text}</p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-white/55">{g.text}</p>
                   <Link to="/services" className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange">
                     {g.link}
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

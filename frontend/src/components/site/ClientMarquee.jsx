@@ -13,7 +13,7 @@ const CLIENTS = [
 
 export default function ClientMarquee() {
   return (
-    <section data-testid="client-logos" className="border-y border-white/10 bg-[#070707] py-14">
+    <section data-testid="client-logos" className="border-y border-white/10 bg-[#05060e] py-14">
       <p className="text-center text-[11px] font-bold uppercase tracking-[0.35em] text-white/30">
         Trusted by forward-thinking teams
       </p>
