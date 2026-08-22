@@ -1,0 +1,167 @@
+{
+  "brand": "OrynticLabs Private Limited",
+  "theme": "Mixed Dark Futuristic (Dark hero, alternating light/dark sections)",
+  "typography": {
+    "heading_font": "Cabinet Grotesk",
+    "body_font": "Outfit",
+    "rules": "DO NOT use Inter or generic sans for headings. Use Cabinet Grotesk for its premium, architectural tech feel. Use Outfit for high legibility body copy.",
+    "scale": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl tracking-tighter font-black leading-none",
+      "h2": "text-4xl md:text-5xl tracking-tight font-bold",
+      "h3": "text-2xl md:text-3xl tracking-tight font-semibold",
+      "h4": "text-xl md:text-2xl font-medium",
+      "body": "text-base md:text-lg leading-relaxed text-foreground/80",
+      "overline": "text-xs tracking-[0.2em] uppercase font-bold text-primary"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary_orange": "#FF5500",
+      "primary_blue": "#0066FF",
+      "dark_bg": "#050505",
+      "light_bg": "#FAFAFA",
+      "text_light": "#FFFFFF",
+      "text_dark": "#0A0A0A",
+      "muted_dark": "#1A1A1A",
+      "muted_light": "#EAEAEA",
+      "glass_dark": "rgba(5, 5, 5, 0.6)",
+      "glass_light": "rgba(255, 255, 255, 0.7)",
+      "border_dark": "rgba(255, 255, 255, 0.1)",
+      "border_light": "rgba(0, 0, 0, 0.1)"
+    },
+    "rules": "Alternating sections MUST flip the primary background and text colors. The hero section must be dark_bg (#050505). High-contrast UI with neon blue (#0066FF) and kinetic orange (#FF5500) used strictly as accents and CTAs. NO full-screen gradients. Use subtle grain/noise overlays to prevent flat digital looks."
+  },
+  "visual_enhancers": {
+    "3d_libraries": "react-tsparticles for a subtle floating constellation/tech-node background in the Hero section to give a 3D/parallax feel without heavy WebGL overhead.",
+    "textures": "Add a fixed noise overlay div with pointer-events-none and opacity-5 across the entire application to give a premium, tactile 'film grain' feel.",
+    "glassmorphism": "Use backdrop-blur-xl with a 1px delicate inner stroke (border-white/10 on dark, border-black/5 on light) for sticky navs and floating cards. NEVER use pure transparency without a blur."
+  },
+  "layouts": {
+    "grids": "Use 'Bento Grid' protocols for Services and Industries. Start with grid-cols-1 on mobile, md:grid-cols-4 or md:grid-cols-8. Leave intentional empty grid cells to create negative space. Do not perfectly fill every row.",
+    "spacing": "Generous spacing. Sections should use py-24 or py-32. Elements within cards use p-8 or p-12.",
+    "borders": "Expose the grid. Use border-collapse styles or 1px border-border/40 for a highly technical, structured 'architectural' look."
+  },
+  "motion": {
+    "libraries": ["framer-motion", "lenis", "react-fast-marquee"],
+    "hero_kinetic": "Masked line-by-line reveal on mount using Framer Motion. Text wrapped in overflow-hidden spans, translating Y from 100% to 0%.",
+    "marquee": "Use react-fast-marquee for an 'Editorial Ribbon' of Industries or Tech Stack. Extremely slow, smooth drift, large gaps (gap-24), high typography focus.",
+    "scroll_reveals": "Framer Motion whileInView transitions. Slight Y-axis offset (y: 20, opacity: 0 -> 1) with staggered children for lists.",
+    "interactions": "Hover states should lift elements slightly (-translate-y-1) and enhance border glow or color. All buttons must have scale-down on tap (whileTap={{ scale: 0.95 }})."
+  },
+  "pages": {
+    "Home": {
+      "sections": [
+        "Hero: Dark background, kinetic typography ('ENGINEERING THE FUTURE'), floating TSParticles nodes, dual CTA (Our Work / Contact).",
+        "Editorial Marquee: Slow moving ribbon of core competencies.",
+        "Numbered Manifesto: Alternating Light/Dark blocks explaining the 'OrynticLabs Way' (01. Discovery, 02. Architecture, 03. Execution).",
+        "Services Highlight: Bento grid of top services, dark mode.",
+        "Products Teaser: 3 tall overlapping cards for OryAI, OryCMS, PerformX."
+      ]
+    },
+    "About": {
+      "sections": [
+        "Hero: Minimal text focus, bold statement on 'Why Us'.",
+        "Mission & Vision: Large asymmetric typography block, light mode.",
+        "Team/Culture: Image gallery using framing/chrome style, showcasing software engineering collaboration.",
+        "Metrics: Large numbers (e.g., '50+ Enterprise Clients', '99.9% Uptime') in a 4-col grid."
+      ]
+    },
+    "Services": {
+      "sections": [
+        "Hero: Dark, imposing header.",
+        "Service Grid: 8 distinct cards (Web, Mobile, AI/ML, Data, Cloud, UI/UX, Enterprise, DevOps) with Lucide-react icons. On hover, a tracing beam or soft blue glow appears.",
+        "Process Flow: Vertical timeline showing the delivery pipeline."
+      ]
+    },
+    "Products": {
+      "sections": [
+        "Hero: 'Products built for scale.'",
+        "OryAI: Dark futuristic section, glowing AI brain image, focus on intelligence.",
+        "OryCMS: Light, crisp section focusing on content structure and headless speed.",
+        "PerformX: High-contrast split section focusing on HR metrics and dashboard efficiency."
+      ]
+    },
+    "Industries": {
+      "sections": [
+        "Hero: Focus on vertical expertise.",
+        "Grid Showcase: 11 Industries (Fintech, Healthcare, E-Commerce, Logistics, EdTech, Real Estate, Manufacturing, Web3/Crypto, Travel, Automotive, Entertainment) represented as dense list items with hover-reveal images."
+      ]
+    },
+    "Technology_Stack": {
+      "sections": [
+        "Hero: 'The tools behind the craft.'",
+        "Interactive Grid: Grouped by Frontend, Backend, Cloud, AI. Use text-based lists with borders instead of typical logo salads to maintain a premium agency feel."
+      ]
+    },
+    "Contact": {
+      "sections": [
+        "Hero: 'Let's build.'",
+        "Form Section: Premium Shadcn UI form with dark inputs, glowing border focus states.",
+        "Global Offices: Grid showing addresses, contact emails."
+      ]
+    }
+  },
+  "image_urls": [
+    {
+      "url": "https://images.unsplash.com/photo-1534312527009-56c7016453e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwYWJzdHJhY3QlMjBibHVlJTIwb3JhbmdlJTIwZ2xvd2luZ3xlbnwwfHx8fDE3ODczNzY5NTN8MA&ixlib=rb-4.1.0&q=85",
+      "category": "Hero / Global Abstract",
+      "description": "Futuristic abstract glowing blue/orange light streaks."
+    },
+    {
+      "url": "https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "About Us",
+      "description": "Software engineering team collaborating in a modern tech office."
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTIwdGVhbSUyMGNvbGxhYm9yYXRpb258ZW58MHx8fHwxNzg3Mzc2OTUzfDA&ixlib=rb-4.1.0&q=85",
+      "category": "Culture / Team",
+      "description": "Group using laptop, team collaboration."
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwYWJzdHJhY3QlMjBkaWdpdGFsfGVufDB8fHx8MTc4NzM3Njk1M3ww&ixlib=rb-4.1.0&q=85",
+      "category": "Products - OryAI",
+      "description": "Artificial intelligence digital abstract within a human head."
+    },
+    {
+      "url": "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Products - PerformX / OryCMS",
+      "description": "Dashboard interface showcasing futuristic graphs and data analytics."
+    },
+    {
+      "url": "https://images.pexels.com/photos/33719029/pexels-photo-33719029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Industries",
+      "description": "Modern skyscraper facade, enterprise scale architecture."
+    },
+    {
+      "url": "https://images.pexels.com/photos/37730211/pexels-photo-37730211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Services - Cloud / DevOps",
+      "description": "Modern server rack with blue lighting in a secure data center."
+    }
+  ],
+  "component_path": "/app/frontend/src/components/ui",
+  "instructions_to_main_agent": [
+    "You MUST use .js and .jsx files for React components. Do NOT use .tsx.",
+    "Implement Lenis for smooth scrolling in the main App wrapper.",
+    "Use Framer Motion for scroll-reveals (whileInView) and kinetic typography.",
+    "Set up dynamic routing (react-router-dom) to navigate between Home, About, Services, Products, Industries, Tech, and Contact.",
+    "Install and use 'lucide-react' for all icons.",
+    "Ensure 'Cabinet Grotesk' and 'Outfit' are imported via Google Fonts or Fontsource in index.css.",
+    "NEVER use generic placeholder URLs for images. Use the provided high-quality image_urls.",
+    "All interactive and key informational elements MUST include a 'data-testid' attribute (e.g., data-testid='hero-cta-button').",
+    "Header MUST NOT be fully transparent over content. Use glassmorphism: backdrop-blur-xl bg-black/60 (for dark) or bg-white/70 (for light).",
+    "For the 'Subtle Parallax / 3D' hero requirement, utilize 'react-tsparticles' or a custom framer-motion parallax setup behind the main text.",
+    "Alternate sections between light theme (bg-[#FAFAFA] text-[#0A0A0A]) and dark theme (bg-[#050505] text-[#FFFFFF]) to create a rhythmic scrolling experience."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid the 'AI slop' aesthetic. Make creative, distinctive frontends.",
+    "Do NOT use dark colors as gradients. Use dark solid colors.",
+    "Don't make generic centered layouts. Create depth through layered design elements with z-index hierarchy and asymmetrical bento grids.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transitions (e.g., transition: all). Add transitions to specific interactive elements.",
+    "You MUST NOT center align the app container in CSS. Let natural HTML document flow control text alignment (mostly left-aligned).",
+    "Always use modern button styles (pill-shaped or sharp) with interaction animations & brand color relevance.",
+    "NEVER use AI assistant emojis 🤖🧠💭💡🔮🎯 for icons. Use lucide-react.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap."
+  ]
+}
