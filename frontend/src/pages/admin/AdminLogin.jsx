@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Loader2, Lock } from "lucide-react";
 import { EASE } from "@/components/site/Reveal";
+import Logo from "@/components/site/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -47,9 +48,7 @@ export default function AdminLogin() {
         transition={{ duration: 0.7, ease: EASE }}
         className="w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.03] p-10 backdrop-blur-xl glow-blue"
       >
-        <Link to="/" className="font-display text-xl font-extrabold tracking-tight">
-          ORYNTIC<span className="text-brand-orange">LABS</span>
-        </Link>
+        <Logo testId="admin-login-logo" />
         <div className="mt-8 flex items-center gap-3">
           <Lock className="h-5 w-5 text-brand-orange" strokeWidth={1.75} />
           <h1 className="font-display text-2xl font-bold tracking-tight">Admin Access</h1>

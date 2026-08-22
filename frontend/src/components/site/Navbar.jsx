@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, ChevronDown, ArrowRight } from "lucide-react";
 import { SERVICES, PRODUCTS, INDUSTRIES } from "@/data/content";
 import { EASE } from "@/components/site/Reveal";
+import Logo from "@/components/site/Logo";
 
 const DROPDOWNS = {
   services: {
     label: "Services",
     to: "/services",
-    panelClass: "w-[600px]",
+    heading: "What we do — 8 service practices",
+    panelClass: "w-[640px]",
     footer: { label: "View all services", to: "/services" },
     items: SERVICES.map((s) => ({ to: "/services", icon: s.icon, title: s.title, desc: s.blurb.split("—")[0].trim() })),
     cols: "grid-cols-2",
@@ -17,6 +19,7 @@ const DROPDOWNS = {
   products: {
     label: "Products",
     to: "/products",
+    heading: "Our proprietary product suite",
     panelClass: "w-[720px]",
     footer: { label: "Explore all products", to: "/products" },
     items: PRODUCTS.map((p) => ({ to: "/products", title: p.name, desc: p.tagline, badge: true })),
@@ -25,7 +28,8 @@ const DROPDOWNS = {
   industries: {
     label: "Industries",
     to: "/industries",
-    panelClass: "w-[640px]",
+    heading: "Industries we serve",
+    panelClass: "w-[680px]",
     footer: { label: "Check all industries", to: "/industries" },
     items: INDUSTRIES.map((ind) => ({ to: "/industries", title: ind.name })),
     cols: "grid-cols-3",
@@ -120,14 +124,16 @@ function AnnouncementBar({ scrolled }) {
 function MegaPanel({ config, menuKey }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.25, ease: EASE }}
+      transition={{ duration: 0.28, ease: EASE }}
       data-testid={`mega-panel-${menuKey}`}
-      className={`absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4 ${config.panelClass}`}
+      className={`absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 ${config.panelClass}`}
     >
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0A0A0A]/95 shadow-2xl shadow-black/60 backdrop-blur-2xl">
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#090909]/95 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.85)] backdrop-blur-2xl">
+        <div className="h-px w-full bg-gradient-to-r from-brand-orange via-white/25 to-brand-blue" aria-hidden="true" />
+        <p className="px-7 pt-5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">{config.heading}</p>
         <div className={`grid ${config.cols} gap-1 p-4`}>
           {config.items.map((item) => {
             const Icon = item.icon;
@@ -136,22 +142,30 @@ function MegaPanel({ config, menuKey }) {
                 key={item.title}
                 to={item.to}
                 data-testid={`mega-item-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                className="group rounded-xl p-4 transition-colors duration-200 hover:bg-white/5"
+                className="group/item flex items-start gap-4 rounded-xl p-4 transition-all duration-300 hover:translate-x-1 hover:bg-white/[0.05]"
               >
-                <div className="flex items-center gap-3">
-                  {Icon && <Icon className="h-5 w-5 shrink-0 text-brand-blue transition-colors duration-200 group-hover:text-brand-orange" strokeWidth={1.5} />}
-                  <p className="text-sm font-semibold text-white transition-colors duration-200 group-hover:text-brand-orange">
+                {Icon ? (
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] transition-colors duration-300 group-hover/item:border-brand-orange/40 group-hover/item:bg-brand-orange/10">
+                    <Icon className="h-[18px] w-[18px] text-brand-blue transition-colors duration-300 group-hover/item:text-brand-orange" strokeWidth={1.5} />
+                  </span>
+                ) : (
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange/70 transition-all duration-300 group-hover/item:bg-brand-orange" aria-hidden="true" />
+                )}
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-white transition-colors duration-300 group-hover/item:text-brand-orange">
                     {item.title}
-                  </p>
-                </div>
-                {item.desc && <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-white/45">{item.desc}</p>}
+                  </span>
+                  {item.desc && (
+                    <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-white/45">{item.desc}</span>
+                  )}
+                </span>
               </Link>
             );
           })}
         </div>
         <Link
           to={config.footer.to}
-          className="group flex items-center justify-between border-t border-white/10 px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-orange"
+          className="group flex items-center justify-between border-t border-white/10 bg-white/[0.02] px-7 py-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-orange"
         >
           {config.footer.label}
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -160,6 +174,15 @@ function MegaPanel({ config, menuKey }) {
     </motion.div>
   );
 }
+
+const NavUnderline = ({ active }) => (
+  <span
+    aria-hidden="true"
+    className={`absolute -bottom-0.5 left-0 h-[2px] w-full origin-left rounded-full bg-brand-orange transition-transform duration-300 ease-out ${
+      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+    }`}
+  />
+);
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -185,49 +208,52 @@ export default function Navbar() {
     <>
       <header
         data-testid="site-navbar"
+        onMouseLeave={() => setActiveMenu(null)}
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-          scrolled || activeMenu ? "border-b border-white/10 bg-brand-ink/80 backdrop-blur-xl" : "bg-transparent"
+          scrolled || activeMenu ? "border-b border-white/10 bg-brand-ink/85 backdrop-blur-xl" : "bg-transparent"
         }`}
       >
         <AnnouncementBar scrolled={scrolled} />
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 md:py-5">
-          <Link to="/" data-testid="nav-logo" className="font-display text-xl font-extrabold tracking-tight text-white">
-            ORYNTIC<span className="text-brand-orange">LABS</span>
-            <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-brand-blue align-super" />
-          </Link>
+          <div onMouseEnter={() => setActiveMenu(null)}>
+            <Logo testId="nav-logo" />
+          </div>
 
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
             {PLAIN_LINKS.slice(0, 2).map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
+                onMouseEnter={() => setActiveMenu(null)}
                 data-testid={`nav-link-${link.label.toLowerCase()}`}
                 className={({ isActive }) =>
-                  `text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  `group relative py-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
                     isActive ? "text-brand-orange" : "text-white/70 hover:text-white"
                   }`
                 }
               >
-                {link.label}
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    <NavUnderline active={isActive} />
+                  </>
+                )}
               </NavLink>
             ))}
 
             {Object.entries(DROPDOWNS).map(([key, config]) => (
-              <div
-                key={key}
-                className="relative"
-                onMouseEnter={() => setActiveMenu(key)}
-                onMouseLeave={() => setActiveMenu(null)}
-              >
+              <div key={key} className="static">
                 <button
                   data-testid={`nav-dropdown-${key}`}
+                  onMouseEnter={() => setActiveMenu(key)}
                   onClick={() => setActiveMenu(activeMenu === key ? null : key)}
-                  className={`flex items-center gap-1.5 text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  className={`group relative flex items-center gap-1.5 py-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
                     activeMenu === key || pathname === config.to ? "text-brand-orange" : "text-white/70 hover:text-white"
                   }`}
                 >
                   {config.label}
                   <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${activeMenu === key ? "rotate-180" : ""}`} />
+                  <NavUnderline active={activeMenu === key || pathname === config.to} />
                 </button>
                 <AnimatePresence>
                   {activeMenu === key && <MegaPanel config={config} menuKey={key} />}
@@ -237,18 +263,24 @@ export default function Navbar() {
 
             <NavLink
               to="/stack"
+              onMouseEnter={() => setActiveMenu(null)}
               data-testid="nav-link-stack"
               className={({ isActive }) =>
-                `text-sm font-medium tracking-wide transition-colors duration-300 ${
+                `group relative py-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
                   isActive ? "text-brand-orange" : "text-white/70 hover:text-white"
                 }`
               }
             >
-              Stack
+              {({ isActive }) => (
+                <>
+                  Stack
+                  <NavUnderline active={isActive} />
+                </>
+              )}
             </NavLink>
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:block" onMouseEnter={() => setActiveMenu(null)}>
             <motion.div whileTap={{ scale: 0.95 }}>
               <Link
                 to="/contact"

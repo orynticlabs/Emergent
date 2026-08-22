@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { Loader2, LogOut, Save } from "lucide-react";
+import Logo from "@/components/site/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -98,9 +99,7 @@ export default function AdminFooter() {
       <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-ink/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
-            <Link to="/" className="font-display text-lg font-extrabold tracking-tight">
-              ORYNTIC<span className="text-brand-orange">LABS</span>
-            </Link>
+            <Logo textClass="text-lg" markSize={30} testId="admin-logo" />
             <span className="rounded-full border border-brand-orange/40 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange">Footer Manager</span>
           </div>
           <div className="flex items-center gap-3">

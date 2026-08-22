@@ -7,6 +7,7 @@ import {
   ArrowRight, Loader2, CheckCircle2, Linkedin, Instagram, Facebook, Twitter, Youtube,
 } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import Logo from "@/components/site/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -106,10 +107,7 @@ export default function Footer() {
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>
-              <Link to="/" className="font-display text-2xl font-extrabold tracking-tight" data-testid="footer-logo">
-                ORYNTIC<span className="text-brand-orange">LABS</span>
-                <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-brand-blue align-super" />
-              </Link>
+              <Logo textClass="text-2xl" markSize={38} testId="footer-logo" />
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/50">
