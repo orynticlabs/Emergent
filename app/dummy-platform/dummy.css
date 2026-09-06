@@ -1,0 +1,21 @@
+/* Standalone stylesheet for the mock "Dummy Platform" third-party app —
+   deliberately its own design system, not OryCMS's, so the connect flow
+   reads as two genuinely separate products. */
+@import "tailwindcss" source(none);
+@source "../dummy-platform";
+
+:root {
+  --dp-bg: #f5f4ff;
+  --dp-surface: #ffffff;
+  --dp-border: #e3e0fb;
+  --dp-ink: #1e1b3a;
+  --dp-muted: #6b6790;
+  --dp-brand: #6d28d9;
+  --dp-brand-ink: #ffffff;
+}
+
+body {
+  background: var(--dp-bg);
+  color: var(--dp-ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
