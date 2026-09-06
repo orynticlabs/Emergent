@@ -32,17 +32,17 @@ export const HeroParallax = ({ products }) => {
       <motion.div style={{ rotateX, rotateZ, translateY, opacity }}>
         <motion.div className="mb-20 flex flex-row-reverse space-x-20 space-x-reverse">
           {firstRow.map((product) => (
-            <ProductCard product={product} translate={translateX} key={product.title} />
+            <ProductCard product={product} translate={translateX} key={product.id ?? product.title} />
           ))}
         </motion.div>
         <motion.div className="mb-20 flex flex-row space-x-20">
           {secondRow.map((product) => (
-            <ProductCard product={product} translate={translateXReverse} key={product.title} />
+            <ProductCard product={product} translate={translateXReverse} key={product.id ?? product.title} />
           ))}
         </motion.div>
         <motion.div className="flex flex-row-reverse space-x-20 space-x-reverse">
           {thirdRow.map((product) => (
-            <ProductCard product={product} translate={translateX} key={product.title} />
+            <ProductCard product={product} translate={translateX} key={product.id ?? product.title} />
           ))}
         </motion.div>
       </motion.div>
@@ -53,7 +53,7 @@ export const HeroParallax = ({ products }) => {
 const Header = () => (
   <div className="relative left-0 top-0 mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-40">
     <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-orange">Our Work</p>
-    <h1 className="mt-4 font-display text-2xl font-bold uppercase text-white md:text-7xl">
+    <h1 className="mt-4 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-5xl">
       Products We&apos;ve Shipped <br /> and Are Shipping
     </h1>
     <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/55 md:text-xl">
@@ -67,7 +67,6 @@ const ProductCard = ({ product, translate }) => (
   <motion.div
     style={{ x: translate }}
     whileHover={{ y: -20 }}
-    key={product.title}
     className="group/product relative h-96 w-[30rem] shrink-0"
   >
     <Link href={product.link} className="block group-hover/product:shadow-2xl">

@@ -3,14 +3,31 @@ import {
 } from "lucide-react";
 
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1534312527009-56c7016453e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwYWJzdHJhY3QlMjBibHVlJTIwb3JhbmdlJTIwZ2xvd2luZ3xlbnwwfHx8fDE3ODczNzY5NTN8MA&ixlib=rb-4.1.0&q=85",
+  hero: "https://images.pexels.com/photos/30547579/pexels-photo-30547579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   about: "https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  culture: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTIwdGVhbSUyMGNvbGxhYm9yYXRpb258ZW58MHx8fHwxNzg3Mzc2OTUzfDA&ixlib=rb-4.1.0&q=85",
-  ai: "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwYWJzdHJhY3QlMjBkaWdpdGFsfGVufDB8fHx8MTc4NzM3Njk1M3ww&ixlib=rb-4.1.0&q=85",
+  culture: "https://images.pexels.com/photos/3912478/pexels-photo-3912478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  ai: "https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   dashboard: "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   architecture: "https://images.pexels.com/photos/33719029/pexels-photo-33719029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   datacenter: "https://images.pexels.com/photos/37730211/pexels-photo-37730211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  tech: "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
 };
+
+const PEXELS_AVATAR = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100`;
+
+// Who actually picks up — the real roles on a staff-augmentation or delivery
+// team, not invented individuals. Shown as roles, with stock Pexels headshots
+// standing in for photos (same placeholder-image convention as the rest of
+// the marketing site) since these aren't named team members. Shared across
+// every "meet the team" strip on the site (home + about) so they stay in sync.
+export const TEAM_ROLES = [
+  { id: 1, name: "Frontend & Backend", designation: "Full-stack engineers", image: PEXELS_AVATAR(220453), className: "bg-brand-orange" },
+  { id: 2, name: "Mobile", designation: "iOS, Android & cross-platform", image: PEXELS_AVATAR(1043471), className: "bg-brand-blue" },
+  { id: 3, name: "AI & ML", designation: "Agents, RAG, model training", image: PEXELS_AVATAR(733872), className: "bg-violet-500" },
+  { id: 4, name: "Cloud & DevOps", designation: "AWS, GCP, Azure, CI/CD", image: PEXELS_AVATAR(415829), className: "bg-sky-500" },
+  { id: 5, name: "Product Design", designation: "UI/UX, design systems", image: PEXELS_AVATAR(1239291), className: "bg-pink-500" },
+  { id: 6, name: "QA", designation: "Testing & quality assurance", image: PEXELS_AVATAR(1181686), className: "bg-emerald-500" },
+];
 
 export const CLIENTS = [
   { name: "QUANTIVA", cls: "font-display font-bold tracking-[0.22em]" },
@@ -109,7 +126,9 @@ export const PRODUCTS = [
     model: "PaaS + Custom",
     ideal: "Enterprises adding production-grade AI to existing products",
     description: "The modular infrastructure layer underneath the AI features we build — agent framework, knowledge management, evaluation, and connectors — so AI deploys reliably in production, not just in a prototype.",
-    image: IMAGES.ai,
+    image: "/orycms/img/OryAI.png",
+    logo: "/orycms/oryai.png",
+    siteUrl: "oryai.orynticlabs.com",
     theme: "dark",
     features: ["Custom AI agent builder & orchestration", "RAG with multiple vector databases", "LLM layer — OpenAI, Anthropic, open-source", "Workflow automation builder", "Conversation memory & sessions", "Evaluation & monitoring dashboard", "Multi-language — Hindi & English"],
   },
@@ -120,7 +139,9 @@ export const PRODUCTS = [
     model: "PaaS / SaaS",
     ideal: "Product & marketing teams publishing across platforms",
     description: "A modern content architecture for product and marketing teams that publish across web, mobile, email, and third-party platforms — without depending on a developer for every change.",
-    image: IMAGES.dashboard,
+    image: "/orycms/img/orybanner.png",
+    logo: "/orycms/orycmslogo.png",
+    siteUrl: "orycms.orynticlabs.com",
     theme: "light",
     features: ["API-first — REST & GraphQL", "Visual editor with structured content", "Role-based editorial workflows", "Multi-site & multi-language", "Media library with CDN delivery", "Webhooks & integrations", "White-label ready"],
   },
@@ -131,24 +152,81 @@ export const PRODUCTS = [
     model: "SaaS",
     ideal: "Growing teams that need the full employee lifecycle in one place",
     description: "Built because existing HR tools were too expensive, too rigid, or missing what we needed. Onboarding to payroll, leave, performance, and offboarding — the version we wanted to use ourselves.",
-    image: IMAGES.culture,
+    image: "/orycms/img/performx.png",
+    logo: "/orycms/performxlogo.png",
+    siteUrl: "performx.orynticlabs.com",
     theme: "dark",
     features: ["Employee records & documents", "Onboarding automation", "Attendance & leave with auto LOP", "Payroll & payslip generation", "Performance review cycles", "Internal mail & meetings", "Direct salary disbursement", "AWS-deployed, fully backed up"],
   },
 ];
 
 export const INDUSTRIES = [
-  { name: "Fintech", build: "We've shipped payment platforms and lending systems for fintechs, plus the fraud detection and KYC/AML checks that keep regulators satisfied." },
-  { name: "Healthcare & Biotech", build: "Patient records, clinical data platforms, and diagnostic AI — built to handle sensitive data the way healthcare actually requires." },
-  { name: "EdTech", build: "Learning platforms that adapt to how a student is actually doing, backed by the analytics and assessment engines that make that possible." },
-  { name: "Supply Chain & Logistics", build: "Shipment tracking and warehouse systems that tell you where something actually is, not where it was supposed to be." },
-  { name: "Manufacturing", build: "Production monitoring and predictive maintenance that catches a failing machine before it stops the line." },
-  { name: "Agriculture", build: "Precision farming tools and crop intelligence that turn field data into decisions a farmer can act on that same season." },
-  { name: "Retail & E-commerce", build: "Storefronts, inventory systems, and loyalty platforms built to handle real order volume, not a demo cart." },
-  { name: "Energy & Utilities", build: "Grid monitoring and consumption analytics that catch problems in the network before customers notice them." },
-  { name: "Real Estate", build: "Listing platforms and valuation tools that make a property searchable, comparable, and easy to close on." },
-  { name: "Automobile", build: "Fleet management and vehicle telematics — down to the EV charging infrastructure most shops aren't set up to build." },
-  { name: "Hospitality & Food", build: "Reservation systems and kitchen management that keep a dining room running smoothly during a Friday night rush." },
+  {
+    name: "Fintech",
+    build: "We've shipped payment platforms and lending systems for fintechs, plus the fraud detection and KYC/AML checks that keep regulators satisfied.",
+    approach: "Regulatory constraints shape the build from day one — KYC/AML and audit requirements aren't bolted on after the fact.",
+    capabilities: ["Payment platforms", "Lending systems", "Portfolio management", "Fraud detection", "KYC/AML automation", "Financial analytics"],
+  },
+  {
+    name: "Healthcare & Biotech",
+    build: "Patient records, clinical data platforms, and diagnostic AI — built to handle sensitive data the way healthcare actually requires.",
+    approach: "Every system is built around how patient data actually needs to move, be stored, and be audited — to the standard healthcare compliance demands.",
+    capabilities: ["Patient management systems", "Clinical data platforms", "Diagnostic AI", "Telemedicine infrastructure", "Biomedical data pipelines"],
+  },
+  {
+    name: "EdTech",
+    build: "Learning platforms that adapt to how a student is actually doing, backed by the analytics and assessment engines that make that possible.",
+    approach: "We start from how a student and a teacher actually use the platform day to day, not a generic LMS template.",
+    capabilities: ["Learning management systems", "Adaptive learning platforms", "Student analytics", "Assessment engines", "Content delivery"],
+  },
+  {
+    name: "Supply Chain & Logistics",
+    build: "Shipment tracking and warehouse systems that tell you where something actually is, not where it was supposed to be.",
+    approach: "Real-time visibility across warehouses and shipments, built around what an operations team needs to see — not a dashboard for its own sake.",
+    capabilities: ["Shipment tracking", "Warehouse management", "Route optimisation", "Supplier portals", "Inventory intelligence"],
+  },
+  {
+    name: "Manufacturing",
+    build: "Production monitoring and predictive maintenance that catches a failing machine before it stops the line.",
+    approach: "Sensor data, production metrics, and maintenance schedules feed into one system, not three disconnected tools on the factory floor.",
+    capabilities: ["Production monitoring", "Quality control systems", "Predictive maintenance", "Factory floor digitisation"],
+  },
+  {
+    name: "Agriculture",
+    build: "Precision farming tools and crop intelligence that turn field data into decisions a farmer can act on that same season.",
+    approach: "Field data has to work with patchy connectivity and seasonal decision windows — the platform is built around that reality, not against it.",
+    capabilities: ["Crop intelligence", "Precision farming tools", "Supply chain visibility", "Market linkage platforms"],
+  },
+  {
+    name: "Retail & E-commerce",
+    build: "Storefronts, inventory systems, and loyalty platforms built to handle real order volume, not a demo cart.",
+    approach: "Built to survive a real sale-day traffic spike, not just demo well in a pitch.",
+    capabilities: ["Custom storefronts", "Inventory management", "Personalisation engines", "Omnichannel commerce", "Loyalty platforms"],
+  },
+  {
+    name: "Energy & Utilities",
+    build: "Grid monitoring and consumption analytics that catch problems in the network before customers notice them.",
+    approach: "Grid and consumption data get monitored and reported the way regulators and operators actually need it, not just visualised for a demo.",
+    capabilities: ["Grid monitoring", "Energy consumption analytics", "Predictive maintenance", "Sustainability reporting"],
+  },
+  {
+    name: "Real Estate",
+    build: "Listing platforms and valuation tools that make a property searchable, comparable, and easy to close on.",
+    approach: "Listings, valuations, and agreements connected end to end, so a broker isn't re-entering the same data three times.",
+    capabilities: ["Property listing platforms", "Valuation tools", "Tenant management", "Digital agreements", "Broker portals"],
+  },
+  {
+    name: "Automobile",
+    build: "Fleet management and vehicle telematics — down to the EV charging infrastructure most shops aren't set up to build.",
+    approach: "Fleet and telematics data built for dealers and operators who need answers in real time, not a monthly report.",
+    capabilities: ["Fleet management", "Vehicle telematics", "Dealer management systems", "EV infrastructure software"],
+  },
+  {
+    name: "Hospitality & Food",
+    build: "Reservation systems and kitchen management that keep a dining room running smoothly during a Friday night rush.",
+    approach: "Reservations, kitchen operations, and POS wired together so a Friday night rush doesn't expose the gaps between three separate systems.",
+    capabilities: ["Reservation systems", "POS integration", "Kitchen management", "Guest experience platforms", "Delivery operations"],
+  },
 ];
 
 export const TECH_GROUPS = [
@@ -184,7 +262,7 @@ export const CONTACT = {
   sales: "sales@orynticlabs.com",
   support: "support@orynticlabs.com",
   general: "hello@orynticlabs.com",
-  phone: "+91 79017 17617",
+  phone: "+91 76489 15266",
   website: "www.orynticlabs.com",
 };
 
@@ -301,15 +379,4 @@ export const CONTACT_FAQS = [
     q: "Is the initial consultation free?",
     a: "Yes. The first call is a scoping conversation, not a sales pitch — we ask questions, tell you honestly if we're a fit, and outline what a working engagement would look like before anything is signed.",
   },
-];
-
-export const PROJECTS = [
-  { title: "AI Knowledge Assistant", category: "AI Solutions", industry: "Enterprise", desc: "RAG-powered assistant that answers from company knowledge in seconds — in Hindi and English.", tags: ["LangGraph", "FastAPI", "React"], image: IMAGES.ai },
-  { title: "Fleet Command Center", category: "Enterprise Software", industry: "Automobile", desc: "Real-time fleet tracking, telematics analytics, and predictive maintenance for a logistics operator.", tags: ["Node.js", "Kafka", "React"], image: IMAGES.architecture },
-  { title: "Headless Commerce Platform", category: "Web Platforms", industry: "Retail", desc: "OryCMS-powered storefront with personalization, structured content, and sub-second page loads.", tags: ["Next.js", "OryCMS", "Stripe"], image: IMAGES.dashboard },
-  { title: "Telemedicine Suite", category: "Mobile Apps", industry: "Healthcare", desc: "Patient app with video consultations, digital health records, and prescription workflows.", tags: ["React Native", "WebRTC", "PostgreSQL"], image: IMAGES.about },
-  { title: "Lending Automation Platform", category: "Enterprise Software", industry: "Fintech", desc: "End-to-end loan origination with KYC automation, risk scoring, and disbursement workflows.", tags: ["FastAPI", "OryAI", "AWS"], image: IMAGES.datacenter },
-  { title: "Smart Warehouse System", category: "AI Solutions", industry: "Supply Chain", desc: "Computer-vision inventory counting and route optimization across distributed warehouses.", tags: ["PyTorch", "OpenCV", "Go"], image: IMAGES.hero },
-  { title: "Learning Experience Platform", category: "Web Platforms", industry: "EdTech", desc: "Adaptive learning paths with live classes, assessments, and student performance analytics.", tags: ["Next.js", "GraphQL", "Redis"], image: IMAGES.culture },
-  { title: "EV Charging Network App", category: "Mobile Apps", industry: "Automobile", desc: "Station discovery, session billing, and energy analytics for EV drivers and operators.", tags: ["Flutter", "OryAI", "GCP"], image: IMAGES.ai },
 ];

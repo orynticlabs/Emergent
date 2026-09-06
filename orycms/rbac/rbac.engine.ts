@@ -21,6 +21,10 @@ export type OryCMSResource =
   | "ai"
   | "announcements"
   | "companies"
+  | "case-studies"
+  | "testimonials"
+  | "hire-staff-requests"
+  | "bookings"
   | "payments"
   | "whatsapp";
 
@@ -64,6 +68,10 @@ export const ORYCMS_DEFAULT_PERMISSIONS: PermMatrix = {
     ai: M,
     announcements: M,
     companies: M,
+    "case-studies": M,
+    testimonials: M,
+    "hire-staff-requests": M,
+    bookings: M,
     payments: M,
     whatsapp: M,
   },
@@ -83,6 +91,10 @@ export const ORYCMS_DEFAULT_PERMISSIONS: PermMatrix = {
     ai: M,
     announcements: M,
     companies: M,
+    "case-studies": M,
+    testimonials: M,
+    "hire-staff-requests": M,
+    bookings: M,
     payments: M,
     whatsapp: M,
   },
@@ -97,6 +109,10 @@ export const ORYCMS_DEFAULT_PERMISSIONS: PermMatrix = {
     ai: ["read"],
     announcements: CRUD,
     companies: CRUD,
+    "case-studies": CRUD,
+    testimonials: CRUD,
+    "hire-staff-requests": ["read", "update", "delete"],
+    bookings: CRUD,
   },
   Author: {
     collections: ["read"],
@@ -107,6 +123,10 @@ export const ORYCMS_DEFAULT_PERMISSIONS: PermMatrix = {
     ai: ["read"],
     announcements: ["read"],
     companies: ["read"],
+    "case-studies": ["read"],
+    testimonials: ["read"],
+    "hire-staff-requests": ["read"],
+    bookings: ["read"],
   },
   Viewer: {
     collections: ["read"],
@@ -117,6 +137,10 @@ export const ORYCMS_DEFAULT_PERMISSIONS: PermMatrix = {
     seo: ["read"],
     announcements: ["read"],
     companies: ["read"],
+    "case-studies": ["read"],
+    testimonials: ["read"],
+    "hire-staff-requests": ["read"],
+    bookings: ["read"],
   },
 };
 

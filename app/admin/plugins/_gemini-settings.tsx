@@ -43,12 +43,9 @@ import { cn } from "@/lib/utils";
 // plain literal list here since this is a client component; the API route
 // accepts any non-empty model string, this is just the suggested set.
 const MODELS = [
-  "gemini-2.5-flash",
-  "gemini-2.5-pro",
-  "gemini-2.5-flash-lite",
-  "gemini-2.0-flash",
-  "gemini-1.5-flash",
-  "gemini-1.5-pro",
+  "gemini-flash-latest",
+  "gemini-pro-latest",
+  "gemini-flash-lite-latest",
 ] as const;
 
 const TEMPERATURE_MIN = 0;

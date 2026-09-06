@@ -1,3 +1,4 @@
+import { logStep, maskPhone } from "@/lib/pretty-log";
 import type { OryCMSWhatsAppOutboundProvider } from "../whatsapp.outbound.provider";
 import type {
   OryCMSWhatsAppOutboundCredentials,
@@ -53,6 +54,7 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
         }),
       });
     } catch {
+      logStep("fail", "WhatsApp connect (meta)", `${maskPhone(request.customerId)} · network unreachable`);
       return fail({
         code: "WHATSAPP_NETWORK_ERROR",
         message: "Couldn't reach the WhatsApp Cloud API. Check network connectivity and try again.",
@@ -60,6 +62,7 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
     }
 
     if (res.status === 401 || res.status === 403) {
+      logStep("fail", "WhatsApp connect (meta)", `HTTP ${res.status} invalid token`);
       return fail({
         code: "WHATSAPP_INVALID_ACCESS_TOKEN",
         message: "WhatsApp rejected the access token. Check that it's correct and still active.",
@@ -67,6 +70,7 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
     }
 
     if (res.status === 400) {
+      logStep("fail", "WhatsApp connect (meta)", `HTTP 400 invalid request`);
       return fail({
         code: "WHATSAPP_INVALID_REQUEST",
         message: "WhatsApp rejected the request (invalid recipient, phone number id, or message).",
@@ -74,6 +78,7 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
     }
 
     if (res.status === 429) {
+      logStep("warn", "WhatsApp connect (meta)", "HTTP 429 rate limited");
       return fail({
         code: "WHATSAPP_RATE_LIMITED",
         message: "WhatsApp rate-limited this request. Try again shortly.",
@@ -81,6 +86,7 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
     }
 
     if (!res.ok) {
+      logStep("fail", "WhatsApp connect (meta)", `HTTP ${res.status}`);
       return fail({
         code: "WHATSAPP_REQUEST_FAILED",
         message: `WhatsApp Cloud API returned an unexpected error (HTTP ${res.status}).`,
@@ -95,12 +101,14 @@ export const metaOutboundProvider: OryCMSWhatsAppOutboundProvider = {
     const messageId = data?.messages?.[0]?.id;
 
     if (!data || typeof messageId !== "string" || !messageId) {
+      logStep("fail", "WhatsApp connect (meta)", "unparsable response");
       return fail({
         code: "WHATSAPP_INVALID_RESPONSE",
         message: "WhatsApp returned a response that couldn't be parsed.",
       });
     }
 
+    logStep("ok", "WhatsApp connect (meta)", `sent to ${maskPhone(request.customerId)}`);
     return { success: true, provider: "meta", messageId, error: null };
   },
 };

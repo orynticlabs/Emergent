@@ -14,18 +14,25 @@
  * CHECK constraint (unlike whatsapp's provider column) — Google adds/retires
  * model ids on its own schedule, so the column stays a free-text TEXT and
  * this list is only a convenience default set for the dropdown.
+ *
+ * Deliberately ONLY Google's own stable "-latest" aliases, which always
+ * resolve to Google's current recommended model in that tier. Dated model
+ * ids (e.g. "gemini-2.5-flash") were removed after being proven, against a
+ * real API key, to fail generateContent with a 404 — Google's own error
+ * for those was: "This model ... is no longer available to new users."
+ * The model still exists (GET /v1beta/models/{id} succeeds, so it's not
+ * even "not found" in the usual sense) but real newer API keys are blocked
+ * from generation on it — the exact failure mode a hardcoded dated id in
+ * this list is guaranteed to hit again as Google keeps advancing "latest."
  */
 export const ORYCMS_GEMINI_MODELS = [
-  "gemini-2.5-flash",
-  "gemini-2.5-pro",
-  "gemini-2.5-flash-lite",
-  "gemini-2.0-flash",
-  "gemini-1.5-flash",
-  "gemini-1.5-pro",
+  "gemini-flash-latest",
+  "gemini-pro-latest",
+  "gemini-flash-lite-latest",
 ] as const;
 
 export const ORYCMS_GEMINI_DEFAULT_MODEL: (typeof ORYCMS_GEMINI_MODELS)[number] =
-  "gemini-2.5-flash";
+  "gemini-flash-latest";
 
 export const ORYCMS_GEMINI_DEFAULT_TEMPERATURE = 0.7;
 export const ORYCMS_GEMINI_DEFAULT_MAX_OUTPUT_TOKENS = 2048;

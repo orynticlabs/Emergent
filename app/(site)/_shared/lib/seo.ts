@@ -9,7 +9,7 @@ export const SITE_NAME = "OrynticLabs";
 // OG image when one exists; every page's social preview uses this fallback
 // unless it passes its own `image`.
 export const DEFAULT_OG_IMAGE =
-  "https://images.unsplash.com/photo-1534312527009-56c7016453e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwYWJzdHJhY3QlMjBibHVlJTIwb3JhbmdlJTIwZ2xvd2luZ3xlbnwwfHx8fDE3ODczNzY5NTN8MA&ixlib=rb-4.1.0&q=85";
+  "https://images.pexels.com/photos/30547579/pexels-photo-30547579.jpeg?auto=compress&cs=tinysrgb&h=630&w=1200";
 
 interface PageMetadataInput {
   title: string;

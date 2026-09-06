@@ -6,8 +6,8 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 /**
  * Aceternity "animated tooltip": a row of overlapping avatars where hovering
  * one pops up a name/role card that tilts and slides slightly with the
- * cursor position across the avatar. Adapted to render an icon-in-a-circle
- * instead of a photo, since these represent roles, not named individuals.
+ * cursor position across the avatar. Renders a photo when `item.image` is
+ * given, falling back to an icon-in-a-circle for items without one.
  */
 export function AnimatedTooltip({ items }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -53,12 +53,23 @@ export function AnimatedTooltip({ items }) {
                 </motion.div>
               )}
             </AnimatePresence>
-            <div
-              onMouseMove={handleMouseMove}
-              className={`relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-brand-ink object-cover object-top transition duration-500 group-hover:z-30 group-hover:scale-105 ${item.className ?? "bg-brand-orange"}`}
-            >
-              {Icon && <Icon className="h-5 w-5 text-white" strokeWidth={2} />}
-            </div>
+            {item.image ? (
+              <img
+                onMouseMove={handleMouseMove}
+                src={item.image}
+                alt={item.name}
+                loading="lazy"
+                decoding="async"
+                className="relative h-12 w-12 rounded-full border-2 border-brand-ink object-cover object-top transition duration-500 group-hover:z-30 group-hover:scale-105"
+              />
+            ) : (
+              <div
+                onMouseMove={handleMouseMove}
+                className={`relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-brand-ink object-cover object-top transition duration-500 group-hover:z-30 group-hover:scale-105 ${item.className ?? "bg-brand-orange"}`}
+              >
+                {Icon && <Icon className="h-5 w-5 text-white" strokeWidth={2} />}
+              </div>
+            )}
           </div>
         );
       })}

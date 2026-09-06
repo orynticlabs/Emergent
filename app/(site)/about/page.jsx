@@ -1,13 +1,14 @@
-import { IMAGES, CLIENTS } from "@site/data/content";
+import { IMAGES } from "@site/data/content";
 import { Reveal, SectionHead } from "@site/components/site/Reveal";
+import { CanvasText } from "@site/components/ui/canvas-text";
 import { buildPageMetadata } from "@site/lib/seo";
+import ClientMarquee from "@site/components/site/ClientMarquee";
 import AboutHero from "./AboutHero";
 import AboutFeatures from "./AboutFeatures";
 import AboutWhyUs from "./AboutWhyUs";
 import AboutTestimonials from "./AboutTestimonials";
 import AboutFlowText from "./AboutFlowText";
 import AboutGallery from "./AboutGallery";
-import AboutCTA from "./AboutCTA";
 
 export const metadata = buildPageMetadata({
   title: "About Us",
@@ -29,6 +30,8 @@ export default function About() {
     <main data-testid="about-page">
       <AboutHero />
 
+      <ClientMarquee />
+
       <AboutFlowText />
 
       <section className="bg-brand-ink pb-24 pt-10 text-white md:pb-32 md:pt-14" data-testid="about-who-we-are">
@@ -37,7 +40,19 @@ export default function About() {
             <SectionHead
               titleClassName="text-2xl md:text-7xl uppercase"
               wrapperClassName="max-w-lg"
-              title="Who Are We"
+              title={
+                <>
+                  Who
+                  <br />
+                  <CanvasText
+                    text="Are We"
+                    className="font-display text-2xl font-black uppercase md:text-7xl"
+                    colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
+                    lineGap={6}
+                    animationDuration={10}
+                  />
+                </>
+              }
               description="OrynticLabs is a full-spectrum engineering and product studio — we design, build, and deliver custom technology across web, mobile, AI, data, and cloud, helping businesses innovate, scale, and lead in their industry."
             />
             <div className="grid grid-cols-2 gap-x-10 gap-y-10">
@@ -54,38 +69,11 @@ export default function About() {
 
       <AboutFeatures />
 
-      <section className="border-t border-white/5 bg-brand-ink py-24 text-white md:py-32" data-testid="about-trusted">
-        <div className="mx-auto max-w-5xl px-6 text-center md:px-10">
-          <SectionHead
-            align="center"
-            titleClassName="text-2xl md:text-7xl uppercase"
-            wrapperClassName="max-w-4xl"
-            title="Trusted by the best companies"
-            description="Companies that have been using our product from the very start."
-          />
-          <Reveal delay={0.15}>
-            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
-              {CLIENTS.map((c) => (
-                <span
-                  key={c.name}
-                  data-testid={`about-trusted-${c.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className={`text-2xl text-white/70 transition-colors duration-300 hover:text-white ${c.cls}`}
-                >
-                  {c.name}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <AboutWhyUs />
 
       <AboutGallery />
 
       <AboutTestimonials />
-
-      <AboutCTA />
     </main>
   );
 }

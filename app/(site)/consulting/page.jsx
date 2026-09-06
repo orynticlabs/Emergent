@@ -51,10 +51,9 @@ export default function Consulting() {
         description="Advisory work for founders, CTOs, and heads of product — architecture evaluation, migration planning, vendor assessment, and technology roadmaps. Structured, time-bound, and outcome-focused. We never bill indefinitely for advice."
       />
 
-      <section className="bg-brand-paper py-24 text-brand-coal md:py-32" data-testid="consulting-coverage-section">
+      <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="consulting-coverage-section">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <SectionHead
-            dark={false}
             overline="What we cover"
             title="Four kinds of decisions we get called in for."
             description="Every engagement starts with a documented scope — what we're evaluating, what you'll receive, and by when."
@@ -66,11 +65,11 @@ export default function Consulting() {
                 <Reveal key={item.title} delay={0.06 * i}>
                   <div
                     data-testid={`consulting-coverage-${i}`}
-                    className="group h-full rounded-3xl border border-black/10 bg-white p-10 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/50 hover:shadow-xl hover:shadow-brand-blue/10"
+                    className="group h-full rounded-3xl border border-white/10 bg-white/[0.03] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/50 hover:shadow-xl hover:shadow-brand-blue/10"
                   >
                     <Icon className="h-10 w-10 text-brand-blue transition-colors duration-300 group-hover:text-brand-orange" strokeWidth={1.5} />
                     <h3 className="mt-8 font-display text-2xl font-bold tracking-tight">{item.title}</h3>
-                    <p className="mt-4 leading-relaxed text-black/55">{item.text}</p>
+                    <p className="mt-4 leading-relaxed text-white/55">{item.text}</p>
                   </div>
                 </Reveal>
               );
@@ -112,10 +111,9 @@ export default function Consulting() {
         </div>
       </section>
 
-      <section className="bg-brand-paper py-24 text-brand-coal md:py-32" data-testid="consulting-cta-section">
+      <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="consulting-cta-section">
         <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
           <SectionHead
-            dark={false}
             align="center"
             wrapperClassName="max-w-2xl"
             overline="Ready when you are"

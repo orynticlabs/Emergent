@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import Navbar from "@site/components/site/Navbar";
 import Footer from "@site/components/site/Footer";
+import BuildTogetherCTA from "@site/components/site/BuildTogetherCTA";
+import { BookingModalProvider } from "@site/components/site/BookingModalContext";
+import BookACallModal from "@site/components/site/BookACallModal";
 import { Toaster } from "@site/components/ui/sonner";
 
 const SmoothScroll = ({ children }) => {
@@ -42,9 +45,13 @@ export default function SiteShell({ children }) {
     <div className="App" data-testid="app-root">
       <div className="noise-overlay" aria-hidden="true" />
       <SmoothScroll>
-        <Navbar />
-        {children}
-        <Footer />
+        <BookingModalProvider>
+          <Navbar />
+          {children}
+          <BuildTogetherCTA />
+          <Footer />
+          <BookACallModal />
+        </BookingModalProvider>
         <Toaster position="bottom-right" theme="dark" richColors />
       </SmoothScroll>
     </div>

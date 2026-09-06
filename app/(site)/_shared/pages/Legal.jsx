@@ -47,16 +47,16 @@ export default function Legal({ kind }) {
   return (
     <main data-testid={`legal-page-${kind}`}>
       <PageHero overline={page.overline} lines={page.lines} accentIndex={page.accentIndex} description={page.description} />
-      <section className="bg-brand-paper py-20 text-brand-coal md:py-28">
+      <section className="bg-brand-ink py-20 text-white md:py-28">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           {page.sections.map((s, i) => (
             <Reveal key={s.title} delay={0.05 * i}>
-              <div className="border-b border-black/10 py-8">
+              <div className="border-b border-white/10 py-8">
                 <h2 className="font-display text-xl font-bold tracking-tight md:text-2xl">
                   <span className="mr-3 text-sm text-brand-orange">{String(i + 1).padStart(2, "0")}</span>
                   {s.title}
                 </h2>
-                <p className="mt-3 leading-relaxed text-black/60">{s.text}</p>
+                <p className="mt-3 leading-relaxed text-white/60">{s.text}</p>
               </div>
             </Reveal>
           ))}

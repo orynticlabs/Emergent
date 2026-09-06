@@ -8,6 +8,7 @@ const PAGES: Array<{ path: string; priority: number; changeFrequency: MetadataRo
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/products", priority: 0.8, changeFrequency: "monthly" },
   { path: "/portfolio", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/hire-staff", priority: 0.7, changeFrequency: "monthly" },
   { path: "/industries", priority: 0.7, changeFrequency: "monthly" },
   { path: "/stack", priority: 0.6, changeFrequency: "monthly" },
   { path: "/contact-us", priority: 0.7, changeFrequency: "yearly" },

@@ -35,11 +35,33 @@ function hasStatusCode(err: unknown): err is StatusfulError {
 }
 
 /**
+ * True for Node's own system/network errors (DNS lookup failures, ECONNREFUSED,
+ * ETIMEDOUT, ...) — these carry a `.code` string (e.g. "ENOTFOUND") the exact
+ * same shape our intentional application errors use, but must never be
+ * treated as one: `.message` on these can contain internal infrastructure
+ * details (a database hostname, an internal port) that must not reach the
+ * client. Node's libuv-backed system errors are documented to additionally
+ * carry a numeric `.errno` and a `.syscall` string — a pair no application
+ * error in this codebase sets — so that combination is what distinguishes
+ * them from Plugin/Manifest-style errors below. See: a real Neon DNS outage
+ * that leaked "getaddrinfo ENOTFOUND ep-...aws.neon.tech" into a browser
+ * toast before this check existed.
+ */
+function isNodeSystemError(err: unknown): boolean {
+  if (!(err instanceof Error)) return false;
+  const e = err as unknown as Record<string, unknown>;
+  return typeof e.errno === "number" && typeof e.syscall === "string";
+}
+
+/**
  * Maps any thrown value to the canonical `{ success:false, error:{...} }` envelope.
  *
  * - Auth / Content / CollectionPersistence / Hook / Media errors all expose
  *   `code` + `statusCode` → mapped generically (preserving `issues`/`field`).
  * - Plugin / Manifest errors have `code` but NO `statusCode` → default to 400.
+ * - Node system/network errors (DNS, connection failures, ...) are never
+ *   exposed, even though they also carry a `.code` string — see
+ *   isNodeSystemError's comment.
  * - Everything else → 500 INTERNAL_ERROR (message hidden).
  */
 export function toErrorResponse(err: unknown): NextResponse {
@@ -53,8 +75,13 @@ export function toErrorResponse(err: unknown): NextResponse {
     return NextResponse.json({ success: false, error: body }, { status: err.statusCode });
   }
 
-  // Plugin/Manifest errors: have `code` but no statusCode.
-  if (err instanceof Error && typeof (err as unknown as Record<string, unknown>).code === "string") {
+  // Plugin/Manifest errors: have `code` but no statusCode — excluding Node's
+  // own system errors, which also have `.code` but must stay opaque to the client.
+  if (
+    err instanceof Error &&
+    typeof (err as unknown as Record<string, unknown>).code === "string" &&
+    !isNodeSystemError(err)
+  ) {
     const code = (err as unknown as Record<string, unknown>).code as string;
     const status = code.endsWith("_NOT_FOUND") ? 404 : 400;
     return NextResponse.json(

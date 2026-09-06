@@ -2,9 +2,9 @@
 
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import { IMAGES, HERO_VIDEO } from "@site/data/content";
-import { KineticLine, ArrowLink, EASE } from "@site/components/site/Reveal";
+import { KineticLine, ArrowLink, EASE, Magnetic } from "@site/components/site/Reveal";
 import { Skeleton } from "@site/components/ui/skeleton";
 import ClientMarquee from "@site/components/site/ClientMarquee";
 import { CanvasText } from "@site/components/ui/canvas-text";
@@ -38,8 +38,22 @@ function Hero() {
   const textY = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  function handleMouseMove(event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    mouseX.set(event.clientX - rect.left);
+    mouseY.set(event.clientY - rect.top);
+  }
+  const cursorGlow = useMotionTemplate`radial-gradient(560px circle at ${mouseX}px ${mouseY}px, rgba(0,102,255,0.12), transparent 70%)`;
+
   return (
-    <section ref={ref} data-testid="home-hero" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-ink text-white">
+    <section
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      data-testid="home-hero"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-ink text-white"
+    >
       <video
         autoPlay
         muted
@@ -54,6 +68,25 @@ function Hero() {
       <div className="absolute inset-0 bg-[#050505]/65" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/30 to-[#050505]" aria-hidden="true" />
 
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] hidden md:block"
+        style={{ background: cursorGlow }}
+      />
+
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 -left-24 z-[1] h-72 w-72 rounded-full bg-brand-orange/20 blur-[110px]"
+        animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-20 z-[1] h-80 w-80 rounded-full bg-brand-blue/20 blur-[120px]"
+        animate={{ x: [0, -25, 0], y: [0, -15, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+
       <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
@@ -61,12 +94,12 @@ function Hero() {
           </p>
         </motion.div>
 
-        <h1 className="mt-10 font-display text-5xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.08]">
+        <h1 className="mt-10 font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05]">
           <KineticLine delay={0.15}>Engineering the Next Generation of</KineticLine>
           <KineticLine delay={0.27}>
             <CanvasText
               text="Intelligent Systems"
-              className="font-display text-5xl font-semibold sm:text-6xl lg:text-7xl"
+              className="font-display text-5xl font-black sm:text-6xl lg:text-7xl"
               colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
               lineGap={6}
               animationDuration={10}
@@ -92,8 +125,12 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
-          <ArrowLink to="/contact-us">Consult Our Strategy Team</ArrowLink>
-          <ArrowLink to="/services" variant="ghost" className="border-white/30 text-white backdrop-blur-md">Explore Services</ArrowLink>
+          <Magnetic>
+            <ArrowLink to="/contact-us">Consult Our Strategy Team</ArrowLink>
+          </Magnetic>
+          <Magnetic strength={12}>
+            <ArrowLink to="/services" variant="ghost" className="border-white/30 text-white backdrop-blur-md">Explore Services</ArrowLink>
+          </Magnetic>
         </motion.div>
       </motion.div>
 

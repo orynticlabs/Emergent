@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Loader2, Send, Mail, Phone, MapPin, User, Building2, Layers, MessageSquare, ShieldCheck, MessageCircle, Check, Paperclip, FileText, X, Headphones, AtSign } from "lucide-react";
 import { CONTACT, SERVICES, IMAGES, CONTACT_FAQS, CLIENTS } from "@site/data/content";
 import { Reveal, EASE } from "@site/components/site/Reveal";
+import FAQGrid from "@site/components/site/FAQGrid";
 import { WorldMap } from "@site/components/ui/world-map";
 import { siteAlertToast } from "@site/components/ui/site-alert-toast";
 import { cn } from "@site/lib/utils";
@@ -333,39 +334,23 @@ export default function ContactClient() {
         </div>
       </section>
 
-      <section className="bg-brand-ink py-20 text-white md:py-28" data-testid="contact-faq">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <Reveal>
-            <h2 className="font-display text-4xl font-bold tracking-tight md:text-5xl">Frequently asked questions</h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-white/50">
-              We're here to help with anything you're unsure about. If you don't find what you need,
-              write to us directly at{" "}
-              <a
-                href={`mailto:${CONTACT.support}`}
-                className="font-semibold text-brand-orange underline underline-offset-4 transition-colors duration-300 hover:text-white"
-              >
-                {CONTACT.support}
-              </a>
-              .
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3">
-              {CONTACT_FAQS.map((item, i) => (
-                <div
-                  key={item.q}
-                  data-testid={`contact-faq-card-${i}`}
-                  className="mb-6 break-inside-avoid rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:border-brand-orange/40"
-                >
-                  <p className="font-display text-base font-bold text-white">{item.q}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-white/55">{item.a}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <FAQGrid
+        testId="contact-faq"
+        items={CONTACT_FAQS}
+        description={
+          <>
+            We're here to help with anything you're unsure about. If you don't find what you need,
+            write to us directly at{" "}
+            <a
+              href={`mailto:${CONTACT.support}`}
+              className="font-semibold text-brand-orange underline underline-offset-4 transition-colors duration-300 hover:text-white"
+            >
+              {CONTACT.support}
+            </a>
+            .
+          </>
+        }
+      />
     </main>
   );
 }

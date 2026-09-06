@@ -1,33 +1,30 @@
 "use client";
 
-import { IMAGES } from "@site/data/content";
 import { HeroParallax } from "@site/components/ui/hero-parallax";
 
 /*
- * Own work only — no third-party product screenshots. Real placeholder
- * portfolio projects (same ones on /portfolio) mixed with our own products
- * and site sections, each linking to the real internal page. Swap the
- * portfolio entries for real client work/screenshots when available.
+ * Own work only — no third-party product screenshots. Sourced from
+ * public/ourwork/, each linking to the most relevant internal page.
  */
-const PRODUCTS = [
-  { title: "AI Knowledge Assistant", link: "/portfolio", thumbnail: IMAGES.ai },
-  { title: "Fleet Command Center", link: "/portfolio", thumbnail: IMAGES.architecture },
-  { title: "Headless Commerce Platform", link: "/portfolio", thumbnail: IMAGES.dashboard },
-  { title: "Telemedicine Suite", link: "/portfolio", thumbnail: IMAGES.about },
-  { title: "Lending Automation Platform", link: "/portfolio", thumbnail: IMAGES.datacenter },
-
-  { title: "Smart Warehouse System", link: "/portfolio", thumbnail: IMAGES.hero },
-  { title: "Learning Experience Platform", link: "/portfolio", thumbnail: IMAGES.culture },
-  { title: "EV Charging Network App", link: "/portfolio", thumbnail: IMAGES.ai },
-  { title: "OryAI", link: "/products", thumbnail: IMAGES.datacenter },
-  { title: "OryCMS", link: "/products", thumbnail: IMAGES.dashboard },
-
-  { title: "PerformX", link: "/products", thumbnail: IMAGES.architecture },
-  { title: "Strategic Consulting", link: "/services", thumbnail: IMAGES.culture },
-  { title: "Industries We Serve", link: "/industries", thumbnail: IMAGES.hero },
-  { title: "Our Technology Stack", link: "/stack", thumbnail: IMAGES.about },
-  { title: "Meet OrynticLabs", link: "/about", thumbnail: IMAGES.ai },
+const OUR_WORK = [
+  { title: "Foodie App", link: "/services/mobile-development", thumbnail: "/ourwork/foodie-app.jpg" },
+  { title: "Medico — Doctor Consultation App", link: "/services/mobile-development", thumbnail: "/ourwork/medico-app.png" },
+  { title: "SaaS Product Landing Page", link: "/portfolio", thumbnail: "/ourwork/saas-landing.png" },
+  { title: "Vision — Analytics Dashboard", link: "/products", thumbnail: "/ourwork/vision-dashboard-1.png" },
+  { title: "Vision — Dashboard Components", link: "/products", thumbnail: "/ourwork/vision-dashboard-2.png" },
+  { title: "E-Commerce Storefront", link: "/portfolio", thumbnail: "/ourwork/ecommerce-storefront.png" },
+  { title: "Adhunik Crop Care — Agri Platform", link: "/industries", thumbnail: "/ourwork/adhunik-crop-care.png" },
 ];
+
+// The parallax lays out 3 rows of 5 (15 cards). Only 7 real screenshots
+// exist today, so the list repeats to fill every row instead of leaving
+// the 2nd/3rd rows sparse or empty — each repeat gets a distinct `id` so
+// keys stay unique even though the same image shows more than once.
+const ROW_CARD_COUNT = 15;
+const PRODUCTS = Array.from({ length: ROW_CARD_COUNT }, (_, i) => ({
+  ...OUR_WORK[i % OUR_WORK.length],
+  id: i,
+}));
 
 export default function HeroParallaxSection() {
   return (

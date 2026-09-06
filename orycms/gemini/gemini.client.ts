@@ -10,6 +10,8 @@
  * in orycms_gemini_settings, not a deployment-level secret.
  */
 
+import { logStep } from "@/lib/pretty-log";
+
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta";
 
 export interface OryCMSGeminiConnectionCheck {
@@ -37,6 +39,7 @@ export async function testOryCMSGeminiConnection(
       headers: { "x-goog-api-key": apiKey },
     });
   } catch {
+    logStep("fail", "Gemini connect", `${model} · network unreachable`);
     return {
       ok: false,
       code: "GEMINI_NETWORK_ERROR",
@@ -45,6 +48,7 @@ export async function testOryCMSGeminiConnection(
   }
 
   if (res.status === 401 || res.status === 403) {
+    logStep("fail", "Gemini connect", `${model} · HTTP ${res.status} invalid key`);
     return {
       ok: false,
       code: "GEMINI_INVALID_API_KEY",
@@ -53,6 +57,7 @@ export async function testOryCMSGeminiConnection(
   }
 
   if (res.status === 404) {
+    logStep("fail", "Gemini connect", `${model} · model not found`);
     return {
       ok: false,
       code: "GEMINI_MODEL_NOT_FOUND",
@@ -61,6 +66,7 @@ export async function testOryCMSGeminiConnection(
   }
 
   if (!res.ok) {
+    logStep("fail", "Gemini connect", `${model} · HTTP ${res.status}`);
     return {
       ok: false,
       code: "GEMINI_REQUEST_FAILED",
@@ -68,6 +74,7 @@ export async function testOryCMSGeminiConnection(
     };
   }
 
+  logStep("ok", "Gemini connect", model);
   return {
     ok: true,
     code: "GEMINI_CONNECTED",
@@ -94,6 +101,26 @@ export type OryCMSGeminiGenerateResult =
   | { ok: true; text: string; usage: OryCMSGeminiUsage | null }
   | { ok: false; code: string; message: string };
 
+// Google's free-tier capacity for popular models (e.g. "gemini-flash-latest")
+// measurably 503s a meaningful fraction of the time under load — observed
+// directly: 4 of 6 back-to-back real calls failed with 503 in testing. A
+// 503 is Google's own server saying "temporarily overloaded," not a config
+// or request problem, and empirically clears within a second or two — so a
+// couple of short, bounded retries meaningfully improves real delivery odds
+// for the WhatsApp auto-reply flow without risking a long hang (worst case:
+// ~1.5s of extra latency, still well inside what the webhook route/Meta's
+// own retry tolerance can absorb). Deliberately NOT retried: 429 (rate
+// limit) — Google's own 429s here have included a hard `limit: 0`
+// zero-quota case that no amount of retrying fixes, and its suggested
+// retry-after (20s+) doesn't fit inside a single webhook request anyway.
+const TRANSIENT_RETRY_STATUSES = new Set([503]);
+const MAX_ATTEMPTS = 3;
+const RETRY_DELAY_MS = 500;
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /**
  * Calls POST /v1beta/models/{model}:generateContent with the API key in the
  * `x-goog-api-key` header (never a query string — same reasoning as
@@ -101,9 +128,50 @@ export type OryCMSGeminiGenerateResult =
  * instruction, the user message, or the generated text — the caller
  * (gemini.service.ts) owns what, if anything, gets logged, and Step 4's
  * instructions are "don't log prompts unnecessarily," so this function logs
- * nothing at all.
+ * nothing at all. Retries automatically (see TRANSIENT_RETRY_STATUSES above)
+ * on Gemini's own transient 503s before giving up.
  */
 export async function generateOryCMSGeminiContent(
+  apiKey: string,
+  model: string,
+  options: OryCMSGeminiGenerateOptions,
+): Promise<OryCMSGeminiGenerateResult> {
+  let lastResult: OryCMSGeminiGenerateResult = {
+    ok: false,
+    code: "GEMINI_REQUEST_FAILED",
+    message: "Gemini API returned an unexpected error.",
+  };
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    lastResult = await attemptGenerateOryCMSGeminiContent(apiKey, model, options);
+    if (lastResult.ok) {
+      const usage = lastResult.usage;
+      const usageLabel = usage?.totalTokens != null ? `${usage.totalTokens} tokens` : undefined;
+      logStep("ok", `Gemini generate (attempt ${attempt}/${MAX_ATTEMPTS})`, usageLabel);
+      return lastResult;
+    }
+
+    const status = lastResult.code === "GEMINI_REQUEST_FAILED" ? extractHttpStatus(lastResult.message) : null;
+    const shouldRetry = status !== null && TRANSIENT_RETRY_STATUSES.has(status) && attempt < MAX_ATTEMPTS;
+    if (!shouldRetry) {
+      logStep("fail", `Gemini generate (attempt ${attempt}/${MAX_ATTEMPTS})`, lastResult.code);
+      return lastResult;
+    }
+
+    logStep("warn", `Gemini generate (attempt ${attempt}/${MAX_ATTEMPTS})`, `HTTP ${status} · retrying`);
+    await delay(RETRY_DELAY_MS * attempt);
+  }
+
+  return lastResult;
+}
+
+/** Pulls the HTTP status back out of "Gemini API returned an unexpected error (HTTP 503)." — avoids restructuring attemptGenerateOryCMSGeminiContent's return shape just to carry the status code an extra hop. */
+function extractHttpStatus(message: string): number | null {
+  const match = /HTTP (\d+)/.exec(message);
+  return match ? Number(match[1]) : null;
+}
+
+async function attemptGenerateOryCMSGeminiContent(
   apiKey: string,
   model: string,
   options: OryCMSGeminiGenerateOptions,

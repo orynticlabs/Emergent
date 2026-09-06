@@ -8,6 +8,7 @@ import {
   verifyOryCMSMetaWebhookSignature,
 } from "@/whatsapp";
 import type { OryCMSWhatsAppAutomationResult } from "@/whatsapp";
+import { logSection, logSectionEnd, logStep, maskId } from "@/lib/pretty-log";
 
 /**
  * WhatsApp webhook — receives events directly from the configured BSP
@@ -38,19 +39,27 @@ import type { OryCMSWhatsAppAutomationResult } from "@/whatsapp";
 // challenge. Must respond with the raw `hub.challenge` value (plain text,
 // not JSON) when `hub.mode=subscribe` and `hub.verify_token` matches.
 export async function GET(request: NextRequest) {
+  logSection("WhatsApp Webhook · Verify");
+
   const mode = request.nextUrl.searchParams.get("hub.mode");
   const token = request.nextUrl.searchParams.get("hub.verify_token");
   const challenge = request.nextUrl.searchParams.get("hub.challenge");
 
   if (mode !== "subscribe" || !token || !challenge) {
+    logStep("fail", "Subscription challenge", "missing mode/token/challenge");
+    logSectionEnd();
     return new NextResponse("Forbidden", { status: 403 });
   }
 
   const config = await OryCMSWhatsAppService.getWebhookVerificationConfig();
   if (!config?.verifyToken || !timingSafeStringEqual(token, config.verifyToken)) {
+    logStep("fail", "Subscription challenge", "verify_token mismatch");
+    logSectionEnd();
     return new NextResponse("Forbidden", { status: 403 });
   }
 
+  logStep("ok", "Subscription challenge", `provider ${config.provider}`);
+  logSectionEnd();
   return new NextResponse(challenge, { status: 200, headers: { "Content-Type": "text/plain" } });
 }
 
@@ -61,14 +70,20 @@ export async function GET(request: NextRequest) {
 // endpoint. Only a bad/missing signature on a configured integration is
 // rejected outright.
 export async function POST(request: NextRequest) {
+  logSection("WhatsApp Webhook · Connection");
+
   const config = await OryCMSWhatsAppService.getWebhookVerificationConfig();
 
   // Not configured yet: nothing to verify against and no provider context
   // to normalize with. Acknowledge without processing rather than 404 —
   // avoids the BSP retrying a request that will never succeed differently.
   if (!config) {
+    logStep("warn", "Connect", "no WhatsApp settings configured — acknowledging without processing");
+    logSectionEnd();
     return NextResponse.json({ received: true, processed: false }, { status: 200 });
   }
+
+  logStep("ok", "Connect", `provider ${config.provider}`);
 
   // Raw text first — signature verification needs the exact bytes Meta
   // signed, not a re-serialized copy. JSON.parse only happens after.
@@ -77,8 +92,13 @@ export async function POST(request: NextRequest) {
   if (config.appSecret) {
     const signature = request.headers.get("x-hub-signature-256");
     if (!verifyOryCMSMetaWebhookSignature(rawBody, signature, config.appSecret)) {
+      logStep("fail", "Signature", "X-Hub-Signature-256 mismatch");
+      logSectionEnd();
       return new NextResponse("Invalid signature", { status: 401 });
     }
+    logStep("ok", "Signature", "HMAC-SHA256 verified");
+  } else {
+    logStep("warn", "Signature", "no app secret configured — skipped");
   }
   // No appSecret configured: signature verification is skipped rather than
   // rejecting outright, since Step 2/3 never required appSecret to be set
@@ -91,10 +111,17 @@ export async function POST(request: NextRequest) {
   } catch {
     // Not valid JSON at all — not a real Meta request. Reject outright
     // rather than pretending to acknowledge it.
+    logStep("fail", "Payload", "invalid JSON");
+    logSectionEnd();
     return new NextResponse("Invalid JSON", { status: 400 });
   }
 
   const result = normalizeOryCMSWhatsAppWebhookPayload(config.provider, parsedBody);
+  logStep(
+    result.malformed ? "warn" : "ok",
+    "Payload",
+    `${result.messages.length} message(s)${result.malformed ? " · malformed" : ""}`,
+  );
 
   // Dispatch every normalized message to the automation service. Never
   // logs payload content — only {messageId, status} labels ever leave
@@ -106,12 +133,20 @@ export async function POST(request: NextRequest) {
   const results: OryCMSWhatsAppAutomationResult[] = [];
   for (const message of result.messages) {
     try {
-      results.push(await OryCMSWhatsAppAIAutomationService.handleInboundMessage(message));
+      const outcome = await OryCMSWhatsAppAIAutomationService.handleInboundMessage(message);
+      results.push(outcome);
+      logStep(
+        outcome.status.startsWith("failed") ? "fail" : outcome.status.startsWith("skipped") ? "warn" : "ok",
+        `Dispatch ${maskId(message.messageId)}`,
+        outcome.status,
+      );
     } catch {
       results.push({ messageId: message.messageId, status: "failed_unexpected" });
+      logStep("fail", `Dispatch ${maskId(message.messageId)}`, "failed_unexpected");
     }
   }
 
+  logSectionEnd();
   return NextResponse.json(
     { received: true, processed: !result.malformed, messageCount: result.messages.length, results },
     { status: 200 },

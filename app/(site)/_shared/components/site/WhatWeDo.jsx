@@ -1,40 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowUpRight, Compass, Layers, BrainCircuit, Cloud, Sparkles } from "lucide-react";
 import { SERVICE_GROUPS, HOME_STATS } from "@site/data/content";
-import { Reveal, SectionHead } from "@site/components/site/Reveal";
+import { Reveal, SectionHead, CountUp } from "@site/components/site/Reveal";
+import SpotlightCard from "@site/components/site/SpotlightCard";
 
 const ICONS = { Compass, Layers, BrainCircuit, Cloud };
-
-/** Aceternity-style spotlight card: a radial glow that tracks the cursor, revealed on hover. */
-function SpotlightCard({ children, className = "", tint = "255,85,0" }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    mouseX.set(event.clientX - rect.left);
-    mouseY.set(event.clientY - rect.top);
-  }
-
-  const background = useMotionTemplate`radial-gradient(380px circle at ${mouseX}px ${mouseY}px, rgba(${tint},0.16), transparent 72%)`;
-
-  return (
-    <div
-      onMouseMove={handleMouseMove}
-      className={`group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-white/20 ${className}`}
-    >
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background }}
-      />
-      <div className="relative flex h-full flex-col">{children}</div>
-    </div>
-  );
-}
 
 function FeatureTile() {
   const stat = HOME_STATS[0];
@@ -55,9 +27,10 @@ function FeatureTile() {
         </p>
       </div>
       <div className="mt-10 flex items-end gap-3">
-        <span className="font-display text-5xl font-black tracking-tighter text-brand-blue">
-          {stat.value}
-        </span>
+        <CountUp
+          value={stat.value}
+          className="font-display text-5xl font-black tracking-tighter text-brand-blue"
+        />
         <span className="pb-1 text-xs font-medium uppercase tracking-wide text-white/50">
           {stat.label}
         </span>
@@ -98,7 +71,7 @@ export default function WhatWeDo() {
       />
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <SectionHead
-          titleClassName="text-2xl md:text-7xl uppercase"
+          titleClassName="text-2xl md:text-5xl uppercase"
           wrapperClassName="max-w-4xl"
           title={
             <>

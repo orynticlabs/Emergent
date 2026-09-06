@@ -35,7 +35,7 @@ export default function Sitemap() {
         accentIndex={1}
         description="Every page and destination on the OrynticLabs website, in one place."
       />
-      <section className="bg-brand-paper py-20 text-brand-coal md:py-28">
+      <section className="bg-brand-ink py-20 text-white md:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:grid-cols-2 md:px-10 lg:grid-cols-3">
           {GROUPS.map((group, gi) => (
             <Reveal key={group.title} delay={0.06 * gi}>
@@ -44,7 +44,7 @@ export default function Sitemap() {
                 <ul className="mt-5 space-y-3">
                   {group.links.map((link) => (
                     <li key={link.label}>
-                      <Link href={link.url} className="group inline-flex items-center gap-2 text-sm text-black/60 transition-colors duration-300 hover:text-brand-orange">
+                      <Link href={link.url} className="group inline-flex items-center gap-2 text-sm text-white/60 transition-colors duration-300 hover:text-brand-orange">
                         {link.label}
                         <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:opacity-100" />
                       </Link>

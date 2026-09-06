@@ -28,6 +28,11 @@ import {
   CreditCard,
   ScrollText,
   Bot,
+  BookMarked,
+  Quote,
+  UserPlus,
+  CalendarCheck,
+  CalendarCog,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -55,41 +60,13 @@ type Item = {
   permission?: NavPermission;
 };
 
+// Ordered by how often a role actually touches each area day to day:
+// authoring content first, then client/lead work, growth, identity/access
+// config, technical platform integrations, and system settings last.
 const NAV: { section: string; items: Item[] }[] = [
   {
     section: "Workspace",
     items: [{ label: "Overview", to: "/admin", icon: LayoutDashboard }],
-  },
-  {
-    section: "Engagements",
-    items: [
-      {
-        label: "Delivery Suite",
-        icon: Workflow,
-        children: [
-          { label: "PerformX", to: "/admin/projectx", icon: Briefcase, permission: { resource: "projects", action: "read" } },
-        ],
-      },
-      { label: "Clients", to: "/admin/clients", icon: Users, permission: { resource: "clients", action: "read" } },
-      {
-        label: "Feature",
-        icon: Package,
-        children: [
-          {
-            label: "Announcement",
-            to: "/admin/announcements",
-            icon: Megaphone,
-            permission: { resource: "announcements", action: "read" },
-          },
-          {
-            label: "Companies",
-            to: "/admin/companies",
-            icon: Building2,
-            permission: { resource: "companies", action: "read" },
-          },
-        ],
-      },
-    ],
   },
   {
     section: "Content",
@@ -100,10 +77,64 @@ const NAV: { section: string; items: Item[] }[] = [
     ],
   },
   {
-    section: "Identity",
+    section: "Engagements",
     items: [
-      { label: "Team Members", to: "/admin/users", icon: UserCog, permission: { resource: "users", action: "read" } },
-      { label: "Roles & Access", to: "/admin/roles", icon: Shield, permission: { resource: "roles", action: "read" } },
+      { label: "Clients", to: "/admin/clients", icon: Users, permission: { resource: "clients", action: "read" } },
+      {
+        label: "Hire Staff Requests",
+        to: "/admin/hire-staff-requests",
+        icon: UserPlus,
+        permission: { resource: "hire-staff-requests", action: "read" },
+      },
+      {
+        label: "Bookings",
+        to: "/admin/bookings",
+        icon: CalendarCheck,
+        permission: { resource: "bookings", action: "read" },
+      },
+      {
+        label: "Availability",
+        to: "/admin/booking-availability",
+        icon: CalendarCog,
+        permission: { resource: "bookings", action: "read" },
+      },
+      {
+        label: "Delivery Suite",
+        icon: Workflow,
+        children: [
+          { label: "PerformX", to: "/admin/projectx", icon: Briefcase, permission: { resource: "projects", action: "read" } },
+        ],
+      },
+      {
+        label: "Feature",
+        icon: Package,
+        children: [
+          {
+            label: "Case Studies",
+            to: "/admin/case-studies",
+            icon: BookMarked,
+            permission: { resource: "case-studies", action: "read" },
+          },
+          {
+            label: "Testimonials",
+            to: "/admin/testimonials",
+            icon: Quote,
+            permission: { resource: "testimonials", action: "read" },
+          },
+          {
+            label: "Companies",
+            to: "/admin/companies",
+            icon: Building2,
+            permission: { resource: "companies", action: "read" },
+          },
+          {
+            label: "Announcement",
+            to: "/admin/announcements",
+            icon: Megaphone,
+            permission: { resource: "announcements", action: "read" },
+          },
+        ],
+      },
     ],
   },
   {
@@ -114,20 +145,27 @@ const NAV: { section: string; items: Item[] }[] = [
     ],
   },
   {
+    section: "Identity",
+    items: [
+      { label: "Team Members", to: "/admin/users", icon: UserCog, permission: { resource: "users", action: "read" } },
+      { label: "Roles & Access", to: "/admin/roles", icon: Shield, permission: { resource: "roles", action: "read" } },
+    ],
+  },
+  {
     section: "Platform",
     items: [
+      { label: "SEO", to: "/admin/seo", icon: SearchCheck, permission: { resource: "seo", action: "read" } },
+      { label: "Payments", to: "/admin/payments", icon: CreditCard, permission: { resource: "payments", action: "read" } },
       { label: "Integrations", to: "/admin/plugins", icon: Puzzle, permission: { resource: "plugins", action: "read" } },
       { label: "WhatsApp Automation", to: "/admin/whatsapp", icon: Bot, permission: { resource: "whatsapp", action: "manage" } },
       { label: "Database", to: "/admin/database", icon: Database, permission: { resource: "migrations", action: "read" } },
-      { label: "SEO", to: "/admin/seo", icon: SearchCheck, permission: { resource: "seo", action: "read" } },
-      { label: "Payments", to: "/admin/payments", icon: CreditCard, permission: { resource: "payments", action: "read" } },
     ],
   },
   {
     section: "System",
     items: [
-      { label: "MFA Logs", to: "/admin/console-logs", icon: ScrollText, permission: { resource: "audit", action: "read" } },
       { label: "Settings", to: "/admin/settings", icon: Settings, permission: { resource: "settings", action: "read" } },
+      { label: "MFA Logs", to: "/admin/console-logs", icon: ScrollText, permission: { resource: "audit", action: "read" } },
     ],
   },
 ];
@@ -202,9 +240,9 @@ export function AppSidebar({ collapsed }: { collapsed: boolean }) {
           <div className="space-y-5" aria-hidden>
             {[3, 4, 2].map((count, i) => (
               <div key={i} className="space-y-1.5">
-                <Skeleton className="mx-2 h-2.5 w-16 bg-sidebar-accent/60" />
+                <Skeleton className="mx-2 h-2.5 w-16 bg-foreground/10" />
                 {Array.from({ length: count }).map((_, j) => (
-                  <Skeleton key={j} className="mx-0.5 h-8 rounded-md bg-sidebar-accent/40" />
+                  <Skeleton key={j} className="mx-0.5 h-8 rounded-md bg-foreground/5" />
                 ))}
               </div>
             ))}

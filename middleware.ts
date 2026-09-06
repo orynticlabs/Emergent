@@ -36,6 +36,24 @@ const RAZORPAY_WEBHOOK_PATH = "/api/orycms/webhooks/razorpay";
 const WHATSAPP_WEBHOOK_PATH = "/api/orycms/whatsapp/webhook";
 
 /**
+ * The /hire-staff page's popup form submits here with no session — a
+ * visitor has no OryCMS account to authenticate with. This is a public
+ * CREATE, not a public read like the PUBLIC_*_GET_RE patterns below: GET
+ * (and PATCH/DELETE) on this same path still require a session, since
+ * only an admin should be able to list or manage submitted leads. The
+ * route itself validates the body (name/email required) before writing.
+ */
+const HIRE_STAFF_REQUESTS_PATH = "/api/orycms/hire-staff-requests";
+
+/**
+ * The site-wide "Book a Call" widget creates a booking here with no
+ * session — same reasoning as HIRE_STAFF_REQUESTS_PATH above. GET/PATCH/
+ * DELETE on /api/orycms/bookings and /api/orycms/bookings/:id still
+ * require a session; this only exempts the dedicated public-create path.
+ */
+const BOOKINGS_PUBLIC_CREATE_PATH = "/api/orycms/bookings/public";
+
+/**
  * Public content read API routes — GET only.
  * Pattern: /api/orycms/collections/<slug>/content (list)
  *          /api/orycms/collections/<slug>/content/<id> (single, no further segments)
@@ -51,8 +69,14 @@ const PUBLIC_ANNOUNCEMENTS_GET_RE = /^\/api\/orycms\/announcements\/public$/;
 /** Public "trusted by" companies read — GET only, no session required. */
 const PUBLIC_COMPANIES_GET_RE = /^\/api\/orycms\/companies\/public$/;
 
-/** Public product-box image URLs read — GET only, no session required. */
-const PUBLIC_PRODUCT_IMAGES_GET_RE = /^\/api\/orycms\/settings\/product-images\/public$/;
+/** Public case-studies read — GET only, no session required. */
+const PUBLIC_CASE_STUDIES_GET_RE = /^\/api\/orycms\/case-studies\/public$/;
+
+/** Public testimonials read — GET only, no session required. */
+const PUBLIC_TESTIMONIALS_GET_RE = /^\/api\/orycms\/testimonials\/public$/;
+
+/** Public booking-availability + open-slots reads — GET only, no session required. */
+const PUBLIC_BOOKINGS_GET_RE = /^\/api\/orycms\/bookings\/(availability|slots)\/public$/;
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -90,6 +114,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Hire-staff request submission — public POST only; GET/PATCH/DELETE on
+  // this same path fall through to the session check below.
+  if (requestMethod === "POST" && pathname === HIRE_STAFF_REQUESTS_PATH) return NextResponse.next();
+
+  // Book-a-call submission — public POST only.
+  if (requestMethod === "POST" && pathname === BOOKINGS_PUBLIC_CREATE_PATH) return NextResponse.next();
+
   // Public admin page routes
   if (PUBLIC_PAGES.has(pathname)) return NextResponse.next();
 
@@ -108,8 +139,18 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Public product-box image URLs GET endpoint (read-only, no session required)
-  if (requestMethod === "GET" && PUBLIC_PRODUCT_IMAGES_GET_RE.test(pathname)) {
+  // Public case-studies GET endpoint (read-only, no session required)
+  if (requestMethod === "GET" && PUBLIC_CASE_STUDIES_GET_RE.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  // Public testimonials GET endpoint (read-only, no session required)
+  if (requestMethod === "GET" && PUBLIC_TESTIMONIALS_GET_RE.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  // Public booking-availability / open-slots GET endpoints (read-only, no session required)
+  if (requestMethod === "GET" && PUBLIC_BOOKINGS_GET_RE.test(pathname)) {
     return NextResponse.next();
   }
 

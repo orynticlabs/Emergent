@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { PROJECTS } from "@site/data/content";
+import { useCaseStudies } from "@site/hooks/use-case-studies";
 import { Reveal, SectionHead } from "@site/components/site/Reveal";
 import {
   Carousel,
@@ -35,12 +35,15 @@ function CaseStudyContent({ project }) {
 }
 
 export default function CaseStudiesSection() {
+  const { caseStudies } = useCaseStudies();
   const { trackRef, canScrollLeft, canScrollRight, checkScrollability, scrollLeft, scrollRight } =
     useCarouselControls();
 
-  const items = PROJECTS.map((project, index) => (
+  if (caseStudies.length === 0) return null;
+
+  const items = caseStudies.map((project, index) => (
     <Card
-      key={project.title}
+      key={project.slug}
       index={index}
       card={{
         category: project.category,
@@ -60,7 +63,7 @@ export default function CaseStudiesSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>
             <SectionHead
-              titleClassName="text-2xl md:text-7xl uppercase"
+              titleClassName="text-2xl md:text-5xl uppercase"
               wrapperClassName="max-w-4xl"
               title={
                 <>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { SERVICES, PRODUCTS, INDUSTRIES } from "@site/data/content";
+import { PRODUCTS } from "@site/data/content";
 import { EASE } from "@site/components/site/Reveal";
 import Logo from "@site/components/site/Logo";
 import {
@@ -18,30 +18,21 @@ import {
   MobileNavMenu,
 } from "@site/components/ui/resizable-navbar";
 import { Menu, MenuItem, HoveredLink, ProductItem } from "@site/components/ui/navbar-menu";
+import { useBookingModal } from "@site/components/site/BookingModalContext";
 
 const DROPDOWNS = {
-  services: {
-    label: "Services",
-    to: "/services",
-    type: "links",
-    items: SERVICES.map((s) => ({ to: "/services", title: s.title })),
-  },
   products: {
     label: "Products",
     to: "/products",
     type: "products",
     items: PRODUCTS.map((p) => ({ to: "/products", title: p.name, desc: p.tagline, src: p.image })),
   },
-  industries: {
-    label: "Industries",
-    to: "/industries",
-    type: "links",
-    items: INDUSTRIES.map((ind) => ({ to: "/industries", title: ind.name })),
-  },
 };
 
 const PLAIN_LINKS = [
   { to: "/portfolio", label: "Portfolio" },
+  { to: "/services", label: "Services" },
+  { to: "/hire-staff", label: "Hire Staff" },
 ];
 
 const ANNOUNCEMENT_COLOR_CLASS = { orange: "bg-brand-orange", blue: "bg-brand-blue", neutral: "bg-white/15" };
@@ -191,6 +182,7 @@ const NavUnderline = ({ active }) => (
 );
 
 export default function Navbar() {
+  const { openModal: openBookingModal } = useBookingModal();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -230,7 +222,7 @@ export default function Navbar() {
                     key={link.to}
                     href={link.to}
                     onMouseEnter={() => setActiveMenu(null)}
-                    data-testid={`nav-link-${link.label.toLowerCase()}`}
+                    data-testid={`nav-link-${link.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
                     className={`group relative py-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
                       isActive ? "text-brand-orange" : "text-white/70 hover:text-white"
                     }`}
@@ -266,7 +258,10 @@ export default function Navbar() {
             </Menu>
           </div>
 
-          <div onMouseEnter={() => setActiveMenu(null)}>
+          <div onMouseEnter={() => setActiveMenu(null)} className="flex items-center gap-3">
+            <NavbarButton as="button" type="button" onClick={openBookingModal} variant="secondary" data-testid="nav-book-call-button">
+              Book a Call
+            </NavbarButton>
             <NavbarButton href="/contact-us" data-testid="nav-cta-button">
               Consult Our Strategy Team
               <ArrowUpRight className="h-4 w-4" />
@@ -288,7 +283,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 href={link.to}
-                data-testid={`nav-mobile-link-${link.label.toLowerCase()}`}
+                data-testid={`nav-mobile-link-${link.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
                 className={`block w-full border-b border-white/10 py-3.5 text-lg font-semibold tracking-tight ${
                   pathname === link.to ? "text-brand-orange" : "text-white"
                 }`}
@@ -332,7 +327,20 @@ export default function Navbar() {
               </div>
             ))}
 
-            <NavbarButton href="/contact-us" className="mt-2 w-full justify-center" onClick={() => setOpen(false)}>
+            <NavbarButton
+              as="button"
+              type="button"
+              variant="secondary"
+              className="mt-2 w-full justify-center"
+              onClick={() => {
+                setOpen(false);
+                openBookingModal();
+              }}
+              data-testid="nav-mobile-book-call-button"
+            >
+              Book a Call
+            </NavbarButton>
+            <NavbarButton href="/contact-us" className="mt-2.5 w-full justify-center" onClick={() => setOpen(false)}>
               Consult Our Strategy Team
             </NavbarButton>
           </MobileNavMenu>

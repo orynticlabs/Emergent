@@ -1,17 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Smartphone, BrainCircuit, Cloud, Palette, ClipboardCheck, Mic, MicOff } from "lucide-react";
+import { Mic, MicOff } from "lucide-react";
+import { TEAM_ROLES as ROLES } from "@site/data/content";
 import { Reveal, SectionHead } from "@site/components/site/Reveal";
-
-const ROLES = [
-  { id: 1, name: "Frontend & Backend", designation: "Full-stack engineers", icon: Code2, className: "bg-brand-orange" },
-  { id: 2, name: "Mobile", designation: "iOS, Android & cross-platform", icon: Smartphone, className: "bg-brand-blue" },
-  { id: 3, name: "AI & ML", designation: "Agents, RAG, model training", icon: BrainCircuit, className: "bg-violet-500" },
-  { id: 4, name: "Cloud & DevOps", designation: "AWS, GCP, Azure, CI/CD", icon: Cloud, className: "bg-sky-500" },
-  { id: 5, name: "Product Design", designation: "UI/UX, design systems", icon: Palette, className: "bg-pink-500" },
-  { id: 6, name: "QA", designation: "Testing & quality assurance", icon: ClipboardCheck, className: "bg-emerald-500" },
-];
+import { CanvasText } from "@site/components/ui/canvas-text";
 
 function Bubble({ align = "left", delay, children }) {
   return (
@@ -56,7 +49,6 @@ function AvatarCluster() {
   return (
     <div className="relative flex h-56 items-center justify-center">
       {ROLES.map((r, i) => {
-        const Icon = r.icon;
         const positions = [
           "left-[8%] top-[15%]", "right-[10%] top-[10%]", "left-1/2 top-[38%] -translate-x-1/2",
           "left-[14%] bottom-[12%]", "right-[16%] bottom-[15%]", "right-[2%] top-[45%]",
@@ -72,9 +64,9 @@ function AvatarCluster() {
               scale: { duration: 0.4, delay: i * 0.08 },
               y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
             }}
-            className={`absolute flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg ${r.className} ${positions[i]}`}
+            className={`absolute h-12 w-12 overflow-hidden rounded-full shadow-lg ring-2 ring-white/20 ${positions[i]}`}
           >
-            <Icon className="h-5 w-5" strokeWidth={1.75} />
+            <img src={r.image} alt={r.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </motion.div>
         );
       })}
@@ -85,27 +77,28 @@ function AvatarCluster() {
 function TeamList() {
   return (
     <div className="flex h-56 flex-col justify-center gap-3 p-5">
-      {ROLES.slice(0, 4).map((r, i) => {
-        const Icon = r.icon;
-        return (
-          <motion.div
-            key={r.id}
-            initial={{ opacity: 0, x: -12 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5"
-          >
-            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white ${r.className}`}>
-              <Icon className="h-4 w-4" strokeWidth={1.75} />
-            </span>
-            <div className="min-w-0">
-              <p className="truncate text-xs font-bold text-white">{r.name}</p>
-              <p className="truncate text-[11px] text-white/50">{r.designation}</p>
-            </div>
-          </motion.div>
-        );
-      })}
+      {ROLES.slice(0, 4).map((r, i) => (
+        <motion.div
+          key={r.id}
+          initial={{ opacity: 0, x: -12 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: i * 0.1 }}
+          className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5"
+        >
+          <img
+            src={r.image}
+            alt={r.name}
+            loading="lazy"
+            decoding="async"
+            className="h-8 w-8 shrink-0 rounded-full object-cover"
+          />
+          <div className="min-w-0">
+            <p className="truncate text-xs font-bold text-white">{r.name}</p>
+            <p className="truncate text-[11px] text-white/50">{r.designation}</p>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -114,7 +107,6 @@ function CallGrid() {
   return (
     <div className="grid h-56 grid-cols-3 gap-2.5 p-5">
       {ROLES.map((r, i) => {
-        const Icon = r.icon;
         const muted = i % 3 === 1;
         return (
           <motion.div
@@ -123,13 +115,14 @@ function CallGrid() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.08 }}
-            className={`relative flex items-center justify-center rounded-lg ${r.className}/20 border border-white/10`}
+            className="relative overflow-hidden rounded-lg border border-white/10"
           >
-            <Icon className="h-6 w-6 text-white/70" strokeWidth={1.5} />
+            <img src={r.image} alt={r.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <motion.span
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-              className="absolute bottom-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/50"
+              className="absolute bottom-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/60"
             >
               {muted ? <MicOff className="h-3 w-3 text-red-400" /> : <Mic className="h-3 w-3 text-emerald-400" />}
             </motion.span>
@@ -231,7 +224,19 @@ export default function AboutWhyUs() {
           align="center"
           titleClassName="text-2xl md:text-7xl uppercase"
           wrapperClassName="max-w-4xl"
-          title="Why choose us over others?"
+          title={
+            <>
+              Why choose us
+              <br />
+              <CanvasText
+                text="over others?"
+                className="font-display text-2xl font-black uppercase md:text-7xl"
+                colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
+                lineGap={6}
+                animationDuration={10}
+              />
+            </>
+          }
           description="More than a vendor relationship — direct access to the people building your product, honest communication, and a process you can actually see."
         />
 

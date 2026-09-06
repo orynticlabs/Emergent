@@ -7,7 +7,6 @@ import {
   Check,
   CreditCard,
   Globe,
-  Images,
   Lock,
   Mail,
   Shield,
@@ -15,13 +14,10 @@ import {
   Store,
   Users,
 } from "lucide-react";
-import { toast } from "sonner";
 import { AppShell } from "@/components/dashboard/AppShell";
 import { useOryCMSSession } from "@/hooks";
 import { OryCMSMfaSetupDialog } from "@/components/settings/OryCMSMfaSetupDialog";
 import { OryCMSMfaDisableDialog } from "@/components/settings/OryCMSMfaDisableDialog";
-import { OryCMSProductImageUploader } from "@/components/settings/OryCMSProductImageUploader";
-import { fetchJson } from "@/components/projects/OryCMSProjectsAdminPage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -115,51 +111,6 @@ export default function SettingsPage() {
   const [mfaSetupOpen, setMfaSetupOpen] = useState(false);
   const [mfaDisableOpen, setMfaDisableOpen] = useState(false);
 
-  const PRODUCTS_FOR_UPLOAD: { id: string; name: string }[] = [
-    { id: "oryai", name: "OryAI" },
-    { id: "orycms", name: "OryCMS" },
-    { id: "performx", name: "PerformX" },
-  ];
-  type ProductImages = Record<string, string | null>;
-  const [productImages, setProductImages] = useState<ProductImages>({
-    oryai: null,
-    orycms: null,
-    performx: null,
-  });
-
-  useEffect(() => {
-    fetchJson<{ key: string; value: unknown; description: string | null }[]>(
-      "/api/orycms/settings",
-    )
-      .then((settings) => {
-        const row = settings.find((s) => s.key === "product_images");
-        if (row?.value && typeof row.value === "object") {
-          setProductImages((prev) => ({ ...prev, ...(row.value as ProductImages) }));
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  const handleProductImageUploaded = async (productId: string, url: string) => {
-    const next = { ...productImages, [productId]: url };
-    setProductImages(next);
-    try {
-      await fetchJson("/api/orycms/settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          key: "product_images",
-          value: next,
-          description: "Product-box image URLs shown on the marketing site's homepage.",
-        }),
-      });
-    } catch (err) {
-      toast.error("Couldn't save the image", {
-        description: err instanceof Error ? err.message : undefined,
-      });
-    }
-  };
-
   return (
     <AppShell section="Settings">
       <div className="mx-auto max-w-[1400px] space-y-6 p-6 lg:p-8">
@@ -223,25 +174,6 @@ export default function SettingsPage() {
                   </span>
                   <Textarea value={address} onChange={(e) => setAddress(e.target.value)} />
                 </label>
-              </div>
-            </Card>
-
-            <Card className="p-5">
-              <SectionHeader
-                icon={Images}
-                title="Product images"
-                description="Uploaded here, shown on the marketing site's homepage in the 'Products we run ourselves' section (OryAI, OryCMS, PerformX) — same size on every card."
-              />
-              <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                {PRODUCTS_FOR_UPLOAD.map((product) => (
-                  <OryCMSProductImageUploader
-                    key={product.id}
-                    productId={product.id}
-                    productName={product.name}
-                    imageUrl={productImages[product.id] ?? null}
-                    onUploaded={(url) => handleProductImageUploaded(product.id, url)}
-                  />
-                ))}
               </div>
             </Card>
 
