@@ -3,7 +3,7 @@ import { protectOryCMSAdminRoute, verifyOryCMSMfaSetupCode } from "@/auth";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// POST /api/orycms/auth/mfa/verify — check the first authenticator code for a
+// POST /api/orycms/auth/mfa/verify - check the first authenticator code for a
 // pending MFA enrollment and, on success, activate MFA for the current user
 // (encrypted secret + mfaEnabled/mfaEnabledAt persisted in orycms_users).
 // Ownership (setup token must belong to the caller's own session) and the

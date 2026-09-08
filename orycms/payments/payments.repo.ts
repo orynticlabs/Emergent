@@ -32,7 +32,7 @@ export interface OryCMSRecordPaymentInput {
 }
 
 /**
- * Upserts a payment row keyed by razorpayPaymentId — this is what makes the
+ * Upserts a payment row keyed by razorpayPaymentId - this is what makes the
  * webhook handler idempotent against Razorpay's automatic retries and
  * against legitimate status transitions (e.g. "authorized" then later
  * "captured" for the same payment) arriving as separate webhook calls: the

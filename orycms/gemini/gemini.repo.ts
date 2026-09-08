@@ -8,7 +8,7 @@ import type {
 } from "./gemini.types";
 
 /**
- * Repository for orycms_gemini_settings — plain persistence only. No
+ * Repository for orycms_gemini_settings - plain persistence only. No
  * encryption/decryption happens here (gemini.service.ts owns that) and no
  * permission checks happen here (routes gate access via
  * requireOryCMSPermission / guardOryCMS, same as every other OryCMS
@@ -47,7 +47,7 @@ export async function getOryCMSGeminiSettings(
 
 /**
  * Creates the Gemini settings row if none exists, or replaces every field
- * on the existing one (full-record upsert — matching the "save" naming
+ * on the existing one (full-record upsert - matching the "save" naming
  * distinct from the partial "update" below).
  */
 export async function saveOryCMSGeminiSettings(
@@ -104,7 +104,7 @@ export async function saveOryCMSGeminiSettings(
 
 /**
  * Partial update of the existing settings row. Throws
- * GEMINI_SETTINGS_NOT_FOUND if nothing has been saved yet — callers that
+ * GEMINI_SETTINGS_NOT_FOUND if nothing has been saved yet - callers that
  * want create-or-update semantics should use saveOryCMSGeminiSettings.
  */
 export async function updateOryCMSGeminiSettings(

@@ -6,7 +6,7 @@ import { recordOryCMSAuditLog } from "@/audit";
 
 type RouteCtx = { params: Promise<{ id: string; userId: string }> };
 
-// PATCH /api/orycms/projects/:id/members/:userId — change a member's project role
+// PATCH /api/orycms/projects/:id/members/:userId - change a member's project role
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "update");
@@ -34,7 +34,7 @@ export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// DELETE /api/orycms/projects/:id/members/:userId — remove a team member
+// DELETE /api/orycms/projects/:id/members/:userId - remove a team member
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "update");

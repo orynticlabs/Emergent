@@ -8,7 +8,7 @@ import {
 
 type HookOptions = { id?: string; priority?: number; timeout?: number };
 
-/** Type-safe hook definition helper — returns the args as a typed record. */
+/** Type-safe hook definition helper - returns the args as a typed record. */
 export function defineOryCMSHook(
   event: OryCMSHookEventName,
   fn: OryCMSHookFn,

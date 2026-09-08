@@ -345,7 +345,7 @@ export function OryCMSTestimonialsAdminPage() {
                       </div>
                       <div className="min-w-0">
                         <div className="truncate text-sm font-medium text-foreground">{testimonial.name}</div>
-                        <div className="truncate text-[11px] text-muted-foreground">{testimonial.role || "—"}</div>
+                        <div className="truncate text-[11px] text-muted-foreground">{testimonial.role || "-"}</div>
                       </div>
                     </div>
                   </td>

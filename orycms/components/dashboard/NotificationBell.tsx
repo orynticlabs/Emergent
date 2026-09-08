@@ -131,7 +131,7 @@ export function NotificationBell() {
         body: JSON.stringify({ isRead }),
       });
     } catch {
-      // Best-effort — local state already updated optimistically.
+      // Best-effort - local state already updated optimistically.
     }
   }
 

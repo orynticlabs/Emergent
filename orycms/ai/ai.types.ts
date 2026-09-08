@@ -1,9 +1,9 @@
 /**
- * Generic, provider-agnostic AI types — Step 4. Nothing in this file (or
+ * Generic, provider-agnostic AI types - Step 4. Nothing in this file (or
  * anywhere under orycms/ai) knows about Gemini, WhatsApp, or any other
  * concrete provider/channel. A provider module (orycms/gemini today; a
  * future orycms/openai or orycms/claude) is what maps its own API's
- * request/response shape onto these types — see providers/gemini.provider.ts
+ * request/response shape onto these types - see providers/gemini.provider.ts
  * for the one concrete example that exists right now.
  */
 
@@ -19,7 +19,7 @@ export interface OryCMSAIGenerateRequest {
   systemInstruction?: string | null;
   /**
    * Extra instruction ADDED ON TOP of the effective systemInstruction
-   * (explicit or provider-default) rather than replacing it — e.g. a
+   * (explicit or provider-default) rather than replacing it - e.g. a
    * WhatsApp menu option's per-option AI Instructions, combined with a
    * saved base instruction instead of overriding it. Not stored, not
    * logged. Omit when there's nothing to add.
@@ -36,11 +36,11 @@ export interface OryCMSAIUsage {
 }
 
 /**
- * Normalized result every provider's generate() call resolves to —
+ * Normalized result every provider's generate() call resolves to -
  * success/failure, which provider and model produced it, the generated
  * text, and usage metadata "if safely available" (providers that don't
  * report usage return null rather than guessing). Never contains an API
- * key or any other credential. A provider's generate() must never throw —
+ * key or any other credential. A provider's generate() must never throw -
  * every failure path (not configured, invalid request, upstream API error)
  * comes back as `{ success: false, error }` instead, so callers never need
  * a try/catch around a generate() call.

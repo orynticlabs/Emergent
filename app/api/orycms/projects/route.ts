@@ -4,7 +4,7 @@ import { listOryCMSProjects, createOryCMSProject } from "@/projects";
 import type { OryCMSProjectStatus } from "@/projects";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/projects — list projects visible to the caller (all of them
+// GET /api/orycms/projects - list projects visible to the caller (all of them
 // for a Super Admin, only assigned ones for everyone else)
 export async function GET(request: NextRequest) {
   try {
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/projects — create a project
+// POST /api/orycms/projects - create a project
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "projects", "create");

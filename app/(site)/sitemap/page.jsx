@@ -6,7 +6,7 @@ import { buildPageMetadata } from "@site/lib/seo";
 
 export const metadata = buildPageMetadata({
   title: "Sitemap",
-  description: "Every page on the OrynticLabs site, organized by section.",
+  description: "Every page on the Oryntic Labs site, organized by section.",
   path: "/sitemap",
   noindex: true,
 });
@@ -33,7 +33,7 @@ export default function Sitemap() {
         overline="Navigation"
         lines={["SITE", "MAP."]}
         accentIndex={1}
-        description="Every page and destination on the OrynticLabs website, in one place."
+        description="Every page and destination on the Oryntic Labs website, in one place."
       />
       <section className="bg-brand-ink py-20 text-white md:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:grid-cols-2 md:px-10 lg:grid-cols-3">

@@ -2,12 +2,12 @@ import type { Pool } from "pg";
 import { getOryCMSPool } from "@/lib/db";
 
 /**
- * Dedup/observability table for the AI auto-reply flow — Step 8. Holds one
+ * Dedup/observability table for the AI auto-reply flow - Step 8. Holds one
  * row per WhatsApp messageId this OryCMS instance has seen, so a retried
  * webhook delivery (Meta retries on anything other than a fast 2xx, and
  * can also legitimately redeliver) can never trigger a second AI reply for
  * the same inbound message. Idempotent DDL (IF NOT EXISTS), safe to run
- * repeatedly, ensured lazily on first use — the same pattern as
+ * repeatedly, ensured lazily on first use - the same pattern as
  * payments.schema.ts, whatsapp.schema.ts, and gemini.schema.ts.
  *
  * The UNIQUE constraint on "messageId" is what makes dedup atomic and
@@ -17,9 +17,9 @@ import { getOryCMSPool } from "@/lib/db";
  * even without an application-level lock.
  *
  * "status" is a free-text observability field (not a CHECK-constrained
- * enum) — see whatsapp.ai-automation.service.ts for the values it's
+ * enum) - see whatsapp.ai-automation.service.ts for the values it's
  * currently written with (replied / skipped_* / failed_*). No message
- * content, phone numbers, or generated text are ever stored here — only
+ * content, phone numbers, or generated text are ever stored here - only
  * the provider's message id and a short outcome label.
  */
 const CREATE_WHATSAPP_AUTOMATION_SCHEMA_SQL = `

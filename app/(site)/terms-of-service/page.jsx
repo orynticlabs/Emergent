@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@site/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Terms of Service",
   description:
-    "Service-level terms for OrynticLabs platforms and products, including OryAI, OryCMS, and PerformX.",
+    "Service-level terms for Oryntic Labs platforms and products, including OryAI, OryCMS, and PerformX.",
   path: "/terms-of-service",
 });
 

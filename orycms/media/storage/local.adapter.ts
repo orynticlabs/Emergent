@@ -30,7 +30,7 @@ function uploadDir(): string {
 /**
  * Default storage: writes to public/uploads on the local filesystem. Fine
  * for local dev, but this directory does NOT persist across deploys on most
- * hosts (serverless, containers) — use the "cloudinary" provider for
+ * hosts (serverless, containers) - use the "cloudinary" provider for
  * anything beyond local development.
  */
 export function createLocalStorageAdapter(): OryCMSStorageAdapter {
@@ -50,7 +50,7 @@ export function createLocalStorageAdapter(): OryCMSStorageAdapter {
       try {
         await unlink(ref);
       } catch {
-        // ignore ENOENT — already gone
+        // ignore ENOENT - already gone
       }
     },
   };

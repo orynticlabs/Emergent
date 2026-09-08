@@ -6,7 +6,7 @@ import { recordOryCMSAuditLog } from "@/audit";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// GET /api/orycms/roles/:id/permissions — list a role's permissions
+// GET /api/orycms/roles/:id/permissions - list a role's permissions
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "roles", "read");
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// PUT /api/orycms/roles/:id/permissions — replace the role's permission set
+// PUT /api/orycms/roles/:id/permissions - replace the role's permission set
 export async function PUT(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "roles", "update");
@@ -39,7 +39,7 @@ export async function PUT(request: NextRequest, { params }: RouteCtx) {
     }
 
     // Ceiling check: a caller can only grant permissions they themselves
-    // hold — otherwise `roles:update` alone would let any role escalate
+    // hold - otherwise `roles:update` alone would let any role escalate
     // itself (or another role) past its own current access.
     const callerPermissions = await getOryCMSUserPermissions(session.roleName ?? "");
     if (!permissionsWithinCeiling(callerPermissions, resolved)) {

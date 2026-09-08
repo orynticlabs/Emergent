@@ -8,7 +8,7 @@ export interface OryCMSCoreInstallResult {
   success: boolean;
   /** Migration IDs applied during this run. */
   applied: string[];
-  /** Migration IDs already recorded in orycms_migrations — skipped. */
+  /** Migration IDs already recorded in orycms_migrations - skipped. */
   skipped: string[];
   failed: Array<{ migrationId: string; name: string; error: string }>;
 }
@@ -21,7 +21,7 @@ export interface OryCMSCoreInstallResult {
 export function generateOryCMSCoreMigrationPlan(): OryCMSCollectionMigrationPlan[] {
   return getOryCMSCoreCollections().map((collection) => {
     const plan = generateOryCMSCollectionMigrationPlan(collection, "postgresql");
-    // Stable ID — overrides the timestamp-based default so orycms_migrations tracking works
+    // Stable ID - overrides the timestamp-based default so orycms_migrations tracking works
     return { ...plan, migrationId: `orycms_core_${collection.slug.replace(/-/g, "_")}` };
   });
 }
@@ -39,7 +39,7 @@ export async function installOryCMSCoreSchema(
   const skipped: string[] = [];
   const failed: Array<{ migrationId: string; name: string; error: string }> = [];
 
-  // On first install orycms_migrations does not exist yet — that is expected
+  // On first install orycms_migrations does not exist yet - that is expected
   let existingRecords: OryCMSDatabaseRecord[] = [];
   try {
     existingRecords = await adapter.findRecords("orycms_migrations", {});
@@ -69,7 +69,7 @@ export async function installOryCMSCoreSchema(
           durationMs: result.durationMs ?? 0,
         });
       } catch {
-        // Best-effort — don't abort the whole install if recording fails
+        // Best-effort - don't abort the whole install if recording fails
       }
     } else {
       failed.push({

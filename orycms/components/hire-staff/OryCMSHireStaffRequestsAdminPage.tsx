@@ -280,9 +280,9 @@ export function OryCMSHireStaffRequestsAdminPage() {
                     <div className="text-sm font-medium text-foreground">{request.name}</div>
                     <div className="text-[11px] text-muted-foreground">{request.email}</div>
                   </td>
-                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.company || "—"}</td>
-                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.role || "—"}</td>
-                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.engagementModel || "—"}</td>
+                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.company || "-"}</td>
+                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.role || "-"}</td>
+                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{request.engagementModel || "-"}</td>
                   <td className="px-4 py-3">
                     <Badge variant="outline" className={cn("text-[10.5px] capitalize", STATUS_BADGE[request.status])}>
                       {request.status}
@@ -321,23 +321,23 @@ export function OryCMSHireStaffRequestsAdminPage() {
                 <div className="grid grid-cols-2 gap-4 rounded-xl border border-border bg-surface/60 p-4">
                   <div>
                     <div className="text-[11px] text-muted-foreground">Company</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.company || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.company || "-"}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-muted-foreground">Role needed</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.role || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.role || "-"}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-muted-foreground">Engagement model</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.engagementModel || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.engagementModel || "-"}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-muted-foreground">Team size</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.teamSize || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.teamSize || "-"}</div>
                   </div>
                   <div className="col-span-2">
                     <div className="text-[11px] text-muted-foreground">Timeline</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.timeline || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.timeline || "-"}</div>
                   </div>
                 </div>
 

@@ -190,7 +190,7 @@ function NewClientDialog({ onCreated }: { onCreated: (client: OryCMSClient) => v
                 <div>
                   <div className="text-[14px] font-semibold">Add client</div>
                   <p className="text-[11.5px] text-muted-foreground">
-                    Capture their details now — you can start project onboarding right after.
+                    Capture their details now - you can start project onboarding right after.
                   </p>
                 </div>
               </div>
@@ -357,7 +357,7 @@ export function OryCMSClientsAdminPage() {
     }
   };
 
-  // `canRead` fails closed while the session is still loading — wait for it
+  // `canRead` fails closed while the session is still loading - wait for it
   // so a fresh page load doesn't flash "no access" before permissions arrive.
   if (!sessionLoaded) {
     return (
@@ -417,7 +417,7 @@ export function OryCMSClientsAdminPage() {
         <PageHeader
           eyebrow="Engagements"
           title="Clients"
-          description="Every client relationship — from first lead to active delivery — with their onboarded projects."
+          description="Every client relationship - from first lead to active delivery - with their onboarded projects."
         />
         {canCreate && <NewClientDialog onCreated={() => load()} />}
       </div>
@@ -517,12 +517,12 @@ export function OryCMSClientsAdminPage() {
                     <ClientStatusBadge status={client.status} />
                   </td>
                   <td className="px-4 py-3 text-[12.5px] text-muted-foreground">
-                    {client.industry || "—"}
+                    {client.industry || "-"}
                   </td>
                   <td className="px-4 py-3">
                     {client.contactName || client.contactEmail ? (
                       <div className="min-w-0">
-                        <div className="truncate text-[12.5px]">{client.contactName || "—"}</div>
+                        <div className="truncate text-[12.5px]">{client.contactName || "-"}</div>
                         {client.contactEmail && (
                           <div className="flex items-center gap-1 truncate text-[11px] text-muted-foreground">
                             <Mail className="h-3 w-3 shrink-0" />
@@ -531,7 +531,7 @@ export function OryCMSClientsAdminPage() {
                         )}
                       </div>
                     ) : (
-                      <span className="text-[12.5px] text-muted-foreground">—</span>
+                      <span className="text-[12.5px] text-muted-foreground">-</span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-[12.5px] text-muted-foreground">

@@ -4,7 +4,7 @@ import { getOryCMSBookingAvailability, updateOryCMSBookingAvailability } from "@
 import type { OryCMSBookingAvailabilityInput } from "@/bookings";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/bookings/availability — admin reads the weekly schedule + settings
+// GET /api/orycms/bookings/availability - admin reads the weekly schedule + settings
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "bookings", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PUT /api/orycms/bookings/availability — admin saves the weekly schedule + settings
+// PUT /api/orycms/bookings/availability - admin saves the weekly schedule + settings
 export async function PUT(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "bookings", "update");

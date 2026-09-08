@@ -21,14 +21,14 @@ import type {
 } from "./whatsapp.menu.types";
 
 /**
- * Service layer for the WhatsApp menu builder — Step 10. Configuration
+ * Service layer for the WhatsApp menu builder - Step 10. Configuration
  * only: nothing here is wired to the webhook (Step 6), the AI-automation
  * service (Step 8), or any reply-sending path. A future step that adds
  * numbered-reply routing would read through this service, not around it.
  *
  * No secrets are involved (menu options are plain admin-authored text), so
  * unlike whatsapp.service.ts/gemini.service.ts there's no encrypt/decrypt
- * split — but the "validation lives in the service, not the route or the
+ * split - but the "validation lives in the service, not the route or the
  * repository" convention is kept the same.
  */
 
@@ -118,7 +118,7 @@ function assertValidOptions(options: OryCMSWhatsAppMenuOptionInput[]): void {
   }
 }
 
-/** Always returns a full OryCMSWhatsAppMenuSettings shape — {enabled:false, welcomeMessage:null, options:[]} when nothing has been saved yet, so the admin page never has to special-case "not configured". Module-level (not on the service object) so updateMenu can call it directly without relying on `this` binding. */
+/** Always returns a full OryCMSWhatsAppMenuSettings shape - {enabled:false, welcomeMessage:null, options:[]} when nothing has been saved yet, so the admin page never has to special-case "not configured". Module-level (not on the service object) so updateMenu can call it directly without relying on `this` binding. */
 async function loadMenu(pool: Pool): Promise<OryCMSWhatsAppMenuSettings> {
   const [settings, options] = await Promise.all([
     getOryCMSWhatsAppMenuSettings(pool),
@@ -137,7 +137,7 @@ export const OryCMSWhatsAppMenuService = {
   },
 
   /**
-   * Partial update — enabled/welcomeMessage are only written when present
+   * Partial update - enabled/welcomeMessage are only written when present
    * in `patch`; `options`, when present, wholesale-replaces the current
    * option list (add/edit/delete are all just "send the new full list").
    */

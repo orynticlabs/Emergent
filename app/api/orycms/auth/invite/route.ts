@@ -7,7 +7,7 @@ import { createOryCMSToken } from "@/tokens";
 import { dispatchOryCMSTokenLink } from "@/auth/token-links";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// POST /api/orycms/auth/invite — invite a new user (guarded: users:create)
+// POST /api/orycms/auth/invite - invite a new user (guarded: users:create)
 // Creates a pending account + invite token, then emails/returns the accept link.
 export async function POST(request: NextRequest) {
   try {

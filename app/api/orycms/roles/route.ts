@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { listOryCMSRoles, createOryCMSRole } from "@/roles";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/roles — list all roles
+// GET /api/orycms/roles - list all roles
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "roles", "read");
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/roles — create a role
+// POST /api/orycms/roles - create a role
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "roles", "create");

@@ -15,7 +15,7 @@ export const IMAGES = {
 
 const PEXELS_AVATAR = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100`;
 
-// Who actually picks up — the real roles on a staff-augmentation or delivery
+// Who actually picks up - the real roles on a staff-augmentation or delivery
 // team, not invented individuals. Shown as roles, with stock Pexels headshots
 // standing in for photos (same placeholder-image convention as the rest of
 // the marketing site) since these aren't named team members. Shared across
@@ -56,49 +56,49 @@ export const SERVICES = [
     id: "web",
     icon: Globe,
     title: "Web Development",
-    blurb: "Web applications, platforms, and digital products that perform at scale — clean architecture, strong performance, and design users actually enjoy.",
+    blurb: "Web applications, platforms, and digital products that perform at scale - clean architecture, strong performance, and design users actually enjoy.",
     tags: ["Next.js", "React", "Node.js", "FastAPI", "Shopify", "Headless CMS"],
   },
   {
     id: "product",
     icon: Layers,
     title: "Product Development",
-    blurb: "From concept to working product — strategy, user research, technical scoping, sprint planning, and iterative delivery. MVPs to mature platforms.",
+    blurb: "From concept to working product - strategy, user research, technical scoping, sprint planning, and iterative delivery. MVPs to mature platforms.",
     tags: ["Product Strategy", "MVP", "User Research", "Scoping"],
   },
   {
     id: "software",
     icon: Braces,
     title: "Software Development",
-    blurb: "Custom software purpose-built for your business — CRM, ERP, internal tools, automation systems, and complex multi-service architectures.",
+    blurb: "Custom software purpose-built for your business - CRM, ERP, internal tools, automation systems, and complex multi-service architectures.",
     tags: ["CRM", "ERP", "Automation", "Workflow Engines"],
   },
   {
     id: "mobile",
     icon: Smartphone,
     title: "Mobile Development",
-    blurb: "Native and cross-platform apps for iOS and Android, designed for the device first — never adapted from a web layout.",
+    blurb: "Native and cross-platform apps for iOS and Android, designed for the device first - never adapted from a web layout.",
     tags: ["React Native", "Expo", "Swift", "Kotlin", "Flutter"],
   },
   {
     id: "ai",
     icon: BrainCircuit,
     title: "AI & Machine Learning",
-    blurb: "Custom AI and ML systems — not wrappers. Trained on your data, integrated into your workflows, designed to do real work in production.",
+    blurb: "Custom AI and ML systems - not wrappers. Trained on your data, integrated into your workflows, designed to do real work in production.",
     tags: ["ML", "Deep Learning", "AI Agents", "RAG", "LLM Integration"],
   },
   {
     id: "data",
     icon: BarChart3,
     title: "Data & Analytics",
-    blurb: "Pipelines, warehouses, real-time dashboards, and BI platforms that turn raw data into decisions — connected to the AI layer when you're ready.",
+    blurb: "Pipelines, warehouses, real-time dashboards, and BI platforms that turn raw data into decisions - connected to the AI layer when you're ready.",
     tags: ["Data Engineering", "Warehouses", "BI", "Real-time Analytics"],
   },
   {
     id: "cloud",
     icon: Cloud,
     title: "Cloud & Infrastructure",
-    blurb: "Secure, observable, automated infrastructure on AWS, GCP, and Azure — architecture, migration, containers, and CI/CD from day one.",
+    blurb: "Secure, observable, automated infrastructure on AWS, GCP, and Azure - architecture, migration, containers, and CI/CD from day one.",
     tags: ["AWS", "GCP", "Azure", "Kubernetes", "Terraform"],
   },
   {
@@ -113,8 +113,8 @@ export const SERVICES = [
 export const PROCESS = [
   { n: "01", title: "Understand before recommending", text: "We learn your business, users, constraints, and goals before proposing anything. The wrong solution delivered well is still the wrong solution." },
   { n: "02", title: "Scope before building", text: "Every engagement begins with a documented scope of work. You know exactly what you get, what it costs, and what success looks like." },
-  { n: "03", title: "Show progress every week", text: "Two-week sprints with a working demo every Friday. Real progress every week — not a finished product at the end of six months." },
-  { n: "04", title: "Be honest when it is not working", text: "If an approach is wrong, we say so — even mid-path. If timelines shift, you hear it early, never when it is too late to adjust." },
+  { n: "03", title: "Show progress every week", text: "Two-week sprints with a working demo every Friday. Real progress every week - not a finished product at the end of six months." },
+  { n: "04", title: "Be honest when it is not working", text: "If an approach is wrong, we say so - even mid-path. If timelines shift, you hear it early, never when it is too late to adjust." },
   { n: "05", title: "Own the outcome, not just the output", text: "We measure success by whether the product works for your users and moves your business. Shipping code is not the goal; the result is." },
 ];
 
@@ -125,12 +125,12 @@ export const PRODUCTS = [
     tagline: "Proprietary AI intelligence platform",
     model: "PaaS + Custom",
     ideal: "Enterprises adding production-grade AI to existing products",
-    description: "The modular infrastructure layer underneath the AI features we build — agent framework, knowledge management, evaluation, and connectors — so AI deploys reliably in production, not just in a prototype.",
+    description: "The modular infrastructure layer underneath the AI features we build - agent framework, knowledge management, evaluation, and connectors - so AI deploys reliably in production, not just in a prototype.",
     image: "/orycms/img/OryAI.png",
     logo: "/orycms/oryai.png",
     siteUrl: "oryai.orynticlabs.com",
     theme: "dark",
-    features: ["Custom AI agent builder & orchestration", "RAG with multiple vector databases", "LLM layer — OpenAI, Anthropic, open-source", "Workflow automation builder", "Conversation memory & sessions", "Evaluation & monitoring dashboard", "Multi-language — Hindi & English"],
+    features: ["Custom AI agent builder & orchestration", "RAG with multiple vector databases", "LLM layer - OpenAI, Anthropic, open-source", "Workflow automation builder", "Conversation memory & sessions", "Evaluation & monitoring dashboard", "Multi-language - Hindi & English"],
   },
   {
     id: "orycms",
@@ -138,12 +138,12 @@ export const PRODUCTS = [
     tagline: "Headless content management, minus the complexity",
     model: "PaaS / SaaS",
     ideal: "Product & marketing teams publishing across platforms",
-    description: "A modern content architecture for product and marketing teams that publish across web, mobile, email, and third-party platforms — without depending on a developer for every change.",
+    description: "A modern content architecture for product and marketing teams that publish across web, mobile, email, and third-party platforms - without depending on a developer for every change.",
     image: "/orycms/img/orybanner.png",
     logo: "/orycms/orycmslogo.png",
     siteUrl: "orycms.orynticlabs.com",
     theme: "light",
-    features: ["API-first — REST & GraphQL", "Visual editor with structured content", "Role-based editorial workflows", "Multi-site & multi-language", "Media library with CDN delivery", "Webhooks & integrations", "White-label ready"],
+    features: ["API-first - REST & GraphQL", "Visual editor with structured content", "Role-based editorial workflows", "Multi-site & multi-language", "Media library with CDN delivery", "Webhooks & integrations", "White-label ready"],
   },
   {
     id: "performx",
@@ -151,7 +151,7 @@ export const PRODUCTS = [
     tagline: "HRMS for the full employee lifecycle",
     model: "SaaS",
     ideal: "Growing teams that need the full employee lifecycle in one place",
-    description: "Built because existing HR tools were too expensive, too rigid, or missing what we needed. Onboarding to payroll, leave, performance, and offboarding — the version we wanted to use ourselves.",
+    description: "Built because existing HR tools were too expensive, too rigid, or missing what we needed. Onboarding to payroll, leave, performance, and offboarding - the version we wanted to use ourselves.",
     image: "/orycms/img/performx.png",
     logo: "/orycms/performxlogo.png",
     siteUrl: "performx.orynticlabs.com",
@@ -164,13 +164,13 @@ export const INDUSTRIES = [
   {
     name: "Fintech",
     build: "We've shipped payment platforms and lending systems for fintechs, plus the fraud detection and KYC/AML checks that keep regulators satisfied.",
-    approach: "Regulatory constraints shape the build from day one — KYC/AML and audit requirements aren't bolted on after the fact.",
+    approach: "Regulatory constraints shape the build from day one - KYC/AML and audit requirements aren't bolted on after the fact.",
     capabilities: ["Payment platforms", "Lending systems", "Portfolio management", "Fraud detection", "KYC/AML automation", "Financial analytics"],
   },
   {
     name: "Healthcare & Biotech",
-    build: "Patient records, clinical data platforms, and diagnostic AI — built to handle sensitive data the way healthcare actually requires.",
-    approach: "Every system is built around how patient data actually needs to move, be stored, and be audited — to the standard healthcare compliance demands.",
+    build: "Patient records, clinical data platforms, and diagnostic AI - built to handle sensitive data the way healthcare actually requires.",
+    approach: "Every system is built around how patient data actually needs to move, be stored, and be audited - to the standard healthcare compliance demands.",
     capabilities: ["Patient management systems", "Clinical data platforms", "Diagnostic AI", "Telemedicine infrastructure", "Biomedical data pipelines"],
   },
   {
@@ -182,7 +182,7 @@ export const INDUSTRIES = [
   {
     name: "Supply Chain & Logistics",
     build: "Shipment tracking and warehouse systems that tell you where something actually is, not where it was supposed to be.",
-    approach: "Real-time visibility across warehouses and shipments, built around what an operations team needs to see — not a dashboard for its own sake.",
+    approach: "Real-time visibility across warehouses and shipments, built around what an operations team needs to see - not a dashboard for its own sake.",
     capabilities: ["Shipment tracking", "Warehouse management", "Route optimisation", "Supplier portals", "Inventory intelligence"],
   },
   {
@@ -194,7 +194,7 @@ export const INDUSTRIES = [
   {
     name: "Agriculture",
     build: "Precision farming tools and crop intelligence that turn field data into decisions a farmer can act on that same season.",
-    approach: "Field data has to work with patchy connectivity and seasonal decision windows — the platform is built around that reality, not against it.",
+    approach: "Field data has to work with patchy connectivity and seasonal decision windows - the platform is built around that reality, not against it.",
     capabilities: ["Crop intelligence", "Precision farming tools", "Supply chain visibility", "Market linkage platforms"],
   },
   {
@@ -217,7 +217,7 @@ export const INDUSTRIES = [
   },
   {
     name: "Automobile",
-    build: "Fleet management and vehicle telematics — down to the EV charging infrastructure most shops aren't set up to build.",
+    build: "Fleet management and vehicle telematics - down to the EV charging infrastructure most shops aren't set up to build.",
     approach: "Fleet and telematics data built for dealers and operators who need answers in real time, not a monthly report.",
     capabilities: ["Fleet management", "Vehicle telematics", "Dealer management systems", "EV infrastructure software"],
   },
@@ -246,10 +246,10 @@ export const TECH_GROUPS = [
 ];
 
 export const WHY_US = [
-  { title: "We cover the full stack", text: "Web, mobile, AI, data, design, infrastructure, and consulting — one accountable team under one roof." },
+  { title: "We cover the full stack", text: "Web, mobile, AI, data, design, infrastructure, and consulting - one accountable team under one roof." },
   { title: "We build for the long term", text: "Code the next engineer can extend, systems that scale, documentation included. No shortcuts that cost you later." },
   { title: "We have real AI capability", text: "Not prompt engineering. Trained models, intelligent agents, data pipelines, production-grade ML infrastructure." },
-  { title: "We treat your business like our own", text: "The people on your kickoff call build your product. Founders stay directly involved — no handoffs to junior teams." },
+  { title: "We treat your business like our own", text: "The people on your kickoff call build your product. Founders stay directly involved - no handoffs to junior teams." },
   { title: "We run our own products", text: "OryAI, OryCMS, and PerformX are systems we use daily. We understand operational reality, not just specifications." },
 ];
 
@@ -277,28 +277,28 @@ export const SERVICE_GROUPS = [
   {
     icon: "Compass",
     title: "Technology & Product Strategy",
-    text: "Before anything gets built, we sit with your roadmap and your constraints and tell you honestly where the risk actually is — even when that means a smaller first release than you asked for.",
+    text: "Before anything gets built, we sit with your roadmap and your constraints and tell you honestly where the risk actually is - even when that means a smaller first release than you asked for.",
     link: "View Consulting Services",
     href: "/consulting",
   },
   {
     icon: "Layers",
     title: "Product & Software Engineering",
-    text: "From a founder's first sketch to a platform carrying real production traffic — built with architecture the next engineer can extend and tests that catch problems before your users do.",
+    text: "From a founder's first sketch to a platform carrying real production traffic - built with architecture the next engineer can extend and tests that catch problems before your users do.",
     link: "View Engineering Services",
     href: "/services",
   },
   {
     icon: "BrainCircuit",
     title: "Applied AI & Data Systems",
-    text: "We train models on your data and wire agents into your actual workflows — the RAG pipelines, evaluation dashboards, and analytics behind them, not a chatbot bolted onto a landing page.",
+    text: "We train models on your data and wire agents into your actual workflows - the RAG pipelines, evaluation dashboards, and analytics behind them, not a chatbot bolted onto a landing page.",
     link: "View AI Services",
     href: "/services",
   },
   {
     icon: "Cloud",
     title: "Cloud & Infrastructure Operations",
-    text: "We design infrastructure on AWS, GCP, or Azure that pages someone before it breaks, not after — containers, CI/CD, and security configured once, correctly, instead of patched forever.",
+    text: "We design infrastructure on AWS, GCP, or Azure that pages someone before it breaks, not after - containers, CI/CD, and security configured once, correctly, instead of patched forever.",
     link: "View Cloud Services",
     href: "/services",
   },
@@ -306,7 +306,7 @@ export const SERVICE_GROUPS = [
 
 export const HOME_STATS = [
   { value: "08", label: "Service Practices", caption: "covering the complete software lifecycle under one roof", image: "datacenter" },
-  { value: "03", label: "Proprietary Products", caption: "OryAI, OryCMS, and PerformX — running in production daily", image: "dashboard" },
+  { value: "03", label: "Proprietary Products", caption: "OryAI, OryCMS, and PerformX - running in production daily", image: "dashboard" },
   { value: "11", label: "Industries Served", caption: "with deep domain exposure from fintech to agriculture", image: "architecture" },
   { value: "100%", label: "Founder-Led Delivery", caption: "the people on your kickoff call build your product", image: "hero" },
 ];
@@ -315,12 +315,12 @@ export const ORYAI_ECOSYSTEM = [
   {
     icon: "Bot",
     title: "AI Agents & GenAI Integration",
-    points: ["Custom agent builder & orchestration", "LLM layer — OpenAI, Anthropic, open-source", "Workflow automation builder"],
+    points: ["Custom agent builder & orchestration", "LLM layer - OpenAI, Anthropic, open-source", "Workflow automation builder"],
   },
   {
     icon: "Database",
     title: "RAG & Knowledge Systems",
-    points: ["Multi-vector-database retrieval", "Domain knowledge grounded answers", "Multi-language — Hindi & English"],
+    points: ["Multi-vector-database retrieval", "Domain knowledge grounded answers", "Multi-language - Hindi & English"],
   },
   {
     icon: "Gauge",
@@ -331,8 +331,8 @@ export const ORYAI_ECOSYSTEM = [
 
 export const FAQS = [
   {
-    q: "What services does OrynticLabs offer?",
-    a: "Eight practices across the complete software lifecycle — web development, product development, custom software, mobile apps, AI & machine learning, data & analytics, cloud infrastructure, and UI/UX design — plus staff augmentation and technology consulting for teams that need talent or advisory support.",
+    q: "What services does Oryntic Labs offer?",
+    a: "Eight practices across the complete software lifecycle - web development, product development, custom software, mobile apps, AI & machine learning, data & analytics, cloud infrastructure, and UI/UX design - plus staff augmentation and technology consulting for teams that need talent or advisory support.",
   },
   {
     q: "What engagement models do you support?",
@@ -340,11 +340,11 @@ export const FAQS = [
   },
   {
     q: "Is your AI capability real or just API wrappers?",
-    a: "Real. We build custom AI and ML systems — predictive models, neural networks, intelligent agents, RAG architectures, and production-grade ML infrastructure trained on your data and integrated into your workflows. And we are honest when a simpler approach will do the job better.",
+    a: "Real. We build custom AI and ML systems - predictive models, neural networks, intelligent agents, RAG architectures, and production-grade ML infrastructure trained on your data and integrated into your workflows. And we are honest when a simpler approach will do the job better.",
   },
   {
     q: "How does a typical engagement work?",
-    a: "We understand before recommending, document the scope before building, work in two-week sprints with a working demo every Friday, communicate honestly when something is not working, and measure success by outcomes — not just shipped code.",
+    a: "We understand before recommending, document the scope before building, work in two-week sprints with a working demo every Friday, communicate honestly when something is not working, and measure success by outcomes - not just shipped code.",
   },
   {
     q: "Which industries do you serve?",
@@ -357,7 +357,7 @@ export const INDUSTRY_IMAGES = ["architecture", "datacenter", "ai", "dashboard",
 export const CONTACT_FAQS = [
   {
     q: "How quickly will I actually hear back?",
-    a: "Within one business day, from someone who read your message — not an autoresponder. If your query is urgent, call or WhatsApp us and we'll prioritize it the same day.",
+    a: "Within one business day, from someone who read your message - not an autoresponder. If your query is urgent, call or WhatsApp us and we'll prioritize it the same day.",
   },
   {
     q: "Do you sign an NDA before we discuss the idea in detail?",
@@ -365,18 +365,18 @@ export const CONTACT_FAQS = [
   },
   {
     q: "What should I include in my message to get a useful reply?",
-    a: "A short description of the problem, roughly where you are (idea, existing product, or a system that needs fixing), and a rough timeline or budget range if you have one. The more context you give, the more specific our first response will be — no generic sales deck in return.",
+    a: "A short description of the problem, roughly where you are (idea, existing product, or a system that needs fixing), and a rough timeline or budget range if you have one. The more context you give, the more specific our first response will be - no generic sales deck in return.",
   },
   {
     q: "Do you work with clients outside India?",
-    a: "Yes. Our engineering team is based in Gurugram and Rewa, but we run projects for clients across time zones — the same team stays on your calls throughout, not a rotating support desk.",
+    a: "Yes. Our engineering team is based in Gurugram and Rewa, but we run projects for clients across time zones - the same team stays on your calls throughout, not a rotating support desk.",
   },
   {
     q: "I just need extra developers, not a full project. Can you help?",
-    a: 'Yes — pick "Staff Augmentation" from the dropdown. We place vetted engineers directly into your team, working your hours and your tools, for as long as you need the extra capacity.',
+    a: 'Yes - pick "Staff Augmentation" from the dropdown. We place vetted engineers directly into your team, working your hours and your tools, for as long as you need the extra capacity.',
   },
   {
     q: "Is the initial consultation free?",
-    a: "Yes. The first call is a scoping conversation, not a sales pitch — we ask questions, tell you honestly if we're a fit, and outline what a working engagement would look like before anything is signed.",
+    a: "Yes. The first call is a scoping conversation, not a sales pitch - we ask questions, tell you honestly if we're a fit, and outline what a working engagement would look like before anything is signed.",
   },
 ];

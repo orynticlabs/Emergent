@@ -10,7 +10,7 @@ import { updateOryCMSUser } from "@/users";
 import { recordOryCMSAuditLog } from "@/audit";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/accept-invite — public: complete an invite.
+// POST /api/orycms/auth/accept-invite - public: complete an invite.
 // Consumes the invite token, sets the user's password + activates them, logs them in.
 export async function POST(request: NextRequest) {
   try {

@@ -43,7 +43,7 @@ export const INTEGRATIONS: Integration[] = [
     category: "Developer",
     description: "Reference connector used to design and test the OryCMS integration flow end-to-end.",
     longDescription:
-      "Dummy Platform is a stand-in third-party product used to demonstrate how OryCMS connects to an external service — the authorization screen, scope grants, and the token handshake all run for real between the two apps, just with mock data on both sides.",
+      "Dummy Platform is a stand-in third-party product used to demonstrate how OryCMS connects to an external service - the authorization screen, scope grants, and the token handshake all run for real between the two apps, just with mock data on both sides.",
     logo: {
       kind: "lucide",
       icon: PlugZap,
@@ -77,7 +77,7 @@ export const INTEGRATIONS: Integration[] = [
       "Trigger templated WhatsApp messages on order and shipment events, and route customer replies into the OryCMS support inbox.",
     logo: { kind: "brand", icon: siWhatsapp },
     // Real status now comes from the WhatsApp settings API (see
-    // app/admin/plugins/page.tsx's live-status override) — this default
+    // app/admin/plugins/page.tsx's live-status override) - this default
     // only matters before that fetch resolves.
     defaultStatus: "not_connected",
     scopes: ["Send template messages", "Read delivery receipts"],
@@ -90,10 +90,10 @@ export const INTEGRATIONS: Integration[] = [
     category: "AI",
     description: "Connect a Gemini API key so OryCMS AI features have a model to call.",
     longDescription:
-      "Configuration only, independent of any other module — no messaging channel is wired to it yet. Set the API key, pick a model, and tune generation defaults; Test Connection makes a real, lightweight call to the Gemini API to confirm the key and model work.",
+      "Configuration only, independent of any other module - no messaging channel is wired to it yet. Set the API key, pick a model, and tune generation defaults; Test Connection makes a real, lightweight call to the Gemini API to confirm the key and model work.",
     logo: { kind: "brand", icon: siGooglegemini },
     // Real status now comes from the Gemini settings API (see
-    // app/admin/plugins/page.tsx's live-status override) — this default
+    // app/admin/plugins/page.tsx's live-status override) - this default
     // only matters before that fetch resolves.
     defaultStatus: "not_connected",
     scopes: ["Read stored generation settings", "Call the Gemini API to generate content"],
@@ -131,7 +131,7 @@ export const INTEGRATIONS: Integration[] = [
     description: "Auto-generate shipping labels and sync live tracking back to orders.",
     longDescription:
       "Create shipments and labels for dispatched orders and pull carrier tracking events back into the OryCMS order timeline.",
-    // No official mark published in simple-icons — falls back to a generic shipping glyph.
+    // No official mark published in simple-icons - falls back to a generic shipping glyph.
     logo: {
       kind: "lucide",
       icon: Truck,
@@ -155,11 +155,11 @@ export const INTEGRATIONS: Integration[] = [
   {
     slug: "oryai-copilot",
     name: "OryAI Copilot",
-    vendor: "OrynticLabs",
+    vendor: "Oryntic Labs",
     category: "Analytics",
     description: "In-house AI assistant that drafts product copy and flags anomalies.",
     longDescription:
-      "OrynticLabs' own AI assistant, wired into catalog and order data to draft product descriptions and flag unusual demand or fraud patterns.",
+      "Oryntic Labs' own AI assistant, wired into catalog and order data to draft product descriptions and flag unusual demand or fraud patterns.",
     logo: {
       kind: "lucide",
       icon: Sparkles,

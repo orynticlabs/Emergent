@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * OryCMS's branded spinner — a drop-in replacement for lucide's `Loader2`.
+ * OryCMS's branded spinner - a drop-in replacement for lucide's `Loader2`.
  * Sizing/color are controlled the same way (pass `h-x w-x text-*` in className);
  * `animate-spin` is baked in so callers don't need to add it.
  */

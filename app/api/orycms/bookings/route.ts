@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { listOryCMSBookings } from "@/bookings";
 import type { OryCMSBookingStatus } from "@/bookings";
 
-// GET /api/orycms/bookings — list bookings (admin only), optional ?status=&from=&to=
+// GET /api/orycms/bookings - list bookings (admin only), optional ?status=&from=&to=
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "bookings", "read");

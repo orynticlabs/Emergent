@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// PATCH /api/orycms/seo/redirects/:id — update SEO redirect (guarded; impl pending)
+// PATCH /api/orycms/seo/redirects/:id - update SEO redirect (guarded; impl pending)
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "seo", "update");
@@ -14,7 +14,7 @@ export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// DELETE /api/orycms/seo/redirects/:id — delete SEO redirect (guarded; impl pending)
+// DELETE /api/orycms/seo/redirects/:id - delete SEO redirect (guarded; impl pending)
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "seo", "delete");

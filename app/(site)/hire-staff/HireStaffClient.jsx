@@ -15,15 +15,15 @@ import { ROLES, ENGAGEMENT_MODELS, HIRE_STAFF_FAQS } from "./hire-staff-data";
 import HireStaffRequestModal from "./HireStaffRequestModal";
 
 /*
- * "Hire Staff" — staff augmentation / dedicated-team landing page. Hero and
+ * "Hire Staff" - staff augmentation / dedicated-team landing page. Hero and
  * bold-text treatment deliberately match the home/about pages exactly
  * (full-bleed photo, floating blur orbs, KineticLine headline reveal,
  * CanvasText gradient accent) instead of the shorter, boxed `PageHero`
- * most inner service pages use — this page is meant to read as a primary
+ * most inner service pages use - this page is meant to read as a primary
  * landing page, not a generic sub-page.
  *
  * Role cards below are adapted from 21st.dev's "Freelancer Profile Card"
- * pattern (banner + avatar + stats + CTA) — literal source wasn't pulled
+ * pattern (banner + avatar + stats + CTA) - literal source wasn't pulled
  * (paid component), built from the pattern with our own Pexels-headshot
  * placeholder convention, not copied code. The "How hiring works" section
  * uses the existing Aceternity-style Timeline component already in this
@@ -35,11 +35,11 @@ import HireStaffRequestModal from "./HireStaffRequestModal";
 
 const WHY_HIRE = [
   { icon: Repeat, title: "No recruitment overhead", description: "Skip weeks of sourcing, screening, and technical interviews. We've already vetted the engineer." },
-  { icon: FileCheck2, title: "Full IP ownership", description: "Everything built during the engagement is yours outright — code, designs, documentation." },
+  { icon: FileCheck2, title: "Full IP ownership", description: "Everything built during the engagement is yours outright - code, designs, documentation." },
   { icon: Globe2, title: "Real timezone overlap", description: "Engineers work hours that overlap with your team, not a handoff across a 12-hour gap." },
-  { icon: ShieldCheck, title: "Free replacement", description: "If an engineer isn't the right fit, we replace them at no extra cost — no long negotiation." },
+  { icon: ShieldCheck, title: "Free replacement", description: "If an engineer isn't the right fit, we replace them at no extra cost - no long negotiation." },
   { icon: Wallet, title: "Payroll & compliance handled", description: "We're the employer of record. No separate contracts, payroll, or local compliance for you to manage." },
-  { icon: MessagesSquare, title: "Direct access, not a proxy", description: "You're on Slack and in standups with the engineer directly — not relayed through an account manager." },
+  { icon: MessagesSquare, title: "Direct access, not a proxy", description: "You're on Slack and in standups with the engineer directly - not relayed through an account manager." },
 ];
 
 const HIRING_STEPS = [
@@ -47,7 +47,7 @@ const HIRING_STEPS = [
     title: "Share requirements",
     content: (
       <p className="text-sm leading-relaxed text-white/60 md:text-base">
-        Tell us the role, stack, timezone, and how long you need the capacity for — a 15-minute
+        Tell us the role, stack, timezone, and how long you need the capacity for - a 15-minute
         call or a short brief is enough for us to start matching.
       </p>
     ),
@@ -56,7 +56,7 @@ const HIRING_STEPS = [
     title: "Shortlist in 48 hours",
     content: (
       <p className="text-sm leading-relaxed text-white/60 md:text-base">
-        We match against engineers already vetted on technical depth and communication — you get
+        We match against engineers already vetted on technical depth and communication - you get
         2–3 real profiles, not a stack of resumes to screen yourself.
       </p>
     ),
@@ -83,14 +83,14 @@ const HIRING_STEPS = [
     title: "Scale anytime",
     content: (
       <p className="text-sm leading-relaxed text-white/60 md:text-base">
-        Add more capacity, scale down, or swap a role — month to month, with no long-term
+        Add more capacity, scale down, or swap a role - month to month, with no long-term
         lock-in contract.
       </p>
     ),
   },
 ];
 
-/** Same visual/motion output as `ArrowLink`, but a click handler instead of a route — for CTAs that open the popup form rather than navigate. */
+/** Same visual/motion output as `ArrowLink`, but a click handler instead of a route - for CTAs that open the popup form rather than navigate. */
 function ArrowButton({ children, onClick, variant = "primary", className = "" }) {
   const styles =
     variant === "primary"
@@ -170,7 +170,7 @@ function HireStaffHero({ onStartHiring }) {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
-            OrynticLabs — Hire Staff
+            Oryntic Labs - Hire Staff
           </p>
         </motion.div>
 
@@ -194,7 +194,7 @@ function HireStaffHero({ onStartHiring }) {
           className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
         >
           Add pre-vetted software engineers, mobile developers, AI/ML specialists, and DevOps
-          engineers to your team — staff augmentation, a dedicated pod, or project-based delivery.
+          engineers to your team - staff augmentation, a dedicated pod, or project-based delivery.
           Shortlist in 48 hours, full IP ownership, no long-term lock-in.
         </motion.p>
 
@@ -242,17 +242,11 @@ export default function HireStaffClient() {
             title={
               <>
                 Engineers we place,
-                <br />
-                <CanvasText
-                  text="not job titles we invent."
-                  className="font-display text-2xl font-black uppercase md:text-5xl"
-                  colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                  lineGap={6}
-                  animationDuration={10}
-                />
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">not job titles we invent.</span>
               </>
             }
-            description="Every profile is vetted on real production experience — the same bar we hold our own engineers to."
+            description="Every profile is vetted on real production experience - the same bar we hold our own engineers to."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {ROLES.map((role, i) => (
@@ -269,7 +263,13 @@ export default function HireStaffClient() {
             overline="How hiring works"
             titleClassName="text-2xl md:text-5xl uppercase"
             wrapperClassName="max-w-3xl"
-            title="From brief to shipping, in days, not months."
+            title={
+              <>
+                From brief to shipping,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">in days, not months.</span>
+              </>
+            }
           />
         </div>
         <div className="mt-4">
@@ -282,8 +282,14 @@ export default function HireStaffClient() {
           <SectionHead
             titleClassName="text-2xl md:text-5xl uppercase"
             wrapperClassName="max-w-3xl"
-            overline="Why hire through OrynticLabs"
-            title="What you skip by not hiring directly."
+            overline="Why hire through Oryntic Labs"
+            title={
+              <>
+                What you skip
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">by not hiring directly.</span>
+              </>
+            }
             description="Everything a full-time hire usually costs you in time and overhead, minus the overhead."
           />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -305,12 +311,17 @@ export default function HireStaffClient() {
       <section id="hire-staff-engagement-models" className="bg-brand-ink py-24 text-white md:py-32" data-testid="hire-staff-engagement-models">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <SectionHead
-            align="center"
             titleClassName="text-2xl md:text-5xl uppercase"
-            wrapperClassName="mx-auto max-w-3xl"
+            wrapperClassName="max-w-3xl"
             overline="Engagement models"
-            title="Pick the model that fits how you work."
-            description="Every engagement is custom-quoted against your scope — these are the three shapes it usually takes."
+            title={
+              <>
+                Pick the model
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">that fits how you work.</span>
+              </>
+            }
+            description="Every engagement is custom-quoted against your scope - these are the three shapes it usually takes."
           />
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {ENGAGEMENT_MODELS.map((m, i) => (
@@ -360,7 +371,16 @@ export default function HireStaffClient() {
 
       <FAQGrid
         testId="hire-staff-faq"
-        title="Before you get on a call."
+        overline="Frequently asked questions"
+        titleClassName="text-2xl md:text-5xl uppercase"
+        title={
+          <>
+            Before you
+            <br className="hidden sm:block" />
+            <span className="text-brand-orange">get on a call.</span>
+          </>
+        }
+        description="Everything you need to know about how our engineers embed into your team, pricing models, and IP protection."
         items={HIRE_STAFF_FAQS}
       />
 

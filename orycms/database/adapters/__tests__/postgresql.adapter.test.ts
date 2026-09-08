@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 const { mockQuery, mockEnd, MockPool } = vi.hoisted(() => {
   const mockQuery = vi.fn();
   const mockEnd = vi.fn();
-  // Must be a regular function — arrow functions can't be used as constructors (Vitest 4)
+  // Must be a regular function - arrow functions can't be used as constructors (Vitest 4)
   const MockPool = vi.fn(function (this: Record<string, unknown>) {
     this["query"] = mockQuery;
     this["end"] = mockEnd;

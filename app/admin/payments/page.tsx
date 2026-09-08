@@ -145,7 +145,7 @@ export default function PaymentsPage() {
     toast.success("Webhook URL copied");
   };
 
-  // Fail-closed while the session is still loading — same convention as
+  // Fail-closed while the session is still loading - same convention as
   // AppSidebar.tsx's `allow` and the MFA Logs page.
   if (!loaded) return null;
 
@@ -273,8 +273,8 @@ export default function PaymentsPage() {
                 {links.map((link) => (
                   <TableRow key={link.id}>
                     <TableCell className="num">{formatCurrency(Number(link.amount) / 100)}</TableCell>
-                    <TableCell className="max-w-[220px] truncate">{link.description || "—"}</TableCell>
-                    <TableCell>{link.customerName || link.customerEmail || "—"}</TableCell>
+                    <TableCell className="max-w-[220px] truncate">{link.description || "-"}</TableCell>
+                    <TableCell>{link.customerName || link.customerEmail || "-"}</TableCell>
                     <TableCell>
                       <StatusBadge status={link.status} />
                     </TableCell>
@@ -300,7 +300,7 @@ export default function PaymentsPage() {
         <Card className="p-5">
           <div className="text-[13.5px] font-semibold">Payments received</div>
           <p className="mt-0.5 text-[11.5px] text-muted-foreground">
-            Log of verified Razorpay webhook events — the source of truth for what was actually
+            Log of verified Razorpay webhook events - the source of truth for what was actually
             paid.
           </p>
           <div className="mt-4 overflow-x-auto">
@@ -332,10 +332,10 @@ export default function PaymentsPage() {
                       <StatusBadge status={payment.status} />
                     </TableCell>
                     <TableCell className="uppercase text-muted-foreground">
-                      {payment.method || "—"}
+                      {payment.method || "-"}
                     </TableCell>
                     <TableCell className="max-w-[200px] truncate">
-                      {payment.email || payment.contact || "—"}
+                      {payment.email || payment.contact || "-"}
                     </TableCell>
                     <TableCell className="font-mono text-[11px] text-muted-foreground">
                       {payment.eventType}

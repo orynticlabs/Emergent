@@ -16,7 +16,7 @@ type HireStaffRequestBody = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// GET /api/orycms/hire-staff-requests — list all requests (admin only)
+// GET /api/orycms/hire-staff-requests - list all requests (admin only)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "hire-staff-requests", "read");
@@ -26,9 +26,9 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/hire-staff-requests — public: the /hire-staff page's popup
+// POST /api/orycms/hire-staff-requests - public: the /hire-staff page's popup
 // form submits here with no session (exempted in middleware.ts alongside the
-// Razorpay/WhatsApp webhooks — the one other place a POST bypasses the
+// Razorpay/WhatsApp webhooks - the one other place a POST bypasses the
 // session check). No audit log here: audit entries attribute an action to an
 // authenticated actor, and an anonymous visitor submission has none.
 export async function POST(request: NextRequest) {
@@ -53,17 +53,80 @@ export async function POST(request: NextRequest) {
         }),
       );
     }
+    if (!body.phone?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Phone number is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "phone",
+        }),
+      );
+    }
+    if (!body.company?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Company is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "company",
+        }),
+      );
+    }
+    if (!body.role?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Role needed is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "role",
+        }),
+      );
+    }
+    if (!body.engagementModel?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Engagement model is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "engagementModel",
+        }),
+      );
+    }
+    if (!body.teamSize?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Team size is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "teamSize",
+        }),
+      );
+    }
+    if (!body.timeline?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Timeline is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "timeline",
+        }),
+      );
+    }
+    if (!body.message?.trim()) {
+      return toErrorResponse(
+        Object.assign(new Error("Description / project details is required."), {
+          code: "VALIDATION_ERROR",
+          statusCode: 422,
+          field: "message",
+        }),
+      );
+    }
 
     const created = await createOryCMSHireStaffRequest({
       name: body.name.trim(),
       email: body.email.trim(),
-      phone: body.phone?.trim() || null,
-      company: body.company?.trim() || null,
-      role: body.role?.trim() || null,
-      engagementModel: body.engagementModel?.trim() || null,
-      teamSize: body.teamSize?.trim() || null,
-      timeline: body.timeline?.trim() || null,
-      message: body.message?.trim() || null,
+      phone: body.phone.trim(),
+      company: body.company.trim(),
+      role: body.role.trim(),
+      engagementModel: body.engagementModel.trim(),
+      teamSize: body.teamSize.trim(),
+      timeline: body.timeline.trim(),
+      message: body.message.trim(),
     });
     return oryJsonOk(created, 201);
   } catch (err) {

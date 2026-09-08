@@ -66,7 +66,7 @@ export async function listOryCMSTaskRelations(
   return result.rows.map(rowToRelation);
 }
 
-/** Every "blocks" pair among a project's tasks — used to draw dependency arrows on the Gantt timeline. */
+/** Every "blocks" pair among a project's tasks - used to draw dependency arrows on the Gantt timeline. */
 export async function listOryCMSBlockingRelationsForProject(
   projectId: string,
   pool: Pool = getOryCMSPool(),

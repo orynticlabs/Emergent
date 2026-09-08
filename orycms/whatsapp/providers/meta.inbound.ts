@@ -4,11 +4,11 @@ import type {
 } from "../whatsapp.inbound.types";
 
 /**
- * Meta (WhatsApp Cloud API) webhook payload parser — the ONLY file that
+ * Meta (WhatsApp Cloud API) webhook payload parser - the ONLY file that
  * knows Meta's specific JSON shape. Adding a second provider (Twilio,
  * 360dialog, Gupshup, Interakt) means adding a sibling file here that
  * exports the same `(body: unknown) => OryCMSWhatsAppWebhookParseResult`
- * shape, wired in by whatsapp.inbound.ts's dispatcher — nothing about the
+ * shape, wired in by whatsapp.inbound.ts's dispatcher - nothing about the
  * normalized type or the webhook route changes.
  *
  * Meta's documented shape (trimmed to what's used):
@@ -22,18 +22,18 @@ import type {
  *         metadata: { phone_number_id: string, display_phone_number: string },
  *         contacts?: [{ profile?: { name?: string }, wa_id: string }],
  *         messages?: [{ id, from, timestamp, type, text?: { body } }],
- *         statuses?: [...] // delivery/read receipts — no "messages" key, safely ignored
+ *         statuses?: [...] // delivery/read receipts - no "messages" key, safely ignored
  *       }
  *     }]
  *   }]
  * }
  *
  * Never throws: any shape that doesn't match what's expected is treated as
- * "malformed" or simply produces no messages, never an exception — a
+ * "malformed" or simply produces no messages, never an exception - a
  * malformed/unexpected payload must not be able to crash the webhook route
  * (Meta interprets a failure as "retry me," and a route that 500s on a
  * payload it doesn't understand yet would loop forever on that payload).
- * Never logs payload content — only structural booleans/counts may be
+ * Never logs payload content - only structural booleans/counts may be
  * logged by the caller.
  */
 export function parseOryCMSMetaWebhookPayload(body: unknown): OryCMSWhatsAppWebhookParseResult {
@@ -78,7 +78,7 @@ export function parseOryCMSMetaWebhookPayload(body: unknown): OryCMSWhatsAppWebh
           if (normalized) messages.push(normalized);
         }
         // value.statuses (delivery/read receipts) and any other "field"
-        // (e.g. account_alerts) have no "messages" array — nothing to do,
+        // (e.g. account_alerts) have no "messages" array - nothing to do,
         // safely ignored by simply not producing a normalized message.
       }
     }
@@ -86,7 +86,7 @@ export function parseOryCMSMetaWebhookPayload(body: unknown): OryCMSWhatsAppWebh
     return { messages, malformed: false };
   } catch {
     // Any unexpected shape (missing field, wrong type deep in the tree)
-    // ends up here rather than propagating — see the function-level note.
+    // ends up here rather than propagating - see the function-level note.
     return { messages: [], malformed: true };
   }
 }
@@ -120,7 +120,7 @@ function normalizeMetaMessage(
   }
 
   // Any other message type (image, audio, video, document, location,
-  // contacts, interactive, button, sticker, reaction, ...) — recorded as
+  // contacts, interactive, button, sticker, reaction, ...) - recorded as
   // "unsupported" per Step 6's "safely ignore unsupported message types,"
   // rather than dropped entirely, so a future step can see traffic exists.
   return {

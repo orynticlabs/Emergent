@@ -8,7 +8,7 @@ import type {
 } from "./whatsapp.messages.types";
 
 /**
- * Repository for orycms_whatsapp_messages — plain persistence only, no
+ * Repository for orycms_whatsapp_messages - plain persistence only, no
  * decisions about what to store or when (that lives at each call site in
  * whatsapp.ai-automation.service.ts and the manual-reply route, matching
  * the split every other OryCMS repository follows).
@@ -39,7 +39,7 @@ export async function recordOryCMSWhatsAppMessage(
   return result.rows[0];
 }
 
-/** Every message for one customer, oldest first — a natural chat timeline. */
+/** Every message for one customer, oldest first - a natural chat timeline. */
 export async function listOryCMSWhatsAppMessagesForCustomer(
   customerId: string,
   pool: Pool = getOryCMSPool(),
@@ -57,7 +57,7 @@ export async function listOryCMSWhatsAppMessagesForCustomer(
 }
 
 /**
- * One row per customer — their most recent message, ordered by how
+ * One row per customer - their most recent message, ordered by how
  * recently each conversation had activity. `DISTINCT ON` picks the latest
  * row per customerId (Postgres-specific, matches the "customerId,
  * createdAt" index above); the outer query re-sorts those across

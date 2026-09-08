@@ -10,14 +10,14 @@ import { CanvasText } from "@site/components/ui/canvas-text";
 /*
  * Aceternity "AnimatedTestimonials": a stacked, depth-rotated card for the
  * active speaker with prev/next controls, and the quote text blurring in
- * word by word — pattern close to 21st.dev's "Profile Card Testimonial
+ * word by word - pattern close to 21st.dev's "Profile Card Testimonial
  * Carousel" (avatar photo + fade transitions + bottom nav); literal source
  * wasn't pulled, this is built from the pattern, not copied code. Content
  * (name, role, quote, photo) is managed in OryCMS under
  * Feature -> Testimonials, not hardcoded here.
  */
 
-// Deterministic per-card tilt — must render identically on server and
+// Deterministic per-card tilt - must render identically on server and
 // client, so this can't use Math.random() (which caused a hydration
 // mismatch: server and client each rolled a different rotation value).
 function tiltFor(index) {
@@ -63,7 +63,7 @@ export default function AboutTestimonials() {
               />
             </>
           }
-          description="Not client quotes — this is how our own team describes the way we build, in their own words."
+          description="Not client quotes - this is how our own team describes the way we build, in their own words."
         />
 
         <div className="relative mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-16 md:grid-cols-2">

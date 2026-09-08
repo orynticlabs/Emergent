@@ -22,7 +22,7 @@ function CaseStudyContent({ project }) {
           </span>
         ))}
       </div>
-      <p className="mt-6 text-xs font-bold uppercase tracking-widest text-white/40">Industry — {project.industry}</p>
+      <p className="mt-6 text-xs font-bold uppercase tracking-widest text-white/40">Industry - {project.industry}</p>
       <Link
         href="/contact-us"
         className="group mt-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange"
@@ -72,7 +72,7 @@ export default function CaseStudiesSection() {
                   <span className="text-brand-orange">real engagements.</span>
                 </>
               }
-              description="A sample of what we've shipped — click a card for the full picture."
+              description="A sample of what we've shipped - click a card for the full picture."
             />
           </Reveal>
           <CarouselArrows

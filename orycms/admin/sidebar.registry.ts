@@ -18,7 +18,7 @@ export interface OryCMSSidebarItem {
 
 /** pluginId → items registered by that plugin */
 const _registry = new Map<string, OryCMSSidebarItem[]>();
-/** All registered item IDs — used for duplicate detection */
+/** All registered item IDs - used for duplicate detection */
 const _ids = new Set<string>();
 
 // ── Public API ────────────────────────────────────────────────────────────────

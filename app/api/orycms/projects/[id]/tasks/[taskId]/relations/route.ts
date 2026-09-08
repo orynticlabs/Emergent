@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// POST /api/orycms/projects/:id/tasks/:taskId/relations — link to another task
+// POST /api/orycms/projects/:id/tasks/:taskId/relations - link to another task
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "update");

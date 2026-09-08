@@ -8,7 +8,7 @@ import type { OryCMSNotificationRecord } from "./notifications.repo";
  * every request shares the same module instance, so it works out of the box.
  * If OryCMS is ever run across multiple server instances behind a load
  * balancer, a subscriber connected to instance A won't hear about a
- * notification created on instance B — that would need a shared bus (e.g.
+ * notification created on instance B - that would need a shared bus (e.g.
  * Postgres LISTEN/NOTIFY or Redis pub/sub) instead of this module.
  */
 

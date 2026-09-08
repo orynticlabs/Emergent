@@ -1,6 +1,6 @@
 export interface OryCMSStorageUploadInput {
   buffer: Buffer;
-  /** Original filename, used for extension/display only — storage keys are generated. */
+  /** Original filename, used for extension/display only - storage keys are generated. */
   filename: string;
   mimeType: string;
 }

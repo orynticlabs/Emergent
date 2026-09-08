@@ -336,7 +336,7 @@ describe("resolveOryCMSPluginDependencies", () => {
   });
 
   it("includes a load order even when only non-circular errors exist", () => {
-    // missing dep doesn't block ordering — only circular does
+    // missing dep doesn't block ordering - only circular does
     const result = resolveOryCMSPluginDependencies([m("a", "1.0.0", { ghost: "1.0.0" })]);
     expect(result.valid).toBe(false);
     expect(result.loadOrder).toContain("a");

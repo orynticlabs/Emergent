@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS orycms_media (
 -- (see media/storage/*), so deleteOryCMSMedia knows which adapter to route
 -- the delete through even if ORYCMS_STORAGE_PROVIDER changes later.
 -- file_path is now a generic opaque storage reference (local file path,
--- or "resourceType:publicId" for Cloudinary) — not necessarily a filesystem path.
+-- or "resourceType:publicId" for Cloudinary) - not necessarily a filesystem path.
 ALTER TABLE orycms_media ADD COLUMN IF NOT EXISTS storage_provider TEXT NOT NULL DEFAULT 'local';
 CREATE INDEX IF NOT EXISTS idx_om_type    ON orycms_media (media_type);
 CREATE INDEX IF NOT EXISTS idx_om_name    ON orycms_media (name);
@@ -384,7 +384,7 @@ export async function deleteOryCMSMedia(id: string, pool: Pool = getOryCMSPool()
     const storage = getOryCMSStorageAdapterByName(res.rows[0].storage_provider);
     await storage.delete(res.rows[0].file_path);
   } catch {
-    // best-effort — don't block the DB delete on a storage-side failure
+    // best-effort - don't block the DB delete on a storage-side failure
   }
 
   await pool.query(`DELETE FROM orycms_media WHERE id = $1`, [id]);

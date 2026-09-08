@@ -5,12 +5,12 @@ import { OryCMSAuthError } from "@/auth";
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 /**
- * Lifecycle stage — "onboarding" covers everything from signed contract to
+ * Lifecycle stage - "onboarding" covers everything from signed contract to
  * first delivery going live; "active" is an ongoing engagement.
  */
 export type OryCMSClientStatus = "lead" | "onboarding" | "active" | "inactive" | "churned";
 
-/** Canonical industry list — mirrors the marketing site's INDUSTRIES (app/(site)/_shared/data/content.js). */
+/** Canonical industry list - mirrors the marketing site's INDUSTRIES (app/(site)/_shared/data/content.js). */
 export const ORYCMS_CLIENT_INDUSTRIES = [
   "Fintech",
   "Healthcare & Biotech",

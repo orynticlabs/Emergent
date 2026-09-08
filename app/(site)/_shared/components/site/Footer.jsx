@@ -13,7 +13,7 @@ import { Reveal } from "@site/components/site/Reveal";
 import { SERVICES, INDUSTRIES, PRODUCTS } from "@site/data/content";
 import Logo from "@site/components/site/Logo";
 
-// Relative — these routes are served by this same Next.js app, so they must
+// Relative - these routes are served by this same Next.js app, so they must
 // resolve against whatever origin the page was loaded from, not a hardcoded
 // (and easily stale) separate deployment URL.
 const API = `/api`;
@@ -25,9 +25,9 @@ const FALLBACK = {
     support_email: "support@orynticlabs.com",
     phone: "+91 76489 15266",
     address1: "Ward 14, Main Stand, Mangawan, Rewa, Madhya Pradesh 486111, India",
-    address2: "OrynticLabs Private Limited, 6th Venture X, Landmark, Sector 67, Gurugram, Haryana 122101, India",
+    address2: "Oryntic Labs Private Limited, 6th Venture X, Landmark, Sector 67, Gurugram, Haryana 122101, India",
     cin: "U62011MP2026PTC085165",
-    gst: "Available on request",
+    gst: "23AAFCO2495P1ZX",
   },
   socials: {
     linkedin: "https://www.linkedin.com/company/orynticlabs",
@@ -42,13 +42,13 @@ const FALLBACK = {
     { label: "DMCA Protected", image: "/assets/dmca.png" },
   ],
   legal_links: [],
-  copyright: "© 2026 OrynticLabs Private Limited. All rights reserved.",
+  copyright: "© 2026 Oryntic Labs Private Limited. All rights reserved.",
 };
 
 const SOCIAL_ICONS = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook, x: Twitter, youtube: Youtube };
 
-// Multi-column link directory — same structural role as a "Products / Tools
-// / Guides / General" footer, reworked for what OrynticLabs actually has.
+// Multi-column link directory - same structural role as a "Products / Tools
+// / Guides / General" footer, reworked for what Oryntic Labs actually has.
 const FOOTER_LINK_GROUPS = [
   {
     title: "Services",
@@ -85,7 +85,7 @@ const FooterLink = ({ to, children }) => (
   </Link>
 );
 
-/** A stacked "Need help?" contact line — label, then value(s), separated by a divider above (not below), so the first block in a stack has no leading rule. */
+/** A stacked "Need help?" contact line - label, then value(s), separated by a divider above (not below), so the first block in a stack has no leading rule. */
 const ContactBlock = ({ label, children, testId }) => (
   <div className="border-t border-white/10 pt-5 first:border-t-0 first:pt-0" data-testid={testId}>
     <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/40">{label}</p>
@@ -144,7 +144,7 @@ export default function Footer() {
             <Reveal>
               <Logo height={26} testId="footer-logo" />
               <p className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
-                A full-spectrum technology company — strategy, engineering, AI, data, and
+                A full-spectrum technology company - strategy, engineering, AI, data, and
                 infrastructure delivered by one team, start to finish.
               </p>
 

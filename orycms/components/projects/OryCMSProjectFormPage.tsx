@@ -63,12 +63,12 @@ function SectionHeader({
   );
 }
 
-// Only the statuses that make sense for a brand-new project — completed/
+// Only the statuses that make sense for a brand-new project - completed/
 // cancelled aren't reachable from the create form on purpose.
 const STARTABLE_STATUSES: OryCMSProject["status"][] = ["planning", "active", "on_hold"];
 
 /**
- * Full page — not a modal. A project create is a multi-field, occasionally
+ * Full page - not a modal. A project create is a multi-field, occasionally
  * slow (loads users + clients) form; a dedicated route gives it a real URL,
  * a back button, and room to grow without fighting a fixed dialog height,
  * matching how Companies/Roles/Users-invite already do "create" as a page
@@ -292,7 +292,7 @@ export function OryCMSProjectFormPage() {
 
           <Card>
             <CardContent className="space-y-4 p-5">
-              <SectionHeader icon={Calendar} title="Timeline" description="Optional — set these later if unsure." />
+              <SectionHeader icon={Calendar} title="Timeline" description="Optional - set these later if unsure." />
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="project-start">Start date</Label>

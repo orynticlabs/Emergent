@@ -44,7 +44,7 @@ function Breadcrumb({ isEdit }: { isEdit: boolean }) {
   );
 }
 
-/** Shared create/edit page — `companyId` omitted means "create new". */
+/** Shared create/edit page - `companyId` omitted means "create new". */
 export function OryCMSCompanyFormPage({ companyId }: { companyId?: string }) {
   const router = useRouter();
   const isEdit = !!companyId;
@@ -107,7 +107,7 @@ export function OryCMSCompanyFormPage({ companyId }: { companyId?: string }) {
   };
 
   // Existing media asset picked → also routed through the crop dialog so
-  // every logo — freshly uploaded or reused — ends up the same fixed shape.
+  // every logo - freshly uploaded or reused - ends up the same fixed shape.
   const handleMediaSelect = (url: string) => {
     setPickerOpen(false);
     setCropSource(url);
@@ -329,7 +329,7 @@ export function OryCMSCompanyFormPage({ companyId }: { companyId?: string }) {
                 className="h-4 w-4 rounded border-border"
               />
               <Label htmlFor="co-active" className="!mb-0">
-                Active — visible on the site
+                Active - visible on the site
               </Label>
             </div>
           </CardContent>

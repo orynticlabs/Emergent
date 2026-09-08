@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Calendar } from "lucide-react";
 import { PRODUCTS } from "@site/data/content";
 import { EASE } from "@site/components/site/Reveal";
 import Logo from "@site/components/site/Logo";
@@ -42,11 +42,10 @@ function useAnnouncements() {
 
   useEffect(() => {
     let cancelled = false;
-    // Relative path — this API route is served by this same Next.js app,
+    // Relative path - this API route is served by this same Next.js app,
     // not a separate backend, so it must always resolve against whatever
     // origin the page itself was loaded from (localhost in dev, the deployed
-    // domain in production). Prefixing with NEXT_PUBLIC_BACKEND_URL pointed
-    // this at a stale, unrelated deployment and broke it silently.
+    // domain in production). 
     fetch(`/api/orycms/announcements/public`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`Announcements fetch failed: ${res.status}`);
@@ -150,12 +149,12 @@ function AnnouncementBar() {
   );
 }
 
-function MegaPanelContent({ config }) {
+function MegaPanelContent({ config, onClose }) {
   if (config.type === "products") {
     return (
       <div className="grid grid-cols-2 gap-8 p-4 text-sm">
         {config.items.map((item) => (
-          <ProductItem key={item.title} title={item.title} description={item.desc} href={item.to} src={item.src} />
+          <ProductItem key={item.title} title={item.title} description={item.desc} href={item.to} src={item.src} onClick={onClose} />
         ))}
       </div>
     );
@@ -164,7 +163,7 @@ function MegaPanelContent({ config }) {
   return (
     <div className="flex flex-col space-y-4 p-4 text-sm">
       {config.items.map((item) => (
-        <HoveredLink key={item.title} href={item.to}>
+        <HoveredLink key={item.title} href={item.to} onClick={onClose}>
           {item.title}
         </HoveredLink>
       ))}
@@ -208,13 +207,13 @@ export default function Navbar() {
 
       <div className="px-4 pt-1 md:px-6">
         {/* Desktop */}
-        <NavBody visible={scrolled} onMouseLeave={() => setActiveMenu(null)}>
+        <NavBody visible={scrolled}>
           <NavbarLogo>
             <Logo testId="nav-logo" />
           </NavbarLogo>
 
-          <div className="absolute inset-0 hidden items-center justify-center lg:flex" aria-label="Primary">
-            <Menu setActive={setActiveMenu} className="gap-7">
+          <div className="pointer-events-none absolute inset-0 hidden items-center justify-center lg:flex" aria-label="Primary">
+            <Menu className="pointer-events-auto gap-7">
               {PLAIN_LINKS.map((link) => {
                 const isActive = pathname === link.to;
                 return (
@@ -252,19 +251,24 @@ export default function Navbar() {
                     </span>
                   }
                 >
-                  <MegaPanelContent config={config} />
+                  <MegaPanelContent config={config} onClose={() => setActiveMenu(null)} />
                 </MenuItem>
               ))}
             </Menu>
           </div>
 
-          <div onMouseEnter={() => setActiveMenu(null)} className="flex items-center gap-3">
-            <NavbarButton as="button" type="button" onClick={openBookingModal} variant="secondary" data-testid="nav-book-call-button">
+          <div onMouseEnter={() => setActiveMenu(null)} className="relative z-20 flex items-center">
+            <NavbarButton
+              as="button"
+              type="button"
+              onClick={() => {
+                setActiveMenu(null);
+                openBookingModal();
+              }}
+              data-testid="nav-book-call-button"
+            >
+              <Calendar className="h-4 w-4" />
               Book a Call
-            </NavbarButton>
-            <NavbarButton href="/contact-us" data-testid="nav-cta-button">
-              Consult Our Strategy Team
-              <ArrowUpRight className="h-4 w-4" />
             </NavbarButton>
           </div>
         </NavBody>
@@ -330,8 +334,7 @@ export default function Navbar() {
             <NavbarButton
               as="button"
               type="button"
-              variant="secondary"
-              className="mt-2 w-full justify-center"
+              className="mt-4 w-full justify-center"
               onClick={() => {
                 setOpen(false);
                 openBookingModal();
@@ -339,9 +342,6 @@ export default function Navbar() {
               data-testid="nav-mobile-book-call-button"
             >
               Book a Call
-            </NavbarButton>
-            <NavbarButton href="/contact-us" className="mt-2.5 w-full justify-center" onClick={() => setOpen(false)}>
-              Consult Our Strategy Team
             </NavbarButton>
           </MobileNavMenu>
         </MobileNav>

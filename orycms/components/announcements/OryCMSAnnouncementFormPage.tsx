@@ -53,7 +53,7 @@ function Breadcrumb({ isEdit }: { isEdit: boolean }) {
   );
 }
 
-/** Shared create/edit page — `announcementId` omitted means "create new". */
+/** Shared create/edit page - `announcementId` omitted means "create new". */
 export function OryCMSAnnouncementFormPage({ announcementId }: { announcementId?: string }) {
   const router = useRouter();
   const isEdit = !!announcementId;
@@ -85,7 +85,7 @@ export function OryCMSAnnouncementFormPage({ announcementId }: { announcementId?
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, announcementId, sessionLoaded, canWrite]);
 
-  // Used to flag a sort-order collision before it hits the server — every
+  // Used to flag a sort-order collision before it hits the server - every
   // other announcement's order, excluding the one being edited.
   useEffect(() => {
     if (!sessionLoaded || !canWrite) return;
@@ -204,7 +204,7 @@ export function OryCMSAnnouncementFormPage({ announcementId }: { announcementId?
       )}
 
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        {/* Left column — announcement details */}
+        {/* Left column - announcement details */}
         <Card className="rounded-2xl border-border bg-transparent shadow-none">
           <CardContent className="space-y-5 p-6">
             <h2 className="text-[15px] font-semibold">Announcement details</h2>
@@ -262,7 +262,7 @@ export function OryCMSAnnouncementFormPage({ announcementId }: { announcementId?
           </CardContent>
         </Card>
 
-        {/* Right column — publishing settings */}
+        {/* Right column - publishing settings */}
         <div className="space-y-6">
           <Card className="rounded-2xl border-border bg-transparent shadow-none">
             <CardContent className="space-y-4 p-6">

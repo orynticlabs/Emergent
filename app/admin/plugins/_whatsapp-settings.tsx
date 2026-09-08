@@ -24,19 +24,19 @@ import {
 import { cn } from "@/lib/utils";
 
 /**
- * Real WhatsApp Business connector settings — Settings → Integrations →
+ * Real WhatsApp Business connector settings - Settings → Integrations →
  * WhatsApp. Backed by app/api/orycms/whatsapp/settings/route.ts, which in
  * turn calls OryCMSWhatsAppService (encryption + persistence).
  *
  * Secret fields (accessToken, appSecret, verifyToken) are never returned by
- * the API, so they always start blank here — only a "configured" flag comes
+ * the API, so they always start blank here - only a "configured" flag comes
  * back, rendered as placeholder text. Nothing in this file writes any
  * secret to localStorage/sessionStorage; the only place a typed secret
  * value lives is transient React state, cleared right after a successful
  * save.
  */
 
-// Mirrors OryCMSWhatsAppProvider (orycms/whatsapp/whatsapp.types.ts) — kept
+// Mirrors OryCMSWhatsAppProvider (orycms/whatsapp/whatsapp.types.ts) - kept
 // as a plain literal list here since this is a client component and can't
 // import server-only modules; the API route validates the real enum.
 const PROVIDERS = [
@@ -105,7 +105,7 @@ export function WhatsAppSettingsPanel() {
     setPhoneNumberId(safe?.phoneNumberId ?? "");
     setBusinessAccountId(safe?.businessAccountId ?? "");
     setAppId(safe?.appId ?? "");
-    // Secrets never come back from the API — always start blank.
+    // Secrets never come back from the API - always start blank.
     setAccessToken("");
     setAppSecret("");
     setVerifyToken("");
@@ -298,7 +298,7 @@ export function WhatsAppSettingsPanel() {
         <Card className="p-5">
           <div className="text-[13.5px] font-semibold">Secrets</div>
           <div className="mt-0.5 text-[11.5px] text-muted-foreground">
-            Stored encrypted. Never shown again after saving — leave a field blank to keep its
+            Stored encrypted. Never shown again after saving - leave a field blank to keep its
             current value.
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -306,7 +306,7 @@ export function WhatsAppSettingsPanel() {
               label="Access Token"
               hint={
                 settings?.accessTokenConfigured
-                  ? "Configured — leave blank to keep it"
+                  ? "Configured - leave blank to keep it"
                   : "Not set"
               }
             >
@@ -320,7 +320,7 @@ export function WhatsAppSettingsPanel() {
             </Field>
             <Field
               label="App Secret"
-              hint={settings?.appSecretConfigured ? "Configured — leave blank to keep it" : "Not set"}
+              hint={settings?.appSecretConfigured ? "Configured - leave blank to keep it" : "Not set"}
             >
               <Input
                 type="password"
@@ -333,7 +333,7 @@ export function WhatsAppSettingsPanel() {
             <Field
               label="Verify Token"
               hint={
-                settings?.verifyTokenConfigured ? "Configured — leave blank to keep it" : "Not set"
+                settings?.verifyTokenConfigured ? "Configured - leave blank to keep it" : "Not set"
               }
             >
               <Input

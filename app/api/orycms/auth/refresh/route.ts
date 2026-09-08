@@ -9,7 +9,7 @@ import {
 import { getOryCMSPool } from "@/lib/db";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/refresh — rotate the session token.
+// POST /api/orycms/auth/refresh - rotate the session token.
 // Validates the current cookie, issues a fresh token, and revokes the old one
 // (defense against fixation / long-lived stolen tokens).
 export async function POST(request: NextRequest) {

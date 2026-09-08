@@ -99,7 +99,7 @@ export function validateOryCMSAdapterCapabilities(
       capability: "migrations",
       message:
         `Adapter "${adapterType}" does not support schema migrations. ` +
-        `The generated migration plan is for documentation purposes only — ` +
+        `The generated migration plan is for documentation purposes only - ` +
         `apply schema changes manually or via a third-party migration tool.`,
     });
   }

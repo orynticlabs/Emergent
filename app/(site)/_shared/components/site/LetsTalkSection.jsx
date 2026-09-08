@@ -53,10 +53,10 @@ export default function LetsTalkSection() {
             <div className="flex h-full flex-col justify-between p-8 md:p-14">
               <div>
                 <p className="font-display text-lg leading-relaxed text-white/80 md:text-xl">
-                  &quot;You&apos;ll talk to the person actually building your product — not a sales rep
+                  &quot;You&apos;ll talk to the person actually building your product - not a sales rep
                   reading from a script, and not a junior team once the contract is signed.&quot;
                 </p>
-                <p className="mt-6 font-semibold text-white">OrynticLabs Team</p>
+                <p className="mt-6 font-semibold text-white">Oryntic Labs Team</p>
                 <p className="text-sm text-white/45">Founders and engineers, on every call</p>
               </div>
 

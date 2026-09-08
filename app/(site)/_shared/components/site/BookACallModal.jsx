@@ -12,7 +12,7 @@ import { siteAlertToast } from "@site/components/ui/site-alert-toast";
 import { useBookingModal } from "@site/components/site/BookingModalContext";
 
 /*
- * Site-wide "Book a Call" popup — same visual language as the Hire Staff
+ * Site-wide "Book a Call" popup - same visual language as the Hire Staff
  * request modal (rounded-3xl, border-white/15, bg-white/[0.06],
  * backdrop-blur-xl, gradient top border, blurred orb, icon-prefixed
  * underline inputs), reused rather than a generic dialog. Three internal
@@ -62,6 +62,17 @@ export default function BookACallModal() {
   const [form, setForm] = useState(FORM_DEFAULTS);
   const [sending, setSending] = useState(false);
   const [confirmed, setConfirmed] = useState(null);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -158,7 +169,12 @@ export default function BookACallModal() {
             className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm"
           />
 
-          <div className="fixed inset-0 z-[101] flex items-center justify-center overflow-y-auto p-4 md:p-6" role="dialog" aria-modal="true">
+          <div
+            data-lenis-prevent
+            className="fixed inset-0 z-[101] flex items-center justify-center overflow-y-auto overscroll-contain p-4 md:p-6"
+            role="dialog"
+            aria-modal="true"
+          >
             <motion.div
               key="panel"
               initial={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -188,8 +204,12 @@ export default function BookACallModal() {
                 {step === "date" && (
                   <>
                     <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-white md:text-3xl">Pick a day.</h2>
-                    <p className="mt-2.5 text-sm leading-relaxed text-white/55">Choose a day that works — we'll show open times next.</p>
-                    <div className="mt-7 grid max-h-72 grid-cols-3 gap-2.5 overflow-y-auto pr-1 sm:grid-cols-4" data-testid="book-call-date-grid">
+                    <p className="mt-2.5 text-sm leading-relaxed text-white/55">Choose a day that works - we'll show open times next.</p>
+                    <div
+                      data-lenis-prevent
+                      className="mt-7 grid max-h-72 grid-cols-3 gap-2.5 overflow-y-auto overscroll-contain pr-1 sm:grid-cols-4"
+                      data-testid="book-call-date-grid"
+                    >
                       {availability === null && (
                         <p className="col-span-full py-6 text-center text-sm text-white/50">Loading availability…</p>
                       )}
@@ -229,10 +249,14 @@ export default function BookACallModal() {
                       {selectedDate.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
                     </h2>
                     <p className="mt-2.5 text-sm leading-relaxed text-white/55">Times shown in your local timezone.</p>
-                    <div className="mt-7 grid max-h-72 grid-cols-3 gap-2.5 overflow-y-auto pr-1" data-testid="book-call-slot-grid">
+                    <div
+                      data-lenis-prevent
+                      className="mt-7 grid max-h-72 grid-cols-3 gap-2.5 overflow-y-auto overscroll-contain pr-1"
+                      data-testid="book-call-slot-grid"
+                    >
                       {slotsLoading && <p className="col-span-full py-6 text-center text-sm text-white/50">Loading times…</p>}
                       {!slotsLoading && slots.length === 0 && (
-                        <p className="col-span-full py-6 text-center text-sm text-white/50">No times available this day — try another date.</p>
+                        <p className="col-span-full py-6 text-center text-sm text-white/50">No times available this day - try another date.</p>
                       )}
                       {!slotsLoading &&
                         slots.map((slot) => (

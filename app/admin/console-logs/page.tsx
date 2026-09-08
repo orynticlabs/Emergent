@@ -49,7 +49,7 @@ function Card({ className, children }: { className?: string; children: React.Rea
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   return new Date(iso).toLocaleString("en-IN", {
     day: "2-digit",
     month: "short",
@@ -88,7 +88,7 @@ export default function ConsoleLogsPage() {
       .finally(() => setLoading(false));
   }, [loaded, canRead, resource]);
 
-  // Fail-closed while the session is still loading — same convention the
+  // Fail-closed while the session is still loading - same convention the
   // sidebar uses (see AppSidebar.tsx's `allow`).
   if (!loaded) return null;
 
@@ -102,8 +102,8 @@ export default function ConsoleLogsPage() {
             </div>
             <div className="text-[13.5px] font-medium">Restricted to Admin and Super Admin</div>
             <p className="max-w-sm text-[12px] leading-relaxed text-muted-foreground">
-              MFA Logs shows security-sensitive activity — who has MFA enabled and the audit
-              trail behind it — so only Admin and Super Admin roles can view it.
+              MFA Logs shows security-sensitive activity - who has MFA enabled and the audit
+              trail behind it - so only Admin and Super Admin roles can view it.
             </p>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function ConsoleLogsPage() {
                       <div className="font-medium">{u.name || u.email}</div>
                       <div className="text-[11px] text-muted-foreground">{u.email}</div>
                     </TableCell>
-                    <TableCell className="text-muted-foreground">{u.roleName || "—"}</TableCell>
+                    <TableCell className="text-muted-foreground">{u.roleName || "-"}</TableCell>
                     <TableCell>
                       <span
                         className={cn(
@@ -231,7 +231,7 @@ export default function ConsoleLogsPage() {
                     </TableCell>
                     <TableCell className="font-mono text-[11px]">{entry.action}</TableCell>
                     <TableCell className="text-muted-foreground">{entry.resource}</TableCell>
-                    <TableCell className="text-muted-foreground">{entry.ipAddress || "—"}</TableCell>
+                    <TableCell className="text-muted-foreground">{entry.ipAddress || "-"}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -180,7 +180,7 @@ describe("createOryCMSUserSession", () => {
     expect(pool.query as ReturnType<typeof vi.fn>).toHaveBeenCalledTimes(1);
   });
 
-  it("does NOT store the raw token — only the hash", async () => {
+  it("does NOT store the raw token - only the hash", async () => {
     let storedHash: string | undefined;
     const pool = makePool((_sql: unknown, params?: unknown[]) => {
       storedHash = (params as string[])?.[1]; // tokenHash is $2

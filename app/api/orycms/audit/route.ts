@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { listOryCMSAuditLogs } from "@/audit";
 
-// GET /api/orycms/audit — list audit-log entries (guarded: audit:read)
+// GET /api/orycms/audit - list audit-log entries (guarded: audit:read)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "audit", "read");

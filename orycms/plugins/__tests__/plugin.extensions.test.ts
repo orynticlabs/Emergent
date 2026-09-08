@@ -56,7 +56,7 @@ afterEach(() => {
   clearOryCMSPluginRegistry();
 });
 
-// ── Factory correctness — full suite on one representative type ───────────────
+// ── Factory correctness - full suite on one representative type ───────────────
 //
 // Every registry uses the same factory; one thorough run covers the shared logic.
 // We use field types as the representative.

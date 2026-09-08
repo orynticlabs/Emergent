@@ -215,7 +215,7 @@ export function readOryCMSPluginManifest(dir: string): OryCMSPluginManifest {
   return parsed;
 }
 
-// ── Directory scanning (duplicated from discovery intentionally — no coupling) ─
+// ── Directory scanning (duplicated from discovery intentionally - no coupling) ─
 
 function scanSubdirs(dir: string): string[] {
   if (!existsSync(dir)) return [];

@@ -11,22 +11,22 @@ import { Timeline } from "@site/components/ui/timeline";
 import SpotlightCard from "@site/components/site/SpotlightCard";
 
 /*
- * Services — hero and bold-text treatment match the home page exactly
+ * Services - hero and bold-text treatment match the home page exactly
  * (full-bleed photo, floating blur orbs, KineticLine headline reveal,
  * CanvasText gradient accent), same as /about and /hire-staff, instead of
  * the shorter, boxed `PageHero` most inner pages used previously.
  *
  * The eight practices below render through the shared `BentoGrid` (adapted
- * from Aceternity/Magic UI's Bento Grid, 21st.dev — see BentoGrid.jsx's own
+ * from Aceternity/Magic UI's Bento Grid, 21st.dev - see BentoGrid.jsx's own
  * comment) with Web Development and AI & Machine Learning as the two
- * featured tiles — our most-delivered and most-differentiated practices.
+ * featured tiles - our most-delivered and most-differentiated practices.
  * "How we work" reuses the Aceternity-style Timeline component (already in
  * this codebase, first used on /hire-staff) instead of a plain bordered
  * list, so the same scroll-filled rail treatment reads consistently across
  * both pages.
  */
 
-// Services with a dedicated detail page — the rest of the grid stays informational-only.
+// Services with a dedicated detail page - the rest of the grid stays informational-only.
 const SERVICE_DETAIL_HREF = { mobile: "/services/mobile-development" };
 const FEATURED_IDS = new Set(["web", "ai"]);
 
@@ -53,7 +53,7 @@ function ServicesHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
-            OrynticLabs — Services
+            Oryntic Labs - Services
           </p>
         </motion.div>
 
@@ -76,9 +76,9 @@ function ServicesHero() {
           transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
           className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
         >
-          Eight practices across the complete software lifecycle — web development, product
+          Eight practices across the complete software lifecycle - web development, product
           development, custom software, mobile apps, AI &amp; machine learning, data &amp;
-          analytics, cloud infrastructure, and UI/UX design — plus staff augmentation and
+          analytics, cloud infrastructure, and UI/UX design - plus staff augmentation and
           technology consulting for teams that need talent or advisory support.
         </motion.p>
 
@@ -113,8 +113,14 @@ export default function ServicesClient() {
             overline="What we do"
             titleClassName="text-2xl md:text-5xl uppercase"
             wrapperClassName="max-w-3xl"
-            title="Eight practices, one accountable team."
-            description="Every engagement draws from the same in-house bench — no subcontracted vendors relaying work between companies."
+            title={
+              <>
+                Eight practices,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">one accountable team.</span>
+              </>
+            }
+            description="Every engagement draws from the same in-house bench - no subcontracted vendors relaying work between companies."
           />
           <BentoGrid className="mt-14">
             {SERVICES.map((s) => {
@@ -144,7 +150,13 @@ export default function ServicesClient() {
             overline="How we work"
             titleClassName="text-2xl md:text-5xl uppercase"
             wrapperClassName="max-w-3xl"
-            title="The same discipline, every engagement."
+            title={
+              <>
+                The same discipline,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">every engagement.</span>
+              </>
+            }
             description="Whether it's a small web build or a multi-year product partnership, the foundational approach never changes."
           />
         </div>
@@ -166,7 +178,13 @@ export default function ServicesClient() {
             overline="Resource services"
             titleClassName="text-2xl md:text-5xl uppercase"
             wrapperClassName="max-w-3xl"
-            title="Technology talent, without the overhead."
+            title={
+              <>
+                Technology talent,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">without the overhead.</span>
+              </>
+            }
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             <Reveal>
@@ -176,7 +194,7 @@ export default function ServicesClient() {
                   <h3 className="mt-8 font-display text-2xl md:text-3xl font-bold tracking-tight text-white">Staff Augmentation</h3>
                   <p className="mt-4 flex-1 leading-relaxed text-white/55">
                     Pre-vetted engineers, designers, and product managers who embed directly into
-                    your team and work under your direction — hire within 48 hours, full IP
+                    your team and work under your direction - hire within 48 hours, full IP
                     ownership, no long-term lock-in.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-2">
@@ -196,7 +214,7 @@ export default function ServicesClient() {
                 <Compass className="h-10 w-10 text-brand-blue" strokeWidth={1.5} />
                 <h3 className="mt-8 font-display text-2xl md:text-3xl font-bold tracking-tight text-white">Technology Consulting</h3>
                 <p className="mt-4 flex-1 leading-relaxed text-white/55">
-                  Advisory work for founders, CTOs, and heads of product — architecture evaluation,
+                  Advisory work for founders, CTOs, and heads of product - architecture evaluation,
                   migration planning, vendor assessment, and technology roadmaps. Structured,
                   time-bound, and outcome-focused. We never bill indefinitely for advice.
                 </p>
@@ -215,8 +233,14 @@ export default function ServicesClient() {
             align="center"
             wrapperClassName="max-w-2xl"
             overline="Ready to start"
-            title="Not sure which practice you need?"
-            description="Tell us what you're building — we'll tell you honestly which team, model, or combination actually fits."
+            title={
+              <>
+                Not sure which practice
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">you need?</span>
+              </>
+            }
+            description="Tell us what you're building - we'll tell you honestly which team, model, or combination actually fits."
           />
           <div className="mt-8 flex justify-center">
             <ArrowLink to="/contact-us" variant="blue">Talk to our strategy team</ArrowLink>

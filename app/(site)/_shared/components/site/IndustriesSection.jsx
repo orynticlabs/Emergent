@@ -33,7 +33,7 @@ const ICONS = {
 };
 
 /*
- * Numbered hover-list + live preview panel — pattern adapted from 21st.dev's
+ * Numbered hover-list + live preview panel - pattern adapted from 21st.dev's
  * "lumina-interactive-list" (a minimalist 01–06 vertical nav that updates a
  * featured preview on hover, built for "quiet luxury" showcases). Reskinned
  * to the brand system (ink/orange/blue) and driven by framer-motion instead
@@ -110,7 +110,7 @@ export default function IndustriesSection() {
                 <span className="text-brand-orange">Zero copy-paste solutions.</span>
               </>
             }
-            description="We spend time understanding how an industry actually operates before we propose anything — that's why what we build for a hospital looks nothing like what we build for a warehouse."
+            description="We spend time understanding how an industry actually operates before we propose anything - that's why what we build for a hospital looks nothing like what we build for a warehouse."
           />
         </Reveal>
 

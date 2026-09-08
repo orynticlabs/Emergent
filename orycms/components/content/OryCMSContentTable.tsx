@@ -44,9 +44,9 @@ function getPrimaryField(collection: OryCMSCollectionDefinition): string {
 
 /** Format a cell value for display. */
 function formatCell(value: unknown): string {
-  if (value == null) return "—";
+  if (value == null) return "-";
   if (typeof value === "boolean") return value ? "Yes" : "No";
-  if (Array.isArray(value)) return value.join(", ") || "—";
+  if (Array.isArray(value)) return value.join(", ") || "-";
   if (typeof value === "object") return JSON.stringify(value).slice(0, 60);
   return String(value).slice(0, 80);
 }

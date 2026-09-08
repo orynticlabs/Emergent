@@ -31,15 +31,15 @@ import type {
 } from "./gemini.types";
 
 /**
- * Service layer for the Gemini AI plugin — the only place that touches a
+ * Service layer for the Gemini AI plugin - the only place that touches a
  * plaintext API key. Every method here is what the settings route
  * (app/api/orycms/gemini/settings/route.ts) calls after its own
- * requireOryCMSPermission / guardOryCMS check — the same
+ * requireOryCMSPermission / guardOryCMS check - the same
  * "permission checks live at the route, not the repository/service" split
  * every other OryCMS module follows. No permission logic is duplicated or
  * hardcoded here.
  *
- * This module never imports from, or is imported by, orycms/whatsapp — the
+ * This module never imports from, or is imported by, orycms/whatsapp - the
  * two are independent so a future AI provider (or a future messaging
  * channel) can be added without touching the other.
  */
@@ -125,7 +125,7 @@ function assertValidBusinessContext(value: string): void {
  * systemInstruction and businessContext"). Returns null when both are
  * empty, so a caller with neither configured still gets Gemini's own
  * default behavior rather than an empty-but-present instruction string.
- * Never logged — same as the two fields it's built from.
+ * Never logged - same as the two fields it's built from.
  */
 function composeStoredInstruction(
   systemInstruction: string | null,
@@ -139,7 +139,7 @@ function composeStoredInstruction(
 
 /**
  * Strips the API key out of a full record, replacing it with a boolean so
- * callers can render "configured" without ever seeing the value — and adds
+ * callers can render "configured" without ever seeing the value - and adds
  * "connected", true once a key is configured (a strong signal, not a live
  * health check; use testConnection for that).
  */
@@ -149,7 +149,7 @@ function toSafe(record: OryCMSGeminiSettingsRecord): OryCMSGeminiSettingsSafe {
 }
 
 export const OryCMSGeminiService = {
-  /** Response-safe settings — never includes the API key, encrypted or not. */
+  /** Response-safe settings - never includes the API key, encrypted or not. */
   async getSettings(pool: Pool = getOryCMSPool()): Promise<OryCMSGeminiSettingsSafe | null> {
     const record = await getOryCMSGeminiSettings(pool);
     return record ? toSafe(record) : null;
@@ -190,7 +190,7 @@ export const OryCMSGeminiService = {
 
   /**
    * Partial update of the existing settings row. Encrypts apiKey only when
-   * the caller actually supplied a new value for it — fields left out of
+   * the caller actually supplied a new value for it - fields left out of
    * `patch` are untouched, so an already-stored key is never overwritten by
    * omission. Callers (the PATCH route) are responsible for not putting a
    * blank/empty value into `patch.apiKey` when the admin didn't intend to
@@ -234,7 +234,7 @@ export const OryCMSGeminiService = {
 
   /**
    * Decrypts the stored API key and makes a real, lightweight call to the
-   * Gemini API to confirm it (and the configured model) actually work —
+   * Gemini API to confirm it (and the configured model) actually work -
    * see gemini.client.ts. No prompt is sent and no content is generated.
    * The decrypted key never leaves this function.
    */
@@ -245,7 +245,7 @@ export const OryCMSGeminiService = {
       return {
         ok: false,
         code: "GEMINI_NOT_CONFIGURED",
-        message: "Gemini has not been configured yet — save an API key first.",
+        message: "Gemini has not been configured yet - save an API key first.",
       };
     }
 
@@ -255,7 +255,7 @@ export const OryCMSGeminiService = {
 
   /**
    * Generates content with the stored API key, model, temperature, and max
-   * output tokens. Never throws — every failure (not configured, invalid
+   * output tokens. Never throws - every failure (not configured, invalid
    * stored config, invalid request, Gemini API error) comes back as
    * `{ success: false, error }` instead, which is what lets
    * orycms/ai/providers/gemini.provider.ts treat this as a normal result
@@ -282,7 +282,7 @@ export const OryCMSGeminiService = {
 
     const record = await getOryCMSGeminiSettings(pool);
     if (!record?.apiKey) {
-      return fail("GEMINI_NOT_CONFIGURED", "Gemini has not been configured yet — save an API key first.");
+      return fail("GEMINI_NOT_CONFIGURED", "Gemini has not been configured yet - save an API key first.");
     }
 
     try {
@@ -308,7 +308,7 @@ export const OryCMSGeminiService = {
 
     // additionalInstructions (e.g. a WhatsApp menu option's per-option AI
     // Instructions) is appended ON TOP of the base above, never replacing
-    // it — see OryCMSGeminiGenerateRequest.additionalInstructions's doc
+    // it - see OryCMSGeminiGenerateRequest.additionalInstructions's doc
     // comment.
     const additional = request.additionalInstructions?.trim();
     const effectiveSystemInstruction = additional

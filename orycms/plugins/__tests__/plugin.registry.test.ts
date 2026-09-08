@@ -168,7 +168,7 @@ function createPlugin(overrides: Partial<OryCMSPlugin> = {}): OryCMSPlugin {
     version: "1.0.0",
     description: "Adds future SEO helpers.",
     author: {
-      name: "OrynticLabs Private Limited",
+      name: "Oryntic Labs Private Limited",
     },
     ...overrides,
   };

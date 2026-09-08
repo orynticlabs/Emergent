@@ -20,7 +20,7 @@ import type {
 } from "./whatsapp.types";
 import type { OryCMSWhatsAppSendResult } from "./whatsapp.outbound.types";
 
-/** Decrypted credentials the webhook route needs — for internal use only, never serialized into an HTTP response (see OryCMSWhatsAppService.getWebhookVerificationConfig's doc comment). */
+/** Decrypted credentials the webhook route needs - for internal use only, never serialized into an HTTP response (see OryCMSWhatsAppService.getWebhookVerificationConfig's doc comment). */
 export interface OryCMSWhatsAppWebhookVerificationConfig {
   provider: OryCMSWhatsAppProvider;
   phoneNumberId: string | null;
@@ -29,10 +29,10 @@ export interface OryCMSWhatsAppWebhookVerificationConfig {
 }
 
 /**
- * Service layer for the WhatsApp module — the only place that touches
+ * Service layer for the WhatsApp module - the only place that touches
  * plaintext secrets (accessToken, appSecret, verifyToken). Every method
  * here is what the settings route (app/api/orycms/whatsapp/settings/route.ts)
- * calls after its own requireOryCMSPermission / guardOryCMS check — the
+ * calls after its own requireOryCMSPermission / guardOryCMS check - the
  * same "permission checks live at the route, not the repository/service"
  * split payments and mfa already follow (see whatsapp.repo.ts's header
  * comment). No permission logic is duplicated or hardcoded here.
@@ -50,7 +50,7 @@ function assertKnownProvider(provider: string): void {
 /**
  * Strips every secret (accessToken, appSecret, verifyToken) out of a full
  * record, replacing each with a boolean so callers can render "configured"
- * without ever seeing a value — and adds "connected", derived from whether
+ * without ever seeing a value - and adds "connected", derived from whether
  * the fields a live connection needs are present. This is the only shape
  * that may leave the service layer for an API response.
  */
@@ -65,7 +65,7 @@ function toSafe(record: OryCMSWhatsAppSettingsRecord): OryCMSWhatsAppSettingsSaf
   };
 }
 
-/** Encrypts a plaintext secret for storage, or passes through null/undefined ("leave unset" / "no change" — the caller has already decided which). */
+/** Encrypts a plaintext secret for storage, or passes through null/undefined ("leave unset" / "no change" - the caller has already decided which). */
 function encryptIfPresent(value: string | null | undefined): string | null | undefined {
   if (value === undefined) return undefined;
   if (value === null) return null;
@@ -73,7 +73,7 @@ function encryptIfPresent(value: string | null | undefined): string | null | und
 }
 
 export const OryCMSWhatsAppService = {
-  /** Response-safe settings — never includes accessToken, appSecret, or verifyToken, encrypted or not. */
+  /** Response-safe settings - never includes accessToken, appSecret, or verifyToken, encrypted or not. */
   async getSettings(pool: Pool = getOryCMSPool()): Promise<OryCMSWhatsAppSettingsSafe | null> {
     const record = await getOryCMSWhatsAppSettings(pool);
     return record ? toSafe(record) : null;
@@ -93,12 +93,12 @@ export const OryCMSWhatsAppService = {
 
   /**
    * Decrypts and returns verifyToken/appSecret for the webhook route
-   * (app/api/orycms/whatsapp/webhook/route.ts) — the ONLY caller this is
+   * (app/api/orycms/whatsapp/webhook/route.ts) - the ONLY caller this is
    * meant for. The webhook has no admin session to gate on (WhatsApp calls
    * it directly, unauthenticated by OryCMS's RBAC), so this is how it gets
    * the credentials it needs to verify Meta's requests without going
    * through the "manage"-gated settings route. NEVER serialize this
-   * return value into an HTTP response — unlike getSettings()'s
+   * return value into an HTTP response - unlike getSettings()'s
    * OryCMSWhatsAppSettingsSafe, this intentionally is not response-safe.
    */
   async getWebhookVerificationConfig(
@@ -141,7 +141,7 @@ export const OryCMSWhatsAppService = {
 
   /**
    * Partial update of the existing settings row. Encrypts a secret field
-   * only when the caller actually supplied a new value for it — fields left
+   * only when the caller actually supplied a new value for it - fields left
    * out of `patch` are untouched, so an already-stored secret is never
    * overwritten by omission. Callers (the PATCH route) are responsible for
    * not putting a blank/empty value into `patch` for a secret the admin
@@ -183,16 +183,16 @@ export const OryCMSWhatsAppService = {
     await deleteOryCMSWhatsAppSettings(pool);
   },
 
-  /** Placeholder — see whatsapp.repo.ts's testOryCMSWhatsAppConnection. No provider API is called in this step. */
+  /** Placeholder - see whatsapp.repo.ts's testOryCMSWhatsAppConnection. No provider API is called in this step. */
   async testConnection(pool: Pool = getOryCMSPool()): Promise<OryCMSWhatsAppTestConnectionResult> {
     return testOryCMSWhatsAppConnection(pool);
   },
 
   /**
    * Sends a text message to `customerId` using the currently configured
-   * provider — the caller never needs to know it's Meta (or, later,
+   * provider - the caller never needs to know it's Meta (or, later,
    * Twilio/360dialog/Gupshup/Interakt); that dispatch happens inside
-   * sendOryCMSWhatsAppTextMessage (whatsapp.outbound.ts). Never throws —
+   * sendOryCMSWhatsAppTextMessage (whatsapp.outbound.ts). Never throws -
    * every failure (not configured, invalid request, upstream API error)
    * comes back as `{ success: false, error }`, matching
    * OryCMSGeminiService.generateContent()'s contract. Never logs the

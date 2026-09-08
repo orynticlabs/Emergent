@@ -26,20 +26,20 @@ import {
 import { cn } from "@/lib/utils";
 
 /**
- * Real Gemini AI plugin settings — Plugins → Gemini AI. Backed by
+ * Real Gemini AI plugin settings - Plugins → Gemini AI. Backed by
  * app/api/orycms/gemini/settings/route.ts, which calls OryCMSGeminiService
  * (encryption + persistence). Independent of the WhatsApp panel
- * (_whatsapp-settings.tsx) — this file imports nothing from orycms/whatsapp
+ * (_whatsapp-settings.tsx) - this file imports nothing from orycms/whatsapp
  * and nothing here assumes a messaging channel exists.
  *
  * The API key is never returned by the API, so it always starts blank here
- * — only a "configured" flag comes back, rendered as placeholder text.
+ * - only a "configured" flag comes back, rendered as placeholder text.
  * Nothing in this file writes any secret to localStorage/sessionStorage;
  * the only place a typed key lives is transient React state, cleared right
  * after a successful save.
  */
 
-// Mirrors ORYCMS_GEMINI_MODELS (orycms/gemini/gemini.types.ts) — kept as a
+// Mirrors ORYCMS_GEMINI_MODELS (orycms/gemini/gemini.types.ts) - kept as a
 // plain literal list here since this is a client component; the API route
 // accepts any non-empty model string, this is just the suggested set.
 const MODELS = [
@@ -53,7 +53,7 @@ const TEMPERATURE_MAX = 2;
 const MAX_OUTPUT_TOKENS_MIN = 1;
 const MAX_OUTPUT_TOKENS_MAX = 8192;
 // Mirrors ORYCMS_GEMINI_SYSTEM_INSTRUCTION_MAX_LENGTH / _BUSINESS_CONTEXT_MAX_LENGTH
-// (orycms/gemini/gemini.types.ts) — kept as plain literals here for the same
+// (orycms/gemini/gemini.types.ts) - kept as plain literals here for the same
 // reason MODELS above is: this is a client component, gemini.types.ts is
 // server-safe but duplicating two numbers is simpler than a deep import.
 const SYSTEM_INSTRUCTION_MAX_LENGTH = 8000;
@@ -122,7 +122,7 @@ export function GeminiSettingsPanel() {
     setSystemInstruction(safe?.systemInstruction ?? "");
     setBusinessContext(safe?.businessContext ?? "");
     setAutoReplyEnabled(safe?.autoReplyEnabled ?? false);
-    // The API key never comes back from the API — always start blank.
+    // The API key never comes back from the API - always start blank.
     setApiKey("");
   };
 
@@ -201,7 +201,7 @@ export function GeminiSettingsPanel() {
         // route (and OryCMSGeminiService underneath) never overwrites an
         // already-stored key with an empty value. systemInstruction and
         // businessContext are always sent (even blank) since, unlike the
-        // key, they aren't secrets — an empty value here is a deliberate
+        // key, they aren't secrets - an empty value here is a deliberate
         // "clear this field" rather than "leave it alone".
         const res = await fetchJson<{ settings: OryCMSGeminiSettingsSafe }>(
           "/api/orycms/gemini/settings",
@@ -319,7 +319,7 @@ export function GeminiSettingsPanel() {
             </Field>
             <Field
               label="API Key"
-              hint={settings?.apiKeyConfigured ? "Configured — leave blank to keep it" : "Not set"}
+              hint={settings?.apiKeyConfigured ? "Configured - leave blank to keep it" : "Not set"}
             >
               <Input
                 type="password"
@@ -375,7 +375,7 @@ export function GeminiSettingsPanel() {
           <div className="text-[13.5px] font-semibold">AI Instructions & Automation</div>
           <div className="mt-0.5 text-[11.5px] text-muted-foreground">
             How the AI should behave when it's asked to generate a response. Not connected to
-            WhatsApp or any messaging channel yet — this only configures the instruction the
+            WhatsApp or any messaging channel yet - this only configures the instruction the
             Gemini plugin uses.
           </div>
 
@@ -432,7 +432,7 @@ export function GeminiSettingsPanel() {
               className={cn(!businessContextValid && "border-destructive")}
             />
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-              <span>Stored for reference only — not sent to Gemini automatically in this step.</span>
+              <span>Stored for reference only - not sent to Gemini automatically in this step.</span>
               <span className={cn(!businessContextValid && "text-destructive")}>
                 {businessContext.length}/{BUSINESS_CONTEXT_MAX_LENGTH}
               </span>
@@ -444,7 +444,7 @@ export function GeminiSettingsPanel() {
               <div className="text-[12.5px] font-medium">Auto Reply</div>
               <div className="mt-0.5 text-[11.5px] text-muted-foreground">
                 Reserved for a future automated-reply feature (e.g. WhatsApp) to check before
-                acting — this plugin doesn't act on it by itself yet.
+                acting - this plugin doesn't act on it by itself yet.
               </div>
               <div className="mt-1.5 text-[11px] text-muted-foreground">
                 Currently:{" "}

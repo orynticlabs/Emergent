@@ -4,11 +4,11 @@ import { ensureOryCMSWhatsAppConversationModeSchema } from "./whatsapp.conversat
 import type { OryCMSWhatsAppConversationMode } from "./whatsapp.conversation-mode.types";
 
 /**
- * Repository for orycms_whatsapp_conversation_mode — plain persistence
+ * Repository for orycms_whatsapp_conversation_mode - plain persistence
  * only, no automation logic (that lives in whatsapp.ai-automation.service.ts).
  */
 
-/** Defaults to "ai" when no row exists yet — every customer starts in AI Mode until an admin explicitly takes over. */
+/** Defaults to "ai" when no row exists yet - every customer starts in AI Mode until an admin explicitly takes over. */
 export async function getOryCMSWhatsAppConversationMode(
   customerId: string,
   pool: Pool = getOryCMSPool(),
@@ -21,7 +21,7 @@ export async function getOryCMSWhatsAppConversationMode(
   return result.rows[0]?.mode ?? "ai";
 }
 
-/** Upserts the mode for one customer — INSERT if this is the first time it's been set, UPDATE otherwise. `updatedBy` (the admin's user id) is best-effort accountability, not enforced. */
+/** Upserts the mode for one customer - INSERT if this is the first time it's been set, UPDATE otherwise. `updatedBy` (the admin's user id) is best-effort accountability, not enforced. */
 export async function setOryCMSWhatsAppConversationMode(
   customerId: string,
   mode: OryCMSWhatsAppConversationMode,

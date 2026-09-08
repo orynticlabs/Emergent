@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
-// GET /api/orycms/seo/sitemap — read sitemap config (guarded; impl pending)
+// GET /api/orycms/seo/sitemap - read sitemap config (guarded; impl pending)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "seo", "read");
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PATCH /api/orycms/seo/sitemap — update sitemap config (guarded; impl pending)
+// PATCH /api/orycms/seo/sitemap - update sitemap config (guarded; impl pending)
 export async function PATCH(request: NextRequest) {
   try {
     await guardOryCMS(request, "seo", "update");

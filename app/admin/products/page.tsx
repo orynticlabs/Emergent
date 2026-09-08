@@ -9,7 +9,7 @@ export default function ProductsPage() {
       <PlaceholderPage
         eyebrow="Commerce"
         title="Products"
-        description="Manage your product catalog — add, edit, and organize items, variants, and pricing."
+        description="Manage your product catalog - add, edit, and organize items, variants, and pricing."
       />
     </AppShell>
   );

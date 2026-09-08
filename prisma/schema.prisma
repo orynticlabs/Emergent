@@ -2,7 +2,7 @@
 //
 // The OryCMS core (orycms/orycms/**) manages its own system tables (users,
 // roles, content, etc.) directly through the `pg` driver and its own
-// migration engine — that schema is untouched by Prisma. This file is for
+// migration engine - that schema is untouched by Prisma. This file is for
 // any additional application-level data models built on top of the same
 // Neon database; add `model` blocks here as those are needed.
 

@@ -1,12 +1,82 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PRODUCTS } from "@site/data/content";
-import { PageHero, Reveal, Overline, ArrowLink } from "@site/components/site/Reveal";
+import { PRODUCTS, IMAGES } from "@site/data/content";
+import { Reveal, Overline, ArrowLink, KineticLine, Magnetic, EASE } from "@site/components/site/Reveal";
+import { CanvasText } from "@site/components/ui/canvas-text";
 import { Check } from "lucide-react";
 
+function ProductsHero() {
+  return (
+    <section data-testid="page-hero" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-ink text-white">
+      <img src={IMAGES.architecture} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-[#050505]/65" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/30 to-[#050505]" aria-hidden="true" />
+
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 -left-24 h-72 w-72 rounded-full bg-brand-orange/20 blur-[110px]"
+        animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-20 h-80 w-80 rounded-full bg-brand-blue/20 blur-[120px]"
+        animate={{ x: [0, -25, 0], y: [0, -15, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+          <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
+            Oryntic Labs - Products
+          </p>
+        </motion.div>
+
+        <h1 className="mt-10 font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05]">
+          <KineticLine delay={0.15}>Products Built for</KineticLine>
+          <KineticLine delay={0.27}>
+            <CanvasText
+              text="Scale & Production."
+              className="font-display text-5xl font-black sm:text-6xl lg:text-7xl"
+              colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
+              lineGap={6}
+              animationDuration={10}
+            />
+          </KineticLine>
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
+        >
+          Used internally, offered to clients as part of engagements, and engineered to run reliably at scale. Battle-tested proprietary systems ready for production.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
+        >
+          <Magnetic>
+            <ArrowLink to="#products-list">Explore Products</ArrowLink>
+          </Magnetic>
+          <Magnetic strength={12}>
+            <ArrowLink to="/contact-us" variant="ghost" className="border-white/30 text-white backdrop-blur-md">
+              Talk to Our Team
+            </ArrowLink>
+          </Magnetic>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /*
- * Floating product image — the "continuous subtle animation on the visual to
+ * Floating product image - the "continuous subtle animation on the visual to
  * draw attention" idea from 21st.dev's "Feature Spotlight" pattern; literal
  * source wasn't retrievable (daily retrieval limit), so this is the pattern
  * re-built with framer-motion, not copied code.
@@ -19,13 +89,13 @@ function ProductBlock({ product, index, flip }) {
       className="relative overflow-hidden bg-brand-ink py-24 text-white md:py-32"
     >
       <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-brand-orange/10 blur-[130px]" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 md:px-10 lg:grid-cols-2">
-        <div className={flip ? "lg:order-2" : ""}>
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:gap-14 px-6 md:px-10 lg:grid-cols-12">
+        <div className={`lg:col-span-5 ${flip ? "lg:order-2" : ""}`}>
           <Reveal>
             <Overline color="orange">Product 0{index + 1}</Overline>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="mt-4 font-display text-4xl md:text-6xl font-black tracking-tighter">{product.name}</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl font-black tracking-tighter">{product.name}</h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mt-2 text-lg font-medium text-brand-orange">{product.tagline}</p>
@@ -44,7 +114,7 @@ function ProductBlock({ product, index, flip }) {
             ))}
           </div>
         </div>
-        <Reveal delay={0.15} className={flip ? "lg:order-1" : ""}>
+        <Reveal delay={0.15} className={`lg:col-span-7 ${flip ? "lg:order-1" : ""}`}>
           <motion.div
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -59,8 +129,15 @@ function ProductBlock({ product, index, flip }) {
             >
               Internal product
             </motion.span>
-            <div className="overflow-hidden rounded-3xl border border-white/10 glow-orange">
-              <img src={product.image} alt={`${product.name} product visual`} className="h-80 w-full object-cover md:h-[30rem]" />
+            <div className="overflow-hidden rounded-2xl md:rounded-3xl border border-white/15 bg-[#09090b]/80 p-2 sm:p-2.5 shadow-2xl glow-orange backdrop-blur-md">
+              <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-black/40">
+                <img
+                  src={product.image}
+                  alt={`${product.name} product visual`}
+                  className="w-full h-auto object-contain block transition-transform duration-500 hover:scale-[1.01]"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </motion.div>
         </Reveal>
@@ -72,19 +149,17 @@ function ProductBlock({ product, index, flip }) {
 export default function ProductsClient() {
   return (
     <main data-testid="products-page">
-      <PageHero
-        overline="Internal products"
-        lines={["PRODUCTS", "BUILT FOR", "SCALE."]}
-        accentIndex={2}
-        description="Used internally, offered to clients as part of engagements, and in some cases available as standalone products."
-      />
-      {PRODUCTS.map((p, i) => (
-        <ProductBlock key={p.id} product={p} index={i} flip={i % 2 === 1} />
-      ))}
+      <ProductsHero />
+      <div id="products-list">
+        {PRODUCTS.map((p, i) => (
+          <ProductBlock key={p.id} product={p} index={i} flip={i % 2 === 1} />
+        ))}
+      </div>
       <section className="bg-brand-ink py-24 text-center text-white md:py-32" data-testid="products-cta">
         <Reveal>
           <h2 className="mx-auto max-w-3xl px-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            Want one of these running inside <span className="text-brand-orange">your</span> business?
+            Want one of these
+            <span className="block text-brand-orange">running inside your business?</span>
           </h2>
         </Reveal>
         <Reveal delay={0.15}>

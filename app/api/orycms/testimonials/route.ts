@@ -12,7 +12,7 @@ type TestimonialBody = {
   sortOrder?: number;
 };
 
-// GET /api/orycms/testimonials — list all testimonials (admin)
+// GET /api/orycms/testimonials - list all testimonials (admin)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "testimonials", "read");
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/testimonials — add a new testimonial
+// POST /api/orycms/testimonials - add a new testimonial
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "testimonials", "create");

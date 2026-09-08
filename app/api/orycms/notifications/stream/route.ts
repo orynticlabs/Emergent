@@ -4,7 +4,7 @@ import { toErrorResponse } from "@/lib/route-guards";
 import { subscribeToOryCMSNotifications } from "@/notifications";
 import type { OryCMSNotificationRecord } from "@/notifications";
 
-// Long-lived Server-Sent Events connection — needs the Node runtime (not edge)
+// Long-lived Server-Sent Events connection - needs the Node runtime (not edge)
 // so it shares the same process/module state as the in-memory notification
 // bus that the write side (creating a notification) publishes into.
 export const runtime = "nodejs";
@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 
 const HEARTBEAT_MS = 25_000;
 
-// GET /api/orycms/notifications/stream — pushes new notifications for the caller as they happen
+// GET /api/orycms/notifications/stream - pushes new notifications for the caller as they happen
 export async function GET(request: NextRequest) {
   let session;
   try {

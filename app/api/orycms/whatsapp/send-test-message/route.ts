@@ -4,11 +4,11 @@ import { OryCMSWhatsAppService } from "@/whatsapp";
 import { recordOryCMSAuditLog } from "@/audit";
 
 /**
- * Admin-only test endpoint for verifying outbound WhatsApp connectivity —
+ * Admin-only test endpoint for verifying outbound WhatsApp connectivity -
  * sends one real text message via OryCMSWhatsAppService.sendTextMessage(),
  * exactly like a future automation layer would, just triggered manually
  * instead of by an inbound event. Not a general-purpose "send message" API
- * for building a messaging feature on top of — see this step's scope
+ * for building a messaging feature on top of - see this step's scope
  * (Conversations/inbox, automation, etc. are explicitly not built yet).
  */
 interface OryCMSWhatsAppSendTestBody {
@@ -20,11 +20,11 @@ function validationError(message: string) {
   return Object.assign(new Error(message), { code: "VALIDATION_ERROR", statusCode: 422 });
 }
 
-// POST /api/orycms/whatsapp/send-test-message — requires an explicit
+// POST /api/orycms/whatsapp/send-test-message - requires an explicit
 // recipient + message; there is no default/implicit test recipient. Gated
 // on "whatsapp":"manage" (the same permission that gates WhatsApp settings
 // mutations). Never returns or logs the access token; audit metadata is
-// booleans/provider/messageId/errorCode only — never the recipient number
+// booleans/provider/messageId/errorCode only - never the recipient number
 // or the message text itself.
 export async function POST(request: NextRequest) {
   try {

@@ -11,7 +11,7 @@ import {
 import type { OryCMSCollectionDefinition } from "@/schema";
 import { requireOryCMSPermission } from "@/rbac";
 
-// GET /api/orycms/collections/:collection — get a single collection schema
+// GET /api/orycms/collections/:collection - get a single collection schema
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ collection: string }> },
@@ -31,7 +31,7 @@ export async function GET(
   return NextResponse.json({ success: true, data: schema });
 }
 
-// PATCH /api/orycms/collections/:collection — update persisted registry schema
+// PATCH /api/orycms/collections/:collection - update persisted registry schema
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ collection: string }> },
@@ -68,7 +68,7 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/orycms/collections/:collection — delete persisted registry schema
+// DELETE /api/orycms/collections/:collection - delete persisted registry schema
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ collection: string }> },

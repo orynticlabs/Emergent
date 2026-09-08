@@ -9,7 +9,7 @@ import { cn } from "@site/lib/utils";
  * Aceternity "Apple cards carousel": a horizontally-scrolling row of image
  * cards that expand into a full detail overlay on click. Scroll arrows are
  * exposed separately (via useCarouselControls) so the caller can place them
- * wherever it wants — here, top-right next to the section heading instead
+ * wherever it wants - here, top-right next to the section heading instead
  * of below the row like the original demo.
  */
 

@@ -93,7 +93,7 @@ function collectValidationErrors(plugin: OryCMSPlugin, options: OryCMSInstallOpt
 
   const manifest = resolveManifest(options);
 
-  // 2. Compatibility — requires a manifest (which carries the orycms range)
+  // 2. Compatibility - requires a manifest (which carries the orycms range)
   if (manifest && !options.skipCompatibilityCheck) {
     const compatOpts: OryCMSCompatibilityOptions = {
       allowUndeclared: true, // installer does not force a declaration
@@ -104,7 +104,7 @@ function collectValidationErrors(plugin: OryCMSPlugin, options: OryCMSInstallOpt
     }
   }
 
-  // 3. Dependencies — build minimal manifests from installed plugins (they have `version`)
+  // 3. Dependencies - build minimal manifests from installed plugins (they have `version`)
   if (manifest && !options.skipDependencyCheck) {
     const installedManifests: OryCMSPluginManifest[] = listOryCMSPlugins().map((p) => ({
       id: p.id,
@@ -153,7 +153,7 @@ export function installOryCMSPlugin(
   }
 
   if (hasOryCMSPlugin(plugin.id)) {
-    // Already in registry (e.g. loaded by the loader) — track without re-registering
+    // Already in registry (e.g. loaded by the loader) - track without re-registering
     _installed.set(plugin.id, { plugin, enabled: true, installedAt: isoNow() });
     return { status: "installed", plugin };
   }
@@ -330,7 +330,7 @@ export function updateOryCMSPlugin(
 
 /**
  * Reset all installer state. Intended for use in tests only.
- * Does NOT touch the plugin registry — call clearOryCMSPluginRegistry() separately.
+ * Does NOT touch the plugin registry - call clearOryCMSPluginRegistry() separately.
  */
 export function clearOryCMSInstallerForTests(): void {
   _installed.clear();

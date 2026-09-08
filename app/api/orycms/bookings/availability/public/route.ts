@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { getOryCMSBookingAvailability } from "@/bookings";
 
-// GET /api/orycms/bookings/availability/public — the enabled weekdays + booking
+// GET /api/orycms/bookings/availability/public - the enabled weekdays + booking
 // window, no session required (exempted in middleware.ts). Read by the site-wide
-// "Book a Call" widget so it knows which upcoming days are even worth offering —
+// "Book a Call" widget so it knows which upcoming days are even worth offering -
 // actual per-day time slots come from /api/orycms/bookings/slots/public. No PII
 // or internal-only fields here, just the shape a calendar widget needs.
 export const dynamic = "force-dynamic";

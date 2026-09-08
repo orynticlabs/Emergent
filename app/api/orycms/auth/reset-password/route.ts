@@ -6,7 +6,7 @@ import { updateOryCMSUser } from "@/users";
 import { recordOryCMSAuditLog } from "@/audit";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/reset-password — public.
+// POST /api/orycms/auth/reset-password - public.
 // Consumes a reset token, sets the new password, and revokes ALL of the user's
 // existing sessions (so a stolen session can't outlive the reset).
 export async function POST(request: NextRequest) {

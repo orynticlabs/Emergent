@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { getAllOryCMSSettings, setOryCMSSetting } from "@/settings";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/settings — list all settings
+// GET /api/orycms/settings - list all settings
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "settings", "read");
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PATCH /api/orycms/settings — upsert one or more settings
+// PATCH /api/orycms/settings - upsert one or more settings
 export async function PATCH(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "settings", "update");

@@ -2,14 +2,14 @@ import type { Pool } from "pg";
 import { getOryCMSPool } from "@/lib/db";
 
 /**
- * Configuration tables for the WhatsApp menu builder — Step 10. Two
+ * Configuration tables for the WhatsApp menu builder - Step 10. Two
  * tables, mirroring the payments module's split (orycms_payment_links +
  * orycms_payments): one singleton settings row (enabled + welcome
  * message) and one row per numbered option. Idempotent DDL (IF NOT
- * EXISTS), safe to run repeatedly, ensured lazily on first use — the same
+ * EXISTS), safe to run repeatedly, ensured lazily on first use - the same
  * pattern as every other *.schema.ts in this codebase.
  *
- * "number" is CHECK-constrained to 1-9 and UNIQUE at the database level —
+ * "number" is CHECK-constrained to 1-9 and UNIQUE at the database level -
  * the same range the admin UI enforces, kept here too so a race between
  * two saves (or a future direct DB edit) can't produce two options
  * claiming the same number.

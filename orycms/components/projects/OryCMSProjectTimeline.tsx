@@ -98,7 +98,7 @@ export function OryCMSProjectTimeline({
   const todayOffset = daysBetween(rangeStart, today);
 
   // Anchor points (left/right x, mid y) for each task's bar or marker, keyed
-  // by task id — shared between the bar/marker rendering below and the
+  // by task id - shared between the bar/marker rendering below and the
   // dependency-arrow overlay so arrows always line up with what's drawn.
   const anchors = new Map<string, { left: number; right: number; y: number }>();
   rows.forEach(({ task }, i) => {
@@ -219,7 +219,7 @@ export function OryCMSProjectTimeline({
                   ) : due ? (
                     <button
                       onClick={() => onOpen(task)}
-                      title={`${task.title} — due ${due.toLocaleDateString("en-IN")}`}
+                      title={`${task.title} - due ${due.toLocaleDateString("en-IN")}`}
                       style={{
                         left: daysBetween(rangeStart, due) * DAY_WIDTH + DAY_WIDTH / 2 - 6,
                         top: ROW_HEIGHT / 2 - 6,

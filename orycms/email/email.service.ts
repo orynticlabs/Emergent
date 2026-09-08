@@ -15,12 +15,12 @@ export interface OryCMSSendResult {
  *
  * - If a provider is configured (via orycms.config.ts email block or
  *   ORYCMS_EMAIL_PROVIDER env), the message is sent and `{ sent: true }` returned.
- * - If NOT configured, this is a no-op returning `{ sent: false }` — callers
+ * - If NOT configured, this is a no-op returning `{ sent: false }` - callers
  *   (invite/reset/activation) then surface the raw link in the API response so
  *   development works with zero email setup.
  *
  * `emailConfig` can be injected (tests); otherwise it's loaded from config.
- * Provider send failures propagate — callers decide whether to swallow them.
+ * Provider send failures propagate - callers decide whether to swallow them.
  */
 export async function sendOryCMSEmail(
   message: OryCMSEmailMessage,
@@ -50,7 +50,7 @@ async function loadEmailConfigSafe(): Promise<OryCMSEmailConfig | undefined> {
     const config = await loadOryCMSConfig();
     return config.email;
   } catch {
-    // Config file may not exist (e.g. tests, first-run) — fall back to env-only.
+    // Config file may not exist (e.g. tests, first-run) - fall back to env-only.
     return undefined;
   }
 }

@@ -5,7 +5,7 @@ import type { OryCMSAIGenerateRequest, OryCMSAIGenerateResult } from "../ai.type
 /**
  * Adapter that makes the Gemini plugin (orycms/gemini) satisfy the generic
  * OryCMSAIProvider contract. This is the ONLY file that depends on both
- * orycms/ai and orycms/gemini — orycms/ai's core types/interface
+ * orycms/ai and orycms/gemini - orycms/ai's core types/interface
  * (ai.types.ts, ai.provider.ts) never import from orycms/gemini, and
  * orycms/gemini never imports from orycms/ai (see gemini.types.ts's header
  * comment). That one-way dependency here is what keeps adding a second
@@ -14,7 +14,7 @@ import type { OryCMSAIGenerateRequest, OryCMSAIGenerateResult } from "../ai.type
  *
  * gemini.service.ts's generateContent() already returns a result shaped
  * exactly like OryCMSAIGenerateResult (success/provider/model/text/usage/
- * error — see gemini.types.ts's OryCMSGeminiGenerateResult), so this
+ * error - see gemini.types.ts's OryCMSGeminiGenerateResult), so this
  * adapter is a thin pass-through rather than a field-by-field mapping. It
  * stays a named function (not just a re-export) so the seam is visible in
  * code, and so a future provider whose native shape doesn't line up as

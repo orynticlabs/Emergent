@@ -4,7 +4,7 @@ import { listOryCMSClients, createOryCMSClient } from "@/clients";
 import type { OryCMSClientStatus } from "@/clients";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/clients — list all clients
+// GET /api/orycms/clients - list all clients
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "clients", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/clients — onboard a new client
+// POST /api/orycms/clients - onboard a new client
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "clients", "create");

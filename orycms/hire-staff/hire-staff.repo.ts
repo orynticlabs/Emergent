@@ -97,7 +97,7 @@ function rowToHireStaffRequest(row: HireStaffRequestRow): OryCMSHireStaffRequest
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
-/** Newest first — an admin triaging a leads inbox wants to see what just came in. */
+/** Newest first - an admin triaging a leads inbox wants to see what just came in. */
 export async function listOryCMSHireStaffRequests(
   pool: Pool = getOryCMSPool(),
 ): Promise<OryCMSHireStaffRequestRecord[]> {
@@ -122,7 +122,7 @@ export async function getOryCMSHireStaffRequest(
   return rowToHireStaffRequest(row);
 }
 
-/** Called from the public /hire-staff form — no session, so no actor to attribute the row to. */
+/** Called from the public /hire-staff form - no session, so no actor to attribute the row to. */
 export async function createOryCMSHireStaffRequest(
   input: OryCMSHireStaffRequestInput,
   pool: Pool = getOryCMSPool(),
@@ -148,7 +148,7 @@ export async function createOryCMSHireStaffRequest(
   return getOryCMSHireStaffRequest(result.rows[0].id, pool);
 }
 
-/** The only field an admin ever changes on a submitted request — everything else is what the visitor sent. */
+/** The only field an admin ever changes on a submitted request - everything else is what the visitor sent. */
 export async function updateOryCMSHireStaffRequestStatus(
   id: string,
   status: OryCMSHireStaffRequestStatus,

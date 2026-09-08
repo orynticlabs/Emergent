@@ -1,13 +1,13 @@
 import crypto from "crypto";
 
 /**
- * Thin wrapper over Razorpay's REST API — plain `fetch`, no SDK dependency
+ * Thin wrapper over Razorpay's REST API - plain `fetch`, no SDK dependency
  * (mirrors how the rest of this codebase prefers Node built-ins / direct
  * HTTP calls over adding a client library for a single integration).
  *
  * Credentials are read lazily (only when actually calling out or verifying
  * a webhook), never at module load, so an unset env var doesn't crash an
- * unrelated request — same pattern as orycms/auth/mfa.crypto.ts.
+ * unrelated request - same pattern as orycms/auth/mfa.crypto.ts.
  */
 
 const RAZORPAY_API_BASE = "https://api.razorpay.com/v1";
@@ -24,18 +24,18 @@ function getOryCMSRazorpayCredentials(): { keyId: string; keySecret: string } {
   return { keyId, keySecret };
 }
 
-/** True when both API credentials are present — for the Settings/status UI, never logs the values themselves. */
+/** True when both API credentials are present - for the Settings/status UI, never logs the values themselves. */
 export function isOryCMSRazorpayConfigured(): boolean {
   return Boolean(process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET);
 }
 
-/** True when the webhook secret is set — signature verification fails closed otherwise. */
+/** True when the webhook secret is set - signature verification fails closed otherwise. */
 export function isOryCMSRazorpayWebhookConfigured(): boolean {
   return Boolean(process.env.RAZORPAY_WEBHOOK_SECRET);
 }
 
 export interface OryCMSCreatePaymentLinkInput {
-  /** Amount in the smallest currency unit (paise for INR — ₹500 = 50000). */
+  /** Amount in the smallest currency unit (paise for INR - ₹500 = 50000). */
   amount: number;
   currency?: string;
   description?: string;
@@ -55,7 +55,7 @@ export interface OryCMSRazorpayPaymentLink {
 /**
  * Creates a Razorpay Payment Link via the REST API. Throws a
  * {code, statusCode}-shaped error (matching this codebase's toErrorResponse
- * convention) on missing config or a non-2xx response — never logs the key
+ * convention) on missing config or a non-2xx response - never logs the key
  * secret, and the secret only ever appears in the outgoing Authorization
  * header, never in a thrown error message.
  */
@@ -103,10 +103,10 @@ export async function createRazorpayPaymentLink(
 
 /**
  * Verifies the `X-Razorpay-Signature` header against the RAW request body
- * (must be the exact bytes Razorpay signed — parse JSON only AFTER this
+ * (must be the exact bytes Razorpay signed - parse JSON only AFTER this
  * passes, never re-serialize and check against that). Constant-time
  * comparison via crypto.timingSafeEqual. Fails closed: returns false on any
- * missing config, missing signature, or mismatch — never throws, so a
+ * missing config, missing signature, or mismatch - never throws, so a
  * malformed request can't crash the webhook route into a 500 (which
  * Razorpay would interpret as "retry me").
  */

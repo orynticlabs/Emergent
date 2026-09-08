@@ -4,7 +4,7 @@ import { OryCMSWhatsAppMenuService } from "@/whatsapp";
 import { recordOryCMSAuditLog } from "@/audit";
 
 /**
- * WhatsApp menu configuration — Step 10. Configuration only: nothing here
+ * WhatsApp menu configuration - Step 10. Configuration only: nothing here
  * is wired to the webhook, routing, or AI replies (see
  * whatsapp.menu.service.ts's header comment). Both methods are gated on
  * "whatsapp":"manage" per the task's explicit instruction, matching how
@@ -35,9 +35,9 @@ async function parseBody(request: NextRequest): Promise<OryCMSWhatsAppMenuBody> 
   }
 }
 
-// GET /api/orycms/whatsapp/menu — full menu configuration (enabled,
+// GET /api/orycms/whatsapp/menu - full menu configuration (enabled,
 // welcomeMessage, options). Nothing here is a secret, so unlike the
-// WhatsApp/Gemini settings routes there's no masked/safe projection —
+// WhatsApp/Gemini settings routes there's no masked/safe projection -
 // this is the raw configuration as saved.
 export async function GET(request: NextRequest) {
   try {
@@ -49,8 +49,8 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PATCH /api/orycms/whatsapp/menu — update provided fields only.
-// `options`, when present, REPLACES the entire option list — this is how
+// PATCH /api/orycms/whatsapp/menu - update provided fields only.
+// `options`, when present, REPLACES the entire option list - this is how
 // the admin UI expresses adding, editing, and deleting options through a
 // single call (see whatsapp.menu.repo.ts's replaceOryCMSWhatsAppMenuOptions).
 export async function PATCH(request: NextRequest) {
@@ -76,7 +76,7 @@ export async function PATCH(request: NextRequest) {
 
     const menu = await OryCMSWhatsAppMenuService.updateMenu(patch);
 
-    // Metadata is counts/booleans only — option titles/instructions are
+    // Metadata is counts/booleans only - option titles/instructions are
     // admin-authored config, not customer data, but kept out of the audit
     // log anyway to stay consistent with this feature line's "don't log
     // configuration content" convention (Gemini's systemInstruction/

@@ -252,7 +252,7 @@ describe("readOryCMSPluginManifest", () => {
   });
 
   it("does not import or execute any plugin code", async () => {
-    // Manifest reading is purely synchronous JSON file I/O — no dynamic import occurs.
+    // Manifest reading is purely synchronous JSON file I/O - no dynamic import occurs.
     // This is a structural guarantee: readOryCMSPluginManifest does not call import().
     const cwd = await makeTempCwd();
     await writeManifest(cwd, MIN);
@@ -392,7 +392,7 @@ describe("readOryCMSPluginManifests", () => {
     // Structural test: readOryCMSPluginManifests is synchronous and never calls import().
     const cwd = await makeTempCwd();
     await writeManifest(join(cwd, "plugins", "json-only"), MIN);
-    // No index.js or index.ts exists — proves no code import happens
+    // No index.js or index.ts exists - proves no code import happens
     const result = readOryCMSPluginManifests({ cwd });
     expect(result.found).toHaveLength(1);
   });

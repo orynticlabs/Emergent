@@ -21,7 +21,7 @@ type CaseStudyBody = {
   sortOrder?: number;
 };
 
-// GET /api/orycms/case-studies — list all case studies (admin)
+// GET /api/orycms/case-studies - list all case studies (admin)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "case-studies", "read");
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/case-studies — add a new case study
+// POST /api/orycms/case-studies - add a new case study
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "case-studies", "create");

@@ -14,7 +14,7 @@ import { oryAppOrigin } from "@/auth/token-links";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// GET /api/orycms/projects/:id/tasks — list a project's tasks
+// GET /api/orycms/projects/:id/tasks - list a project's tasks
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "read");
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// POST /api/orycms/projects/:id/tasks — create a task on a project
+// POST /api/orycms/projects/:id/tasks - create a task on a project
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "update");

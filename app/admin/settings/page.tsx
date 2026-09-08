@@ -94,7 +94,7 @@ export default function SettingsPage() {
   const [supportEmail, setSupportEmail] = useState("support@orynticlabs.com");
   const [domain, setDomain] = useState("admin.orycms.in");
   const [address, setAddress] = useState(
-    "OrynticLabs Private Limited, Bengaluru, Karnataka, India",
+    "Oryntic Labs Private Limited, Bengaluru, Karnataka, India",
   );
   const [orderPrefix, setOrderPrefix] = useState("ORY");
   const [lowStockThreshold, setLowStockThreshold] = useState("8");

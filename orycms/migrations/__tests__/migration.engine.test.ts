@@ -265,7 +265,7 @@ describe("executeOryCMSMigration", () => {
         clientCallIdx++;
         if (sql === "BEGIN") return { rows: [] };
         if (sql === "ROLLBACK") return { rows: [] };
-        // Any real SQL statement — simulate error
+        // Any real SQL statement - simulate error
         throw new Error("syntax error in SQL");
       }),
       release: vi.fn(),

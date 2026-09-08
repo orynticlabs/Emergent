@@ -9,14 +9,14 @@ import { getOryCMSPool } from "@/lib/db";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// POST /api/orycms/auth/mfa/disable — remove MFA from the CURRENT user's own
+// POST /api/orycms/auth/mfa/disable - remove MFA from the CURRENT user's own
 // account. Requires all three: an authenticated session (protectOryCMSAdminRoute),
-// the current password, and a current TOTP code — any one or two of these
+// the current password, and a current TOTP code - any one or two of these
 // alone must not be enough (see disableOryCMSMfa's doc for why). identity
 // is always session.userId; the client can never name a different account.
 //
 // On success this account no longer has a usable session: every session row
-// for the user is destroyed (destroyOryCMSUserSessions — same call used
+// for the user is destroyed (destroyOryCMSUserSessions - same call used
 // after password reset) and this response clears the caller's own cookie.
 // No replacement session is created.
 export async function POST(request: NextRequest) {

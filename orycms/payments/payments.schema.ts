@@ -7,8 +7,8 @@ import { getOryCMSPool } from "@/lib/db";
  * to run repeatedly, ensured lazily on first use rather than depending on a
  * full /auth/setup re-run (see ensureOryCMSPaymentsSchema below).
  *
- * "orycms_payment_links" — links created from the admin UI via the Razorpay
- * Payment Links API. "orycms_payments" — payment events recorded from
+ * "orycms_payment_links" - links created from the admin UI via the Razorpay
+ * Payment Links API. "orycms_payments" - payment events recorded from
  * incoming Razorpay webhooks (the "payment received" log); rows are keyed
  * by razorpayPaymentId with an upsert, so webhook retries and status
  * transitions (authorized -> captured) update the same row instead of

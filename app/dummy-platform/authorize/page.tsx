@@ -57,7 +57,7 @@ function AuthorizeScreen() {
 
         <div className="mt-5 flex items-center gap-2 rounded-lg bg-[var(--dp-brand)]/5 p-3 text-[11.5px] text-[var(--dp-muted)]">
           <Sparkles className="h-3.5 w-3.5 shrink-0 text-[var(--dp-brand)]" />
-          Demo connector — no real Dummy Platform account or data is involved.
+          Demo connector - no real Dummy Platform account or data is involved.
         </div>
 
         <div className="mt-6 flex items-center gap-3">

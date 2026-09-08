@@ -4,7 +4,7 @@ import { listOryCMSBlockingRelationsForProject, assertOryCMSProjectAccess } from
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// GET /api/orycms/projects/:id/relations — every "blocks" pair in the project (for Gantt arrows)
+// GET /api/orycms/projects/:id/relations - every "blocks" pair in the project (for Gantt arrows)
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "read");

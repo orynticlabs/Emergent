@@ -380,7 +380,7 @@ export function OryCMSAnnouncementsAdminPage() {
                     {announcement.link ? (
                       <span className="truncate">{announcement.ctaLabel ? `${announcement.ctaLabel} → ${announcement.link}` : announcement.link}</span>
                     ) : (
-                      "—"
+                      "-"
                     )}
                   </td>
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>

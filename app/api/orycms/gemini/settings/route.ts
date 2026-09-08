@@ -19,7 +19,7 @@ function validationError(message: string) {
   return Object.assign(new Error(message), { code: "VALIDATION_ERROR", statusCode: 422 });
 }
 
-/** True for undefined, null, or a whitespace-only string — the "nothing meaningful was sent" case for the API key specifically (numbers/booleans use `!== undefined` instead, since 0/false are valid values). */
+/** True for undefined, null, or a whitespace-only string - the "nothing meaningful was sent" case for the API key specifically (numbers/booleans use `!== undefined` instead, since 0/false are valid values). */
 function isBlank(value: unknown): boolean {
   return value === undefined || value === null || (typeof value === "string" && value.trim() === "");
 }
@@ -32,9 +32,9 @@ async function parseBody(request: NextRequest): Promise<OryCMSGeminiSettingsBody
   }
 }
 
-// GET /api/orycms/gemini/settings — configuration status only. Never
+// GET /api/orycms/gemini/settings - configuration status only. Never
 // returns the API key (OryCMSGeminiService strips it before this handler
-// ever sees the result). Gated on "ai":"read" — Editor/Author already hold
+// ever sees the result). Gated on "ai":"read" - Editor/Author already hold
 // this by default (see rbac/rbac.engine.ts), matching how a read-only role
 // can view but not change AI configuration.
 export async function GET(request: NextRequest) {
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/gemini/settings — save (create or fully replace) the
+// POST /api/orycms/gemini/settings - save (create or fully replace) the
 // Gemini configuration. The API key is encrypted inside OryCMSGeminiService
 // before it ever reaches the database; this handler never logs it.
 export async function POST(request: NextRequest) {
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       autoReplyEnabled: body.autoReplyEnabled,
     });
 
-    // Metadata is booleans/numbers about the shape of the request only —
+    // Metadata is booleans/numbers about the shape of the request only -
     // never the API key, systemInstruction, or businessContext content
     // itself (those may hold business-sensitive pricing/policy language).
     await recordOryCMSAuditLog({
@@ -93,14 +93,14 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// PATCH /api/orycms/gemini/settings — update provided fields only. apiKey
+// PATCH /api/orycms/gemini/settings - update provided fields only. apiKey
 // is only touched when a genuinely non-blank value is sent; an omitted or
 // blank apiKey leaves the existing encrypted value untouched (it's a
-// secret — see whatsapp's Step 2 PATCH for the same rule). Numeric/boolean
+// secret - see whatsapp's Step 2 PATCH for the same rule). Numeric/boolean
 // fields (temperature, maxOutputTokens, enabled, autoReplyEnabled) use
 // "!== undefined" rather than a blank check, since 0 and false are valid
 // values. systemInstruction/businessContext also use "!== undefined" (not
-// a blank check) — unlike apiKey they aren't secrets, so an explicit empty
+// a blank check) - unlike apiKey they aren't secrets, so an explicit empty
 // string is a legitimate "clear this field" request, not something to
 // silently ignore.
 export async function PATCH(request: NextRequest) {
@@ -125,7 +125,7 @@ export async function PATCH(request: NextRequest) {
 
     const settings = await OryCMSGeminiService.updateSettings(patch);
 
-    // Metadata is field names and booleans only — never the
+    // Metadata is field names and booleans only - never the
     // systemInstruction/businessContext text itself.
     await recordOryCMSAuditLog({
       userId: session.userId,
@@ -148,7 +148,7 @@ export async function PATCH(request: NextRequest) {
   }
 }
 
-// DELETE /api/orycms/gemini/settings — disconnect Gemini (removes the
+// DELETE /api/orycms/gemini/settings - disconnect Gemini (removes the
 // configuration row entirely, including the encrypted API key).
 export async function DELETE(request: NextRequest) {
   try {

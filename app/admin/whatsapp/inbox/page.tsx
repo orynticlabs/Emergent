@@ -22,14 +22,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 /**
- * WhatsApp Inbox — /admin/whatsapp/inbox. Reads from
+ * WhatsApp Inbox - /admin/whatsapp/inbox. Reads from
  * /api/orycms/whatsapp/inbox (list) and /api/orycms/whatsapp/inbox/:customerId
- * (detail), both backed by orycms_whatsapp_messages — the storage
+ * (detail), both backed by orycms_whatsapp_messages - the storage
  * whatsapp.ai-automation.service.ts now writes to for every inbound
  * customer message and every message it actually sends (AI, menu, or a
  * manual admin reply via this page). Manual replies go through
  * POST /api/orycms/whatsapp/inbox/:customerId/reply, which is gated on
- * "whatsapp":"manage" exactly like every other WhatsApp mutation — no RBAC
+ * "whatsapp":"manage" exactly like every other WhatsApp mutation - no RBAC
  * bypass for admin-initiated sends.
  */
 
@@ -246,7 +246,7 @@ export default function WhatsAppInboxPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mode: nextMode }),
       });
-      toast.success(nextMode === "human" ? "Took over — AI paused for this customer" : "Resumed AI for this customer");
+      toast.success(nextMode === "human" ? "Took over - AI paused for this customer" : "Resumed AI for this customer");
       await loadConversation(selectedCustomerId);
     } catch (err) {
       toast.error("Couldn't change conversation mode", {
@@ -292,7 +292,7 @@ export default function WhatsAppInboxPage() {
         <div>
           <h1 className="text-[26px] font-semibold tracking-tight">WhatsApp Inbox</h1>
           <p className="mt-1 text-[13.5px] text-muted-foreground">
-            Every customer message and reply — automated or manual. Refreshes automatically every
+            Every customer message and reply - automated or manual. Refreshes automatically every
             few seconds.
           </p>
         </div>
@@ -316,7 +316,7 @@ export default function WhatsAppInboxPage() {
               <div className="flex-1 overflow-y-auto">
                 {conversations.length === 0 && (
                   <div className="p-6 text-center text-[12px] text-muted-foreground">
-                    No conversations yet — once a customer messages your WhatsApp number, it'll
+                    No conversations yet - once a customer messages your WhatsApp number, it'll
                     show up here.
                   </div>
                 )}

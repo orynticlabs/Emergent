@@ -5,7 +5,7 @@ import { listOryCMSNotifications, getOryCMSUnreadNotificationCount } from "@/not
 import type { OryCMSNotificationType } from "@/notifications";
 
 // GET /api/orycms/notifications?type=project_assignment|task_assignment&unread=true
-// Every authenticated user reads their own notifications — no separate resource permission.
+// Every authenticated user reads their own notifications - no separate resource permission.
 export async function GET(request: NextRequest) {
   try {
     const session = await protectOryCMSAdminRoute(request);

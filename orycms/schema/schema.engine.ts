@@ -21,7 +21,7 @@ export class OryCMSSchemaError extends Error {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// In-memory registry (module-level singleton — reset via clearOryCMSRegistry for tests)
+// In-memory registry (module-level singleton - reset via clearOryCMSRegistry for tests)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const _registry = new Map<string, OryCMSCollectionDefinition>();
@@ -41,7 +41,7 @@ function _throw(message: string, issues: OryCMSSchemaValidationIssue[]): never {
 /**
  * Validates a collection definition and returns it typed as OryCMSCollectionDefinition.
  * Throws OryCMSSchemaError if validation fails.
- * Does NOT add to the registry — use registerOryCMSCollection for that.
+ * Does NOT add to the registry - use registerOryCMSCollection for that.
  */
 export function defineOryCMSCollection(
   definition: OryCMSCollectionDefinition,
@@ -127,7 +127,7 @@ export function listOryCMSCollections(): OryCMSCollectionDefinition[] {
 
 /**
  * Merges updates into an existing collection definition, re-validates, and persists.
- * The slug is immutable — pass it as the first argument, not inside updates.
+ * The slug is immutable - pass it as the first argument, not inside updates.
  * Throws OryCMSSchemaError if the collection is not found or the merged schema is invalid.
  */
 export function updateOryCMSCollectionSchema(
@@ -175,7 +175,7 @@ export function removeOryCMSCollection(slug: string): void {
 }
 
 /**
- * Pure validation — wraps the validator with optional registry context.
+ * Pure validation - wraps the validator with optional registry context.
  * Does not throw. Returns all issues found.
  */
 export function validateOryCMSCollectionSchemaPure(

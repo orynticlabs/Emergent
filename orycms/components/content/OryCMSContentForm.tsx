@@ -81,7 +81,7 @@ export function OryCMSContentForm({ collection, entry, onSuccess }: OryCMSConten
   const cleanPayload = (raw: Record<string, unknown>): Record<string, unknown> => {
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(raw)) {
-      // Exclude empty strings for optional fields — let backend use defaults
+      // Exclude empty strings for optional fields - let backend use defaults
       if (v === "") out[k] = null;
       else out[k] = v;
     }

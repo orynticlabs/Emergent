@@ -4,7 +4,7 @@ import { bootstrapOryCMS } from "@/core";
 import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/database/migrations — list applied core migrations
+// GET /api/orycms/database/migrations - list applied core migrations
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "migrations", "read");
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/database/migrations — install core schema + seed roles/permissions
+// POST /api/orycms/database/migrations - install core schema + seed roles/permissions
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "migrations", "create");

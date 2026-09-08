@@ -1,4 +1,4 @@
-// Next.js's route-segment loading UI — automatically shown while any page
+// Next.js's route-segment loading UI - automatically shown while any page
 // inside the (site) route group is loading. Scoped to the marketing site
 // only: this file lives in app/(site)/, not app/admin/, so OryCMS never
 // renders it.

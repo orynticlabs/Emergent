@@ -34,7 +34,7 @@ function expectedPermissionNames(): Set<string> {
   return names;
 }
 
-// GET /api/orycms/database/health — connection status, pool stats, permission-drift
+// GET /api/orycms/database/health - connection status, pool stats, permission-drift
 // warnings, and recent migration activity, in one call for the Database dashboard.
 export async function GET(request: NextRequest) {
   try {
@@ -76,17 +76,17 @@ export async function GET(request: NextRequest) {
           });
         }
       } catch {
-        warnings.push({ level: "warning", message: "Core tables aren't installed yet — run migrations to install the schema." });
+        warnings.push({ level: "warning", message: "Core tables aren't installed yet - run migrations to install the schema." });
       }
 
       if (poolInfo.waiting > 0) {
-        warnings.push({ level: "warning", message: `${poolInfo.waiting} query${poolInfo.waiting === 1 ? " is" : "s are"} waiting on a free connection — the pool may be undersized for current load.` });
+        warnings.push({ level: "warning", message: `${poolInfo.waiting} query${poolInfo.waiting === 1 ? " is" : "s are"} waiting on a free connection - the pool may be undersized for current load.` });
       }
       if (poolInfo.max > 0 && poolInfo.total >= poolInfo.max) {
         warnings.push({ level: "info", message: `Connection pool is at capacity (${poolInfo.total}/${poolInfo.max}).` });
       }
     } else {
-      warnings.push({ level: "warning", message: "Could not reach the database — check ORYCMS_DATABASE_URL." });
+      warnings.push({ level: "warning", message: "Could not reach the database - check ORYCMS_DATABASE_URL." });
     }
 
     let activity: Awaited<ReturnType<typeof listOryCMSAuditLogs>> = [];

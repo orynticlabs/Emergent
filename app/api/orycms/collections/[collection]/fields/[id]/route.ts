@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
 type RouteCtx = { params: Promise<{ collection: string; id: string }> };
 
-// PATCH /api/orycms/collections/:collection/fields/:id — update collection field (guarded; impl pending)
+// PATCH /api/orycms/collections/:collection/fields/:id - update collection field (guarded; impl pending)
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "collections", "update");
@@ -14,7 +14,7 @@ export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// DELETE /api/orycms/collections/:collection/fields/:id — delete collection field (guarded; impl pending)
+// DELETE /api/orycms/collections/:collection/fields/:id - delete collection field (guarded; impl pending)
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "collections", "delete");

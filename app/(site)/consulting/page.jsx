@@ -6,7 +6,7 @@ import { buildPageMetadata } from "@site/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Technology Consulting",
   description:
-    "Advisory work for founders, CTOs, and heads of product — architecture evaluation, migration planning, vendor assessment, and technology roadmaps. Structured, time-bound, and outcome-focused.",
+    "Advisory work for founders, CTOs, and heads of product - architecture evaluation, migration planning, vendor assessment, and technology roadmaps. Structured, time-bound, and outcome-focused.",
   path: "/consulting",
   image: IMAGES.architecture,
 });
@@ -15,17 +15,17 @@ const COVERAGE = [
   {
     icon: Compass,
     title: "Architecture Evaluation",
-    text: "An honest read on your current system — where it will hold under growth, where it will not, and what to fix first versus what can wait.",
+    text: "An honest read on your current system - where it will hold under growth, where it will not, and what to fix first versus what can wait.",
   },
   {
     icon: GitBranch,
     title: "Migration Planning",
-    text: "Cloud moves, framework upgrades, monolith-to-services splits — sequenced so the business keeps running while the platform changes under it.",
+    text: "Cloud moves, framework upgrades, monolith-to-services splits - sequenced so the business keeps running while the platform changes under it.",
   },
   {
     icon: ShieldCheck,
     title: "Vendor & Tooling Assessment",
-    text: "Independent evaluation of the platforms and vendors you're considering, scored against your actual constraints — not their sales deck.",
+    text: "Independent evaluation of the platforms and vendors you're considering, scored against your actual constraints - not their sales deck.",
   },
   {
     icon: Map,
@@ -35,10 +35,10 @@ const COVERAGE = [
 ];
 
 const ENGAGEMENT = [
-  { n: "01", title: "Discovery call", text: "A structured conversation about your roadmap, constraints, and the decision you're actually trying to make — no generic questionnaire." },
-  { n: "02", title: "Structured assessment", text: "We review the system, the team, and the constraints directly — architecture, code, infrastructure, or vendor proposals, whichever the engagement calls for." },
-  { n: "03", title: "Findings & roadmap", text: "A written report: what's actually true about your system today, the risk ranked by what matters, and a sequenced plan — not a slide deck of buzzwords." },
-  { n: "04", title: "Optional execution handoff", text: "If you want the same team to build what we recommended, we can — the same engineers who wrote the roadmap ship it. Never required." },
+  { n: "01", title: "Discovery call", text: "A structured conversation about your roadmap, constraints, and the decision you're actually trying to make - no generic questionnaire." },
+  { n: "02", title: "Structured assessment", text: "We review the system, the team, and the constraints directly - architecture, code, infrastructure, or vendor proposals, whichever the engagement calls for." },
+  { n: "03", title: "Findings & roadmap", text: "A written report: what's actually true about your system today, the risk ranked by what matters, and a sequenced plan - not a slide deck of buzzwords." },
+  { n: "04", title: "Optional execution handoff", text: "If you want the same team to build what we recommended, we can - the same engineers who wrote the roadmap ship it. Never required." },
 ];
 
 export default function Consulting() {
@@ -48,7 +48,7 @@ export default function Consulting() {
         overline="Technology Consulting"
         lines={["ADVICE", "THAT", "SHIPS."]}
         accentIndex={1}
-        description="Advisory work for founders, CTOs, and heads of product — architecture evaluation, migration planning, vendor assessment, and technology roadmaps. Structured, time-bound, and outcome-focused. We never bill indefinitely for advice."
+        description="Advisory work for founders, CTOs, and heads of product - architecture evaluation, migration planning, vendor assessment, and technology roadmaps. Structured, time-bound, and outcome-focused. We never bill indefinitely for advice."
       />
 
       <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="consulting-coverage-section">
@@ -56,7 +56,7 @@ export default function Consulting() {
           <SectionHead
             overline="What we cover"
             title="Four kinds of decisions we get called in for."
-            description="Every engagement starts with a documented scope — what we're evaluating, what you'll receive, and by when."
+            description="Every engagement starts with a documented scope - what we're evaluating, what you'll receive, and by when."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             {COVERAGE.map((item, i) => {

@@ -5,7 +5,7 @@ export type OryCMSDatabaseAdapterType = "postgresql" | "mysql" | "mongodb" | "fi
 // -------------------------------------------------------------------
 
 export interface OryCMSDatabaseConnectionConfig {
-  /** Full connection URL — takes precedence over individual fields. */
+  /** Full connection URL - takes precedence over individual fields. */
   url?: string;
   host?: string;
   port?: number;
@@ -112,7 +112,7 @@ export interface OryCMSDatabaseCollectionSchema {
 // Migrations
 // -------------------------------------------------------------------
 
-/** Input definition passed to the adapter — distinct from the stored OryCMSMigration record. */
+/** Input definition passed to the adapter - distinct from the stored OryCMSMigration record. */
 export interface OryCMSAdapterMigration {
   id: string;
   name: string;

@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 /**
  * Browser autofill sets an input's DOM value directly, without firing the
- * "input" event React listens to for controlled components — so state
+ * "input" event React listens to for controlled components - so state
  * (email/password, etc.) stays stale even though the field visually shows a
  * value, which can leave a `disabled={!value}` submit button stuck forever.
  * Pair with the `onAutoFillStart` keyframe in styles.css (fires only on
@@ -46,11 +46,11 @@ export function formatCompactCurrency(value: number) {
 }
 
 /**
- * Default per-account avatar — a memoji-style cartoon face, deterministically
+ * Default per-account avatar - a memoji-style cartoon face, deterministically
  * generated from `seed` (pass the user's id, not their name/email, so the
  * avatar doesn't change if they're renamed). Same seed always renders the
  * same face; different accounts get visibly different ones. Backed by
- * DiceBear's free avatar API — no account data leaves the browser beyond the
+ * DiceBear's free avatar API - no account data leaves the browser beyond the
  * seed string itself.
  */
 export function oryCMSAvatarUrl(seed: string): string {

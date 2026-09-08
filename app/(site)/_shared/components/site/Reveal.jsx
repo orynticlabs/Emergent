@@ -7,7 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export const EASE = [0.16, 1, 0.3, 1];
 
-/** Pulls the pointer's translation toward its center within `strength` px — used on CTAs and pill buttons for a tactile, premium feel. Disabled on touch devices. */
+/** Pulls the pointer's translation toward its center within `strength` px - used on CTAs and pill buttons for a tactile, premium feel. Disabled on touch devices. */
 export const Magnetic = ({ children, strength = 18, className = "" }) => {
   const ref = useRef(null);
   const x = useMotionValue(0);

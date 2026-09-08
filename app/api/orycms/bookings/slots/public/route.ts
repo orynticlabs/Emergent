@@ -3,7 +3,7 @@ import { getOryCMSAvailableSlots } from "@/bookings";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-// GET /api/orycms/bookings/slots/public?date=YYYY-MM-DD — open time slots for
+// GET /api/orycms/bookings/slots/public?date=YYYY-MM-DD - open time slots for
 // one calendar date, no session required (exempted in middleware.ts). Read
 // by the "Book a Call" widget once a visitor picks a day.
 export const dynamic = "force-dynamic";

@@ -11,7 +11,7 @@ import type { OryCMSWhatsAppAutomationResult } from "@/whatsapp";
 import { logSection, logSectionEnd, logStep, maskId } from "@/lib/pretty-log";
 
 /**
- * WhatsApp webhook — receives events directly from the configured BSP
+ * WhatsApp webhook - receives events directly from the configured BSP
  * (Meta today). Deliberately NOT behind guardOryCMS/protectOryCMSAdminRoute:
  * WhatsApp has no OryCMS admin session and must be able to call this route
  * on its own. Authenticity is instead established per-request:
@@ -21,12 +21,12 @@ import { logSection, logSectionEnd, logStep, maskId } from "@/lib/pretty-log";
  *           the raw body using the configured, decrypted appSecret (Meta's
  *           per-request signature).
  * Neither the token nor the secret is ever read from an admin-session
- * value — both come from OryCMSWhatsAppService.getWebhookVerificationConfig(),
+ * value - both come from OryCMSWhatsAppService.getWebhookVerificationConfig(),
  * a method that exists specifically for this route and is documented as
  * never response-safe.
  *
  * Flow: Verify → Normalize → Dispatch → Acknowledge. This route holds NONE
- * of the "check config → AI generation → outbound reply" logic itself —
+ * of the "check config → AI generation → outbound reply" logic itself -
  * every normalized message is handed to
  * OryCMSWhatsAppAIAutomationService.handleInboundMessage() (Step 8), which
  * owns that entirely. Each call is wrapped so a single message's failure
@@ -35,7 +35,7 @@ import { logSection, logSectionEnd, logStep, maskId } from "@/lib/pretty-log";
  * an internal error message back to WhatsApp.
  */
 
-// GET /api/orycms/whatsapp/webhook — Meta's subscription verification
+// GET /api/orycms/whatsapp/webhook - Meta's subscription verification
 // challenge. Must respond with the raw `hub.challenge` value (plain text,
 // not JSON) when `hub.mode=subscribe` and `hub.verify_token` matches.
 export async function GET(request: NextRequest) {
@@ -63,9 +63,9 @@ export async function GET(request: NextRequest) {
   return new NextResponse(challenge, { status: 200, headers: { "Content-Type": "text/plain" } });
 }
 
-// POST /api/orycms/whatsapp/webhook — incoming events. Always resolves
+// POST /api/orycms/whatsapp/webhook - incoming events. Always resolves
 // quickly with a 2xx once the request is authenticated (or, if WhatsApp
-// isn't configured at all, without attempting to authenticate anything —
+// isn't configured at all, without attempting to authenticate anything -
 // there's nothing to check against) so the BSP doesn't retry-storm this
 // endpoint. Only a bad/missing signature on a configured integration is
 // rejected outright.
@@ -75,17 +75,17 @@ export async function POST(request: NextRequest) {
   const config = await OryCMSWhatsAppService.getWebhookVerificationConfig();
 
   // Not configured yet: nothing to verify against and no provider context
-  // to normalize with. Acknowledge without processing rather than 404 —
+  // to normalize with. Acknowledge without processing rather than 404 -
   // avoids the BSP retrying a request that will never succeed differently.
   if (!config) {
-    logStep("warn", "Connect", "no WhatsApp settings configured — acknowledging without processing");
+    logStep("warn", "Connect", "no WhatsApp settings configured - acknowledging without processing");
     logSectionEnd();
     return NextResponse.json({ received: true, processed: false }, { status: 200 });
   }
 
   logStep("ok", "Connect", `provider ${config.provider}`);
 
-  // Raw text first — signature verification needs the exact bytes Meta
+  // Raw text first - signature verification needs the exact bytes Meta
   // signed, not a re-serialized copy. JSON.parse only happens after.
   const rawBody = await request.text();
 
@@ -98,18 +98,18 @@ export async function POST(request: NextRequest) {
     }
     logStep("ok", "Signature", "HMAC-SHA256 verified");
   } else {
-    logStep("warn", "Signature", "no app secret configured — skipped");
+    logStep("warn", "Signature", "no app secret configured - skipped");
   }
   // No appSecret configured: signature verification is skipped rather than
   // rejecting outright, since Step 2/3 never required appSecret to be set
-  // to save WhatsApp settings — an admin can tighten this simply by
+  // to save WhatsApp settings - an admin can tighten this simply by
   // configuring an App Secret (see Security notes in this step's report).
 
   let parsedBody: unknown;
   try {
     parsedBody = JSON.parse(rawBody);
   } catch {
-    // Not valid JSON at all — not a real Meta request. Reject outright
+    // Not valid JSON at all - not a real Meta request. Reject outright
     // rather than pretending to acknowledge it.
     logStep("fail", "Payload", "invalid JSON");
     logSectionEnd();
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
   );
 
   // Dispatch every normalized message to the automation service. Never
-  // logs payload content — only {messageId, status} labels ever leave
+  // logs payload content - only {messageId, status} labels ever leave
   // this function, and only in the response body, never a log line. A
   // per-message try/catch means one message throwing unexpectedly (the
   // service itself is designed to never throw, but this is the safety net

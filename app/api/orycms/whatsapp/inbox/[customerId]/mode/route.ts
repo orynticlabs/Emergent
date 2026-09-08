@@ -14,10 +14,10 @@ function validationError(message: string) {
 }
 
 /**
- * PATCH /api/orycms/whatsapp/inbox/:customerId/mode — "Take Over" (mode:
+ * PATCH /api/orycms/whatsapp/inbox/:customerId/mode - "Take Over" (mode:
  * "human") / "Resume AI" (mode: "ai") in the inbox. Only flips the stored
  * mode flag whatsapp.ai-automation.service.ts checks before generating or
- * sending anything — no send or AI logic lives here. Gated on
+ * sending anything - no send or AI logic lives here. Gated on
  * "whatsapp":"manage", same as every other WhatsApp mutation; a manual
  * takeover is not a special/bypass path around RBAC.
  */

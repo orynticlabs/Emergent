@@ -7,7 +7,7 @@ import { createOryCMSNotification } from "@/notifications";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// GET /api/orycms/projects/:id/members — list a project's team
+// GET /api/orycms/projects/:id/members - list a project's team
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "read");
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// POST /api/orycms/projects/:id/members — add (or re-role) a team member
+// POST /api/orycms/projects/:id/members - add (or re-role) a team member
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "update");

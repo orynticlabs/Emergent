@@ -70,7 +70,7 @@
 :root {
   --radius: 0.75rem;
 
-  /* Neutrals — warm-cool balanced */
+  /* Neutrals - warm-cool balanced */
   --background: oklch(0.985 0.003 260);
   --foreground: oklch(0.18 0.02 265);
   --surface: oklch(1 0 0);
@@ -219,7 +219,7 @@
 /*
  * Chrome (and other browsers) fill autofilled inputs by setting the DOM
  * value directly, without dispatching the "input" event React listens to
- * for controlled components — so state like `email`/`password` in the
+ * for controlled components - so state like `email`/`password` in the
  * login/setup/invite/reset forms stays "" even though the field visually
  * shows a value, leaving submit buttons stuck on `disabled={!value}`.
  * This no-op animation fires only when :-webkit-autofill applies, giving

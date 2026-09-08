@@ -22,7 +22,7 @@ function errResponse(err: unknown) {
   );
 }
 
-// GET /api/orycms/media — list media assets
+// GET /api/orycms/media - list media assets
 export async function GET(request: NextRequest) {
   try {
     const session = await protectOryCMSAdminRoute(request);
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/media — upload a media asset (multipart/form-data)
+// POST /api/orycms/media - upload a media asset (multipart/form-data)
 export async function POST(request: NextRequest) {
   try {
     const session = await protectOryCMSAdminRoute(request);

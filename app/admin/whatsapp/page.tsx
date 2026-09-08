@@ -24,10 +24,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 /**
- * WhatsApp Automation — /admin/whatsapp. Step 9: pure UI. Every value here
+ * WhatsApp Automation - /admin/whatsapp. Step 9: pure UI. Every value here
  * comes from the settings routes Steps 2/3/5 already built
  * (/api/orycms/whatsapp/settings, /api/orycms/gemini/settings) plus the
- * generic generation endpoint Step 4 built (/api/orycms/ai/generate) — no
+ * generic generation endpoint Step 4 built (/api/orycms/ai/generate) - no
  * new backend route or table is introduced by this file. WhatsApp
  * credentials themselves (access token, phone number id, ...) are still
  * only editable at Plugins → Integrations → WhatsApp Business
@@ -193,7 +193,7 @@ export default function WhatsAppAutomationPage() {
     }
   };
 
-  // Fail-closed while the session is still loading — same convention as
+  // Fail-closed while the session is still loading - same convention as
   // AppSidebar.tsx and the Payments/MFA Logs pages.
   if (!loaded) return null;
 
@@ -225,7 +225,7 @@ export default function WhatsAppAutomationPage() {
             <h1 className="mt-1 text-[26px] font-semibold tracking-tight">WhatsApp Automation</h1>
             <p className="mt-1 text-[13.5px] text-muted-foreground">
               Configure how Gemini AI auto-replies to incoming WhatsApp messages. Connection
-              credentials are managed on their own integration pages — this page controls
+              credentials are managed on their own integration pages - this page controls
               behavior only.
             </p>
           </div>
@@ -371,7 +371,7 @@ export default function WhatsAppAutomationPage() {
                   Test AI Reply
                 </div>
                 <div className="mt-0.5 text-[11.5px] text-muted-foreground">
-                  Sends a message straight to Gemini using your saved instructions — no WhatsApp
+                  Sends a message straight to Gemini using your saved instructions - no WhatsApp
                   message is sent to a customer.
                 </div>
 

@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 /**
- * At-rest encryption for the Gemini API key — AES-256-GCM via Node's
+ * At-rest encryption for the Gemini API key - AES-256-GCM via Node's
  * built-in crypto (no new dependency), mirroring auth/mfa.crypto.ts and
  * whatsapp/whatsapp.crypto.ts. Key comes from ORYCMS_GEMINI_ENCRYPTION_KEY,
  * a base64-encoded 32-byte value that must live outside Postgres (env var
@@ -10,7 +10,7 @@ import crypto from "crypto";
  *   openssl rand -base64 32
  *
  * Deliberately its own key, separate from ORYCMS_MFA_ENCRYPTION_KEY and
- * ORYCMS_WHATSAPP_ENCRYPTION_KEY — a leaked Gemini key shouldn't compromise
+ * ORYCMS_WHATSAPP_ENCRYPTION_KEY - a leaked Gemini key shouldn't compromise
  * MFA secrets or WhatsApp credentials, or vice versa. This is also what
  * keeps the Gemini plugin independent: nothing about its key material is
  * shared with any other module.
@@ -29,7 +29,7 @@ let cachedKey: Buffer | undefined;
 
 /**
  * Reads and validates ORYCMS_GEMINI_ENCRYPTION_KEY on first use (not at
- * module load, so importing this file never crashes an unrelated request —
+ * module load, so importing this file never crashes an unrelated request -
  * only actually encrypting/decrypting the API key does). Throws an error
  * shaped like route-guards.ts's toErrorResponse expects ({code, statusCode}),
  * so the route maps it to a clean response without leaking why to the client.

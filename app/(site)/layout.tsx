@@ -4,13 +4,13 @@ import "./_shared/site.css";
 import SiteShell from "./_shared/components/site/SiteShell";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "./_shared/lib/seo";
 
-const DEFAULT_TITLE = "OrynticLabs — Engineering Intelligent Software";
+const DEFAULT_TITLE = "Oryntic Labs - Engineering Intelligent Software";
 const DEFAULT_DESCRIPTION =
-  "OrynticLabs — a full-spectrum technology company engineering intelligent software: web, mobile, AI/ML, data, cloud, and design.";
+  "Oryntic Labs - a full-spectrum technology company engineering intelligent software: web, mobile, AI/ML, data, cloud, and design.";
 
 export const metadata: Metadata = {
   // Base URL every relative `alternates.canonical` / OG image path resolves
-  // against — required for Next.js to emit absolute canonical/OG URLs.
+  // against - required for Next.js to emit absolute canonical/OG URLs.
   metadataBase: new URL(SITE_URL),
 
   // ── Core <head> tags ──────────────────────────────────────────────────
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
-  authors: [{ name: "OrynticLabs Private Limited", url: SITE_URL }],
-  creator: "OrynticLabs Private Limited",
-  publisher: "OrynticLabs Private Limited",
+  authors: [{ name: "Oryntic Labs Private Limited", url: SITE_URL }],
+  creator: "Oryntic Labs Private Limited",
+  publisher: "Oryntic Labs Private Limited",
   keywords: [
-    "OrynticLabs",
+    "Oryntic Labs",
     "software engineering studio",
     "AI engineering",
     "custom software development",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     },
   },
 
-  // ── Open Graph — Facebook / Meta / WhatsApp / LinkedIn all read these ──
+  // ── Open Graph - Facebook / Meta / WhatsApp / LinkedIn all read these ──
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -92,7 +92,7 @@ export default function SiteLayout({
   return (
     <>
       {/* Guards against a known browser/extension DataCloneError thrown for
-          PerformanceServerTiming entries — harmless, but noisy in the console. */}
+          PerformanceServerTiming entries - harmless, but noisy in the console. */}
       <Script id="datacloneerror-guard" strategy="beforeInteractive">
         {`window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);`}
       </Script>

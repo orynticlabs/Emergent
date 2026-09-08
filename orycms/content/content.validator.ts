@@ -2,7 +2,7 @@ import type { OryCMSCollectionDefinition, OryCMSSchemaField } from "@/schema";
 import type { OryCMSContentData } from "@/types";
 import { OryCMSContentError } from "./content.errors";
 
-/** System fields injected by the engine — never treated as user-defined fields. */
+/** System fields injected by the engine - never treated as user-defined fields. */
 const SYSTEM_FIELDS = new Set([
   "id",
   "createdAt",

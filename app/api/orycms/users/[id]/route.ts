@@ -7,7 +7,7 @@ import { recordOryCMSAuditLog } from "@/audit";
 
 /**
  * Throws VALIDATION_ERROR if `beforeRoleName` is the Super Admin role and
- * this change would leave zero active Super Admins — shared by the role
+ * this change would leave zero active Super Admins - shared by the role
  * change and delete paths below.
  */
 async function assertNotLastSuperAdmin(beforeRoleName: string | null | undefined): Promise<void> {
@@ -15,7 +15,7 @@ async function assertNotLastSuperAdmin(beforeRoleName: string | null | undefined
   const activeCount = await countOryCMSActiveUsersByRoleName(ORYCMS_SUPER_ADMIN_ROLE);
   if (activeCount <= 1) {
     throw Object.assign(
-      new Error("At least one active Super Admin must remain — assign another Super Admin first."),
+      new Error("At least one active Super Admin must remain - assign another Super Admin first."),
       { code: "VALIDATION_ERROR", statusCode: 422 },
     );
   }
@@ -48,7 +48,7 @@ export async function PATCH(request: NextRequest, { params }: RouteCtx) {
     };
 
     // Self-elevation guard: you can grant/change OTHER users' roles with
-    // users:update, but never your own — otherwise this permission alone
+    // users:update, but never your own - otherwise this permission alone
     // would let anyone with it hand themselves a more powerful role.
     if (body.roleId !== undefined && id === session.userId) {
       return toErrorResponse(

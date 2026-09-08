@@ -126,7 +126,7 @@ function InviteMemberForm({
         });
       } else {
         toast.message("Invite created", {
-          description: `Email delivery isn't configured — share this link with them: ${result.inviteLink}`,
+          description: `Email delivery isn't configured - share this link with them: ${result.inviteLink}`,
         });
       }
       reset();
@@ -208,7 +208,7 @@ function InviteMemberForm({
                 </select>
               </div>
               <p className="rounded-md bg-surface-muted/60 px-3 py-2 text-[11.5px] text-muted-foreground">
-                They'll receive an email with a link to set their own password — no password needed here.
+                They'll receive an email with a link to set their own password - no password needed here.
               </p>
               {error && <p className="text-[12px] text-destructive">{error}</p>}
               <div className="flex items-center gap-2 pt-1">
@@ -346,7 +346,7 @@ function MemberRow({
 
       <div className="min-w-0 flex-1 basis-[200px]">
         <div className="flex items-center gap-1.5">
-          <span className="truncate text-[13px] font-medium">{member.name || "—"}</span>
+          <span className="truncate text-[13px] font-medium">{member.name || "-"}</span>
           {isSelf && (
             <Badge variant="outline" className="shrink-0 text-[10px]">
               You
@@ -455,7 +455,7 @@ export function OryCMSUsersAdminPage() {
   }, [sessionLoaded, canRead]);
 
   // `canRead` fails closed (false) while the session is still loading (see
-  // useOryCMSPermission) — without this check, every gated page flashes its
+  // useOryCMSPermission) - without this check, every gated page flashes its
   // "no access" state for a beat on every fresh load before permissions
   // arrive and the real content pops in.
   if (!sessionLoaded) {

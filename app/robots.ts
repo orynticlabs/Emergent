@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // The OryCMS admin panel lives on this same domain — keep it out of
+        // The OryCMS admin panel lives on this same domain - keep it out of
         // crawling entirely (the /admin/* pages also carry robots:noindex
         // as a second layer, but disallowing here stops crawl budget being
         // spent on it in the first place).

@@ -172,7 +172,7 @@ const NAV: { section: string; items: Item[] }[] = [
 
 export function AppSidebar({ collapsed }: { collapsed: boolean }) {
   const pathname = usePathname();
-  // Accordion behavior: only one dropdown open at a time, all closed on load —
+  // Accordion behavior: only one dropdown open at a time, all closed on load -
   // opening one collapses whichever was previously open.
   const [openLabel, setOpenLabel] = useState<string | null>(null);
   const { permissions, loaded } = useOryCMSSession();
@@ -225,7 +225,7 @@ export function AppSidebar({ collapsed }: { collapsed: boolean }) {
           <div className="min-w-0">
             <div className="text-[13px] font-semibold tracking-tight truncate">OryCMS</div>
             <div className="truncate text-[11px] text-muted-foreground">
-              By OrynticLabs Private Limited
+              By Oryntic Labs Private Limited
             </div>
           </div>
         )}
@@ -234,7 +234,7 @@ export function AppSidebar({ collapsed }: { collapsed: boolean }) {
       <nav className="flex-1 overflow-y-auto py-3 px-2.5 space-y-5">
         {!loaded ? (
           // Permission-gated items are hidden fail-closed until the session
-          // loads (see `allow` above) — without this skeleton that reads as
+          // loads (see `allow` above) - without this skeleton that reads as
           // a real, much-shorter sidebar for a beat before everything pops
           // in, rather than an obviously-still-loading state.
           <div className="space-y-5" aria-hidden>

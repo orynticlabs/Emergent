@@ -1,4 +1,4 @@
-/* Standalone stylesheet for the mock "Dummy Platform" third-party app —
+/* Standalone stylesheet for the mock "Dummy Platform" third-party app -
    deliberately its own design system, not OryCMS's, so the connect flow
    reads as two genuinely separate products. */
 @import "tailwindcss" source(none);

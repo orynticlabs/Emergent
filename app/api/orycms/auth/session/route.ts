@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { protectOryCMSAdminRoute, OryCMSAuthError } from "@/auth";
 
-// GET /api/orycms/auth/session — returns the current session user
+// GET /api/orycms/auth/session - returns the current session user
 export async function GET(request: NextRequest) {
   try {
     const session = await protectOryCMSAdminRoute(request);

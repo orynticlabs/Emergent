@@ -139,7 +139,7 @@ describe("discoverOryCMSPlugins", () => {
     const dir = join(cwd, "plugins", "broken");
     await mkdir(dir, { recursive: true });
     await writeFile(join(dir, "package.json"), JSON.stringify({ type: "module" }));
-    // runtime throw — fails regardless of TypeScript support
+    // runtime throw - fails regardless of TypeScript support
     await writeFile(join(dir, "index.js"), `throw new Error("intentional import error");`);
 
     const { discovered, failed } = await discoverOryCMSPlugins({ cwd });
@@ -235,7 +235,7 @@ describe("discoverOryCMSPlugins", () => {
     const dir = join(cwd, "plugins", "ts-fallback");
     await mkdir(dir, { recursive: true });
     await writeFile(join(dir, "package.json"), JSON.stringify({ type: "module" }));
-    // index.ts throws at runtime — causes the fallback to index.js
+    // index.ts throws at runtime - causes the fallback to index.js
     await writeFile(join(dir, "index.ts"), `throw new Error("ts not supported here");`);
     await writeFile(
       join(dir, "index.js"),

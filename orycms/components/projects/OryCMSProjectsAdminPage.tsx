@@ -103,7 +103,7 @@ export async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> 
   return body.data as T;
 }
 
-/** Searchable client picker — filters by name or client ID as you type. */
+/** Searchable client picker - filters by name or client ID as you type. */
 export function ClientCombobox({
   id,
   clients,
@@ -244,7 +244,7 @@ function StatCard({
   );
 }
 
-/** Compact 0–100% bar — how much of a project's tasks are done. */
+/** Compact 0–100% bar - how much of a project's tasks are done. */
 function TaskProgress({ done, total }: { done: number; total: number }) {
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
   return (
@@ -308,7 +308,7 @@ export function OryCMSProjectsAdminPage() {
     }
   };
 
-  // `canRead` fails closed while the session is still loading — wait for it
+  // `canRead` fails closed while the session is still loading - wait for it
   // so a fresh page load doesn't flash "no access" before permissions arrive.
   if (!sessionLoaded) {
     return (
