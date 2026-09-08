@@ -3,20 +3,20 @@ import { CONTACT, CONTACT_FAQS } from "@site/data/content";
 import ContactClient from "./ContactClient";
 
 export const metadata = buildPageMetadata({
-  title: "Contact OrynticLabs | Talk to Our Software & AI Development Team",
+  title: "Contact Oryntic Labs | Talk to Our Software & AI Development Team",
   description:
-    "Get in touch with OrynticLabs to discuss web, mobile, AI, or software development for your business. Share your requirements and hear back from our team within 24 hours — no sales queue, no ticket number.",
+    "Get in touch with Oryntic Labs to discuss web, mobile, AI, or software development for your business. Share your requirements and hear back from our team within 24 hours - no sales queue, no ticket number.",
   path: "/contact-us",
 });
 
 const CONTACT_PAGE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  name: "Contact OrynticLabs",
+  name: "Contact Oryntic Labs",
   url: `${SITE_URL}/contact-us`,
   about: {
     "@type": "Organization",
-    name: "OrynticLabs",
+    name: "Oryntic Labs",
     url: SITE_URL,
     email: CONTACT.general,
     telephone: CONTACT.phone,

@@ -1,7 +1,7 @@
-# Auth Testing Playbook (OrynticLabs admin)
+# Auth Testing Playbook (Oryntic Labs admin)
 
 ## Step 1: MongoDB verification
-- `db.admins.find({role: "admin"})` — admin exists, password_hash starts with `$2b$`
+- `db.admins.find({role: "admin"})` - admin exists, password_hash starts with `$2b$`
 - Indexes: admins.email (unique), login_attempts.identifier
 
 ## Step 2: API testing

@@ -3,7 +3,7 @@
 import { Reveal, ArrowLink } from "@site/components/site/Reveal";
 
 /**
- * Shared empty-state block for API-driven or filterable content on the marketing site —
+ * Shared empty-state block for API-driven or filterable content on the marketing site -
  * e.g. a portfolio filter with no matches. Keep this brand-consistent instead of a bare
  * "no results" string; wire it wherever a list/grid can legitimately render zero items
  * while the surrounding section still needs to stay visible.

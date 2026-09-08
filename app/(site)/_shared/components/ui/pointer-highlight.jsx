@@ -7,7 +7,7 @@ import { cn } from "@site/lib/utils";
 /**
  * Aceternity "PointerHighlight": once the wrapped word scrolls into view, a
  * rectangle draws around it and fades, then a small cursor/pointer icon
- * appears at its corner and fades in — reads like a design-tool annotation
+ * appears at its corner and fades in - reads like a design-tool annotation
  * rather than a static highlight box.
  */
 export function PointerHighlight({ children, rectangleClassName, pointerClassName, containerClassName }) {

@@ -230,7 +230,7 @@ export function OryCMSBookingAvailabilityPage() {
             <Label className="text-[12px] text-muted-foreground">Business timezone</Label>
             <Input value={availability.settings.timezone} disabled className="mt-1.5 h-9 text-[12.5px]" />
             <p className="mt-1.5 text-[11.5px] text-muted-foreground">
-              Fixed to Asia/Kolkata for now — every time above is interpreted in India Standard Time.
+              Fixed to Asia/Kolkata for now - every time above is interpreted in India Standard Time.
             </p>
           </div>
         </CardContent>

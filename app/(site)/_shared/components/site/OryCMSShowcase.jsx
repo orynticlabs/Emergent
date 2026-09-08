@@ -19,7 +19,7 @@ export default function OryCMSShowcase() {
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-white/50 md:text-base">
-              Our own headless CMS — collections, roles, workspaces, and a live admin
+              Our own headless CMS - collections, roles, workspaces, and a live admin
               dashboard, running this very site.
             </p>
           </>

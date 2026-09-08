@@ -5,7 +5,7 @@ import { markOryCMSNotificationRead } from "@/notifications";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// PATCH /api/orycms/notifications/:id — mark a notification read/unread
+// PATCH /api/orycms/notifications/:id - mark a notification read/unread
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await protectOryCMSAdminRoute(request);

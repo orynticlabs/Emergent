@@ -19,7 +19,7 @@ const activity = [
   {
     icon: PackageX,
     iconClass: "text-warning",
-    text: "Ceramic Mug — Sand is low stock (4 left)",
+    text: "Ceramic Mug - Sand is low stock (4 left)",
     meta: "8m ago",
   },
   { icon: UserPlus, iconClass: "text-info", text: "12 new customers today", meta: "14m ago" },
@@ -96,9 +96,9 @@ export function InsightsPanel({ open }: { open: boolean }) {
           </div>
           <div className="mt-2.5 space-y-1.5">
             {[
-              { name: "Ceramic Mug — Sand", stock: 4 },
-              { name: "Linen Tee — M", stock: 2 },
-              { name: "Canvas Tote — Natural", stock: 6 },
+              { name: "Ceramic Mug - Sand", stock: 4 },
+              { name: "Linen Tee - M", stock: 2 },
+              { name: "Canvas Tote - Natural", stock: 6 },
             ].map((p) => (
               <div key={p.name} className="flex items-center justify-between py-1 text-[12.5px]">
                 <span className="truncate pr-2">{p.name}</span>

@@ -9,7 +9,7 @@ import type {
 } from "./whatsapp.types";
 
 /**
- * Repository for orycms_whatsapp_settings — plain persistence only. No
+ * Repository for orycms_whatsapp_settings - plain persistence only. No
  * encryption/decryption happens here (whatsapp.service.ts owns that, the
  * same split auth/mfa.ts uses around auth/mfa.crypto.ts) and no permission
  * checks happen here (routes gate access via requireOryCMSPermission /
@@ -17,7 +17,7 @@ import type {
  *
  * The table is a singleton: OryCMS connects to exactly one WhatsApp
  * account at a time in this step, so every method operates on "the"
- * settings row rather than taking an id — mirroring settings.repo.ts's
+ * settings row rather than taking an id - mirroring settings.repo.ts's
  * getOryCMSSetting/setOryCMSSetting shape for a single-row concern.
  */
 
@@ -49,7 +49,7 @@ export async function getOryCMSWhatsAppSettings(
 
 /**
  * Creates the WhatsApp settings row if none exists, or replaces every
- * field on the existing one (full-record upsert — matching the "save"
+ * field on the existing one (full-record upsert - matching the "save"
  * naming distinct from the partial "update" below).
  */
 export async function saveOryCMSWhatsAppSettings(
@@ -110,7 +110,7 @@ export async function saveOryCMSWhatsAppSettings(
 
 /**
  * Partial update of the existing settings row. Throws
- * WHATSAPP_SETTINGS_NOT_FOUND if nothing has been saved yet — callers that
+ * WHATSAPP_SETTINGS_NOT_FOUND if nothing has been saved yet - callers that
  * want create-or-update semantics should use saveOryCMSWhatsAppSettings.
  */
 export async function updateOryCMSWhatsAppSettings(
@@ -171,7 +171,7 @@ export async function deleteOryCMSWhatsAppSettings(pool: Pool = getOryCMSPool())
 // ── Connection test ────────────────────────────────────────────────────────────
 
 /**
- * Placeholder only — no provider API is called. Verifies a settings row
+ * Placeholder only - no provider API is called. Verifies a settings row
  * exists and reports which required fields are still missing, but performs
  * no network request. A later step replaces this with a real Meta Cloud
  * API health check while keeping the same signature and result shape.

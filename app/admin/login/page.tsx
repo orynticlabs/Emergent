@@ -43,7 +43,7 @@ function LoginForm() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  // MFA challenge state — the challenge token lives ONLY here, in memory.
+  // MFA challenge state - the challenge token lives ONLY here, in memory.
   // Never written to a cookie, localStorage, sessionStorage, or the URL, and
   // never logged. It's cleared on "back", on any MFA failure, and once the
   // real session cookie is set by the server.
@@ -129,7 +129,7 @@ function LoginForm() {
   };
 
   // Discards the in-memory challenge and returns to the password screen.
-  // No server call — no session exists yet, so there's nothing to log out of.
+  // No server call - no session exists yet, so there's nothing to log out of.
   const handleBackToLogin = () => {
     if (isVerifying) return;
     setChallengeToken(null);
@@ -139,7 +139,7 @@ function LoginForm() {
   };
 
   // Ends the MFA attempt on the client and returns to the password screen
-  // with a message — used for "too many attempts" and "expired/invalid
+  // with a message - used for "too many attempts" and "expired/invalid
   // challenge" outcomes, which both require a fresh password + challenge.
   const failMfaChallenge = (message: string) => {
     setChallengeToken(null);
@@ -163,13 +163,13 @@ function LoginForm() {
       const data = (await res.json()) as { success: boolean };
 
       if (res.ok && data.success) {
-        // Server has set the session cookie — nothing to do here but redirect.
+        // Server has set the session cookie - nothing to do here but redirect.
         redirectAfterLogin();
         return;
       }
 
       if (res.status === 422) {
-        // Wrong code — same challenge, let the user retry.
+        // Wrong code - same challenge, let the user retry.
         setError("Invalid verification code. Please try again.");
         setMfaCode("");
         setIsVerifying(false);
@@ -182,7 +182,7 @@ function LoginForm() {
         return;
       }
 
-      // Expired/invalid challenge, or anything else — start over from
+      // Expired/invalid challenge, or anything else - start over from
       // password. Deliberately generic: never surface server error detail.
       failMfaChallenge("Your session expired. Please sign in again.");
     } catch {
@@ -212,7 +212,7 @@ function LoginForm() {
               <div>
                 <div className="text-[18px] font-semibold tracking-tight">OryCMS</div>
                 <div className="text-[12px] text-muted-foreground">
-                  By OrynticLabs Private Limited
+                  By Oryntic Labs Private Limited
                 </div>
               </div>
             </div>
@@ -227,8 +227,8 @@ function LoginForm() {
               Sign in to manage clients, projects, and delivery.
             </h1>
             <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
-              This is OrynticLabs' internal console for running client engagements, project
-              delivery, and the marketing site — reserved for our team. Enter your credentials to
+              This is Oryntic Labs' internal console for running client engagements, project
+              delivery, and the marketing site - reserved for our team. Enter your credentials to
               continue.
             </p>
 
@@ -274,7 +274,7 @@ function LoginForm() {
           <div>
             <div className="text-[20px] font-semibold tracking-tight">OryCMS</div>
             <div className="mt-0.5 text-[12px] text-muted-foreground">
-              by OrynticLabs Private Limited
+              by Oryntic Labs Private Limited
             </div>
           </div>
         </div>

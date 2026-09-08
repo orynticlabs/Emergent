@@ -8,7 +8,7 @@ import { AnimatedTooltip } from "@site/components/ui/animated-tooltip";
 
 /**
  * Site-wide closing CTA, shown on every page (rendered from SiteShell, just
- * above the footer) — not page-specific content. Headline reveals line by
+ * above the footer) - not page-specific content. Headline reveals line by
  * line via KineticLine, the same mechanism the home/hero headlines use,
  * instead of the whole line appearing at once.
  */
@@ -26,7 +26,7 @@ export default function BuildTogetherCTA() {
             </h2>
             <Reveal delay={0.25}>
               <p className="mt-5 max-w-lg text-base leading-relaxed text-white/60 md:text-lg">
-                Tell us what you&apos;re building and hear back from our team within 24 hours — no sales
+                Tell us what you&apos;re building and hear back from our team within 24 hours - no sales
                 queue, no ticket number.
               </p>
 

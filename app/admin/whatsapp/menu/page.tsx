@@ -21,10 +21,10 @@ import {
 import { cn } from "@/lib/utils";
 
 /**
- * WhatsApp Menu Builder — /admin/whatsapp/menu. Step 10: configuration
+ * WhatsApp Menu Builder - /admin/whatsapp/menu. Step 10: configuration
  * only, via the existing GET/PATCH /api/orycms/whatsapp/menu route (Step
- * 10's own new API — no other backend route is touched). Nothing here is
- * wired to the webhook, numbered-reply routing, or AI replies yet — saving
+ * 10's own new API - no other backend route is touched). Nothing here is
+ * wired to the webhook, numbered-reply routing, or AI replies yet - saving
  * a menu here has no runtime effect until a later step reads it.
  */
 
@@ -47,7 +47,7 @@ interface OryCMSWhatsAppMenuSettings {
   options: OryCMSWhatsAppMenuOptionRecord[];
 }
 
-/** Local editable row — `key` is a stable React key independent of the server id (new rows don't have one yet). */
+/** Local editable row - `key` is a stable React key independent of the server id (new rows don't have one yet). */
 interface EditableOption {
   key: string;
   number: number;
@@ -239,7 +239,7 @@ export default function WhatsAppMenuBuilderPage() {
             <h1 className="text-[26px] font-semibold tracking-tight">WhatsApp Menu Builder</h1>
             <p className="mt-1 text-[13.5px] text-muted-foreground">
               Define a numbered menu customers can choose from. Not connected to the webhook or
-              any reply flow yet — this only saves configuration.
+              any reply flow yet - this only saves configuration.
             </p>
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function WhatsAppMenuBuilderPage() {
               <div className="mt-5 space-y-4">
                 {options.length === 0 && (
                   <div className="rounded-lg border border-dashed border-border p-6 text-center text-[12px] text-muted-foreground">
-                    No options yet — add one to start building the menu.
+                    No options yet - add one to start building the menu.
                   </div>
                 )}
 

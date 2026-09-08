@@ -75,7 +75,7 @@ export function getOryCMSEmailProvider(
     case "custom":
       return createCustomProvider(options);
     default: {
-      // Exhaustiveness guard — unreachable if KNOWN_PROVIDERS matches the union.
+      // Exhaustiveness guard - unreachable if KNOWN_PROVIDERS matches the union.
       const _never: never = provider;
       throw new Error(`Unknown OryCMS email provider: ${String(_never)}`);
     }

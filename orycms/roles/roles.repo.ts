@@ -137,7 +137,7 @@ export async function deleteOryCMSRole(id: string, pool: Pool = getOryCMSPool())
   if (Number(inUse.rows[0].count) > 0) {
     throw Object.assign(
       new Error(
-        `This role is assigned to ${inUse.rows[0].count} user(s) — reassign them before deleting it.`,
+        `This role is assigned to ${inUse.rows[0].count} user(s) - reassign them before deleting it.`,
       ),
       { code: "VALIDATION_ERROR", statusCode: 422 },
     );
@@ -150,7 +150,7 @@ export async function deleteOryCMSRole(id: string, pool: Pool = getOryCMSPool())
 // ── Role ↔ permission assignment ────────────────────────────────────────────────
 
 /**
- * Resolves a set of permission ids to their {resource, action} records —
+ * Resolves a set of permission ids to their {resource, action} records -
  * used by the roles/:id/permissions route to (a) reject ids that don't
  * exist and (b) check the requesting caller isn't granting a permission
  * they don't themselves hold (see that route for the ceiling check).

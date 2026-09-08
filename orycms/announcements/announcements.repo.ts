@@ -4,7 +4,7 @@ import { OryCMSAuthError } from "@/auth";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
-/** Badge color — mapped to the marketing site's brand tokens, not raw CSS. */
+/** Badge color - mapped to the marketing site's brand tokens, not raw CSS. */
 export type OryCMSAnnouncementColor = "orange" | "blue" | "neutral";
 
 export interface OryCMSAnnouncementRecord {

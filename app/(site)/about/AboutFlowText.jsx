@@ -4,7 +4,7 @@
  * Aceternity "Wispr Flow" text-along-a-path effect, used here as a purely
  * decorative background element (the original's drag-to-edit path tooling
  * is a design-time aid, not something a visitor needs, so it's dropped).
- * A long, unbroken paragraph about OrynticLabs drifts along a curved path.
+ * A long, unbroken paragraph about Oryntic Labs drifts along a curved path.
  */
 
 const VIEW_W = 1048;
@@ -54,7 +54,7 @@ function buildPathD() {
 const PATH_D = buildPathD();
 
 const FLOW_TEXT =
-  "We started OrynticLabs because most software studios either move fast and break things or move carefully and never ship anything real, and we wanted neither — we wanted a team that scopes honestly before writing a line of code, ships in two-week sprints with a working demo every Friday, tells you the truth when a timeline is slipping instead of hiding it until it's too late, and stays involved from the first kickoff call through production and long after launch, because software nobody uses isn't finished, it's just deployed, and that difference is the whole point of the work.";
+  "We started Oryntic Labs because most software studios either move fast and break things or move carefully and never ship anything real, and we wanted neither - we wanted a team that scopes honestly before writing a line of code, ships in two-week sprints with a working demo every Friday, tells you the truth when a timeline is slipping instead of hiding it until it's too late, and stays involved from the first kickoff call through production and long after launch, because software nobody uses isn't finished, it's just deployed, and that difference is the whole point of the work.";
 
 export default function AboutFlowText({ speed = 25, fontSize = 15, textOpacity = 0.5, textColor = "#ffffff", strokeColor = "rgba(255,255,255,0.08)" }) {
   return (

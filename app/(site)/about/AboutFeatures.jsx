@@ -14,7 +14,7 @@ import { WorldMap } from "@site/components/ui/world-map";
 import { SectionHead } from "@site/components/site/Reveal";
 import { CanvasText } from "@site/components/ui/canvas-text";
 
-// Real brand marks (via simple-icons), not plain-text name chips — a
+// Real brand marks (via simple-icons), not plain-text name chips - a
 // representative, recognizable slice of the full stack on /stack, spanning
 // frontend, backend, data, and infra rather than an arbitrary sample.
 const TECH_LOGOS = [
@@ -48,7 +48,7 @@ function SkeletonStack() {
       <div className="group mx-auto h-full w-full bg-white/5 p-5 shadow-2xl">
         <img
           src={IMAGES.dashboard}
-          alt="OrynticLabs product interface"
+          alt="Oryntic Labs product interface"
           loading="lazy"
           decoding="async"
           className="aspect-square h-full w-full rounded-sm object-cover object-left-top"
@@ -144,7 +144,7 @@ export default function AboutFeatures() {
     },
     {
       title: "See the work, not just the pitch",
-      description: "Real projects we've shipped — click through to the full portfolio.",
+      description: "Real projects we've shipped - click through to the full portfolio.",
       skeleton: <SkeletonPortfolio project={featuredProject} />,
       className: "col-span-1 lg:col-span-3 lg:border-r border-white/10",
     },
@@ -177,7 +177,7 @@ export default function AboutFeatures() {
                 />
               </>
             }
-            description="From product strategy to production infrastructure, one team carries the work through — here's what that actually looks like."
+            description="From product strategy to production infrastructure, one team carries the work through - here's what that actually looks like."
           />
         </div>
 

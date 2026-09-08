@@ -62,7 +62,7 @@ function slugify(value: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-/** Appends -2, -3, … until the slug doesn't collide with an existing one —
+/** Appends -2, -3, … until the slug doesn't collide with an existing one -
  *  there's no slug input for the admin to fix a collision by hand. */
 function uniqueSlug(base: string, taken: Set<string>): string {
   if (!base) return base;
@@ -96,7 +96,7 @@ function Breadcrumb({ isEdit }: { isEdit: boolean }) {
   );
 }
 
-/** Shared create/edit page — `caseStudyId` omitted means "create new". */
+/** Shared create/edit page - `caseStudyId` omitted means "create new". */
 export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string }) {
   const router = useRouter();
   const isEdit = !!caseStudyId;
@@ -140,7 +140,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
   }, [isEdit, caseStudyId, sessionLoaded, canWrite]);
 
   // Used to flag a sort-order collision, and to keep the auto-generated slug
-  // (on create) from colliding with an existing one — there's no slug input
+  // (on create) from colliding with an existing one - there's no slug input
   // for the admin to fix that by hand, so it has to be avoided automatically.
   useEffect(() => {
     if (!sessionLoaded || !canWrite) return;
@@ -152,7 +152,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
   const sortOrderConflict = others.find((c) => c.sortOrder === Number(form.sortOrder));
   const canSubmit = form.title.trim().length > 0 && form.slug.trim().length > 0 && !submitting;
 
-  // Slug is derived, not typed — on create it's recomputed from the title
+  // Slug is derived, not typed - on create it's recomputed from the title
   // (disambiguated against existing slugs); on edit the original slug is
   // kept fixed so the case study's URL never changes under someone editing
   // the title.
@@ -182,7 +182,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
     setForm((f) => ({ ...f, results: f.results.filter((_, i) => i !== index) }));
 
   // Device file → validate type/size → hand off to the crop dialog as an
-  // object URL. Nothing is uploaded yet; only the *cropped* result is —
+  // object URL. Nothing is uploaded yet; only the *cropped* result is -
   // same flow as Companies' logo upload.
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -359,7 +359,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
                   autoFocus
                 />
                 <p className="text-[11px] text-muted-foreground">
-                  URL: /portfolio/{form.slug || "…"} — generated automatically from the title.
+                  URL: /portfolio/{form.slug || "…"} - generated automatically from the title.
                 </p>
               </div>
 
@@ -450,7 +450,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label className="!mb-0">Approach — numbered steps</Label>
+                  <Label className="!mb-0">Approach - numbered steps</Label>
                   <Button type="button" variant="outline" size="sm" className="h-7 gap-1 text-[11.5px]" onClick={addApproachStep}>
                     <Plus className="h-3 w-3" />
                     Add step
@@ -553,7 +553,7 @@ export function OryCMSCaseStudyFormPage({ caseStudyId }: { caseStudyId?: string 
                   className="h-4 w-4 rounded border-border"
                 />
                 <Label htmlFor="cs-active" className="!mb-0">
-                  Active — visible on the site
+                  Active - visible on the site
                 </Label>
               </div>
             </CardContent>

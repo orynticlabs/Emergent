@@ -103,7 +103,7 @@ export function useOryCMSPermission(resource: string, action: string): boolean {
   return hasOryCMSClientPermission(permissions, resource, action);
 }
 
-/** Pure permission check against a flat permission list — matches backend semantics. */
+/** Pure permission check against a flat permission list - matches backend semantics. */
 export function hasOryCMSClientPermission(
   permissions: string[],
   resource: string,
@@ -115,7 +115,7 @@ export function hasOryCMSClientPermission(
 /**
  * Declarative gate for action UI (buttons, menu items). Renders `children` only
  * when the current role may perform `resource:action`; otherwise renders
- * `fallback` (default: nothing). The backend still enforces the permission —
+ * `fallback` (default: nothing). The backend still enforces the permission -
  * this only hides UI the user can't use.
  *
  *   <Can resource="users" action="delete"><DeleteButton /></Can>

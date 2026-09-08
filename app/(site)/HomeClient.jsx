@@ -9,7 +9,7 @@ import { Skeleton } from "@site/components/ui/skeleton";
 import ClientMarquee from "@site/components/site/ClientMarquee";
 import { CanvasText } from "@site/components/ui/canvas-text";
 
-// Everything below the hero is code-split out of the initial bundle — each
+// Everything below the hero is code-split out of the initial bundle - each
 // chunk downloads only once it's about to be needed, so first load only
 // pays for the hero. A skeleton fills the section's place until then,
 // instead of a layout jump when the real content arrives.
@@ -90,7 +90,7 @@ function Hero() {
       <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
-            OrynticLabs — Full-Spectrum Technology Company
+            Oryntic Labs - Full-Spectrum Technology Company
           </p>
         </motion.div>
 
@@ -115,7 +115,7 @@ function Hero() {
           className="mx-auto mt-8 max-w-3xl text-base md:text-lg leading-relaxed text-white/65"
         >
           We design, build, and deliver secure, scalable technology across the complete software
-          lifecycle — combining strong architecture, data engineering, and AI capability to move
+          lifecycle - combining strong architecture, data engineering, and AI capability to move
           organizations from strategy to reliable systems in production.
         </motion.p>
 

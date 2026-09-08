@@ -103,7 +103,7 @@ async function loadUserConfig(
   }
 
   // configUrl.href is only known at runtime (it's the project's own
-  // orycms.config.ts, resolved from cwd) — webpackIgnore stops Next/webpack
+  // orycms.config.ts, resolved from cwd) - webpackIgnore stops Next/webpack
   // from trying to statically analyze this as a bundled dependency.
   const configModule = (await import(/* webpackIgnore: true */ configUrl.href)) as OryCMSConfigModule;
   const userConfig = configModule.default ?? configModule.config ?? {};

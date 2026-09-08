@@ -162,7 +162,7 @@ export function OryCMSRolesListPage() {
   };
 
   // `canRead` fails closed while the session is still loading (see
-  // useOryCMSPermission) — check `sessionLoaded` first so a fresh page load
+  // useOryCMSPermission) - check `sessionLoaded` first so a fresh page load
   // doesn't flash the "no access" state before permissions actually arrive.
   if (!sessionLoaded) {
     return (
@@ -295,7 +295,7 @@ export function OryCMSRolesListPage() {
                     </div>
                   </td>
                   <td className="px-4 py-3 text-[12.5px] text-muted-foreground">
-                    <span className="line-clamp-1">{role.description || "—"}</span>
+                    <span className="line-clamp-1">{role.description || "-"}</span>
                   </td>
                   <td className="px-4 py-3">
                     <Badge variant="outline" className="text-[10.5px]">
@@ -398,7 +398,7 @@ export function OryCMSRoleFormPage({ roleId }: { roleId?: string }) {
       .finally(() => setLoading(false));
   }, [isNew, roleId]);
 
-  // For a brand-new role there's nothing to assign permissions to yet — still
+  // For a brand-new role there's nothing to assign permissions to yet - still
   // load the catalog so the matrix can render (all unchecked) once created.
   useEffect(() => {
     if (!isNew) return;
@@ -660,10 +660,10 @@ export function OryCMSRoleFormPage({ roleId }: { roleId?: string }) {
                                       togglePermission(perm.id, checked === true)
                                     }
                                     disabled={!canEditFields}
-                                    aria-label={`${resourceLabel(resource)} — ${ACTION_LABELS[action]}`}
+                                    aria-label={`${resourceLabel(resource)} - ${ACTION_LABELS[action]}`}
                                   />
                                 ) : (
-                                  <span className="text-border-strong">—</span>
+                                  <span className="text-border-strong">-</span>
                                 )}
                               </td>
                             );

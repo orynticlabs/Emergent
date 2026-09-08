@@ -21,7 +21,7 @@ import type { OryCMSPaymentLinkRecord } from "@/payments";
  * Creates a Razorpay Payment Link via POST /api/orycms/payments/links (which
  * calls the real Razorpay API server-side, then persists the returned link).
  * Amount is entered in rupees here and converted to paise before it's ever
- * sent — Razorpay's API and this codebase's stored `amount` column are both
+ * sent - Razorpay's API and this codebase's stored `amount` column are both
  * in the smallest currency unit.
  */
 export function OryCMSCreatePaymentLinkDialog({
@@ -104,7 +104,7 @@ export function OryCMSCreatePaymentLinkDialog({
         <DialogHeader>
           <DialogTitle>New payment link</DialogTitle>
           <DialogDescription>
-            Creates a Razorpay payment link customers can pay through directly — no card details
+            Creates a Razorpay payment link customers can pay through directly - no card details
             ever touch OryCMS.
           </DialogDescription>
         </DialogHeader>
@@ -113,7 +113,7 @@ export function OryCMSCreatePaymentLinkDialog({
           <div className="space-y-3">
             <div className="flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 px-3 py-2.5 text-[12.5px] text-success">
               <Link2 className="h-4 w-4 shrink-0" />
-              Link created — share it with your customer.
+              Link created - share it with your customer.
             </div>
             <div className="flex items-center gap-2 rounded-md border border-border bg-surface-muted/40 px-3 py-2">
               <span className="min-w-0 flex-1 truncate text-[12.5px]">{created.shortUrl}</span>

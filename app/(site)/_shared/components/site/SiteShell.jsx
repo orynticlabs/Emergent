@@ -14,7 +14,20 @@ const SmoothScroll = ({ children }) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    const lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      allowNestedScroll: true,
+      prevent: (node) => {
+        return (
+          node.hasAttribute("data-lenis-prevent") ||
+          Boolean(node.closest("[data-lenis-prevent]")) ||
+          Boolean(node.closest("[role='dialog']")) ||
+          Boolean(node.closest("[role='listbox']")) ||
+          Boolean(node.closest("[data-radix-popper-content-wrapper]"))
+        );
+      },
+    });
     window.__lenis = lenis;
     let raf;
     const loop = (time) => {

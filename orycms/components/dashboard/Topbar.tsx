@@ -77,7 +77,7 @@ export function Topbar({
     try {
       await fetch("/api/orycms/auth/logout", { method: "POST", credentials: "include" });
     } catch {
-      // Best-effort — still navigate to login even if the request failed.
+      // Best-effort - still navigate to login even if the request failed.
     }
     await refresh();
     router.push("/admin/login");

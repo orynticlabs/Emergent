@@ -1,14 +1,14 @@
 // Plain data module (no "use client") so both the server page.jsx (JSON-LD)
 // and client components (HireStaffClient, HireStaffRequestModal) can import
-// the same arrays — a data export from a "use client" module can't be
+// the same arrays - a data export from a "use client" module can't be
 // safely consumed by a server component.
 
 const PEXELS_AVATAR = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=300&w=300`;
 
 export const ROLES = [
-  { id: 1, title: "Frontend Engineer", tags: ["React", "Next.js", "TypeScript"], blurb: "Ships production UI, not just components — performance, accessibility, and design fidelity included.", image: PEXELS_AVATAR(220453) },
+  { id: 1, title: "Frontend Engineer", tags: ["React", "Next.js", "TypeScript"], blurb: "Ships production UI, not just components - performance, accessibility, and design fidelity included.", image: PEXELS_AVATAR(220453) },
   { id: 2, title: "Backend Engineer", tags: ["Node.js", "FastAPI", "PostgreSQL"], blurb: "Designs APIs and data models that hold up under real production load, not just a demo.", image: PEXELS_AVATAR(1043471) },
-  { id: 3, title: "Mobile Engineer", tags: ["React Native", "Swift", "Kotlin"], blurb: "Native or cross-platform, chosen for your product — not a default they reach for every time.", image: PEXELS_AVATAR(733872) },
+  { id: 3, title: "Mobile Engineer", tags: ["React Native", "Swift", "Kotlin"], blurb: "Native or cross-platform, chosen for your product - not a default they reach for every time.", image: PEXELS_AVATAR(733872) },
   { id: 4, title: "AI/ML Engineer", tags: ["PyTorch", "LangChain", "RAG"], blurb: "Builds and ships trained models and agent systems into production, not just notebooks.", image: PEXELS_AVATAR(415829) },
   { id: 5, title: "DevOps Engineer", tags: ["AWS", "Kubernetes", "Terraform"], blurb: "Owns CI/CD, observability, and infrastructure-as-code so releases stop being an event.", image: PEXELS_AVATAR(1239291) },
   { id: 6, title: "QA Engineer", tags: ["Playwright", "Cypress", "Test Strategy"], blurb: "Builds a real test strategy and automation suite, not just manual click-throughs.", image: PEXELS_AVATAR(1181686) },
@@ -37,10 +37,28 @@ export const ENGAGEMENT_MODELS = [
 ];
 
 export const HIRE_STAFF_FAQS = [
-  { q: "How fast can I actually get an engineer working?", a: "Most engagements get a shortlist within 48 hours of a clear brief, and start within a week of selecting a candidate. Urgent needs can move faster once requirements are confirmed." },
-  { q: "Do I own the code and IP the engineer produces?", a: "Yes. Full IP ownership transfers to you as standard in every engagement — there's no separate negotiation for it." },
-  { q: "What happens if the engineer isn't the right fit?", a: "We replace them at no additional cost. The goal is the right engineer for your team, not billing for a mismatch." },
-  { q: "How is billing structured?", a: "Staff augmentation and dedicated teams are billed monthly per engineer or pod. Project-based work is milestone-based against a fixed scope. No hourly surprises either way." },
-  { q: "Will the engineer actually work in my timezone?", a: "Yes — timezone overlap is agreed before the engagement starts, not left to chance once someone's already onboarded." },
-  { q: "Is there a minimum commitment period?", a: "No long-term lock-in. Scale up, scale down, or end the engagement with standard notice — month to month." },
+  {
+    q: "How fast can I actually get an engineer working?",
+    a: "Most engagements receive a candidate shortlist within 48 hours of a brief, and engineers typically onboard and start shipping inside the first week. Urgent requirements can be accelerated once scope is confirmed.",
+  },
+  {
+    q: "Do I own the code and IP the engineer produces?",
+    a: "Yes. 100% of the code, designs, documentation, and intellectual property produced during the engagement belong entirely to your company from day one.",
+  },
+  {
+    q: "What happens if an engineer isn't the right fit?",
+    a: "We replace the engineer promptly at zero additional cost. Our priority is long-term delivery velocity and cultural fit, not billing for a mismatch.",
+  },
+  {
+    q: "How is billing structured?",
+    a: "Staff augmentation and dedicated pods are billed on a predictable monthly retainer per engineer. Fixed-scope projects follow milestone-based billing with no hourly surprises.",
+  },
+  {
+    q: "Will the engineer actually work in my timezone?",
+    a: "Yes. Dedicated working hour overlap with your core team hours (US, UK, Europe, or APAC) is agreed upon before onboarding starts.",
+  },
+  {
+    q: "Is there a minimum commitment period?",
+    a: "No long-term lock-in. You can scale capacity up, adjust roles, or wind down month-to-month with standard notice.",
+  },
 ];

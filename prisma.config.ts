@@ -11,7 +11,7 @@ export default defineConfig({
   schema: path.join(__dirname, "prisma", "schema.prisma"),
   datasource: {
     // CLI/migration commands (generate, db push, migrate) connect directly,
-    // bypassing Neon's connection pooler — pgbouncer's transaction pooling
+    // bypassing Neon's connection pooler - pgbouncer's transaction pooling
     // doesn't support the prepared statements/DDL these commands issue.
     // The app's runtime PrismaClient uses the pooled DATABASE_URL instead,
     // via a driver adapter (see orycms/lib/prisma.ts).

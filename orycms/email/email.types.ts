@@ -17,7 +17,7 @@ export interface OryCMSEmailMessage {
 
 /**
  * A pluggable email transport. Implementations lazy-load their SDK so OryCMS
- * ships with zero hard email dependencies — the SDK is only required when a
+ * ships with zero hard email dependencies - the SDK is only required when a
  * developer actually selects that provider.
  */
 export interface OryCMSEmailProvider {

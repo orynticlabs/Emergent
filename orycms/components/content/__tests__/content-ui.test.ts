@@ -1,6 +1,6 @@
 /**
  * Pure logic tests for OryCMS content UI helpers.
- * No DOM rendering — tests the utility functions extracted from the components.
+ * No DOM rendering - tests the utility functions extracted from the components.
  */
 import { describe, it, expect } from "vitest";
 import type { OryCMSCollectionDefinition } from "@/schema";
@@ -8,7 +8,7 @@ import type { OryCMSContentEntry } from "@/types";
 
 // ── Helpers under test (extracted to be independently testable) ───────────────
 
-/** @see OryCMSContentTable — getPrimaryField */
+/** @see OryCMSContentTable - getPrimaryField */
 function getPrimaryField(collection: OryCMSCollectionDefinition): string {
   const f = collection.fields.find(
     (f) => !f.private && ["text", "email", "slug", "textarea"].includes(f.type),
@@ -16,16 +16,16 @@ function getPrimaryField(collection: OryCMSCollectionDefinition): string {
   return f?.name ?? "id";
 }
 
-/** @see OryCMSContentTable — formatCell */
+/** @see OryCMSContentTable - formatCell */
 function formatCell(value: unknown): string {
-  if (value == null) return "—";
+  if (value == null) return "-";
   if (typeof value === "boolean") return value ? "Yes" : "No";
-  if (Array.isArray(value)) return value.join(", ") || "—";
+  if (Array.isArray(value)) return value.join(", ") || "-";
   if (typeof value === "object") return JSON.stringify(value).slice(0, 60);
   return String(value).slice(0, 80);
 }
 
-/** @see OryCMSContentForm — initFormData */
+/** @see OryCMSContentForm - initFormData */
 function initFormData(
   collection: OryCMSCollectionDefinition,
   entry?: OryCMSContentEntry,
@@ -49,7 +49,7 @@ function initFormData(
   return data;
 }
 
-/** @see OryCMSContentForm — slug sanitiser */
+/** @see OryCMSContentForm - slug sanitiser */
 function sanitiseSlug(raw: string): string {
   return raw
     .toLowerCase()
@@ -148,12 +148,12 @@ describe("getPrimaryField", () => {
 // ── formatCell ────────────────────────────────────────────────────────────────
 
 describe("formatCell", () => {
-  it("returns '—' for null", () => expect(formatCell(null)).toBe("—"));
-  it("returns '—' for undefined", () => expect(formatCell(undefined)).toBe("—"));
+  it("returns '-' for null", () => expect(formatCell(null)).toBe("-"));
+  it("returns '-' for undefined", () => expect(formatCell(undefined)).toBe("-"));
   it("returns 'Yes' for true", () => expect(formatCell(true)).toBe("Yes"));
   it("returns 'No' for false", () => expect(formatCell(false)).toBe("No"));
   it("joins arrays with comma", () => expect(formatCell(["a", "b", "c"])).toBe("a, b, c"));
-  it("returns '—' for empty array", () => expect(formatCell([])).toBe("—"));
+  it("returns '-' for empty array", () => expect(formatCell([])).toBe("-"));
   it("stringifies objects", () => expect(formatCell({ x: 1 })).toBe('{"x":1}'));
   it("converts numbers to string", () => expect(formatCell(42)).toBe("42"));
   it("truncates long strings to 80 chars", () => {

@@ -24,8 +24,8 @@ export interface OryCMSBootstrapResult {
  * 1. Installs the core schema (11 system tables) through the PostgreSQL adapter.
  *    installOryCMSCoreSchema checks orycms_migrations, so re-runs are no-ops.
  * 2. Seeds the default roles + permission matrix (Owner/Admin/Editor/Author/Viewer).
- *    Both seeders are ON CONFLICT DO NOTHING / NOT EXISTS guarded — safe to repeat.
- * 3. Ensures the MFA columns exist on orycms_users (ALTER ... IF NOT EXISTS —
+ *    Both seeders are ON CONFLICT DO NOTHING / NOT EXISTS guarded - safe to repeat.
+ * 3. Ensures the MFA columns exist on orycms_users (ALTER ... IF NOT EXISTS -
  *    safe to repeat, and applies to databases that already existed before
  *    MFA was added, not just fresh installs).
  *

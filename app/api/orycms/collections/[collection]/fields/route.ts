@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
 type RouteCtx = { params: Promise<{ collection: string }> };
 
-// GET /api/orycms/collections/:collection/fields — list collection fields (guarded; impl pending)
+// GET /api/orycms/collections/:collection/fields - list collection fields (guarded; impl pending)
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "collections", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// POST /api/orycms/collections/:collection/fields — create collection field (guarded; impl pending)
+// POST /api/orycms/collections/:collection/fields - create collection field (guarded; impl pending)
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "collections", "create");

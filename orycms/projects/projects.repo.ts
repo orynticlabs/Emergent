@@ -41,9 +41,9 @@ export interface OryCMSProjectInput {
  * every project; every other role (Admin included) only sees/accesses
  * projects it's a member of (see orycms_project_members). Kept as a literal
  * string match rather than a permission check because this is a row-level
- * visibility rule, not a resource-level permission — a role can have
+ * visibility rule, not a resource-level permission - a role can have
  * `projects:manage` and still be scoped to its assigned projects.
- * ORYCMS_SUPER_ADMIN_ROLE is the single shared source for this name — see
+ * ORYCMS_SUPER_ADMIN_ROLE is the single shared source for this name - see
  * its doc comment in orycms/rbac/rbac.engine.ts.
  */
 const SUPER_ADMIN_ROLE = ORYCMS_SUPER_ADMIN_ROLE;
@@ -102,7 +102,7 @@ CREATE INDEX IF NOT EXISTS idx_opt_parent   ON orycms_project_tasks (parent_id);
 -- Per-project membership, additive to the global role system: a project
 -- member has a role scoped to that project (manager/member/viewer), used for
 -- team visibility and as an assignee pool. It does not gate access on its
--- own — global RBAC (the "projects" resource) still governs who can read or
+-- own - global RBAC (the "projects" resource) still governs who can read or
 -- edit a project at all.
 CREATE TABLE IF NOT EXISTS orycms_project_members (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),

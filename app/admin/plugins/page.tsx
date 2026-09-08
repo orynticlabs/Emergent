@@ -55,7 +55,7 @@ function IntegrationsHero() {
         <div className="text-[12px] text-muted-foreground">Platform / Integrations</div>
         <h1 className="mt-1 text-[26px] font-semibold tracking-tight">Integrations</h1>
         <p className="mt-1 text-[13.5px] text-muted-foreground">
-          Connect OryCMS to payment, messaging, analytics, and shipping platforms — start with the
+          Connect OryCMS to payment, messaging, analytics, and shipping platforms - start with the
           Dummy Platform connector to see the full connect flow end-to-end.
         </p>
       </div>
@@ -264,7 +264,7 @@ export default function IntegrationsPage() {
     });
 
     // WhatsApp is the one card backed by a real connector (see
-    // app/api/orycms/whatsapp/settings/route.ts) — override its badge with
+    // app/api/orycms/whatsapp/settings/route.ts) - override its badge with
     // live status instead of the localStorage mock every other card uses.
     // A 403 (no whatsapp:manage permission) or any other failure just
     // leaves the mock default in place rather than breaking the page.
@@ -278,7 +278,7 @@ export default function IntegrationsPage() {
       .catch(() => {});
 
     // Same override for the Gemini AI card (see
-    // app/api/orycms/gemini/settings/route.ts) — independent of the
+    // app/api/orycms/gemini/settings/route.ts) - independent of the
     // WhatsApp fetch above, each module's status comes from its own API.
     fetchJson<{ settings: { connected: boolean } | null }>("/api/orycms/gemini/settings")
       .then((res) => {

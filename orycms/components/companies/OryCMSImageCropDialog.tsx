@@ -13,7 +13,7 @@ interface CropPixels {
   height: number;
 }
 
-/** Selectable crop shapes — "Wide logo" matches the marquee's display box,
+/** Selectable crop shapes - "Wide logo" matches the marquee's display box,
  * the rest let the admin pick a different shape when a logo needs it. */
 function buildAspectPresets(naturalAspect: number | null) {
   return [

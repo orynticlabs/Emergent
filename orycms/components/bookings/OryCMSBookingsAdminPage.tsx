@@ -309,7 +309,7 @@ export function OryCMSBookingsAdminPage() {
                         Join
                       </a>
                     ) : (
-                      "—"
+                      "-"
                     )}
                   </td>
                 </tr>
@@ -344,11 +344,11 @@ export function OryCMSBookingsAdminPage() {
                 <div className="grid grid-cols-2 gap-4 rounded-xl border border-border bg-surface/60 p-4">
                   <div>
                     <div className="text-[11px] text-muted-foreground">Company</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.company || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.company || "-"}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-muted-foreground">Visitor timezone</div>
-                    <div className="mt-0.5 font-medium text-foreground">{active.visitorTimezone || "—"}</div>
+                    <div className="mt-0.5 font-medium text-foreground">{active.visitorTimezone || "-"}</div>
                   </div>
                 </div>
 

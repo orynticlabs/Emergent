@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
 type RouteCtx = { params: Promise<{ slug: string }> };
 
-// GET /api/orycms/plugins/:slug — plugin detail (guarded; impl pending)
+// GET /api/orycms/plugins/:slug - plugin detail (guarded; impl pending)
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "plugins", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// POST /api/orycms/plugins/:slug — install plugin (guarded; impl pending)
+// POST /api/orycms/plugins/:slug - install plugin (guarded; impl pending)
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "plugins", "create");
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// PATCH /api/orycms/plugins/:slug — update config or enable/disable (guarded; impl pending)
+// PATCH /api/orycms/plugins/:slug - update config or enable/disable (guarded; impl pending)
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "plugins", "update");
@@ -36,7 +36,7 @@ export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// DELETE /api/orycms/plugins/:slug — uninstall plugin (guarded; impl pending)
+// DELETE /api/orycms/plugins/:slug - uninstall plugin (guarded; impl pending)
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "plugins", "delete");

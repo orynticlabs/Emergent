@@ -45,7 +45,7 @@ export default function DummyPlatformHome() {
               </div>
               <div>
                 <div className="text-[14px] font-semibold text-[var(--dp-ink)]">OryCMS</div>
-                <div className="text-[12px] text-[var(--dp-muted)]">by OrynticLabs Private Limited</div>
+                <div className="text-[12px] text-[var(--dp-muted)]">by Oryntic Labs Private Limited</div>
               </div>
             </div>
 

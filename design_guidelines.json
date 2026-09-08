@@ -1,5 +1,5 @@
 {
-  "brand": "OrynticLabs Private Limited",
+  "brand": "Oryntic Labs Private Limited",
   "theme": "Mixed Dark Futuristic (Dark hero, alternating light/dark sections)",
   "typography": {
     "heading_font": "Cabinet Grotesk",
@@ -53,7 +53,7 @@
       "sections": [
         "Hero: Dark background, kinetic typography ('ENGINEERING THE FUTURE'), floating TSParticles nodes, dual CTA (Our Work / Contact).",
         "Editorial Marquee: Slow moving ribbon of core competencies.",
-        "Numbered Manifesto: Alternating Light/Dark blocks explaining the 'OrynticLabs Way' (01. Discovery, 02. Architecture, 03. Execution).",
+        "Numbered Manifesto: Alternating Light/Dark blocks explaining the 'Oryntic Labs Way' (01. Discovery, 02. Architecture, 03. Execution).",
         "Services Highlight: Bento grid of top services, dark mode.",
         "Products Teaser: 3 tall overlapping cards for OryAI, OryCMS, PerformX."
       ]

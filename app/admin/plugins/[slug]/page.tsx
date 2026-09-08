@@ -26,7 +26,7 @@ import { GeminiSettingsPanel } from "../_gemini-settings";
 
 // Integrations with a real, working backend (see
 // app/api/orycms/whatsapp/settings/route.ts and
-// app/api/orycms/gemini/settings/route.ts) — every other card in _data.ts
+// app/api/orycms/gemini/settings/route.ts) - every other card in _data.ts
 // still uses the mock connect flow below. The two are independent modules;
 // this page just happens to host both detail views.
 const WHATSAPP_SLUG = "whatsapp-business";
@@ -59,7 +59,7 @@ function ConnectDialog({
         <DialogHeader>
           <DialogTitle>Connect {name}</DialogTitle>
           <DialogDescription>
-            This is a mock connector — enter any value to simulate pairing an API key.
+            This is a mock connector - enter any value to simulate pairing an API key.
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-1.5 py-2">
@@ -253,7 +253,7 @@ function IntegrationDetail({ slug }: { slug: string }) {
                     <div className="grid h-7 w-7 place-items-center rounded-md bg-surface-muted">
                       <Clock3 className="h-3.5 w-3.5" />
                     </div>
-                    No activity yet — connect {integration.name} to start syncing.
+                    No activity yet - connect {integration.name} to start syncing.
                   </div>
                 )}
               </div>
@@ -333,7 +333,7 @@ function IntegrationDetail({ slug }: { slug: string }) {
 /** Shared header (breadcrumb + brand mark + name) for a slug backed by a real panel, instead of the generic mock-connect flow below. */
 function RealIntegrationDetail({ slug, panel }: { slug: string; panel: React.ReactNode }) {
   const integration = getIntegration(slug);
-  if (!integration) return null; // unreachable — every real slug is always in _data.ts
+  if (!integration) return null; // unreachable - every real slug is always in _data.ts
 
   return (
     <AppShell section="Integrations">

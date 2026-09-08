@@ -2,15 +2,15 @@ import type { Pool } from "pg";
 import { getOryCMSPool } from "@/lib/db";
 
 /**
- * WhatsApp conversation-history table — every inbound customer message and
+ * WhatsApp conversation-history table - every inbound customer message and
  * every outbound message OryCMS actually sent (AI auto-reply, automated
  * menu text, or a manual admin reply), one row each, oldest first. This is
  * the storage the inbox (Step "Build a WhatsApp Inbox") reads from.
  * Idempotent DDL (IF NOT EXISTS), safe to run repeatedly, ensured lazily
- * on first use — the same pattern as every other *.schema.ts here.
+ * on first use - the same pattern as every other *.schema.ts here.
  *
  * "sender" distinguishes who/what produced a message (customer / ai / menu
- * / admin) — see whatsapp.messages.types.ts's OryCMSWhatsAppMessageSender.
+ * / admin) - see whatsapp.messages.types.ts's OryCMSWhatsAppMessageSender.
  * Not a CHECK-constrained enum, kept as free TEXT for the same reason
  * gemini's "model" column is: a values list living only in application
  * code is one less place a future addition needs a migration.

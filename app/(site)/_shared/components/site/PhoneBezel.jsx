@@ -2,7 +2,7 @@
 
 import { Wifi } from "lucide-react";
 
-/** Shared iPhone-style device chrome — status bar, dynamic island, bezel — so
+/** Shared iPhone-style device chrome - status bar, dynamic island, bezel - so
  *  MobileAppSection and the mobile-development page don't each hand-roll their
  *  own device frame. Pass screen content as children; the frame stays fixed. */
 

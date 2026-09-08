@@ -4,7 +4,7 @@ import { getOryCMSPool } from "@/lib/db";
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 export interface OryCMSAuditEntry {
-  /** Actor — null for anonymous/system actions (e.g. forgot-password). */
+  /** Actor - null for anonymous/system actions (e.g. forgot-password). */
   userId?: string | null;
   /** Verb: create, update, delete, publish, login, invite, migrate, … */
   action: string;
@@ -70,7 +70,7 @@ export interface OryCMSMfaEnrollmentRow {
 /**
  * Who has MFA enabled, for the Console Logs "MFA registrations" panel.
  * Deliberately a separate query from users.repo.ts's listOryCMSUsers (used
- * by the general Team Members page, visible to Editor via users:read) —
+ * by the general Team Members page, visible to Editor via users:read) -
  * this lives in the audit module and is only ever called from the
  * audit:read-gated /api/orycms/audit/mfa-status route, so MFA enrollment
  * status stays visible to Super Admin/Admin only, not every role that can

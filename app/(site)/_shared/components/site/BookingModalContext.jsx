@@ -4,7 +4,7 @@ import { createContext, useContext, useMemo, useState, useCallback } from "react
 
 /**
  * `Navbar` and `Footer` are siblings under `SiteShell`, not parent/child,
- * but both need to open the same "Book a Call" modal instance — this
+ * but both need to open the same "Book a Call" modal instance - this
  * codebase has no global state library, so a small dedicated context is
  * the minimal way to share one open/close/prefill state across them.
  */

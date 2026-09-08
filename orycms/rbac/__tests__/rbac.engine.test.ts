@@ -90,7 +90,7 @@ describe("getOryCMSUserPermissions", () => {
     expect(perms.has("content:publish")).toBe(true);
   });
 
-  it("caches the result — second call does not hit DB", async () => {
+  it("caches the result - second call does not hit DB", async () => {
     const pool = makePool(() => ({ rows: [{ resource: "content", action: "read" }] }));
     await getOryCMSUserPermissions("Viewer", pool);
     await getOryCMSUserPermissions("Viewer", pool);

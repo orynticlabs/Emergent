@@ -4,10 +4,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { OryCMSSessionProvider } from "@/hooks";
 
 export const metadata: Metadata = {
-  title: "OryCMS by OrynticLabs Private Limited",
+  title: "OryCMS by Oryntic Labs Private Limited",
   description:
-    "OryCMS by OrynticLabs Private Limited for managing products, orders, customers, inventory, marketing, and analytics.",
-  // Admin panel — must never appear in search results.
+    "OryCMS by Oryntic Labs Private Limited for managing products, orders, customers, inventory, marketing, and analytics.",
+  // Admin panel - must never appear in search results.
   robots: {
     index: false,
     follow: false,
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     googleBot: { index: false, follow: false },
   },
   openGraph: {
-    title: "OryCMS by OrynticLabs Private Limited",
-    description: "OryCMS by OrynticLabs Private Limited for managing your entire storefront.",
+    title: "OryCMS by Oryntic Labs Private Limited",
+    description: "OryCMS by Oryntic Labs Private Limited for managing your entire storefront.",
     type: "website",
   },
   twitter: {

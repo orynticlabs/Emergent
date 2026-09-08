@@ -2,7 +2,7 @@ import type { OryCMSEmailMessage, OryCMSEmailProvider } from "./email.types";
 
 /**
  * Every provider lazy-loads its SDK via dynamic import(). OryCMS declares NO
- * email SDK as a dependency — the import only runs when a developer selects that
+ * email SDK as a dependency - the import only runs when a developer selects that
  * provider, and a clear error is thrown if the package isn't installed.
  */
 

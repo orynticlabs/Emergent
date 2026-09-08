@@ -47,7 +47,7 @@ const funnel = [
 const topProducts = [
   { name: "Linen Crewneck Tee", sku: "LT-01", sold: 428, rev: 12840, trend: 12.4 },
   { name: "Canvas Everyday Tote", sku: "CT-04", sold: 361, rev: 9748, trend: 8.1 },
-  { name: "Ceramic Mug — Sand", sku: "CM-11", sold: 289, rev: 5202, trend: -3.2 },
+  { name: "Ceramic Mug - Sand", sku: "CM-11", sold: 289, rev: 5202, trend: -3.2 },
   { name: "Merino Beanie", sku: "MB-02", sold: 214, rev: 4708, trend: 5.6 },
   { name: "Oak Serving Board", sku: "OS-07", sold: 172, rev: 8256, trend: 21.0 },
 ];

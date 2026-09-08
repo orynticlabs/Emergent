@@ -6,7 +6,7 @@ import { dispatchOryCMSTokenLink } from "@/auth/token-links";
 import { recordOryCMSAuditLog } from "@/audit";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/forgot-password — public.
+// POST /api/orycms/auth/forgot-password - public.
 // ALWAYS returns 200 regardless of whether the email exists (no user enumeration).
 // When the user exists, a reset token is created and emailed / returned.
 export async function POST(request: NextRequest) {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as { email?: string };
     const email = (body.email ?? "").toLowerCase().trim();
 
-    // Generic success response — identical whether or not the account exists.
+    // Generic success response - identical whether or not the account exists.
     const generic = oryJsonOk({
       message: "If an account exists for that email, a reset link has been sent.",
     });

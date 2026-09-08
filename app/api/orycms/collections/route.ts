@@ -10,14 +10,14 @@ import {
 import type { OryCMSCollectionDefinition } from "@/schema";
 import { requireOryCMSPermission } from "@/rbac";
 
-// GET /api/orycms/collections — list all registered collection schemas
+// GET /api/orycms/collections - list all registered collection schemas
 export async function GET(_request: NextRequest) {
   await loadOryCMSPersistedCollectionsOnStartup();
   const collections = listOryCMSCollections();
   return NextResponse.json({ success: true, data: collections });
 }
 
-// POST /api/orycms/collections — persist a new collection schema
+// POST /api/orycms/collections - persist a new collection schema
 export async function POST(request: NextRequest) {
   try {
     await loadOryCMSPersistedCollectionsOnStartup();

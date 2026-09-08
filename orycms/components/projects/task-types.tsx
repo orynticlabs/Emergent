@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
  * Shared task type/constants used by the board, timeline, detail drawer, and
  * detail page. Kept in a leaf module (no imports from sibling project
  * components) so those components can all import from here without forming
- * a circular import with OryCMSProjectDetailPage.tsx — a cycle previously
+ * a circular import with OryCMSProjectDetailPage.tsx - a cycle previously
  * caused a "Cannot access before initialization" crash at runtime because
  * module evaluation order isn't guaranteed across circular ES module graphs.
  */
@@ -55,7 +55,7 @@ export function TaskTypeIcon({ type, className }: { type: OryCMSProjectTask["typ
 
 // ── Task ID / branch name ────────────────────────────────────────────────────
 
-/** Short, stable, human-referenceable ID — first 8 chars of the task's UUID, same convention used for clients and projects elsewhere in the admin. */
+/** Short, stable, human-referenceable ID - first 8 chars of the task's UUID, same convention used for clients and projects elsewhere in the admin. */
 export function taskShortId(task: Pick<OryCMSProjectTask, "id">): string {
   return task.id.slice(0, 8);
 }
@@ -77,7 +77,7 @@ function slugify(text: string): string {
     .replace(/-+$/g, "");
 }
 
-/** A git-friendly branch name derived from the task type, short ID, and title — e.g. "bugfix/a1b2c3d4-fix-login-page". */
+/** A git-friendly branch name derived from the task type, short ID, and title - e.g. "bugfix/a1b2c3d4-fix-login-page". */
 export function taskBranchName(task: Pick<OryCMSProjectTask, "id" | "type" | "title">): string {
   const slug = slugify(task.title);
   const id = taskShortId(task);

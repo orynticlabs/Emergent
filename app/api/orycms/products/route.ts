@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
-// GET /api/orycms/products — list products (guarded; impl pending)
+// GET /api/orycms/products - list products (guarded; impl pending)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "collections", "read");
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/products — create product (guarded; impl pending)
+// POST /api/orycms/products - create product (guarded; impl pending)
 export async function POST(request: NextRequest) {
   try {
     await guardOryCMS(request, "collections", "create");

@@ -9,11 +9,11 @@ import {
 import { getOryCMSPool } from "@/lib/db";
 import { toErrorResponse } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/mfa/login-verify — second step of login for accounts
-// with MFA enabled. Public (no session cookie exists yet at this point — the
+// POST /api/orycms/auth/mfa/login-verify - second step of login for accounts
+// with MFA enabled. Public (no session cookie exists yet at this point - the
 // caller only has the challengeToken returned by /auth/login). Checks the
 // submitted TOTP code against the challenge issued there and, ONLY on
-// success, creates the real session and sets the session cookie — identical
+// success, creates the real session and sets the session cookie - identical
 // to the non-MFA path in /auth/login. A wrong code never creates a session.
 export async function POST(request: NextRequest) {
   try {

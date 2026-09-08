@@ -6,7 +6,7 @@ import { Reveal, SectionHead, ArrowLink, CountUp } from "@site/components/site/R
 import { buildPageMetadata } from "@site/lib/seo";
 
 /*
- * Case-study read page — structure informed by 21st.dev's "Bold Stats" pattern
+ * Case-study read page - structure informed by 21st.dev's "Bold Stats" pattern
  * (headline metric + supporting row of key figures) for the results section;
  * literal source wasn't retrievable (daily retrieval limit), so this is built
  * from the pattern, not copied code.
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
   const project = caseStudies.find((p) => p.slug === slug);
   if (!project) return {};
   return buildPageMetadata({
-    title: `${project.title} — Case Study`,
+    title: `${project.title} - Case Study`,
     description: project.description,
     path: `/portfolio/${project.slug}`,
     image: project.imageUrl,

@@ -27,7 +27,7 @@ const handleError = (err: unknown) => {
   );
 };
 
-// POST /api/orycms/collections/:collection/content/:id/publish — publish
+// POST /api/orycms/collections/:collection/content/:id/publish - publish
 export async function POST(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await protectOryCMSAdminRoute(request);
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// DELETE /api/orycms/collections/:collection/content/:id/publish — unpublish
+// DELETE /api/orycms/collections/:collection/content/:id/publish - unpublish
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await protectOryCMSAdminRoute(request);

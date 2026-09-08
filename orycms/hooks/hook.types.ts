@@ -19,9 +19,9 @@ export interface OryCMSHookContext {
   readonly operation: OryCMSHookEventName;
   /** Authenticated user, if available */
   readonly user: Readonly<OryCMSHookUser> | null;
-  /** Primary data payload — hooks may mutate this before the engine persists it */
+  /** Primary data payload - hooks may mutate this before the engine persists it */
   readonly data: Record<string, unknown>;
-  /** Previous state — populated for update/delete/publish operations */
+  /** Previous state - populated for update/delete/publish operations */
   readonly previous: Record<string, unknown> | null;
   /** Raw HTTP request, when available */
   readonly request?: Readonly<unknown>;
@@ -53,7 +53,7 @@ export type OryCMSHookFn = (
 export type OryCMSHookSource = "collection" | "global" | "plugin";
 
 export interface OryCMSHookRegistration {
-  /** Unique identifier — used for duplicate detection */
+  /** Unique identifier - used for duplicate detection */
   readonly id: string;
   readonly event: OryCMSHookEventName;
   readonly fn: OryCMSHookFn;

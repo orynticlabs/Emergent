@@ -4,7 +4,7 @@ import { listOryCMSAnnouncements, createOryCMSAnnouncement } from "@/announcemen
 import type { OryCMSAnnouncementColor } from "@/announcements";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/announcements — list all announcements (admin)
+// GET /api/orycms/announcements - list all announcements (admin)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "announcements", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/announcements — create a new announcement
+// POST /api/orycms/announcements - create a new announcement
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "announcements", "create");

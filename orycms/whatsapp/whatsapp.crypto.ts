@@ -1,8 +1,8 @@
 import crypto from "crypto";
 
 /**
- * At-rest encryption for WhatsApp secrets — accessToken, appSecret, and
- * verifyToken all go through this — AES-256-GCM via Node's built-in crypto
+ * At-rest encryption for WhatsApp secrets - accessToken, appSecret, and
+ * verifyToken all go through this - AES-256-GCM via Node's built-in crypto
  * (no new dependency), mirroring auth/mfa.crypto.ts. Key comes from
  * ORYCMS_WHATSAPP_ENCRYPTION_KEY, a base64-encoded 32-byte value that must
  * live outside Postgres (env var only, never hard-coded, never sent to the
@@ -10,7 +10,7 @@ import crypto from "crypto";
  *
  *   openssl rand -base64 32
  *
- * Deliberately a separate key from ORYCMS_MFA_ENCRYPTION_KEY — a leaked
+ * Deliberately a separate key from ORYCMS_MFA_ENCRYPTION_KEY - a leaked
  * WhatsApp secret shouldn't compromise MFA secrets or vice versa.
  *
  * Unlike mfa.crypto.ts (which stores ciphertext and IV in two columns
@@ -28,7 +28,7 @@ let cachedKey: Buffer | undefined;
 
 /**
  * Reads and validates ORYCMS_WHATSAPP_ENCRYPTION_KEY on first use (not at
- * module load, so importing this file never crashes an unrelated request —
+ * module load, so importing this file never crashes an unrelated request -
  * only actually encrypting/decrypting a token does). Throws an error shaped
  * like route-guards.ts's toErrorResponse expects ({code, statusCode}), so a
  * future route maps it to a clean response without leaking why to the client.

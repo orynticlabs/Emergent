@@ -3,7 +3,7 @@ import { getOryCMSPool } from "@/lib/db";
 import { ensureOryCMSWhatsAppAutomationSchema } from "./whatsapp.automation.schema";
 
 /**
- * Repository for orycms_whatsapp_processed_messages — plain persistence
+ * Repository for orycms_whatsapp_processed_messages - plain persistence
  * only, no automation logic (that lives in whatsapp.ai-automation.service.ts,
  * matching the split every other OryCMS repository/service pair follows).
  */
@@ -11,7 +11,7 @@ import { ensureOryCMSWhatsAppAutomationSchema } from "./whatsapp.automation.sche
 /**
  * Atomically claims a messageId: returns true the first time this id is
  * seen (the caller should proceed with processing), false if it's already
- * been claimed before (the caller must skip — this is the entire duplicate
+ * been claimed before (the caller must skip - this is the entire duplicate
  * -protection mechanism, race-safe because the database's UNIQUE
  * constraint + ON CONFLICT DO NOTHING is what decides the winner, not an
  * application-level check-then-write).
@@ -34,7 +34,7 @@ export async function claimOryCMSWhatsAppMessage(
 }
 
 /**
- * Records the outcome of processing an already-claimed message — a short
+ * Records the outcome of processing an already-claimed message - a short
  * status label only (see whatsapp.automation.schema.ts's header for the
  * values used). Never stores message content, phone numbers, or generated
  * text. Best-effort: a failure here must not be allowed to change the

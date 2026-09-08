@@ -13,7 +13,7 @@ import AboutGallery from "./AboutGallery";
 export const metadata = buildPageMetadata({
   title: "About Us",
   description:
-    "OrynticLabs is not a generalist IT vendor. We are a focused engineering and product studio that combines deep technical expertise with design intelligence and business understanding.",
+    "Oryntic Labs is not a generalist IT vendor. We are a focused engineering and product studio that combines deep technical expertise with design intelligence and business understanding.",
   path: "/about",
   image: IMAGES.about,
 });
@@ -53,7 +53,7 @@ export default function About() {
                   />
                 </>
               }
-              description="OrynticLabs is a full-spectrum engineering and product studio — we design, build, and deliver custom technology across web, mobile, AI, data, and cloud, helping businesses innovate, scale, and lead in their industry."
+              description="Oryntic Labs is a full-spectrum engineering and product studio - we design, build, and deliver custom technology across web, mobile, AI, data, and cloud, helping businesses innovate, scale, and lead in their industry."
             />
             <div className="grid grid-cols-2 gap-x-10 gap-y-10">
               {WHO_WE_ARE_STATS.map((s, i) => (

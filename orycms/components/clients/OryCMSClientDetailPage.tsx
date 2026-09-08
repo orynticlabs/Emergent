@@ -42,7 +42,7 @@ import {
 } from "./OryCMSClientsAdminPage";
 
 function formatClientSince(iso: string | undefined): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   return new Date(iso).toLocaleDateString("en-IN", { month: "short", year: "numeric" });
 }
 

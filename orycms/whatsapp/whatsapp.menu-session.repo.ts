@@ -3,7 +3,7 @@ import { getOryCMSPool } from "@/lib/db";
 import { ensureOryCMSWhatsAppMenuSessionSchema } from "./whatsapp.menu-session.schema";
 
 /**
- * Repository for orycms_whatsapp_menu_sessions — plain persistence only,
+ * Repository for orycms_whatsapp_menu_sessions - plain persistence only,
  * no automation logic (that lives in whatsapp.ai-automation.service.ts).
  */
 
@@ -19,7 +19,7 @@ export async function isOryCMSWhatsAppCustomerAwaitingMenuSelection(
   return result.rows[0]?.awaitingSelection ?? false;
 }
 
-/** Upserts the flag for one customer — INSERT if this is the first time they've been seen, UPDATE otherwise. */
+/** Upserts the flag for one customer - INSERT if this is the first time they've been seen, UPDATE otherwise. */
 export async function setOryCMSWhatsAppCustomerAwaitingMenuSelection(
   customerId: string,
   awaitingSelection: boolean,

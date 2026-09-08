@@ -60,7 +60,7 @@ async function compareWithDummyHash(password: string, hash: string | null | unde
  * Returns true if at least one user exists in orycms_users.
  *
  * On a fresh database, orycms_users doesn't exist yet (the core schema is
- * only installed on first setup submission — see bootstrapOryCMS). That's
+ * only installed on first setup submission - see bootstrapOryCMS). That's
  * not a real error: it just means no user has been created yet, so this
  * treats "relation does not exist" (Postgres 42P01) the same as "no rows".
  */
@@ -167,7 +167,7 @@ export async function authenticateOryCMSUser(
 
 /**
  * Re-verifies the CURRENT password of an already-authenticated user, keyed
- * by userId (never email) — for step-up confirmation on a sensitive action
+ * by userId (never email) - for step-up confirmation on a sensitive action
  * (e.g. disabling MFA), not for logging in. Deliberately does NOT fire
  * beforeLogin/afterLogin hooks and does NOT create a session: this proves
  * "the caller still knows the password right now," it isn't a login event.
@@ -194,7 +194,7 @@ export async function verifyOryCMSUserPassword(
 
 /**
  * Creates a session for the given user.
- * Returns the raw token (64-char hex) — this is what goes in the cookie.
+ * Returns the raw token (64-char hex) - this is what goes in the cookie.
  * Only the SHA-256 hash is stored in the database.
  */
 export async function createOryCMSUserSession(pool: Pool, userId: string): Promise<string> {

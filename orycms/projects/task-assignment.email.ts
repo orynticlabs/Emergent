@@ -10,15 +10,15 @@ const PRIORITY_LABEL: Record<string, string> = {
 
 /**
  * Emails a task's assignee, mirroring exactly when the existing in-app
- * "task_assignment" notification fires (see the POST/PATCH task routes) —
+ * "task_assignment" notification fires (see the POST/PATCH task routes) -
  * same guard conditions (has an assignee, assignee isn't the actor, and on
  * PATCH only when the assignee actually changed), same "assigned" vs
  * "reassigned" wording. Best-effort: a delivery failure here must never
  * fail the task create/update request itself, matching how
  * orycms/auth/token-links.ts treats email as degradable.
  *
- * No-ops silently if the assignee has no email on file (shouldn't happen —
- * every OryCMS user has one — but fails closed rather than throwing).
+ * No-ops silently if the assignee has no email on file (shouldn't happen -
+ * every OryCMS user has one - but fails closed rather than throwing).
  */
 export async function sendOryCMSTaskAssignmentEmail({
   task,
@@ -66,6 +66,6 @@ export async function sendOryCMSTaskAssignmentEmail({
       }),
     });
   } catch {
-    // Best-effort — task assignment must never fail because email delivery failed.
+    // Best-effort - task assignment must never fail because email delivery failed.
   }
 }

@@ -57,14 +57,19 @@ export function NavbarLogo({ children }) {
 
 export function NavbarButton({ href = "#", as, children, className, variant = "primary", ...props }) {
   const Tag = as ?? Link;
+  const isButton = as === "button";
   const base =
-    "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300";
+    "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer select-none";
   const variants = {
     primary: "bg-brand-orange text-white hover:bg-[#e04a00]",
     secondary: "border border-white/15 text-white/80 hover:border-white/30 hover:text-white",
   };
   return (
-    <Tag href={href} className={cn(base, variants[variant], className)} {...props}>
+    <Tag
+      {...(!isButton ? { href } : {})}
+      className={cn(base, variants[variant], className)}
+      {...props}
+    >
       {children}
     </Tag>
   );
@@ -113,8 +118,9 @@ export function MobileNavMenu({ children, className, isOpen }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.25 }}
+          data-lenis-prevent
           className={cn(
-            "absolute inset-x-0 top-full z-50 mt-2 flex max-h-[75vh] w-full flex-col items-start justify-start gap-1 overflow-y-auto rounded-2xl border border-white/10 bg-brand-ink/95 px-5 py-6 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.7)] backdrop-blur-2xl",
+            "absolute inset-x-0 top-full z-50 mt-2 flex max-h-[75vh] w-full flex-col items-start justify-start gap-1 overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-brand-ink/95 px-5 py-6 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.7)] backdrop-blur-2xl",
             className,
           )}
         >

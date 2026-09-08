@@ -110,7 +110,7 @@ export function OryCMSMediaLibrary() {
 
     // Snapshot into a plain array up front: `fileList` is a *live* view of the
     // input's selection, and the caller resets `input.value = ""` right after
-    // this call returns (to allow re-selecting the same file later) — which
+    // this call returns (to allow re-selecting the same file later) - which
     // clears that live list. Reading `fileList[i]` later in this loop would
     // silently see an empty list for every file after the first.
     const files = Array.from(fileList);
@@ -126,7 +126,7 @@ export function OryCMSMediaLibrary() {
           error?: { message: string };
         };
         if (json.success && json.data) {
-          // Show the new asset immediately — no refetch/refresh needed.
+          // Show the new asset immediately - no refetch/refresh needed.
           setAssets((prev) => [json.data as OryCMSMediaAsset, ...prev]);
           setMeta((prev) => ({ ...prev, total: prev.total + 1 }));
         } else {

@@ -42,7 +42,7 @@ export const OryCMSDatabaseService = {
     return this.resolveAdapter().runMigration(migration);
   },
 
-  // ── Introspection stubs (Phase 2 — will query DB schema) ───────────
+  // ── Introspection stubs (Phase 2 - will query DB schema) ───────────
 
   async getTables(): Promise<OryCMSDatabaseTable[]> {
     throw new Error("Not implemented");

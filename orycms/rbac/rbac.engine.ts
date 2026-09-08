@@ -37,7 +37,7 @@ export type OryCMSAction = "create" | "read" | "update" | "delete" | "publish" |
  * hardcodes this exact name to bypass per-project scoping. Renaming or
  * deleting the role with this name (enforced in orycms/roles/roles.repo.ts)
  * would silently break that bypass or duplicate the role on a fresh
- * install's next bootstrap run — so every place that needs "the super
+ * install's next bootstrap run - so every place that needs "the super
  * admin role name" imports this one constant instead of repeating the
  * string.
  */
@@ -205,7 +205,7 @@ export async function syncOryCMSDefaultPermissions(pool: Pool = getOryCMSPool())
   // Without this, a newly-seeded permission (e.g. a resource added to
   // ORYCMS_DEFAULT_PERMISSIONS after the server process already cached a
   // role's permission set) stays invisible to hasOryCMSPermission for up
-  // to CACHE_TTL_MS even though the DB row now exists — the exact bug
+  // to CACHE_TTL_MS even though the DB row now exists - the exact bug
   // behind "I re-ran the migrations endpoint and it still says Permission
   // denied." Clearing here means the reseed takes effect immediately.
   clearOryCMSPermissionCache();
@@ -251,7 +251,7 @@ export async function hasOryCMSPermission(
 /**
  * True when every {resource, action} in `requested` is already covered by
  * `granted` (an exact `resource:action` match, or `resource:manage` in
- * `granted`) — the "ceiling" check for the roles/permissions editor: a
+ * `granted`) - the "ceiling" check for the roles/permissions editor: a
  * caller may only hand out permissions they themselves hold, so a role
  * that can edit permissions can't use that to escalate itself or anyone
  * else above its own current access. A Super Admin's own set already

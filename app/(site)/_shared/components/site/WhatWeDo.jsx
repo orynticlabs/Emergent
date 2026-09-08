@@ -17,13 +17,13 @@ function FeatureTile() {
           <Sparkles className="h-3.5 w-3.5" /> How we work
         </span>
         <h3 className="mt-6 font-display text-2xl font-bold leading-snug tracking-tight md:text-3xl">
-          One team owns it, start to finish —{" "}
+          One team owns it, start to finish -{" "}
           <span className="text-brand-orange">not five vendors passing the blame.</span>
         </h3>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/55">
           Strategy, engineering, AI, data, cloud, and design all sit under one roof here. When
           something breaks or a decision needs to be made fast, there's one team that already
-          knows the whole system — not a ticket routed between three different companies.
+          knows the whole system - not a ticket routed between three different companies.
         </p>
       </div>
       <div className="mt-10 flex items-end gap-3">
@@ -80,7 +80,7 @@ export default function WhatWeDo() {
               <span className="text-brand-orange">One team ships all of it.</span>
             </>
           }
-          description="Strategy, engineering, AI, data, and infrastructure — the same people who scope your project in week one are still on it the day it goes live."
+          description="Strategy, engineering, AI, data, and infrastructure - the same people who scope your project in week one are still on it the day it goes live."
         />
         <div className="mt-16 grid gap-5 lg:grid-cols-3">
           <Reveal className="lg:col-span-2">

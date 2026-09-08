@@ -13,7 +13,7 @@ import type {
 } from "../adapter.types";
 import type { OryCMSCollectionMigrationPlan } from "@/mapper";
 
-// Diagnostics only — never branches query logic on provider
+// Diagnostics only - never branches query logic on provider
 function detectProvider(url: string): "neon" | "supabase" | "postgresql" {
   if (url.includes(".neon.tech")) return "neon";
   if (url.includes(".supabase.co")) return "supabase";

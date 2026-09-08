@@ -6,12 +6,12 @@ import { ArrowUpRight } from "lucide-react";
 import { EASE } from "@site/components/site/Reveal";
 
 /**
- * Asymmetric bento grid — pattern adapted from Aceternity/Magic UI's Bento Grid
+ * Asymmetric bento grid - pattern adapted from Aceternity/Magic UI's Bento Grid
  * (21st.dev) and reskinned to the brand system: ink surfaces, orange/blue accent,
  * framer-motion stagger-in + a CTA row that lifts into view on hover instead of
  * the uniform equal-size cards `HoverEffect` produces. `featured` cards span 2
  * columns/rows on large screens so a handful of items read as highlights inside
- * an otherwise even grid — every item stays in the grid, nothing is dropped.
+ * an otherwise even grid - every item stays in the grid, nothing is dropped.
  */
 const containerVariants = {
   hidden: {},

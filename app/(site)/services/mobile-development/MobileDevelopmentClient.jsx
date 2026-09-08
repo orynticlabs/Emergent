@@ -13,13 +13,13 @@ import SpotlightCard from "@site/components/site/SpotlightCard";
 import PhoneBezel from "@site/components/site/PhoneBezel";
 
 /*
- * Content sourced from OrynticLabs_Company_Document.pdf, "4. Mobile Development"
- * and the "Mobile Development" subsection of the Technology Stack chapter — the
+ * Content sourced from Oryntic Labs_Company_Document.pdf, "4. Mobile Development"
+ * and the "Mobile Development" subsection of the Technology Stack chapter - the
  * capability list, stack descriptions, and delivery-model split below are pulled
  * directly from that document, not invented.
  *
  * The auto-rotating device carousel is adapted from 21st.dev's "Phone Mockups 1"
- * (solaceui) — an auto-advancing iPhone mockup with prev/next/pause controls —
+ * (solaceui) - an auto-advancing iPhone mockup with prev/next/pause controls -
  * reskinned onto the shared PhoneBezel chrome and driven by framer-motion
  * crossfades instead of that source's own animation approach.
  */
@@ -28,7 +28,7 @@ const CAPABILITIES = [
   {
     icon: Rocket,
     title: "Native performance",
-    description: "React Native compiles to native UI components, not a web view. The performance and feel of the app is genuinely native — never a mobile-adapted web experience.",
+    description: "React Native compiles to native UI components, not a web view. The performance and feel of the app is genuinely native - never a mobile-adapted web experience.",
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ const CAPABILITIES = [
   {
     icon: BellRing,
     title: "Push & real-time",
-    description: "Notifications, live updates, and chat — wired in from day one, not bolted on later.",
+    description: "Notifications, live updates, and chat - wired in from day one, not bolted on later.",
   },
   {
     icon: BadgeCheck,
@@ -55,14 +55,14 @@ const CAPABILITIES = [
 
 const STACK = [
   { letter: "R", name: "React Native", className: "bg-brand-blue text-white", text: "A framework for building native mobile applications using React. One codebase runs on both iOS and Android, significantly reducing development time and cost without sacrificing quality." },
-  { letter: "E", name: "Expo", className: "bg-white text-black", text: "A platform and toolchain built on top of React Native. Simplifies development, testing, and deployment — managed builds, over-the-air updates, and native device APIs without writing native code." },
+  { letter: "E", name: "Expo", className: "bg-white text-black", text: "A platform and toolchain built on top of React Native. Simplifies development, testing, and deployment - managed builds, over-the-air updates, and native device APIs without writing native code." },
   { letter: "S", name: "Swift", className: "bg-brand-orange text-white", text: "Apple's native language for iOS and macOS. Used where performance, platform integration, or specific native APIs demand a fully native implementation." },
   { letter: "K", name: "Kotlin", className: "bg-violet-500 text-white", text: "The modern language for Android development, fully supported by Google. Used for native Android builds where requirements exceed what a cross-platform solution can offer." },
   { letter: "F", name: "Flutter", className: "bg-sky-500 text-white", text: "Google's UI toolkit for natively compiled apps across mobile, web, and desktop from a single Dart codebase. Used where pixel-perfect cross-platform UI consistency is the priority." },
 ];
 
 const DELIVERY_MODELS = [
-  { icon: Smartphone, title: "Consumer Applications", text: "Public-facing apps built for scale, retention, and a store-ready launch — from first release to ongoing versions." },
+  { icon: Smartphone, title: "Consumer Applications", text: "Public-facing apps built for scale, retention, and a store-ready launch - from first release to ongoing versions." },
   { icon: Building2, title: "Enterprise Mobility", text: "Internal tools and field applications built for a defined workforce, with the access control and reliability that operations demand." },
   { icon: Boxes, title: "Hybrid Products", text: "Products that work seamlessly across web and mobile from one architecture, without compromising how either platform feels." },
 ];
@@ -130,7 +130,7 @@ const SCREENS = [
     icon: BadgeCheck,
     render: () => (
       <div className="space-y-3 px-4 pt-6">
-        {["App Store — Approved", "Google Play — Live"].map((t) => (
+        {["App Store - Approved", "Google Play - Live"].map((t) => (
           <div key={t} className="flex items-center gap-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.06] p-3.5">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-emerald-500/15 text-emerald-400">
               <BadgeCheck className="h-4 w-4" strokeWidth={2} />
@@ -232,7 +232,7 @@ export default function MobileDevelopmentClient() {
         overline="Mobile Development"
         lines={["BUILT FOR", "THE DEVICE.", "NOT THE BROWSER."]}
         accentIndex={1}
-        description="Native and cross-platform mobile applications for iOS and Android — consumer apps, enterprise mobility, and hybrid products that work seamlessly across web and mobile. Every product we deliver is designed for the device first, never adapted from a web layout."
+        description="Native and cross-platform mobile applications for iOS and Android - consumer apps, enterprise mobility, and hybrid products that work seamlessly across web and mobile. Every product we deliver is designed for the device first, never adapted from a web layout."
       />
 
       <section className="bg-grid-dark relative overflow-hidden bg-brand-ink py-24 text-white md:py-32" data-testid="mobile-dev-showcase">
@@ -244,7 +244,7 @@ export default function MobileDevelopmentClient() {
               One app, built for how it's actually used.
             </h2>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60 md:text-lg">
-              React Native or fully native Swift/Kotlin when it matters — we choose per project,
+              React Native or fully native Swift/Kotlin when it matters - we choose per project,
               not by default. Every screen is designed for a phone in someone's hand, not a
               browser window resized down.
             </p>
@@ -266,7 +266,7 @@ export default function MobileDevelopmentClient() {
             wrapperClassName="max-w-3xl"
             overline="What's included"
             title="Five things every build ships with."
-            description="Not optional add-ons — the baseline for anything OrynticLabs delivers on mobile."
+            description="Not optional add-ons - the baseline for anything Oryntic Labs delivers on mobile."
           />
           <BentoGrid className="mt-14">
             {CAPABILITIES.map((c) => (
@@ -345,7 +345,7 @@ export default function MobileDevelopmentClient() {
             wrapperClassName="max-w-2xl"
             overline="Ready when you are"
             title="Bring us the app you've been putting off."
-            description="Tell us what it needs to do — we'll tell you honestly whether it should be native, cross-platform, or hybrid."
+            description="Tell us what it needs to do - we'll tell you honestly whether it should be native, cross-platform, or hybrid."
           />
           <div className="mt-8 flex justify-center">
             <ArrowLink to="/contact-us" variant="blue">Start a mobile project</ArrowLink>

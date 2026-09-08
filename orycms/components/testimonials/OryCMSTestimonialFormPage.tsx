@@ -53,7 +53,7 @@ function Breadcrumb({ isEdit }: { isEdit: boolean }) {
   );
 }
 
-/** Shared create/edit page — `testimonialId` omitted means "create new". */
+/** Shared create/edit page - `testimonialId` omitted means "create new". */
 export function OryCMSTestimonialFormPage({ testimonialId }: { testimonialId?: string }) {
   const router = useRouter();
   const isEdit = !!testimonialId;
@@ -100,7 +100,7 @@ export function OryCMSTestimonialFormPage({ testimonialId }: { testimonialId?: s
   const canSubmit = form.name.trim().length > 0 && form.quote.trim().length > 0 && !submitting;
 
   // Device file → validate type/size → hand off to the crop dialog as an
-  // object URL. Nothing is uploaded yet; only the *cropped* result is —
+  // object URL. Nothing is uploaded yet; only the *cropped* result is -
   // same flow as Case Studies' cover image upload.
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -319,7 +319,7 @@ export function OryCMSTestimonialFormPage({ testimonialId }: { testimonialId?: s
                   className="h-4 w-4 rounded border-border"
                 />
                 <Label htmlFor="t-active" className="!mb-0">
-                  Active — visible on the site
+                  Active - visible on the site
                 </Label>
               </div>
             </CardContent>

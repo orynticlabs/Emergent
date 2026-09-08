@@ -177,7 +177,7 @@ function renderFirebaseSchema(schema: OryCMSMappedDatabaseSchema): string {
   }, {});
   return (
     `// Firestore collection: "${schema.tableName}"\n` +
-    `// Document structure (Firestore is schemaless — this is guidance only):\n` +
+    `// Document structure (Firestore is schemaless - this is guidance only):\n` +
     JSON.stringify(structure, null, 2)
   );
 }
@@ -327,7 +327,7 @@ export function generateOryCMSCollectionMigrationPlan(
     adapterType
   ],
 ): OryCMSCollectionMigrationPlan {
-  // 1. Validate capabilities — throw on blocking errors
+  // 1. Validate capabilities - throw on blocking errors
   const capResult = validateOryCMSAdapterCapabilities(collection, adapterType, capabilities);
   if (!capResult.valid) {
     const errors = capResult.issues.filter((i) => i.severity === "error");

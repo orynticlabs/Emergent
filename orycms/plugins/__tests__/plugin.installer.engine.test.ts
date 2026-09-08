@@ -1,5 +1,5 @@
 /**
- * Installer Engine tests — covers updateOryCMSPlugin, dir-based manifest reading,
+ * Installer Engine tests - covers updateOryCMSPlugin, dir-based manifest reading,
  * atomic update semantics, and full install/uninstall lifecycle including
  * cleanup of hooks, routes, pages, sidebar, and extensions.
  */
@@ -139,7 +139,7 @@ describe("updateOryCMSPlugin", () => {
       expect(new Date(after).toString()).not.toBe("Invalid Date");
       // installedAt is a valid ISO string
       expect(after).toMatch(/^\d{4}-\d{2}-\d{2}T/);
-      // suppress noisy assertion — just verify it was set
+      // suppress noisy assertion - just verify it was set
       void before;
     });
   });
@@ -203,7 +203,7 @@ describe("updateOryCMSPlugin", () => {
       installOryCMSPlugin(p("seo", "1.0.0", { hooks: { beforeCreate: hookFn } }));
       // After update the registry only has the new plugin; old hooks are gone
       updateOryCMSPlugin("seo", p("seo", "2.0.0"));
-      // The new plugin has no hooks — verify registry has exactly one plugin (no duplicate)
+      // The new plugin has no hooks - verify registry has exactly one plugin (no duplicate)
       expect(listOryCMSPlugins()).toHaveLength(1);
     });
 
@@ -217,7 +217,7 @@ describe("updateOryCMSPlugin", () => {
   });
 });
 
-// ── dir option — manifest reading ─────────────────────────────────────────────
+// ── dir option - manifest reading ─────────────────────────────────────────────
 
 describe("installOryCMSPlugin with dir option", () => {
   it("succeeds when orycms-plugin.json is valid", async () => {

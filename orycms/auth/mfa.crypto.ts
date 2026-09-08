@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 /**
- * At-rest encryption for TOTP secrets — AES-256-GCM via Node's built-in
+ * At-rest encryption for TOTP secrets - AES-256-GCM via Node's built-in
  * crypto (no new dependency). Key comes from ORYCMS_MFA_ENCRYPTION_KEY, a
  * base64-encoded 32-byte value that must live outside Postgres (env var
  * only, never hard-coded, never sent to the client). Generate one with:
@@ -9,7 +9,7 @@ import crypto from "crypto";
  *   openssl rand -base64 32
  *
  * GCM's auth tag is appended to the ciphertext before base64-encoding, so
- * "mfaSecret" holds ciphertext+tag and "mfaSecretIv" holds only the IV —
+ * "mfaSecret" holds ciphertext+tag and "mfaSecretIv" holds only the IV -
  * matching the two columns mfa.schema.ts already added to orycms_users.
  */
 
@@ -22,7 +22,7 @@ let cachedKey: Buffer | undefined;
 
 /**
  * Reads and validates ORYCMS_MFA_ENCRYPTION_KEY on first use (not at module
- * load, so importing this file never crashes an unrelated request — only
+ * load, so importing this file never crashes an unrelated request - only
  * actually encrypting/decrypting an MFA secret does). Throws a
  * StatusfulError-shaped error so route handlers' toErrorResponse maps it to
  * a clean 500 without leaking why to the client; the message itself never
@@ -80,7 +80,7 @@ export function encryptOryCMSMfaSecret(secret: string): OryCMSEncryptedMfaSecret
 
 /**
  * Decrypts a TOTP secret previously produced by encryptOryCMSMfaSecret.
- * Not called anywhere yet (no login-time MFA challenge exists in this step) —
+ * Not called anywhere yet (no login-time MFA challenge exists in this step) -
  * provided so the encryption scheme is verifiably reversible and ready for
  * that later step. Never logs the plaintext or the key.
  */

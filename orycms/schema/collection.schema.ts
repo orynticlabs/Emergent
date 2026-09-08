@@ -121,7 +121,7 @@ export interface OryCMSSchemaSlugField extends OryCMSSchemaFieldBase {
   sourceField: string;
 }
 
-// Discriminated union — narrows to the correct interface on `switch (field.type)`
+// Discriminated union - narrows to the correct interface on `switch (field.type)`
 export type OryCMSSchemaField =
   | OryCMSSchemaTextField
   | OryCMSSchemaTextareaField
@@ -179,7 +179,7 @@ export interface OryCMSCollectionAccess {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Top-level collection definition — the developer-facing schema DSL
+// Top-level collection definition - the developer-facing schema DSL
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { OryCMSCollectionHooks } from "@/hooks";

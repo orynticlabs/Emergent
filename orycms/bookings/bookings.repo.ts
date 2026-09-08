@@ -72,7 +72,7 @@ export interface OryCMSBookingFilter {
 }
 
 /**
- * OrynticLabs runs on Asia/Kolkata, a fixed UTC+5:30 offset with no DST — a
+ * Oryntic Labs runs on Asia/Kolkata, a fixed UTC+5:30 offset with no DST - a
  * proper IANA tz lookup isn't needed for a single-business-timezone
  * scheduler, so wall-clock day/slot boundaries are computed with this fixed
  * offset rather than pulling in a new timezone dependency.
@@ -419,7 +419,7 @@ function throwSlotTaken(): never {
   });
 }
 
-/** `orynticlabs-<uuid>` — collision-resistant and non-guessable, since meet.jit.si rooms need no account/API key, just a unique room name in the URL. */
+/** `orynticlabs-<uuid>` - collision-resistant and non-guessable, since meet.jit.si rooms need no account/API key, just a unique room name in the URL. */
 function generateMeetingUrl(): string {
   return `https://meet.jit.si/orynticlabs-${randomUUID().replace(/-/g, "")}`;
 }
@@ -433,18 +433,18 @@ async function sendBookingConfirmationEmail(booking: OryCMSBookingRecord): Promi
     });
     await sendOryCMSEmail({
       to: booking.email,
-      subject: "Your call with OrynticLabs is confirmed",
-      text: `Hi ${booking.name},\n\nYour call is confirmed for ${when} (India time).\n\nJoin here: ${booking.meetingUrl}\n\n— OrynticLabs`,
-      html: `<p>Hi ${booking.name},</p><p>Your call is confirmed for <strong>${when}</strong> (India time).</p><p><a href="${booking.meetingUrl}">Join the call</a></p><p>— OrynticLabs</p>`,
+      subject: "Your call with Oryntic Labs is confirmed",
+      text: `Hi ${booking.name},\n\nYour call is confirmed for ${when} (India time).\n\nJoin here: ${booking.meetingUrl}\n\n- Oryntic Labs`,
+      html: `<p>Hi ${booking.name},</p><p>Your call is confirmed for <strong>${when}</strong> (India time).</p><p><a href="${booking.meetingUrl}">Join the call</a></p><p>- Oryntic Labs</p>`,
     });
   } catch {
-    // Best-effort only — a booking must persist even if email sending fails
+    // Best-effort only - a booking must persist even if email sending fails
     // or no provider is configured.
   }
 }
 
 /**
- * Called from the public booking widget — no session, so no actor to
+ * Called from the public booking widget - no session, so no actor to
  * attribute the row to. Re-validates the requested slot is still free
  * immediately before inserting (via a single pool client so the check and
  * the insert see a consistent snapshot), since two visitors can race for
@@ -495,7 +495,7 @@ export async function createOryCMSBooking(
     try {
       await client.query("ROLLBACK");
     } catch {
-      // ignore rollback failure — original error is what matters
+      // ignore rollback failure - original error is what matters
     }
     throw err;
   } finally {

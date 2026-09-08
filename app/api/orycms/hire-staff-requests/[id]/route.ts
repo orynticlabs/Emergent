@@ -23,7 +23,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// PATCH /api/orycms/hire-staff-requests/:id — status transitions only
+// PATCH /api/orycms/hire-staff-requests/:id - status transitions only
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "hire-staff-requests", "update");

@@ -15,9 +15,9 @@ type BookingBody = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// POST /api/orycms/bookings/public — the site-wide "Book a Call" widget
+// POST /api/orycms/bookings/public - the site-wide "Book a Call" widget
 // submits here with no session (exempted in middleware.ts alongside
-// /api/orycms/hire-staff-requests — a visitor has no OryCMS account). GET
+// /api/orycms/hire-staff-requests - a visitor has no OryCMS account). GET
 // on the base /api/orycms/bookings route is a separate, session-guarded
 // admin listing.
 export async function POST(request: NextRequest) {

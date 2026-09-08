@@ -5,7 +5,7 @@ import type { OryCMSWhatsAppProvider } from "@/whatsapp";
 import { recordOryCMSAuditLog } from "@/audit";
 
 // Fields the WhatsApp settings API accepts. "enabled", "displayName", and
-// "webhookEnabled" (Step 1 columns) are deliberately not exposed here —
+// "webhookEnabled" (Step 1 columns) are deliberately not exposed here -
 // this step's UI only surfaces connection identity + secrets + status.
 interface OryCMSWhatsAppSettingsBody {
   provider?: string;
@@ -21,7 +21,7 @@ function validationError(message: string) {
   return Object.assign(new Error(message), { code: "VALIDATION_ERROR", statusCode: 422 });
 }
 
-/** True for undefined, null, or a whitespace-only string — the "nothing meaningful was sent" case for a plain text field. */
+/** True for undefined, null, or a whitespace-only string - the "nothing meaningful was sent" case for a plain text field. */
 function isBlank(value: unknown): boolean {
   return value === undefined || value === null || (typeof value === "string" && value.trim() === "");
 }
@@ -34,7 +34,7 @@ async function parseBody(request: NextRequest): Promise<OryCMSWhatsAppSettingsBo
   }
 }
 
-// GET /api/orycms/whatsapp/settings — provider + configuration status only.
+// GET /api/orycms/whatsapp/settings - provider + configuration status only.
 // Never returns accessToken, appSecret, or verifyToken (OryCMSWhatsAppService
 // strips them before this handler ever sees the result).
 export async function GET(request: NextRequest) {
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/whatsapp/settings — save (create or fully replace) the
+// POST /api/orycms/whatsapp/settings - save (create or fully replace) the
 // WhatsApp configuration. Secrets are encrypted inside OryCMSWhatsAppService
 // before they ever reach the database; this handler never logs them.
 export async function POST(request: NextRequest) {
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
       verifyToken: body.verifyToken ?? null,
     });
 
-    // Metadata is booleans only — never the secret values themselves.
+    // Metadata is booleans only - never the secret values themselves.
     await recordOryCMSAuditLog({
       userId: session.userId,
       action: "connect",
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// PATCH /api/orycms/whatsapp/settings — update provided fields only.
+// PATCH /api/orycms/whatsapp/settings - update provided fields only.
 // Secret fields (accessToken, appSecret, verifyToken) are only touched when
 // a genuinely non-blank value is sent; omitted or blank secret fields leave
 // the existing encrypted value untouched.
@@ -113,7 +113,7 @@ export async function PATCH(request: NextRequest) {
       ...(!isBlank(body.phoneNumberId) && { phoneNumberId: body.phoneNumberId }),
       ...(!isBlank(body.businessAccountId) && { businessAccountId: body.businessAccountId }),
       ...(!isBlank(body.appId) && { appId: body.appId }),
-      // Secrets: only ever included when non-blank — this is what protects
+      // Secrets: only ever included when non-blank - this is what protects
       // an already-stored secret from being wiped by a blank/omitted field.
       ...(!isBlank(body.accessToken) && { accessToken: body.accessToken }),
       ...(!isBlank(body.appSecret) && { appSecret: body.appSecret }),
@@ -147,7 +147,7 @@ export async function PATCH(request: NextRequest) {
   }
 }
 
-// DELETE /api/orycms/whatsapp/settings — disconnect WhatsApp (removes the
+// DELETE /api/orycms/whatsapp/settings - disconnect WhatsApp (removes the
 // configuration row entirely, including the encrypted secrets).
 export async function DELETE(request: NextRequest) {
   try {

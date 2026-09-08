@@ -6,7 +6,7 @@ import { HIRE_STAFF_FAQS } from "./hire-staff-data";
 export const metadata = buildPageMetadata({
   title: "Hire Staff | Hire Vetted Developers & Engineers On Demand",
   description:
-    "Hire pre-vetted software engineers, mobile developers, AI/ML specialists, and DevOps engineers on flexible terms — staff augmentation, dedicated teams, or project-based hiring. Shortlist in 48 hours, full IP ownership, no long-term lock-in.",
+    "Hire pre-vetted software engineers, mobile developers, AI/ML specialists, and DevOps engineers on flexible terms - staff augmentation, dedicated teams, or project-based hiring. Shortlist in 48 hours, full IP ownership, no long-term lock-in.",
   path: "/hire-staff",
   image: IMAGES.culture,
 });
@@ -15,14 +15,14 @@ const SERVICE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Staff Augmentation & Dedicated Engineering Teams",
-  name: "Hire Staff — OrynticLabs",
+  name: "Hire Staff - Oryntic Labs",
   description:
     "Hire pre-vetted software engineers, mobile developers, AI/ML specialists, and DevOps engineers on flexible staff augmentation, dedicated team, or project-based terms.",
   url: `${SITE_URL}/hire-staff`,
   areaServed: "Worldwide",
   provider: {
     "@type": "Organization",
-    name: "OrynticLabs",
+    name: "Oryntic Labs",
     url: SITE_URL,
     email: CONTACT.general,
     telephone: CONTACT.phone,

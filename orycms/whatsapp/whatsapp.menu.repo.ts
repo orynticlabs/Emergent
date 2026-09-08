@@ -9,14 +9,14 @@ import type {
 
 /**
  * Repository for orycms_whatsapp_menu_settings + orycms_whatsapp_menu_options
- * — plain persistence only, no validation (that lives in
+ * - plain persistence only, no validation (that lives in
  * whatsapp.menu.service.ts, matching the split every other OryCMS
  * repository/service pair in this codebase follows) and no permission
  * checks (routes gate access via requireOryCMSPermission / guardOryCMS).
  *
  * Both tables are singleton-scoped: OryCMS has exactly one WhatsApp menu
  * at a time, so getOryCMSWhatsAppMenuSettings/saveOryCMSWhatsAppMenuSettings
- * operate on "the" settings row rather than taking an id — same convention
+ * operate on "the" settings row rather than taking an id - same convention
  * as whatsapp.repo.ts and gemini.repo.ts.
  */
 
@@ -75,13 +75,13 @@ export async function listOryCMSWhatsAppMenuOptions(
 }
 
 /**
- * Atomically replaces the entire option list — the whole DELETE + re-INSERT
+ * Atomically replaces the entire option list - the whole DELETE + re-INSERT
  * runs in one transaction (BEGIN/COMMIT/ROLLBACK via a dedicated client,
  * matching the transaction pattern already used in
  * orycms/migrations/migration.engine.ts and orycms/schema/schema.persistence.ts),
  * so a failure partway through can never leave the menu with a partial
  * option list. This is how add/edit/delete of individual options are all
- * expressed through one PATCH call — see whatsapp.menu.service.ts.
+ * expressed through one PATCH call - see whatsapp.menu.service.ts.
  */
 export async function replaceOryCMSWhatsAppMenuOptions(
   options: OryCMSWhatsAppMenuOptionInput[],

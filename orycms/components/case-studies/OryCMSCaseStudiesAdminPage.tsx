@@ -350,7 +350,7 @@ export function OryCMSCaseStudiesAdminPage() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{caseStudy.category || "—"}</td>
+                  <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{caseStudy.category || "-"}</td>
                   <td className="px-4 py-3 text-[12.5px] text-muted-foreground">{caseStudy.sortOrder}</td>
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                     <button

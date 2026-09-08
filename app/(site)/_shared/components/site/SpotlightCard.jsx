@@ -5,7 +5,7 @@ import { motion, useMotionValue, useMotionTemplate, useSpring, useTransform } fr
 /**
  * Aceternity-style spotlight card: a radial glow that tracks the cursor, plus a gentle
  * perspective tilt toward the pointer, revealed on hover. Shared across WhatWeDo and any
- * other section that needs the same premium hover-card treatment — do not redefine locally.
+ * other section that needs the same premium hover-card treatment - do not redefine locally.
  */
 export default function SpotlightCard({ children, className = "", tint = "255,85,0", ...rest }) {
   const mouseX = useMotionValue(0);

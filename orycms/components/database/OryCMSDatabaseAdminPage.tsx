@@ -97,7 +97,7 @@ function StatTile({ icon: Icon, label, value, tone = "default" }: { icon: typeof
 function formatActivityMessage(entry: OryCMSActivityEntry): string {
   if (entry.action === "migrate") {
     const applied = Array.isArray(entry.metadata?.applied) ? (entry.metadata!.applied as unknown[]).length : 0;
-    return applied > 0 ? `Ran migrations — ${applied} applied` : "Ran migrations — schema already up to date";
+    return applied > 0 ? `Ran migrations - ${applied} applied` : "Ran migrations - schema already up to date";
   }
   return `${entry.action} · ${entry.resource}`;
 }
@@ -105,10 +105,10 @@ function formatActivityMessage(entry: OryCMSActivityEntry): string {
 /**
  * Runs core schema install + role/permission reseed (POST
  * /api/orycms/database/migrations → bootstrapOryCMS). Both the schema install
- * and the ORYCMS_DEFAULT_PERMISSIONS seed are idempotent — safe to run any
+ * and the ORYCMS_DEFAULT_PERMISSIONS seed are idempotent - safe to run any
  * number of times. This is the fix for "I added a new permission resource in
  * code but nobody's session has it yet": the matrix in rbac.engine.ts only
- * becomes real database rows once this runs — the warnings list below
+ * becomes real database rows once this runs - the warnings list below
  * surfaces exactly that drift so it doesn't have to be discovered the hard
  * way (a nav item silently missing) again.
  */
@@ -157,9 +157,9 @@ export function OryCMSDatabaseAdminPage() {
         method: "POST",
       });
       if (result.install.applied.length > 0) {
-        toast.success(`Schema up to date — ${result.install.applied.length} migration(s) applied`);
+        toast.success(`Schema up to date - ${result.install.applied.length} migration(s) applied`);
       } else {
-        toast.success("Schema already up to date — roles & permissions reseeded");
+        toast.success("Schema already up to date - roles & permissions reseeded");
       }
       load();
       loadHealth();
@@ -210,7 +210,7 @@ export function OryCMSDatabaseAdminPage() {
       <PageHeader
         eyebrow="Platform internals"
         title="Database"
-        description="Connection health, pending schema drift, migration runs, and recent database activity — end to end, in one place."
+        description="Connection health, pending schema drift, migration runs, and recent database activity - end to end, in one place."
       />
 
       {error && (
@@ -242,12 +242,12 @@ export function OryCMSDatabaseAdminPage() {
               value={connection?.ok ? "Connected" : connection?.error ? "Unreachable" : "Unknown"}
               tone={connection?.ok ? "good" : "bad"}
             />
-            <StatTile icon={Gauge} label="Latency" value={connection?.latencyMs != null ? `${connection.latencyMs}ms` : "—"} />
-            <StatTile icon={Database} label="Server version" value={connection?.version ?? "—"} />
+            <StatTile icon={Gauge} label="Latency" value={connection?.latencyMs != null ? `${connection.latencyMs}ms` : "-"} />
+            <StatTile icon={Database} label="Server version" value={connection?.version ?? "-"} />
             <StatTile
               icon={ShieldCheck}
               label="Pool (active / idle / waiting)"
-              value={pool ? `${pool.total} / ${pool.idle} / ${pool.waiting}` : "—"}
+              value={pool ? `${pool.total} / ${pool.idle} / ${pool.waiting}` : "-"}
               tone={pool && pool.waiting > 0 ? "bad" : "default"}
             />
           </div>
@@ -267,7 +267,7 @@ export function OryCMSDatabaseAdminPage() {
         ) : warnings.length === 0 ? (
           <div className="flex items-center gap-2.5 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.06] px-4 py-3.5 text-[12.5px] text-emerald-600 dark:text-emerald-400">
             <CheckCircle2 className="h-4 w-4 shrink-0" />
-            No warnings — schema, permissions, and connection pool all look healthy.
+            No warnings - schema, permissions, and connection pool all look healthy.
           </div>
         ) : (
           <div className="space-y-2">
@@ -298,8 +298,8 @@ export function OryCMSDatabaseAdminPage() {
               <div className="text-[13.5px] font-semibold">Run migrations &amp; sync permissions</div>
               <p className="mt-0.5 max-w-md text-[12.5px] text-muted-foreground">
                 Installs any pending core schema migrations, then reseeds the default role
-                permission matrix — including any new resource added since the DB was last
-                seeded — and clears the permission cache immediately.
+                permission matrix - including any new resource added since the DB was last
+                seeded - and clears the permission cache immediately.
               </p>
             </div>
           </div>

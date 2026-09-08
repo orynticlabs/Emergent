@@ -8,7 +8,7 @@ import type {
 } from "./whatsapp.outbound.types";
 
 /**
- * Registry of every outbound provider implementation currently available —
+ * Registry of every outbound provider implementation currently available -
  * mirrors whatsapp.inbound.ts's dispatcher for the opposite direction, and
  * orycms/ai/ai.service.ts's provider registry in spirit. This is the ONE
  * place that maps "which provider is configured" to "which sender runs";
@@ -23,7 +23,7 @@ const OUTBOUND_PROVIDERS: Partial<Record<OryCMSWhatsAppProvider, OryCMSWhatsAppO
  * Dispatches a send request to the right provider implementation. Twilio /
  * 360dialog / Gupshup / Interakt: schema and settings already support
  * selecting these providers (see whatsapp.types.ts), but no outbound
- * sender exists yet — resolves to a normalized failure rather than
+ * sender exists yet - resolves to a normalized failure rather than
  * guessing at an API nobody has implemented.
  */
 export async function sendOryCMSWhatsAppTextMessage(

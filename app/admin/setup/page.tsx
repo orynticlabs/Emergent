@@ -14,7 +14,7 @@ const setupSignals = [
   {
     icon: UserPlus,
     title: "Owner account",
-    body: "The first account gets Owner-level access — full control over users, content, and settings.",
+    body: "The first account gets Owner-level access - full control over users, content, and settings.",
   },
   {
     icon: Lock,
@@ -77,7 +77,7 @@ export default function SetupPage() {
         setIsSubmitting(false);
         return;
       }
-      // Account provisioned — sign in on /login to start a session.
+      // Account provisioned - sign in on /login to start a session.
       router.replace("/admin/login");
     } catch {
       setError("Network error. Please try again.");
@@ -105,7 +105,7 @@ export default function SetupPage() {
             <div>
               <div className="text-[18px] font-semibold tracking-tight">OryCMS</div>
               <div className="text-[12px] text-muted-foreground">
-                By OrynticLabs Private Limited
+                By Oryntic Labs Private Limited
               </div>
             </div>
             <Badge variant="outline" className="border-border bg-surface/80 px-3 py-1 text-[11px]">
@@ -166,7 +166,7 @@ export default function SetupPage() {
         <div className="mb-8 text-center lg:hidden">
           <div className="text-[20px] font-semibold tracking-tight">OryCMS</div>
           <div className="mt-0.5 text-[12px] text-muted-foreground">
-            by OrynticLabs Private Limited
+            by Oryntic Labs Private Limited
           </div>
         </div>
 

@@ -72,7 +72,7 @@ export async function getOryCMSUser(
   return user;
 }
 
-/** Look up a user by email. Returns null when absent (no throw) — used by
+/** Look up a user by email. Returns null when absent (no throw) - used by
  *  no-enumeration flows like forgot-password. */
 export async function findOryCMSUserByEmail(
   email: string,
@@ -188,7 +188,7 @@ export async function setOryCMSUserStatus(
 }
 
 /**
- * How many ACTIVE users currently hold the role named `roleName` — used by
+ * How many ACTIVE users currently hold the role named `roleName` - used by
  * the users route to refuse a change that would leave zero active Super
  * Admins (role change away, deactivation, or deletion of the last one).
  */

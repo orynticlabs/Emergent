@@ -18,9 +18,9 @@ export interface OryCMSAdminPage {
 
 /** pluginId → pages registered by that plugin */
 const _registry = new Map<string, OryCMSAdminPage[]>();
-/** All registered page IDs — for id-duplicate detection */
+/** All registered page IDs - for id-duplicate detection */
 const _ids = new Set<string>();
-/** All registered paths — for path-duplicate detection */
+/** All registered paths - for path-duplicate detection */
 const _paths = new Set<string>();
 
 // ── Public API ────────────────────────────────────────────────────────────────

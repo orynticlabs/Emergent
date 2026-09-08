@@ -3,9 +3,9 @@ import { buildPageMetadata, SITE_URL } from "@site/lib/seo";
 import ServicesClient from "./ServicesClient";
 
 export const metadata = buildPageMetadata({
-  title: "Software Development Services | Web, Mobile, AI & Cloud — OrynticLabs",
+  title: "Software Development Services | Web, Mobile, AI & Cloud - Oryntic Labs",
   description:
-    "OrynticLabs delivers web development, product development, custom software, mobile apps, AI & machine learning, data & analytics, cloud infrastructure, and UI/UX design — plus staff augmentation and technology consulting. One accountable team, full-spectrum delivery, based in India.",
+    "Oryntic Labs delivers web development, product development, custom software, mobile apps, AI & machine learning, data & analytics, cloud infrastructure, and UI/UX design - plus staff augmentation and technology consulting. One accountable team, full-spectrum delivery, based in India.",
   path: "/services",
   image: IMAGES.datacenter,
 });
@@ -14,14 +14,14 @@ const SERVICE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Software Development",
-  name: "OrynticLabs Software Development Services",
+  name: "Oryntic Labs Software Development Services",
   description:
     "Full-spectrum software development services spanning web, product, custom software, mobile, AI/ML, data & analytics, cloud infrastructure, UI/UX design, staff augmentation, and technology consulting.",
   url: `${SITE_URL}/services`,
   areaServed: "Worldwide",
   provider: {
     "@type": "Organization",
-    name: "OrynticLabs",
+    name: "Oryntic Labs",
     url: SITE_URL,
     email: CONTACT.general,
     telephone: CONTACT.phone,

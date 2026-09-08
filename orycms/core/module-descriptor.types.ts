@@ -1,7 +1,7 @@
 import type { OryCMSResource } from "@/rbac";
 
 /**
- * Shared shape for a first-class OryCMS module's static descriptor —
+ * Shared shape for a first-class OryCMS module's static descriptor -
  * makes a module discoverable (a future settings/module list, health
  * checks, onboarding checklists) without registering a route, page, or
  * sidebar entry. See orycms/whatsapp/whatsapp.module.ts and
@@ -18,7 +18,7 @@ export interface OryCMSModuleDescriptor {
   id: string;
   name: string;
   description: string;
-  /** RBAC resource this module is gated behind — see rbac/rbac.engine.ts. */
+  /** RBAC resource this module is gated behind - see rbac/rbac.engine.ts. */
   resource: OryCMSResource;
   /** Human-readable capability keys this module exposes, for a future permissions UI. Enforcement itself runs through the resource:action pairs above, not these strings. */
   permissions: { key: string; label: string }[];

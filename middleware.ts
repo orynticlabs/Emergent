@@ -17,7 +17,7 @@ const PUBLIC_PAGES = new Set([
 const PUBLIC_API_PREFIX = "/api/orycms/auth/";
 
 /**
- * Razorpay calls this directly with no OryCMS session — it can only ever
+ * Razorpay calls this directly with no OryCMS session - it can only ever
  * send a POST, and identity/trust comes from the HMAC signature verified
  * inside the route itself (see app/api/orycms/webhooks/razorpay/route.ts),
  * not from anything middleware can check.
@@ -25,18 +25,18 @@ const PUBLIC_API_PREFIX = "/api/orycms/auth/";
 const RAZORPAY_WEBHOOK_PATH = "/api/orycms/webhooks/razorpay";
 
 /**
- * WhatsApp (Meta) calls this directly with no OryCMS session — GET is
+ * WhatsApp (Meta) calls this directly with no OryCMS session - GET is
  * Meta's subscription-verification challenge, POST is incoming events.
  * Identity/trust comes from the `hub.verify_token` match (GET) or the
  * `X-Hub-Signature-256` HMAC (POST) verified inside the route itself (see
  * app/api/orycms/whatsapp/webhook/route.ts), not from anything middleware
- * can check — same reasoning as RAZORPAY_WEBHOOK_PATH above, just with
+ * can check - same reasoning as RAZORPAY_WEBHOOK_PATH above, just with
  * both methods public since WhatsApp uses GET for verification too.
  */
 const WHATSAPP_WEBHOOK_PATH = "/api/orycms/whatsapp/webhook";
 
 /**
- * The /hire-staff page's popup form submits here with no session — a
+ * The /hire-staff page's popup form submits here with no session - a
  * visitor has no OryCMS account to authenticate with. This is a public
  * CREATE, not a public read like the PUBLIC_*_GET_RE patterns below: GET
  * (and PATCH/DELETE) on this same path still require a session, since
@@ -47,35 +47,35 @@ const HIRE_STAFF_REQUESTS_PATH = "/api/orycms/hire-staff-requests";
 
 /**
  * The site-wide "Book a Call" widget creates a booking here with no
- * session — same reasoning as HIRE_STAFF_REQUESTS_PATH above. GET/PATCH/
+ * session - same reasoning as HIRE_STAFF_REQUESTS_PATH above. GET/PATCH/
  * DELETE on /api/orycms/bookings and /api/orycms/bookings/:id still
  * require a session; this only exempts the dedicated public-create path.
  */
 const BOOKINGS_PUBLIC_CREATE_PATH = "/api/orycms/bookings/public";
 
 /**
- * Public content read API routes — GET only.
+ * Public content read API routes - GET only.
  * Pattern: /api/orycms/collections/<slug>/content (list)
  *          /api/orycms/collections/<slug>/content/<id> (single, no further segments)
  *
- * POST/PATCH/DELETE on these same paths still require a session —
+ * POST/PATCH/DELETE on these same paths still require a session -
  * the check is done per-request based on method.
  */
 const PUBLIC_CONTENT_GET_RE = /^\/api\/orycms\/collections\/[^/]+\/content(?:\/[^/]+)?$/;
 
-/** Public announcement-bar read — GET only, no session required. */
+/** Public announcement-bar read - GET only, no session required. */
 const PUBLIC_ANNOUNCEMENTS_GET_RE = /^\/api\/orycms\/announcements\/public$/;
 
-/** Public "trusted by" companies read — GET only, no session required. */
+/** Public "trusted by" companies read - GET only, no session required. */
 const PUBLIC_COMPANIES_GET_RE = /^\/api\/orycms\/companies\/public$/;
 
-/** Public case-studies read — GET only, no session required. */
+/** Public case-studies read - GET only, no session required. */
 const PUBLIC_CASE_STUDIES_GET_RE = /^\/api\/orycms\/case-studies\/public$/;
 
-/** Public testimonials read — GET only, no session required. */
+/** Public testimonials read - GET only, no session required. */
 const PUBLIC_TESTIMONIALS_GET_RE = /^\/api\/orycms\/testimonials\/public$/;
 
-/** Public booking-availability + open-slots reads — GET only, no session required. */
+/** Public booking-availability + open-slots reads - GET only, no session required. */
 const PUBLIC_BOOKINGS_GET_RE = /^\/api\/orycms\/bookings\/(availability|slots)\/public$/;
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -96,29 +96,29 @@ function isSafeFrom(from: string | null): from is string {
 // ── Middleware ───────────────────────────────────────────────────────────────
 //
 // Only guards OryCMS: the marketing site (everything outside /admin and
-// /api/orycms) is untouched by this middleware — see `config.matcher` below.
+// /api/orycms) is untouched by this middleware - see `config.matcher` below.
 
 export function middleware(request: NextRequest) {
   const { pathname, method } = request.nextUrl;
   const requestMethod = request.method ?? method ?? "GET";
 
-  // Auth API — always public
+  // Auth API - always public
   if (pathname.startsWith(PUBLIC_API_PREFIX)) return NextResponse.next();
 
-  // Razorpay webhook — public; the route itself verifies the HMAC signature.
+  // Razorpay webhook - public; the route itself verifies the HMAC signature.
   if (requestMethod === "POST" && pathname === RAZORPAY_WEBHOOK_PATH) return NextResponse.next();
 
-  // WhatsApp webhook — public for both GET (verification challenge) and
+  // WhatsApp webhook - public for both GET (verification challenge) and
   // POST (events); the route itself verifies the token/signature.
   if (pathname === WHATSAPP_WEBHOOK_PATH && (requestMethod === "GET" || requestMethod === "POST")) {
     return NextResponse.next();
   }
 
-  // Hire-staff request submission — public POST only; GET/PATCH/DELETE on
+  // Hire-staff request submission - public POST only; GET/PATCH/DELETE on
   // this same path fall through to the session check below.
   if (requestMethod === "POST" && pathname === HIRE_STAFF_REQUESTS_PATH) return NextResponse.next();
 
-  // Book-a-call submission — public POST only.
+  // Book-a-call submission - public POST only.
   if (requestMethod === "POST" && pathname === BOOKINGS_PUBLIC_CREATE_PATH) return NextResponse.next();
 
   // Public admin page routes
@@ -158,7 +158,7 @@ export function middleware(request: NextRequest) {
   const sessionCookie = request.cookies.get("orycms_session");
   if (!sessionCookie?.value) {
     const loginUrl = new URL("/admin/login", request.url);
-    // Only carry `from` for safe relative paths — prevents open-redirect
+    // Only carry `from` for safe relative paths - prevents open-redirect
     if (isSafeFrom(pathname)) {
       loginUrl.searchParams.set("from", pathname);
     }
@@ -169,7 +169,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Only run this middleware for OryCMS's own surface — the marketing site
+  // Only run this middleware for OryCMS's own surface - the marketing site
   // is never touched by it.
   matcher: ["/admin/:path*", "/api/orycms/:path*"],
 };

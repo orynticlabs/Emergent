@@ -4,7 +4,7 @@ import { OryCMSWhatsAppInboxService } from "@/whatsapp";
 
 type RouteCtx = { params: Promise<{ customerId: string }> };
 
-// GET /api/orycms/whatsapp/inbox/:customerId — full message timeline for
+// GET /api/orycms/whatsapp/inbox/:customerId - full message timeline for
 // one customer plus current menu-flow "awaiting selection" state. Gated
 // on "whatsapp":"manage".
 export async function GET(request: NextRequest, { params }: RouteCtx) {

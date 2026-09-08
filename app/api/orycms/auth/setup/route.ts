@@ -4,7 +4,7 @@ import { createOryCMSInitialOwner, OryCMSAuthError } from "@/auth";
 import { bootstrapOryCMS } from "@/core";
 import { getOryCMSPool } from "@/lib/db";
 
-// POST /api/orycms/auth/setup — create the first Owner account
+// POST /api/orycms/auth/setup - create the first Owner account
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as { name?: string; email?: string; password?: string };
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Install the core schema (11 tables) AND seed the default roles + permission
     // matrix before creating the Owner, so a fresh database works end-to-end.
-    // bootstrapOryCMS is idempotent — safe to re-run.
+    // bootstrapOryCMS is idempotent - safe to re-run.
     const bootstrap = await bootstrapOryCMS(pool);
     if (!bootstrap.install.success) {
       return NextResponse.json(

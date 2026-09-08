@@ -21,7 +21,7 @@ export function useCaseStudies() {
 
   useEffect(() => {
     let cancelled = false;
-    // Relative path — this API route is served by this same Next.js app.
+    // Relative path - this API route is served by this same Next.js app.
     fetch(`/api/orycms/case-studies/public`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`Case studies fetch failed: ${res.status}`);

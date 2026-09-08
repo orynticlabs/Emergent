@@ -73,7 +73,7 @@ describe("POST /api/orycms/auth/setup", () => {
     expect(body).toEqual({ success: true, data: { userId: "u1", email: "owner@acme.io" } });
   });
 
-  it("does NOT auto-login (no session cookie set — user signs in on /login)", async () => {
+  it("does NOT auto-login (no session cookie set - user signs in on /login)", async () => {
     bootstrapOryCMS.mockResolvedValue({
       install: { success: true, applied: [], skipped: [], failed: [] },
       seeded: true,

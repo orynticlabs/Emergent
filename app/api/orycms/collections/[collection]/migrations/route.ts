@@ -40,7 +40,7 @@ function errResponse(err: unknown) {
 
 type RouteCtx = { params: Promise<{ collection: string }> };
 
-// GET /api/orycms/collections/:collection/migrations — migration history
+// GET /api/orycms/collections/:collection/migrations - migration history
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     await loadOryCMSPersistedCollectionsOnStartup();

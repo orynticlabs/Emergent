@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { listOryCMSCompanies, createOryCMSCompany } from "@/companies";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/companies — list all companies (admin)
+// GET /api/orycms/companies - list all companies (admin)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "companies", "read");
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/companies — add a new company wordmark
+// POST /api/orycms/companies - add a new company wordmark
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "companies", "create");

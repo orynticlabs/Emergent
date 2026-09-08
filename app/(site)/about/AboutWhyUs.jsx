@@ -182,7 +182,7 @@ const CARDS = [
   },
   {
     title: "Honest When It's Not Working",
-    text: "If an approach is wrong, we say so — even mid-project. You hear it early, never when it's too late to adjust.",
+    text: "If an approach is wrong, we say so - even mid-project. You hear it early, never when it's too late to adjust.",
     scene: (
       <ChatScene
         messages={[
@@ -196,17 +196,17 @@ const CARDS = [
   },
   {
     title: "One Team, Under One Roof",
-    text: "Web, mobile, AI, cloud, and design — all in-house, coordinating on the same project without handoffs.",
+    text: "Web, mobile, AI, cloud, and design - all in-house, coordinating on the same project without handoffs.",
     scene: <AvatarCluster />,
   },
   {
     title: "Founders Stay Involved",
-    text: "The people on your kickoff call are the people who stay on your project — no disappearing after the sale.",
+    text: "The people on your kickoff call are the people who stay on your project - no disappearing after the sale.",
     scene: <TeamList />,
   },
   {
     title: "A Live Demo, Every Friday",
-    text: "Two-week sprints end in a real, working demo — not a status report. You see progress, not promises.",
+    text: "Two-week sprints end in a real, working demo - not a status report. You see progress, not promises.",
     scene: <CallGrid />,
   },
   {
@@ -237,7 +237,7 @@ export default function AboutWhyUs() {
               />
             </>
           }
-          description="More than a vendor relationship — direct access to the people building your product, honest communication, and a process you can actually see."
+          description="More than a vendor relationship - direct access to the people building your product, honest communication, and a process you can actually see."
         />
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">

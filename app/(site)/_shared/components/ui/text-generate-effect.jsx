@@ -6,7 +6,7 @@ import { cn } from "@site/lib/utils";
 
 /**
  * Aceternity "text generate effect": words fade in from a blur, one at a
- * time, left to right — used for a single confident statement rather than
+ * time, left to right - used for a single confident statement rather than
  * a whole paragraph of body copy.
  */
 export function TextGenerateEffect({ words, className, filter = true, duration = 0.5 }) {

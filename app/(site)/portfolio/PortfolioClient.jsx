@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Search, SearchX } from "lucide-react";
+import { ArrowUpRight, Search, SearchX, X } from "lucide-react";
 import { IMAGES } from "@site/data/content";
 import { useCaseStudies } from "@site/hooks/use-case-studies";
 import { Reveal, ArrowLink, EASE } from "@site/components/site/Reveal";
@@ -17,58 +17,105 @@ const HERO_STATS = [
   { type: "image", image: IMAGES.hero, badge: "Full-Spectrum Delivery" },
 ];
 
-/*
- * Gooey search input — the liquid-merge effect Aceternity's UI kit is known
- * for, built with the classic SVG goo filter (blur + contrast matrix) rather
- * than an npm/shadcn install, since this project doesn't use the shadcn CLI
- * registry. Filtered shapes (the pill + the focus blob) live on their own
- * unfiltered-from-text layer — text run through a goo filter turns to mush,
- * so the actual <input> and icon sit on a separate, crisp layer on top.
+/**
+ * Normalizes text for case-insensitive, punctuation-agnostic search.
+ * Converts "UI/UX" -> "ui ux", "PhonePe" -> "phonepe", etc.
  */
-function GooeySearchInput({ value, onChange }) {
+function normalizeForSearch(text) {
+  if (!text) return "";
+  return String(text)
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Checks if a project matches the search query.
+ * Breaks the query into tokens so multi-word queries match even if non-contiguous or punctuated.
+ */
+function matchesSearch(project, rawQuery) {
+  const query = rawQuery.trim();
+  if (!query) return true;
+
+  const normalizedQuery = normalizeForSearch(query);
+  const queryTokens = normalizedQuery.split(" ").filter(Boolean);
+  if (queryTokens.length === 0) return true;
+
+  const tagList = Array.isArray(project.tags) ? project.tags.join(" ") : "";
+  const approachList = Array.isArray(project.approach) ? project.approach.join(" ") : "";
+  const resultsList = Array.isArray(project.results)
+    ? project.results.map((r) => `${r.value || ""} ${r.label || ""}`).join(" ")
+    : "";
+
+  const combinedRaw = [
+    project.title,
+    project.desc,
+    project.description,
+    project.category,
+    project.industry,
+    project.client,
+    project.slug,
+    project.challenge,
+    tagList,
+    approachList,
+    resultsList,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const combinedNormalized = normalizeForSearch(combinedRaw);
+
+  return queryTokens.every(
+    (token) => combinedNormalized.includes(token) || combinedRaw.includes(token)
+  );
+}
+
+function SearchInput({ value, onChange, onClear }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="relative w-full lg:w-80">
-      <svg width="0" height="0" className="absolute">
-        <defs>
-          <filter id="portfolio-search-goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -11" result="goo" />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
-
-      <div className="pointer-events-none absolute inset-0" style={{ filter: "url(#portfolio-search-goo)" }} aria-hidden="true">
-        <div className="absolute inset-0 rounded-full bg-[#141414]" />
-        <motion.span
-          animate={{ scale: focused ? 1 : 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 22 }}
-          className="absolute left-[26px] top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-orange"
-        />
-      </div>
-
       <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute inset-0 rounded-full border transition-colors duration-300 ${
-          focused ? "border-brand-orange/60" : "border-white/15"
+        className={`relative flex items-center w-full rounded-full border transition-all duration-300 p-1 backdrop-blur-md ${
+          focused
+            ? "border-brand-orange/70 bg-white/[0.06] shadow-[0_0_20px_-4px_rgba(255,85,0,0.25)] ring-1 ring-brand-orange/30"
+            : "border-white/15 bg-white/[0.04] hover:border-white/25"
         }`}
-      />
+      >
+        <div
+          aria-hidden="true"
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+            focused
+              ? "bg-brand-orange text-white shadow-sm shadow-brand-orange/40"
+              : "bg-white/[0.06] text-white/50"
+          }`}
+        >
+          <Search className="h-3.5 w-3.5" />
+        </div>
 
-      <Search
-        className={`pointer-events-none absolute left-4 top-1/2 z-10 h-4 w-4 -translate-y-1/2 transition-colors duration-300 ${
-          focused ? "text-white" : "text-white/40"
-        }`}
-      />
-      <input
-        value={value}
-        onChange={onChange}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        placeholder="Search projects..."
-        data-testid="portfolio-search"
-        className="relative z-10 w-full rounded-full bg-transparent py-3 pl-12 pr-5 text-sm text-white placeholder:text-white/35 outline-none"
-      />
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder="Search projects..."
+          data-testid="portfolio-search"
+          className="w-full bg-transparent py-1.5 pl-3 pr-2 text-sm text-white placeholder:text-white/35 outline-none"
+        />
+
+        {value && (
+          <button
+            type="button"
+            onClick={onClear}
+            aria-label="Clear search"
+            className="mr-1.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white/40 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -96,8 +143,9 @@ function HeroStat({ stat, index }) {
   );
 }
 
-export default function PortfolioClient() {
-  const { caseStudies } = useCaseStudies();
+export default function PortfolioClient({ initialCaseStudies = [] }) {
+  const { caseStudies: liveCaseStudies } = useCaseStudies();
+  const caseStudies = liveCaseStudies.length > 0 ? liveCaseStudies : initialCaseStudies;
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -106,8 +154,7 @@ export default function PortfolioClient() {
 
   const filtered = caseStudies.filter((p) => {
     const matchCategory = category === "All" || p.category === category;
-    const q = query.trim().toLowerCase();
-    const matchQuery = !q || [p.title, p.desc, p.industry, ...p.tags].join(" ").toLowerCase().includes(q);
+    const matchQuery = matchesSearch(p, query);
     return matchCategory && matchQuery;
   });
 
@@ -148,7 +195,7 @@ export default function PortfolioClient() {
             transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
             className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-lg"
           >
-            Explore how OrynticLabs engineers digital solutions across 11 industries —
+            Explore how Oryntic Labs engineers digital solutions across 11 industries -
             from AI platforms to enterprise systems.
           </motion.p>
           <motion.div
@@ -187,14 +234,18 @@ export default function PortfolioClient() {
                 </button>
               ))}
             </div>
-            <GooeySearchInput value={query} onChange={(e) => setQuery(e.target.value)} />
+            <SearchInput
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onClear={() => setQuery("")}
+            />
           </div>
 
           {/*
            * Box design + interaction adapted from 21st.dev's "Hover Reveal
            * Cards" (the hovered card stays crisp while its siblings blur and
            * fade back) layered on the "Project Card" pattern (zoom-on-hover
-           * cover image, category/industry badges, tag pills, CTA link) —
+           * cover image, category/industry badges, tag pills, CTA link) -
            * literal source wasn't pulled (paid components), built from the
            * pattern rather than copied code.
            */}
@@ -260,11 +311,25 @@ export default function PortfolioClient() {
                 testId="portfolio-empty"
                 icon={SearchX}
                 title="No projects match your search."
-                description="Try a different keyword or category."
-                action="Clear filters"
+                description={
+                  category !== "All" && query.trim()
+                    ? `No projects found in "${category}" matching "${query}".`
+                    : query.trim()
+                    ? `No projects found matching "${query}".`
+                    : "Try a different keyword or category."
+                }
+                action={
+                  category !== "All" && query.trim()
+                    ? "Search all categories"
+                    : "Clear filters"
+                }
                 onAction={() => {
-                  setCategory("All");
-                  setQuery("");
+                  if (category !== "All" && query.trim()) {
+                    setCategory("All");
+                  } else {
+                    setCategory("All");
+                    setQuery("");
+                  }
                 }}
               />
             </div>

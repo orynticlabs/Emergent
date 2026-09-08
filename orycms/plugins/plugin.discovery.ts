@@ -36,7 +36,7 @@ export type OryCMSDiscoveryLoadResult = {
 
 // ── Internal state ────────────────────────────────────────────────────────────
 
-/** IDs registered through auto-discovery — lets reloadDiscoveredOryCMSPlugins know what to clean up. */
+/** IDs registered through auto-discovery - lets reloadDiscoveredOryCMSPlugins know what to clean up. */
 const _discoveredIds = new Set<string>();
 
 /** Import cache-bust counter, same pattern as config.loader.ts. */
@@ -78,7 +78,7 @@ async function tryImportEntry(
       // try next entry file
     }
   }
-  if (!firstFound) return {}; // no entry file — not a plugin dir, silently skip
+  if (!firstFound) return {}; // no entry file - not a plugin dir, silently skip
   return {
     entryFile: firstFound,
     error: new Error(`Could not import any entry file in "${dir}".`),

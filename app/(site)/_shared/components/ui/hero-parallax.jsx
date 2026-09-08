@@ -57,7 +57,7 @@ const Header = () => (
       Products We&apos;ve Shipped <br /> and Are Shipping
     </h1>
     <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/55 md:text-xl">
-      A closer look at the platforms, products, and engagements our team has delivered — from
+      A closer look at the platforms, products, and engagements our team has delivered - from
       internal tools to client production systems.
     </p>
   </div>

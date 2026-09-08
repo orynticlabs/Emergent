@@ -13,7 +13,7 @@ const signals = [
   {
     icon: Lock,
     title: "Choose a new password",
-    body: "Passwords are hashed with bcrypt (cost 12) — never stored in plain text.",
+    body: "Passwords are hashed with bcrypt (cost 12) - never stored in plain text.",
   },
   {
     icon: LogOut,
@@ -78,7 +78,7 @@ function ResetPasswordForm() {
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-[18px] font-semibold tracking-tight">OryCMS</div>
-              <div className="text-[12px] text-muted-foreground">By OrynticLabs Private Limited</div>
+              <div className="text-[12px] text-muted-foreground">By Oryntic Labs Private Limited</div>
             </div>
             <Badge variant="outline" className="border-border bg-surface/80 px-3 py-1 text-[11px]">
               Reset password
@@ -130,7 +130,7 @@ function ResetPasswordForm() {
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-12 lg:px-12">
         <div className="mb-8 text-center lg:hidden">
           <div className="text-[20px] font-semibold tracking-tight">OryCMS</div>
-          <div className="mt-0.5 text-[12px] text-muted-foreground">by OrynticLabs Private Limited</div>
+          <div className="mt-0.5 text-[12px] text-muted-foreground">by Oryntic Labs Private Limited</div>
         </div>
 
         <div className="w-full max-w-[420px] rounded-2xl border border-border bg-surface p-6 shadow-[0_20px_60px_-20px_rgba(20,24,31,0.18)] lg:p-8">

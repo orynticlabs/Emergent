@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// DELETE /api/orycms/settings/api-keys/:id — revoke an API key (guarded; impl pending)
+// DELETE /api/orycms/settings/api-keys/:id - revoke an API key (guarded; impl pending)
 export async function DELETE(request: NextRequest, { params }: RouteCtx) {
   try {
     await guardOryCMS(request, "settings", "delete");

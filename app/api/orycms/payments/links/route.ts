@@ -7,9 +7,9 @@ import {
   listOryCMSPaymentLinks,
 } from "@/payments";
 
-// GET /api/orycms/payments/links — list payment links.
-// POST /api/orycms/payments/links — create a new Razorpay payment link.
-// Gated by the "payments" RBAC resource (Super Admin/Admin by default —
+// GET /api/orycms/payments/links - list payment links.
+// POST /api/orycms/payments/links - create a new Razorpay payment link.
+// Gated by the "payments" RBAC resource (Super Admin/Admin by default -
 // see ORYCMS_DEFAULT_PERMISSIONS) since creating a real payment link is a
 // financial action, not a self-scoped personal-account one.
 

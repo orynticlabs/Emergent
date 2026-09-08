@@ -27,7 +27,7 @@ interface OryCMSMfaSetup {
  * MFA enrollment dialog: fetches a fresh TOTP secret + QR code on open, then
  * lets the user confirm their authenticator app is enrolled by submitting the
  * first 6-digit code. A successful verify activates MFA server-side (see
- * /api/orycms/auth/mfa/verify), so this re-fetches the session afterward —
+ * /api/orycms/auth/mfa/verify), so this re-fetches the session afterward -
  * the Settings page's "Enabled"/"Disabled" status comes from that session
  * data, not from any local state here.
  */

@@ -5,7 +5,7 @@ import { setOryCMSUserStatus } from "@/users";
 import { recordOryCMSAuditLog } from "@/audit";
 import { toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 
-// POST /api/orycms/auth/activate — public.
+// POST /api/orycms/auth/activate - public.
 // Consumes an activation token and marks the account active.
 export async function POST(request: NextRequest) {
   try {

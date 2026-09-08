@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const user = await authenticateOryCMSUser(pool, email, password);
 
     // MFA accounts: password alone is not enough. Issue a short-lived login
-    // challenge instead of a session — no cookie is set until
+    // challenge instead of a session - no cookie is set until
     // /api/orycms/auth/mfa/login-verify confirms the TOTP code.
     if (user.mfaEnabled) {
       const { challengeToken } = await createOryCMSMfaLoginChallenge(user.id, user.email, pool);

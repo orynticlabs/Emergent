@@ -4,7 +4,7 @@ import { listOryCMSProjectsByClient } from "@/projects";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// GET /api/orycms/clients/:id/projects — this client's projects visible to the caller
+// GET /api/orycms/clients/:id/projects - this client's projects visible to the caller
 export async function GET(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "projects", "read");

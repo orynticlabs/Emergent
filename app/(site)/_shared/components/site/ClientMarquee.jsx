@@ -8,7 +8,7 @@ export default function ClientMarquee() {
 
   useEffect(() => {
     let cancelled = false;
-    // Relative path — this API route is served by this same Next.js app.
+    // Relative path - this API route is served by this same Next.js app.
     fetch(`/api/orycms/companies/public`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`Companies fetch failed: ${res.status}`);

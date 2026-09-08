@@ -14,10 +14,10 @@ function validationError(message: string) {
 }
 
 /**
- * POST /api/orycms/whatsapp/inbox/:customerId/reply — manual admin reply.
+ * POST /api/orycms/whatsapp/inbox/:customerId/reply - manual admin reply.
  * Sends through OryCMSWhatsAppInboxService.sendManualReply(), which itself
  * only calls the existing OryCMSWhatsAppService.sendTextMessage() (no new
- * provider, no duplicated send logic). Gated on "whatsapp":"manage" —
+ * provider, no duplicated send logic). Gated on "whatsapp":"manage" -
  * same permission every other WhatsApp mutation in this codebase requires;
  * a manual reply is not a special/bypass path around RBAC.
  */
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest, { params }: RouteCtx) {
 
     const result = await OryCMSWhatsAppInboxService.sendManualReply(decodedCustomerId, body.text);
 
-    // Metadata is booleans/provider/errorCode only — never the message text.
+    // Metadata is booleans/provider/errorCode only - never the message text.
     await recordOryCMSAuditLog({
       userId: session.userId,
       action: "send_manual_reply",

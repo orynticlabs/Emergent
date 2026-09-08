@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { listActiveOryCMSAnnouncements } from "@/announcements";
 
-// GET /api/orycms/announcements/public — active announcements only, no session
+// GET /api/orycms/announcements/public - active announcements only, no session
 // required (exempted in middleware.ts's PUBLIC_ANNOUNCEMENTS_GET_RE). Read by
 // the marketing site's Navbar to render the live announcement bar.
 //

@@ -21,10 +21,10 @@ import { fetchJson } from "@/components/projects/OryCMSProjectsAdminPage";
 
 /**
  * MFA removal confirmation dialog. Requires the current password AND a
- * current TOTP code — matches /api/orycms/auth/mfa/disable's requirement
+ * current TOTP code - matches /api/orycms/auth/mfa/disable's requirement
  * that neither alone is sufficient. Disabling destroys every session for
  * the account server-side (including this one), so a successful disable
- * redirects to the login page rather than continuing as "authenticated" —
+ * redirects to the login page rather than continuing as "authenticated" -
  * there is no session left to refresh into.
  */
 export function OryCMSMfaDisableDialog({
@@ -84,7 +84,7 @@ export function OryCMSMfaDisableDialog({
         setError("MFA is no longer enabled on this account.");
         resetFields();
         onOpenChange(false);
-        // No session was destroyed on this path (nothing to disable) —
+        // No session was destroyed on this path (nothing to disable) -
         // just re-sync the session so the Settings page reflects reality.
         await refresh();
       } else {

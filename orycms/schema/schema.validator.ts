@@ -68,7 +68,7 @@ export interface OryCMSValidatorOptions {
 
 /**
  * Validates an OryCMS collection definition without touching the registry.
- * Returns every issue found — does NOT throw.
+ * Returns every issue found - does NOT throw.
  */
 export function validateOryCMSCollectionSchema(
   definition: unknown,
@@ -331,7 +331,7 @@ export function validateOryCMSCollectionSchema(
       }
 
       // text, textarea, richText, number, boolean, date, email, password, media, json
-      // have no extra required properties — type-check is sufficient
+      // have no extra required properties - type-check is sufficient
       default:
         break;
     }

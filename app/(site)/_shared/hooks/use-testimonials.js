@@ -17,7 +17,7 @@ export function useTestimonials() {
 
   useEffect(() => {
     let cancelled = false;
-    // Relative path — this API route is served by this same Next.js app.
+    // Relative path - this API route is served by this same Next.js app.
     fetch(`/api/orycms/testimonials/public`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`Testimonials fetch failed: ${res.status}`);

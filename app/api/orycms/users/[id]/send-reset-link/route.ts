@@ -7,7 +7,7 @@ import { recordOryCMSAuditLog } from "@/audit";
 
 type RouteCtx = { params: Promise<{ id: string }> };
 
-// POST /api/orycms/users/:id/send-reset-link — Super Admin only (users:manage).
+// POST /api/orycms/users/:id/send-reset-link - Super Admin only (users:manage).
 // Lets a Super Admin trigger a password-reset email for any team member directly,
 // without the member having to use "Forgot password" themselves.
 export async function POST(request: NextRequest, { params }: RouteCtx) {

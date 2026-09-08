@@ -1,8 +1,8 @@
 /*
- * Marketing-site stylesheet — Tailwind v4. Only loaded by app/(site)/layout.tsx,
+ * Marketing-site stylesheet - Tailwind v4. Only loaded by app/(site)/layout.tsx,
  * so it never reaches /admin (which loads orycms/orycms/styles.css, Tailwind v4
  * as well but with its own independent theme). This file is a straight port of
- * the original CRA tailwind.config.js (theme.extend) + src/index.css — same
+ * the original CRA tailwind.config.js (theme.extend) + src/index.css - same
  * tokens, same utility classes, same visual output; only the config mechanism
  * changed from a JS config object to Tailwind v4's CSS-based `@theme`.
  */
@@ -10,7 +10,7 @@
 @import "tw-animate-css";
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-/* Scan the whole (site) route group — page.jsx files (app/(site)/**) live
+/* Scan the whole (site) route group - page.jsx files (app/(site)/**) live
    one level up from this file, not just _shared/components. */
 @source "..";
 

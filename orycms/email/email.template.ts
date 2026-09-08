@@ -1,14 +1,14 @@
 /**
- * Single global HTML shell every OryCMS system email renders through —
+ * Single global HTML shell every OryCMS system email renders through -
  * white / black / orange, matching the OryCMS admin brand (see the login
  * page's logo at public/orycms/img/favicon.png). Add a new transactional
- * email by writing a plain-text body and one `renderOryCMSEmail()` call —
- * never a one-off template — so every email stays visually consistent.
+ * email by writing a plain-text body and one `renderOryCMSEmail()` call -
+ * never a one-off template - so every email stays visually consistent.
  *
  * Light theme deliberately, not the dark admin UI: transactional email is
  * read in inboxes with images-off-by-default and dark-mode auto-inversion
  * quirks, and a plain white card with black text is the most reliable
- * rendering across Gmail/Outlook/Apple Mail — the same reasoning most
+ * rendering across Gmail/Outlook/Apple Mail - the same reasoning most
  * professional transactional templates (Stripe, GitHub, etc.) follow.
  */
 
@@ -23,7 +23,7 @@ const SECURITY_BG = "#FFF4EE";
 const SECURITY_BORDER = "#FFD9C2";
 
 /**
- * Absolute URL to the OryCMS logo — must be absolute (not a relative path)
+ * Absolute URL to the OryCMS logo - must be absolute (not a relative path)
  * for email clients to load it at all. Built from ORYCMS_APP_URL the same
  * way orycms/auth/token-links.ts builds absolute links; if that env var
  * isn't set (e.g. local dev pointed at localhost), we fall back to a text
@@ -38,14 +38,14 @@ function getOryCMSLogoUrl(): string | null {
 export interface OryCMSEmailTemplateOptions {
   /** Short heading shown above the body copy, e.g. "Reset your password". */
   heading: string;
-  /** Body paragraph(s), plain text — one <p> per array entry. */
+  /** Body paragraph(s), plain text - one <p> per array entry. */
   paragraphs: string[];
   /** Primary call-to-action button. */
   cta: { label: string; url: string };
   /** Small print under the button, e.g. an expiry notice. */
   footnote?: string;
   /**
-   * Security reassurance line shown in a highlighted box below the CTA —
+   * Security reassurance line shown in a highlighted box below the CTA -
    * defaults to a generic "didn't request this" notice. Pass a specific
    * one per email type (e.g. password reset vs. invite) when the generic
    * default isn't precise enough.
@@ -58,7 +58,7 @@ export function renderOryCMSEmail({
   paragraphs,
   cta,
   footnote,
-  securityNotice = "If you didn't request this, you can safely ignore this email — no changes will be made to your account. Never share this link with anyone; OrynticLabs staff will never ask you for it.",
+  securityNotice = "If you didn't request this, you can safely ignore this email - no changes will be made to your account. Never share this link with anyone; Oryntic Labs staff will never ask you for it.",
 }: OryCMSEmailTemplateOptions): string {
   const paragraphsHtml = paragraphs
     .map(
@@ -127,7 +127,7 @@ export function renderOryCMSEmail({
             <tr>
               <td style="padding:24px 8px 0;" align="center">
                 <p style="margin:0;font-size:12px;color:${MUTED};">
-                  OrynticLabs Private Limited · This is an automated message from OryCMS.<br />
+                  Oryntic Labs Private Limited · This is an automated message from OryCMS.<br />
                   Need help? <a href="mailto:support@orynticlabs.com" style="color:${MUTED};">support@orynticlabs.com</a>
                 </p>
               </td>

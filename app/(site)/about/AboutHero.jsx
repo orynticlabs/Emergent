@@ -8,7 +8,7 @@ import { CanvasText } from "@site/components/ui/canvas-text";
 
 /**
  * Same hero pattern as the home page (KineticLine word-reveal headline,
- * overline, description, Magnetic CTA) instead of a bespoke treatment —
+ * overline, description, Magnetic CTA) instead of a bespoke treatment -
  * a full-bleed Pexels photo standing in for the home hero's video.
  */
 export default function AboutHero() {
@@ -34,7 +34,7 @@ export default function AboutHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-left md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
-            OrynticLabs — Who We Are
+            Oryntic Labs - Who We Are
           </p>
         </motion.div>
 
@@ -60,7 +60,7 @@ export default function AboutHero() {
           transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
           className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
         >
-          We design and build AI-powered software that businesses actually rely on — not demos,
+          We design and build AI-powered software that businesses actually rely on - not demos,
           production systems people use every day.
         </motion.p>
 

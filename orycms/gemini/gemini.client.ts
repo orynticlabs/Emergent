@@ -1,5 +1,5 @@
 /**
- * Thin wrapper over the Gemini (Generative Language) API — plain `fetch`,
+ * Thin wrapper over the Gemini (Generative Language) API - plain `fetch`,
  * no SDK dependency, mirroring payments/razorpay.client.ts. Covers Test
  * Connection (a lightweight "does this key + model actually work" check)
  * and, as of Step 4, real content generation via generateContent.
@@ -24,7 +24,7 @@ export interface OryCMSGeminiConnectionCheck {
  * Calls GET /v1beta/models/{model} with the API key in the
  * `x-goog-api-key` header (never a query string, so it can't end up in
  * server/proxy access logs the way a `?key=` query param can). This is a
- * metadata read — it does not consume generation quota and sends no
+ * metadata read - it does not consume generation quota and sends no
  * prompt/content. Never logs the API key; the key only ever appears in the
  * outgoing header, never in a thrown error or returned message.
  */
@@ -78,7 +78,7 @@ export async function testOryCMSGeminiConnection(
   return {
     ok: true,
     code: "GEMINI_CONNECTED",
-    message: `Connected — "${model}" is reachable with this API key.`,
+    message: `Connected - "${model}" is reachable with this API key.`,
   };
 }
 
@@ -102,15 +102,15 @@ export type OryCMSGeminiGenerateResult =
   | { ok: false; code: string; message: string };
 
 // Google's free-tier capacity for popular models (e.g. "gemini-flash-latest")
-// measurably 503s a meaningful fraction of the time under load — observed
+// measurably 503s a meaningful fraction of the time under load - observed
 // directly: 4 of 6 back-to-back real calls failed with 503 in testing. A
 // 503 is Google's own server saying "temporarily overloaded," not a config
-// or request problem, and empirically clears within a second or two — so a
+// or request problem, and empirically clears within a second or two - so a
 // couple of short, bounded retries meaningfully improves real delivery odds
 // for the WhatsApp auto-reply flow without risking a long hang (worst case:
 // ~1.5s of extra latency, still well inside what the webhook route/Meta's
 // own retry tolerance can absorb). Deliberately NOT retried: 429 (rate
-// limit) — Google's own 429s here have included a hard `limit: 0`
+// limit) - Google's own 429s here have included a hard `limit: 0`
 // zero-quota case that no amount of retrying fixes, and its suggested
 // retry-after (20s+) doesn't fit inside a single webhook request anyway.
 const TRANSIENT_RETRY_STATUSES = new Set([503]);
@@ -123,9 +123,9 @@ function delay(ms: number): Promise<void> {
 
 /**
  * Calls POST /v1beta/models/{model}:generateContent with the API key in the
- * `x-goog-api-key` header (never a query string — same reasoning as
+ * `x-goog-api-key` header (never a query string - same reasoning as
  * testOryCMSGeminiConnection above). Never logs the API key, the system
- * instruction, the user message, or the generated text — the caller
+ * instruction, the user message, or the generated text - the caller
  * (gemini.service.ts) owns what, if anything, gets logged, and Step 4's
  * instructions are "don't log prompts unnecessarily," so this function logs
  * nothing at all. Retries automatically (see TRANSIENT_RETRY_STATUSES above)
@@ -165,7 +165,7 @@ export async function generateOryCMSGeminiContent(
   return lastResult;
 }
 
-/** Pulls the HTTP status back out of "Gemini API returned an unexpected error (HTTP 503)." — avoids restructuring attemptGenerateOryCMSGeminiContent's return shape just to carry the status code an extra hop. */
+/** Pulls the HTTP status back out of "Gemini API returned an unexpected error (HTTP 503)." - avoids restructuring attemptGenerateOryCMSGeminiContent's return shape just to carry the status code an extra hop. */
 function extractHttpStatus(message: string): number | null {
   const match = /HTTP (\d+)/.exec(message);
   return match ? Number(match[1]) : null;

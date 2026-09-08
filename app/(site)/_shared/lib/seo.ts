@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-// Real domain — CONTACT.website in data/content.js confirms www.orynticlabs.com.
+// Real domain - CONTACT.website in data/content.js confirms www.orynticlabs.com.
 export const SITE_URL = "https://www.orynticlabs.com";
-export const SITE_NAME = "OrynticLabs";
+export const SITE_NAME = "Oryntic Labs";
 
-// Placeholder — data/content.js's IMAGES are stock photos (already flagged
+// Placeholder - data/content.js's IMAGES are stock photos (already flagged
 // elsewhere in this repo as placeholders). Swap for a real 1200x630 branded
 // OG image when one exists; every page's social preview uses this fallback
 // unless it passes its own `image`.
@@ -17,16 +17,16 @@ interface PageMetadataInput {
   /** Site-relative path, e.g. "/about". Used for the canonical URL + OG url. */
   path: string;
   image?: string;
-  /** Set for hard "do not index" pages (none currently — kept for completeness). */
+  /** Set for hard "do not index" pages (none currently - kept for completeness). */
   noindex?: boolean;
 }
 
 /**
- * Builds a complete, self-contained Metadata object for one marketing page —
+ * Builds a complete, self-contained Metadata object for one marketing page -
  * canonical URL, Open Graph (Facebook/WhatsApp/LinkedIn all read OG tags),
  * Twitter Card, and Googlebot-specific directives. Next.js does NOT deep-merge
  * nested `openGraph`/`twitter` objects between a page and its layout, so each
- * page must supply the full object — this helper does that consistently.
+ * page must supply the full object - this helper does that consistently.
  */
 export function buildPageMetadata({
   title,

@@ -55,7 +55,7 @@ async function getCloudinaryClient(): Promise<CloudinaryModule["v2"]> {
 }
 
 /**
- * Stores media in Cloudinary instead of the local filesystem — the file
+ * Stores media in Cloudinary instead of the local filesystem - the file
  * survives deploys/restarts and gets Cloudinary's CDN + on-the-fly image
  * transforms for free. `ref` is encoded as "resourceType:publicId" since
  * Cloudinary's destroy() needs the resource type to delete non-image files.

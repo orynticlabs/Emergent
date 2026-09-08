@@ -3,7 +3,7 @@ import { guardOryCMS, toErrorResponse, oryJsonOk } from "@/lib/route-guards";
 import { listOryCMSUsers, createOryCMSUser } from "@/users";
 import { recordOryCMSAuditLog } from "@/audit";
 
-// GET /api/orycms/users — list all users
+// GET /api/orycms/users - list all users
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "users", "read");
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/users — create a user
+// POST /api/orycms/users - create a user
 export async function POST(request: NextRequest) {
   try {
     const session = await guardOryCMS(request, "users", "create");

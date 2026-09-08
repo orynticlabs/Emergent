@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Pool } from "pg";
 
-// Mock the storage adapter factory instead of fs — media.engine no longer
+// Mock the storage adapter factory instead of fs - media.engine no longer
 // talks to the filesystem directly, it goes through OryCMSStorageAdapter.
 const mockUpload = vi.fn();
 const mockDelete = vi.fn();

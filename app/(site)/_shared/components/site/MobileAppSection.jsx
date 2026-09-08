@@ -13,7 +13,7 @@ const ONBOARDING_SCREEN_2 = "/assets/Onboarding.png";
  * Phone-mockup treatment adapted from a 21st.dev "cinematic hero" component
  * (physical/skeuomorphic device card + mouse-tracked sheen + floating glass
  * badges + progress ring). Kept scoped to this one section instead of that
- * source's full-viewport GSAP ScrollTrigger pin-and-scrub timeline — pinning
+ * source's full-viewport GSAP ScrollTrigger pin-and-scrub timeline - pinning
  * the whole page for ~7000px of scroll around a single mid-page section would
  * break the surrounding homepage flow. Re-implemented the same visual language
  * with framer-motion (already the project's animation library) instead of
@@ -50,7 +50,7 @@ function FloatingBadge({ icon: Icon, title, subtitle, className }) {
 
 /** Two overlapping device mockups, each showing one of the two onboarding-screen
  *  designs supplied as finished assets (public/assets/on boarding.png and
- *  Onboarding.png) — rendered full-bleed since both images already include
+ *  Onboarding.png) - rendered full-bleed since both images already include
  *  their own status bar. */
 function PhoneStack() {
   return (
@@ -62,7 +62,7 @@ function PhoneStack() {
       <FloatingBadge icon={Flame} title="Native feel" subtitle="Not a wrapped web view" className="-left-4 top-4 lg:-left-12" />
       <FloatingBadge icon={Sparkles} title="Store ready" subtitle="Submission handled for you" className="-right-4 bottom-8 lg:-right-14" />
 
-      {/* Back phone — Home screen */}
+      {/* Back phone - Home screen */}
       <motion.div
         initial={{ opacity: 0, x: -30, rotate: -18 }}
         whileInView={{ opacity: 1, x: 0, rotate: -8 }}
@@ -71,11 +71,11 @@ function PhoneStack() {
         className="absolute left-0 top-0 origin-bottom-right scale-[0.8] sm:scale-90"
       >
         <PhoneBezel dotColor="bg-brand-blue" fullBleed>
-          <img src={ONBOARDING_SCREEN_1} alt="OrynticLabs mobile app onboarding screen" className="h-full w-full object-cover" />
+          <img src={ONBOARDING_SCREEN_1} alt="Oryntic Labs mobile app onboarding screen" className="h-full w-full object-cover" />
         </PhoneBezel>
       </motion.div>
 
-      {/* Front phone — Detail screen */}
+      {/* Front phone - Detail screen */}
       <motion.div
         initial={{ opacity: 0, x: 30, rotate: 18 }}
         whileInView={{ opacity: 1, x: 0, rotate: 6 }}
@@ -84,7 +84,7 @@ function PhoneStack() {
         className="absolute bottom-0 right-0 origin-top-left"
       >
         <PhoneBezel dotColor="bg-brand-orange" fullBleed>
-          <img src={ONBOARDING_SCREEN_2} alt="OrynticLabs mobile app onboarding screen" className="h-full w-full object-cover" />
+          <img src={ONBOARDING_SCREEN_2} alt="Oryntic Labs mobile app onboarding screen" className="h-full w-full object-cover" />
         </PhoneBezel>
       </motion.div>
     </div>
@@ -133,7 +133,7 @@ export default function MobileAppSection() {
           </h2>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60 md:text-lg">
             Consumer apps, enterprise mobility, and hybrid products that work seamlessly across
-            web and mobile — designed for the device first, never adapted from a web layout.
+            web and mobile - designed for the device first, never adapted from a web layout.
           </p>
 
           <div className="mt-10">
@@ -155,7 +155,7 @@ export default function MobileAppSection() {
           <StoreButtons />
 
           <div className="mt-8">
-            <ArrowLink to="/services/mobile-development" variant="ghost" className="border-white/20 text-white hover:bg-white/5">
+            <ArrowLink to="/services" variant="ghost" className="border-white/20 text-white hover:bg-white/5">
               Learn More
             </ArrowLink>
           </div>

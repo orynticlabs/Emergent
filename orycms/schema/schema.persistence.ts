@@ -385,7 +385,7 @@ export async function listOryCMSPersistedCollections(
        ORDER BY name ASC`,
     );
   } catch (err: unknown) {
-    // 42P01 = undefined_table — schema not yet installed, treat as empty
+    // 42P01 = undefined_table - schema not yet installed, treat as empty
     if ((err as { code?: string }).code === "42P01") return [];
     throw err;
   }

@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { guardOryCMS, toErrorResponse, oryJsonError } from "@/lib/route-guards";
 
-// GET /api/orycms/seo/redirects — list SEO redirects (guarded; impl pending)
+// GET /api/orycms/seo/redirects - list SEO redirects (guarded; impl pending)
 export async function GET(request: NextRequest) {
   try {
     await guardOryCMS(request, "seo", "read");
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/orycms/seo/redirects — create SEO redirect (guarded; impl pending)
+// POST /api/orycms/seo/redirects - create SEO redirect (guarded; impl pending)
 export async function POST(request: NextRequest) {
   try {
     await guardOryCMS(request, "seo", "create");

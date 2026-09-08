@@ -301,7 +301,7 @@ export default function ContactClient() {
             <p className="mt-5 max-w-2xl leading-relaxed text-white/60">
               Whether you're scoping a new web platform, adding AI to an existing product, or need
               engineers to sit inside your team for a few months, there's a direct line below for
-              it — sales for new work, support if you're already a client, and a phone number if
+              it - sales for new work, support if you're already a client, and a phone number if
               you'd rather just talk it through.
             </p>
           </Reveal>
@@ -322,7 +322,7 @@ export default function ContactClient() {
               Rooted in India. <span className="text-brand-orange">Built to work with the world.</span>
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-white/50 md:text-base">
-              Our team works out of Gurugram and Rewa, delivering for clients across time zones —
+              Our team works out of Gurugram and Rewa, delivering for clients across time zones -
               no matter where you are, you get the same team on every call.
             </p>
           </Reveal>

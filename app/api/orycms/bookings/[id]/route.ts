@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, { params }: RouteCtx) {
   }
 }
 
-// PATCH /api/orycms/bookings/:id — status transitions only (confirm/cancel/complete)
+// PATCH /api/orycms/bookings/:id - status transitions only (confirm/cancel/complete)
 export async function PATCH(request: NextRequest, { params }: RouteCtx) {
   try {
     const session = await guardOryCMS(request, "bookings", "update");

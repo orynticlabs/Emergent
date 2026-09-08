@@ -6,7 +6,7 @@ import { PinContainer } from "@site/components/ui/3d-pin";
 
 /**
  * One product's pin card. A dedicated function (not inline JSX in the
- * .map()) so every card renders through the exact same markup/classes —
+ * .map()) so every card renders through the exact same markup/classes -
  * the image block below is deliberately a fixed h-32/w-full box with
  * object-cover on every card, so OryAI/OryCMS/PerformX all show their
  * product image at the identical size regardless of the source image's
@@ -14,7 +14,7 @@ import { PinContainer } from "@site/components/ui/3d-pin";
  * product's image under its feature list).
  *
  * A product with a `logo` (currently just PerformX) shows that logo image
- * in place of the plain-text name — sized to the same line-height the text
+ * in place of the plain-text name - sized to the same line-height the text
  * title occupied (h-6) with `object-contain` so the logo's own aspect
  * ratio is preserved rather than stretched/cropped.
  */
@@ -41,11 +41,11 @@ function ProductPinCard({ product }) {
         <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-400/80">
           {product.description}
         </p>
-        <div className="mt-4 h-32 w-full shrink-0 overflow-hidden rounded-lg border border-white/10">
+        <div className="mt-4 flex h-32 w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-black/50 p-1.5">
           <img
             src={product.image}
-            alt={`${product.name} logo`}
-            className="h-full w-full object-cover"
+            alt={`${product.name} visual`}
+            className="max-h-full max-w-full object-contain"
             draggable={false}
           />
         </div>
@@ -72,7 +72,7 @@ export default function InternalProjectsSection() {
                 <span className="text-brand-orange">before we ever sell them.</span>
               </>
             }
-            description="OryAI, OryCMS, and PerformX aren't case studies — they're the systems our own team depends on every day."
+            description="OryAI, OryCMS, and PerformX aren't case studies - they're the systems our own team depends on every day."
           />
         </Reveal>
 

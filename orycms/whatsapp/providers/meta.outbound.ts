@@ -7,20 +7,20 @@ import type {
 } from "../whatsapp.outbound.types";
 
 /**
- * Meta (WhatsApp Cloud API) outbound sender — the ONLY file that knows
+ * Meta (WhatsApp Cloud API) outbound sender - the ONLY file that knows
  * Meta's specific send-message request/response shape, mirroring
  * providers/meta.inbound.ts's role for the inbound direction. Adding a
  * second outbound provider (Twilio, 360dialog, Gupshup, Interakt) means
  * adding a sibling file here exporting the same OryCMSWhatsAppOutboundProvider
- * shape, wired in by whatsapp.outbound.ts's registry — nothing about the
+ * shape, wired in by whatsapp.outbound.ts's registry - nothing about the
  * normalized types, whatsapp.service.ts, or a future automation layer
  * changes.
  *
  * The access token is sent exclusively via the `Authorization: Bearer`
- * header — never a URL query string (Meta's Graph API does accept
+ * header - never a URL query string (Meta's Graph API does accept
  * `?access_token=`, but a header can't leak into server/proxy access logs
  * or browser history the way a URL can, so only the header form is used
- * here) — and never logged or included in any returned value.
+ * here) - and never logged or included in any returned value.
  */
 
 const META_GRAPH_API_VERSION = "v21.0";
