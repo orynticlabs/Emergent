@@ -1,6 +1,5 @@
 import { IMAGES } from "@site/data/content";
 import { Reveal, SectionHead } from "@site/components/site/Reveal";
-import { CanvasText } from "@site/components/ui/canvas-text";
 import { buildPageMetadata } from "@site/lib/seo";
 import ClientMarquee from "@site/components/site/ClientMarquee";
 import AboutHero from "./AboutHero";
@@ -34,23 +33,18 @@ export default function About() {
 
       <AboutFlowText />
 
-      <section className="bg-brand-ink pb-24 pt-10 text-white md:pb-32 md:pt-14" data-testid="about-who-we-are">
+      <section id="about-who-we-are" className="bg-brand-ink pb-24 pt-10 text-white md:pb-32 md:pt-14" data-testid="about-who-we-are">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <SectionHead
-              titleClassName="text-2xl md:text-7xl uppercase"
+              overline="About Oryntic"
+              titleClassName="text-2xl md:text-5xl uppercase"
               wrapperClassName="max-w-lg"
               title={
                 <>
                   Who
-                  <br />
-                  <CanvasText
-                    text="Are We"
-                    className="font-display text-2xl font-black uppercase md:text-7xl"
-                    colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                    lineGap={6}
-                    animationDuration={10}
-                  />
+                  <br className="hidden sm:block" />
+                  <span className="text-brand-orange">we are.</span>
                 </>
               }
               description="Oryntic Labs is a full-spectrum engineering and product studio - we design, build, and deliver custom technology across web, mobile, AI, data, and cloud, helping businesses innovate, scale, and lead in their industry."

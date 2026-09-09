@@ -3,14 +3,8 @@
 import { motion } from "framer-motion";
 import { IMAGES } from "@site/data/content";
 import { KineticLine, ArrowLink, EASE, Magnetic } from "@site/components/site/Reveal";
-import { PointerHighlight } from "@site/components/ui/pointer-highlight";
 import { CanvasText } from "@site/components/ui/canvas-text";
 
-/**
- * Same hero pattern as the home page (KineticLine word-reveal headline,
- * overline, description, Magnetic CTA) instead of a bespoke treatment -
- * a full-bleed Pexels photo standing in for the home hero's video.
- */
 export default function AboutHero() {
   return (
     <section data-testid="page-hero" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-ink text-white">
@@ -31,7 +25,7 @@ export default function AboutHero() {
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-left md:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-28 text-center md:px-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium uppercase tracking-[0.4em] text-white/60" data-testid="hero-overline">
             Oryntic Labs - Who We Are
@@ -39,18 +33,15 @@ export default function AboutHero() {
         </motion.div>
 
         <h1 className="mt-10 font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05]">
-          <KineticLine delay={0.15}>We Transform Your Ideas Into</KineticLine>
+          <KineticLine delay={0.15}>We Transform Ideas Into</KineticLine>
           <KineticLine delay={0.27}>
-            Software That People{" "}
-            <PointerHighlight>
-              <CanvasText
-                text="Love."
-                className="font-display text-5xl font-black sm:text-6xl lg:text-7xl"
-                colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                lineGap={6}
-                animationDuration={10}
-              />
-            </PointerHighlight>
+            <CanvasText
+              text="Software People Love."
+              className="font-display text-5xl font-black sm:text-6xl lg:text-7xl"
+              colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
+              lineGap={6}
+              animationDuration={10}
+            />
           </KineticLine>
         </h1>
 
@@ -58,20 +49,25 @@ export default function AboutHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-          className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
+          className="mx-auto mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/65"
         >
-          We design and build AI-powered software that businesses actually rely on - not demos,
-          production systems people use every day.
+          We design and build AI-powered software that businesses actually rely on - not demos or
+          prototypes, but production systems people use every day.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
-          className="mt-12 flex justify-start"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <Magnetic>
             <ArrowLink to="/contact-us">Consult Our Experts</ArrowLink>
+          </Magnetic>
+          <Magnetic strength={12}>
+            <ArrowLink to="#about-who-we-are" variant="ghost" className="border-white/30 text-white backdrop-blur-md">
+              Who We Are
+            </ArrowLink>
           </Magnetic>
         </motion.div>
       </div>

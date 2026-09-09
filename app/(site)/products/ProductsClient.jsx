@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { PRODUCTS, IMAGES } from "@site/data/content";
-import { Reveal, Overline, ArrowLink, KineticLine, Magnetic, EASE } from "@site/components/site/Reveal";
+import { Reveal, Overline, SectionHead, ArrowLink, KineticLine, Magnetic, EASE } from "@site/components/site/Reveal";
 import { CanvasText } from "@site/components/ui/canvas-text";
 import { Check } from "lucide-react";
 
@@ -155,18 +155,27 @@ export default function ProductsClient() {
           <ProductBlock key={p.id} product={p} index={i} flip={i % 2 === 1} />
         ))}
       </div>
-      <section className="bg-brand-ink py-24 text-center text-white md:py-32" data-testid="products-cta">
-        <Reveal>
-          <h2 className="mx-auto max-w-3xl px-6 font-display text-4xl md:text-5xl font-bold tracking-tight">
-            Want one of these
-            <span className="block text-brand-orange">running inside your business?</span>
-          </h2>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <div className="mt-10">
-            <ArrowLink to="/contact-us">Talk to us</ArrowLink>
-          </div>
-        </Reveal>
+      <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="products-cta">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <SectionHead
+            overline="Deploy in your business"
+            titleClassName="text-2xl md:text-5xl uppercase"
+            wrapperClassName="max-w-3xl"
+            title={
+              <>
+                Want one of these,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">running inside your business?</span>
+              </>
+            }
+            description="Deploy any of our internal platforms directly, or let our engineering team customize and integrate them into your existing infrastructure."
+          />
+          <Reveal delay={0.2}>
+            <div className="mt-10 flex justify-start">
+              <ArrowLink to="/contact-us">Talk to us</ArrowLink>
+            </div>
+          </Reveal>
+        </div>
       </section>
     </main>
   );

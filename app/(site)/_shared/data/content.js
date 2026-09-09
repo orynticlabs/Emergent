@@ -261,7 +261,6 @@ export const MARQUEE_ITEMS = [
 export const CONTACT = {
   sales: "sales@orynticlabs.com",
   support: "support@orynticlabs.com",
-  general: "hello@orynticlabs.com",
   phone: "+91 76489 15266",
   website: "www.orynticlabs.com",
 };

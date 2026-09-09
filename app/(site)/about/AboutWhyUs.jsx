@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Mic, MicOff } from "lucide-react";
 import { TEAM_ROLES as ROLES } from "@site/data/content";
 import { Reveal, SectionHead } from "@site/components/site/Reveal";
-import { CanvasText } from "@site/components/ui/canvas-text";
 
 function Bubble({ align = "left", delay, children }) {
   return (
@@ -221,20 +220,13 @@ export default function AboutWhyUs() {
     <section className="border-t border-white/5 bg-brand-ink py-24 text-white md:py-32" data-testid="about-why-choose">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHead
-          align="center"
-          titleClassName="text-2xl md:text-7xl uppercase"
-          wrapperClassName="max-w-4xl"
+          titleClassName="text-2xl md:text-5xl uppercase"
+          wrapperClassName="max-w-3xl"
           title={
             <>
               Why choose us
-              <br />
-              <CanvasText
-                text="over others?"
-                className="font-display text-2xl font-black uppercase md:text-7xl"
-                colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                lineGap={6}
-                animationDuration={10}
-              />
+              <br className="hidden sm:block" />
+              <span className="text-brand-orange">over others?</span>
             </>
           }
           description="More than a vendor relationship - direct access to the people building your product, honest communication, and a process you can actually see."

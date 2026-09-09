@@ -2,7 +2,6 @@
 
 import { useCaseStudies } from "@site/hooks/use-case-studies";
 import { SectionHead } from "@site/components/site/Reveal";
-import { CanvasText } from "@site/components/ui/canvas-text";
 import { LayoutGrid } from "@site/components/ui/layout-grid";
 
 function CardCaption({ title, category, desc }) {
@@ -34,20 +33,13 @@ export default function AboutGallery() {
     <section className="border-t border-white/5 bg-brand-ink py-24 text-white md:py-32" data-testid="about-gallery">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHead
-          align="center"
-          titleClassName="text-2xl md:text-7xl uppercase"
-          wrapperClassName="mx-auto max-w-4xl"
+          titleClassName="text-2xl md:text-5xl uppercase"
+          wrapperClassName="max-w-3xl"
           title={
             <>
               A few things
-              <br />
-              <CanvasText
-                text="we've shipped"
-                className="font-display text-2xl font-black uppercase md:text-7xl"
-                colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                lineGap={6}
-                animationDuration={10}
-              />
+              <br className="hidden sm:block" />
+              <span className="text-brand-orange">we&apos;ve shipped.</span>
             </>
           }
           description="Click a project to read more about it. The full case study list lives on our portfolio page."

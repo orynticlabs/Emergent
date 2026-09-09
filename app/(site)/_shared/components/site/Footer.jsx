@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight, Calendar, Linkedin, Instagram, Facebook, Twitter, Youtube,
 } from "lucide-react";
-import { siWhatsapp } from "simple-icons";
+import { siWhatsapp, siMedium } from "simple-icons";
 import { useBookingModal } from "@site/components/site/BookingModalContext";
 import { Reveal } from "@site/components/site/Reveal";
 import { SERVICES, INDUSTRIES, PRODUCTS } from "@site/data/content";
@@ -20,7 +20,6 @@ const API = `/api`;
 
 const FALLBACK = {
   company: {
-    email: "hello@orynticlabs.com",
     sales_email: "sales@orynticlabs.com",
     support_email: "support@orynticlabs.com",
     phone: "+91 76489 15266",
@@ -34,6 +33,7 @@ const FALLBACK = {
     instagram: "https://www.instagram.com/orynticlabs",
     x: "https://twitter.com/orynticlabs",
     youtube: "https://www.youtube.com/@orynticlabs",
+    medium: "https://orynticlabs.medium.com/",
   },
   columns: [],
   certificates: [
@@ -45,7 +45,20 @@ const FALLBACK = {
   copyright: "© 2026 Oryntic Labs Private Limited. All rights reserved.",
 };
 
-const SOCIAL_ICONS = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook, x: Twitter, youtube: Youtube };
+const MediumIcon = ({ className = "h-4 w-4" }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" role="img" aria-hidden="true">
+    <path d={siMedium.path} />
+  </svg>
+);
+
+const SOCIAL_ICONS = {
+  linkedin: Linkedin,
+  instagram: Instagram,
+  facebook: Facebook,
+  x: Twitter,
+  youtube: Youtube,
+  medium: MediumIcon,
+};
 
 // Multi-column link directory - same structural role as a "Products / Tools
 // / Guides / General" footer, reworked for what Oryntic Labs actually has.

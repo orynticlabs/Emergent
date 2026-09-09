@@ -228,11 +228,11 @@ export default function ServicesClient() {
       </section>
 
       <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="services-cta">
-        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <SectionHead
-            align="center"
-            wrapperClassName="max-w-2xl"
             overline="Ready to start"
+            titleClassName="text-2xl md:text-5xl uppercase"
+            wrapperClassName="max-w-3xl"
             title={
               <>
                 Not sure which practice
@@ -242,8 +242,8 @@ export default function ServicesClient() {
             }
             description="Tell us what you're building - we'll tell you honestly which team, model, or combination actually fits."
           />
-          <div className="mt-8 flex justify-center">
-            <ArrowLink to="/contact-us" variant="blue">Talk to our strategy team</ArrowLink>
+          <div className="mt-8 flex justify-start">
+            <ArrowLink to="/contact-us">Talk to our strategy team</ArrowLink>
           </div>
         </div>
       </section>

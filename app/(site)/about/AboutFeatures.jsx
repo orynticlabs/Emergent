@@ -12,7 +12,6 @@ import { IMAGES } from "@site/data/content";
 import { useCaseStudies } from "@site/hooks/use-case-studies";
 import { WorldMap } from "@site/components/ui/world-map";
 import { SectionHead } from "@site/components/site/Reveal";
-import { CanvasText } from "@site/components/ui/canvas-text";
 
 // Real brand marks (via simple-icons), not plain-text name chips - a
 // representative, recognizable slice of the full stack on /stack, spanning
@@ -158,28 +157,19 @@ export default function AboutFeatures() {
 
   return (
     <section className="relative z-20 border-t border-white/5 bg-brand-ink py-24 text-white md:py-32" data-testid="about-features">
-      <div className="mx-auto max-w-7xl">
-        <div className="px-8">
-          <SectionHead
-            align="center"
-            titleClassName="text-2xl md:text-7xl uppercase"
-            wrapperClassName="max-w-4xl"
-            title={
-              <>
-                Built to do the whole job,
-                <br />
-                <CanvasText
-                  text="not just part of it."
-                  className="font-display text-2xl font-black uppercase md:text-7xl"
-                  colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                  lineGap={6}
-                  animationDuration={10}
-                />
-              </>
-            }
-            description="From product strategy to production infrastructure, one team carries the work through - here's what that actually looks like."
-          />
-        </div>
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <SectionHead
+          titleClassName="text-2xl md:text-5xl uppercase"
+          wrapperClassName="max-w-3xl"
+          title={
+            <>
+              Built to do the whole job,
+              <br className="hidden sm:block" />
+              <span className="text-brand-orange">not just part of it.</span>
+            </>
+          }
+          description="From product strategy to production infrastructure, one team carries the work through - here's what that actually looks like."
+        />
 
         <div className="relative">
           <div className="mt-12 grid grid-cols-1 rounded-md lg:grid-cols-6 xl:border xl:border-white/10">

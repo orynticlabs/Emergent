@@ -385,29 +385,22 @@ export default function HireStaffClient() {
       />
 
       <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="hire-staff-cta">
-        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <SectionHead
-            align="center"
-            titleClassName="text-2xl md:text-5xl"
-            wrapperClassName="max-w-2xl"
             overline="Ready to hire"
+            titleClassName="text-2xl md:text-5xl uppercase"
+            wrapperClassName="max-w-3xl"
             title={
               <>
-                Tell us the role.
-                <br />
-                <CanvasText
-                  text="We'll bring the shortlist."
-                  className="font-display text-2xl font-black md:text-5xl"
-                  colors={["#FF5500", "#ff8a3d", "#0066FF", "#38bdf8"]}
-                  lineGap={6}
-                  animationDuration={10}
-                />
+                Tell us the role,
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">we'll bring the shortlist.</span>
               </>
             }
             description="A short call is enough for us to start matching engineers to your stack, timezone, and timeline."
           />
-          <div className="mt-8 flex justify-center">
-            <ArrowButton onClick={() => openForm()} variant="blue">Start hiring</ArrowButton>
+          <div className="mt-8 flex justify-start">
+            <ArrowButton onClick={() => openForm()}>Start hiring</ArrowButton>
           </div>
         </div>
       </section>
