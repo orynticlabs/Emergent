@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -477,18 +477,30 @@ export default function PrivacyPolicyClient() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const activeNavRef = useRef(null);
+
+  useEffect(() => {
+    if (activeNavRef.current) {
+      activeNavRef.current.scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [activeSection]);
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const offset = 120;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      if (typeof window !== "undefined" && window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -120 });
+      } else {
+        const offset = 120;
+        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: "smooth",
+        });
+      }
       setActiveSection(id);
     }
   };
@@ -585,11 +597,11 @@ export default function PrivacyPolicyClient() {
 
       {/* Main Content + Sticky Navigation */}
       <section className="relative mx-auto max-w-7xl px-6 py-12 md:px-10 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-12">
           {/* Sticky Table of Contents Sidebar */}
           <aside className="lg:col-span-4">
-            <div className="sticky top-28 rounded-3xl border border-white/15 bg-[#0e0e14]/90 p-6 backdrop-blur-xl shadow-2xl">
-              <div className="flex items-center justify-between">
+            <div className="sticky top-28 flex max-h-[calc(100vh-8.5rem)] flex-col rounded-3xl border border-white/15 bg-[#0e0e14]/90 p-6 backdrop-blur-xl shadow-2xl">
+              <div className="flex shrink-0 items-center justify-between">
                 <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
                   Table of Contents
                 </h3>
@@ -599,7 +611,7 @@ export default function PrivacyPolicyClient() {
               </div>
 
               {/* Search filter within policy */}
-              <div className="relative mt-4">
+              <div className="relative mt-4 shrink-0">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/40" />
                 <input
                   type="text"
@@ -611,12 +623,16 @@ export default function PrivacyPolicyClient() {
               </div>
 
               {/* Navigation links */}
-              <nav className="scrollbar-thin scrollbar-thumb-white/10 mt-5 max-h-[50vh] space-y-1 overflow-y-auto pr-1">
+              <nav
+                data-lenis-prevent
+                className="scrollbar-thin scrollbar-thumb-white/10 mt-5 flex-1 space-y-1 overflow-y-auto pr-1"
+              >
                 {filteredSections.map((s) => {
                   const isActive = activeSection === s.id;
                   return (
                     <button
                       key={s.id}
+                      ref={isActive ? activeNavRef : null}
                       type="button"
                       onClick={() => scrollTo(s.id)}
                       className={cn(
@@ -636,7 +652,7 @@ export default function PrivacyPolicyClient() {
               </nav>
 
               {/* Quick Contact & Action Box */}
-              <div className="mt-6 border-t border-white/10 pt-5 space-y-3">
+              <div className="mt-6 shrink-0 border-t border-white/10 pt-5 space-y-3">
                 <p className="text-xs text-white/50">Need a signed DPA or privacy clarification?</p>
                 <a
                   href={`mailto:${CONTACT.support}`}

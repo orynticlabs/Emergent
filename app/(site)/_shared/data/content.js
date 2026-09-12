@@ -30,10 +30,10 @@ export const TEAM_ROLES = [
 ];
 
 export const CLIENTS = [
-  { name: "QUANTIVA", cls: "font-display font-bold tracking-[0.22em]" },
-  { name: "NorthPeak", cls: "font-display font-semibold italic" },
-  { name: "VERMILION", cls: "font-sans font-bold tracking-widest" },
-  { name: "BlueOrbit", cls: "font-display font-medium tracking-wide" },
+  { name: "Adhunik Crop Care", cls: "font-display font-bold tracking-wide" },
+  { name: "SdAgro", cls: "font-display font-semibold italic" },
+  { name: "Bulletreporter", cls: "font-sans font-bold tracking-wide" },
+  { name: "PerformX", cls: "font-display font-bold tracking-wider" },
   { name: "HEXALAB", cls: "font-sans font-semibold tracking-[0.32em]" },
   { name: "Stratos", cls: "font-display font-bold italic" },
   { name: "Kinetic+", cls: "font-display font-extrabold tracking-tight" },
@@ -238,7 +238,7 @@ export const TECH_GROUPS = [
   { name: "Databases", tools: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Elasticsearch", "Supabase", "Firebase", "Pinecone", "Weaviate"] },
   { name: "Cloud & Infrastructure", tools: ["AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare"] },
   { name: "DevOps & CI/CD", tools: ["Docker", "Kubernetes", "GitHub Actions", "Terraform", "Nginx", "Datadog", "Sentry", "Prometheus", "Grafana"] },
-  { name: "CMS & Commerce", tools: ["Shopify", "WordPress", "Payload CMS", "Strapi", "Sanity", "Contentful"] },
+  { name: "CMS & Commerce", tools: ["OryCMS", "Shopify", "WordPress", "Payload CMS", "Strapi", "Sanity", "Contentful"] },
   { name: "APIs & Integration", tools: ["REST", "GraphQL", "gRPC", "Webhooks", "Razorpay", "Stripe", "Twilio", "SendGrid", "Google Maps", "DigiLocker"] },
   { name: "Security", tools: ["JWT", "OAuth 2.0", "OpenID Connect", "bcrypt", "Argon2", "AWS IAM", "TLS 1.3", "OWASP"] },
   { name: "Testing & QA", tools: ["Jest", "Vitest", "Testing Library", "Playwright", "Cypress", "Pytest", "Postman"] },

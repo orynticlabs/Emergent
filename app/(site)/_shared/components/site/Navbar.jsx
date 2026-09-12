@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Calendar } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { PRODUCTS } from "@site/data/content";
 import { EASE } from "@site/components/site/Reveal";
 import Logo from "@site/components/site/Logo";
@@ -267,7 +267,6 @@ export default function Navbar() {
               }}
               data-testid="nav-book-call-button"
             >
-              <Calendar className="h-4 w-4" />
               Book a Call
             </NavbarButton>
           </div>

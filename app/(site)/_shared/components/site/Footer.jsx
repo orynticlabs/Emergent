@@ -83,6 +83,8 @@ const FOOTER_LINK_GROUPS = [
       { label: "Technology Stack", to: "/stack" },
       { label: "About Us", to: "/about" },
       { label: "Contact", to: "/contact-us" },
+      { label: "Privacy Policy", to: "/privacy-policy" },
+      { label: "Terms & Conditions", to: "/terms-conditions" },
     ],
   },
 ];
@@ -281,8 +283,28 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 pb-10 md:px-10">
         <div className="flex flex-col gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-white/50" data-testid="footer-copyright">{copyright}</p>
-            <div className="mt-4 space-y-0.5 text-sm text-white/35" data-testid="footer-legal-entity">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+              <p className="text-sm text-white/50" data-testid="footer-copyright">{copyright}</p>
+              <span className="hidden text-white/20 sm:inline">|</span>
+              <div className="flex items-center gap-3 text-xs text-white/40">
+                <Link
+                  href="/privacy-policy"
+                  data-testid="footer-legal-privacy"
+                  className="transition-colors duration-200 hover:text-brand-orange"
+                >
+                  Privacy Policy
+                </Link>
+                <span>•</span>
+                <Link
+                  href="/terms-conditions"
+                  data-testid="footer-legal-terms"
+                  className="transition-colors duration-200 hover:text-brand-orange"
+                >
+                  Terms &amp; Conditions
+                </Link>
+              </div>
+            </div>
+            <div className="mt-3 space-y-0.5 text-sm text-white/35" data-testid="footer-legal-entity">
               <p>CIN: {company?.cin}</p>
               <p>GST: {company?.gst}</p>
             </div>
