@@ -1,7 +1,8 @@
 import { INDUSTRIES, IMAGES } from "@site/data/content";
-import { PageHero, Reveal, ArrowLink } from "@site/components/site/Reveal";
+import { Reveal, SectionHead, ArrowLink, Magnetic } from "@site/components/site/Reveal";
 import { ArrowUpRight } from "lucide-react";
 import { buildPageMetadata } from "@site/lib/seo";
+import IndustriesHero from "./IndustriesHero";
 
 export const metadata = buildPageMetadata({
   title: "Industries",
@@ -14,14 +15,9 @@ export const metadata = buildPageMetadata({
 export default function Industries() {
   return (
     <main data-testid="industries-page">
-      <PageHero
-        overline="Industries"
-        lines={["DEEP DOMAIN,", "REAL", "DELIVERY."]}
-        accentIndex={1}
-        description="Our approach in every industry is the same: understand the domain deeply before proposing a solution, then build something that fits how that industry actually works."
-      />
+      <IndustriesHero />
 
-      <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="industries-list-section">
+      <section id="industries-list" className="bg-brand-ink py-24 text-white md:py-32" data-testid="industries-list-section">
         <div className="mx-auto grid max-w-7xl gap-16 px-6 md:px-10 lg:grid-cols-12">
           <div className="hidden lg:col-span-4 lg:block">
             <div className="sticky top-32">
@@ -64,16 +60,26 @@ export default function Industries() {
 
       <section className="bg-brand-ink py-24 text-white md:py-32" data-testid="industries-cta">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-            <Reveal>
-              <h2 className="max-w-2xl font-display text-4xl md:text-5xl font-bold tracking-tight">
-                Your industry not listed? <span className="text-brand-blue">Ask us.</span> The answer is likely yes.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <ArrowLink to="/contact-us">Start the conversation</ArrowLink>
-            </Reveal>
-          </div>
+          <SectionHead
+            overline="Let's connect"
+            titleClassName="text-2xl md:text-5xl uppercase"
+            wrapperClassName="max-w-3xl"
+            title={
+              <>
+                Your industry
+                <br className="hidden sm:block" />
+                <span className="text-brand-orange">not listed?</span>
+              </>
+            }
+            description="Ask us. The answer is likely yes - our approach in every industry is the same: understand the domain deeply before proposing a solution, then build something that fits how that industry actually works."
+          />
+          <Reveal delay={0.2}>
+            <div className="mt-10 flex justify-start">
+              <Magnetic>
+                <ArrowLink to="/contact-us">Start the conversation</ArrowLink>
+              </Magnetic>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>
